@@ -1,5 +1,5 @@
 {
-  "name": "cms",
+  "name": "case_management_system",
   "version": "1.0.0",
   "description": "case management system",
   "main": "app.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
-  "author": "Lisa A",
+  "author": "Lisa Alexander",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.14.1",
