@@ -1,0 +1,2246 @@
+<% include ../partials/header2 %>
+
+
+<div id="cmscontent" class="container">
+
+<div id="topbar">
+	<h1>Case</h1>
+	<div id="topcasepersoninfo">
+     <% if ((thiscase.caseperson_id !== "") && (thiscaseperson.length > 0)) { %>
+		<p><span><strong><a href="/person/<%= thiscaseperson[0].person_id %>"><%= thiscaseperson[0].person_name %></a></strong></span></p>
+		<p>Gender: <span><%= thiscaseperson[0].gender %></span> &nbsp;&nbsp; DOB: <span><%= thiscaseperson[0].birthdate %></span></p>
+    <% } else { %>
+    <br>
+    <% } %>
+	</div>
+</div><!-- topbar -->
+
+<form id="caseform" action="/case/<%= thiscase.case_id %>?_method=PUT" method="post">
+<fieldset id="ablecaseform" disabled="disabled">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="form-group">
+				<label for="casetitle">Title</label>
+				<input type="text" class="form-control" id="casetitle" name="casetitle" size="90" maxlength="150" value=""/>
+			</div>
+		</div>
+	</div><!-- row -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="form-group">
+				<label for="casedescription">Description</label>
+				<textarea class="form-control" id="casedescription" name="casedescription"></textarea>
+			</div>
+		</div>
+	</div><!-- row -->
+	<div class="row">
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="casedomain">Domain</label>
+				<select class="form-control" id="casedomain" name="casedomain">
+					<option value="0">Select</option>
+					<option value="1">Domain 1</option>
+					<option value="2">Domain 2</option>
+					<option value="3">Domain 3</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="casecategory">Category</label>
+				<select class="form-control" id="casecategory" name="casecategory">
+					<option value="0">Select</option>
+					<option value="1">Medical</option>
+					<option value="2">Non-Medical</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="casetype">Type</label>
+				<select class="form-control" id="casetype" name="casetype">
+					<option value="0">Select</option>
+					<option class="1 1" value="1">Domain 1 and Medical</option>
+					<option class="1 2" value="2">Domain 1 and Non-Medical</option>
+					<option class="2 1" value="3">Domain 2 and Medical</option>
+					<option class="2 2" value="4">Domain 2 and Non-Medical</option>
+					<option class="3 1" value="5">Domain 3 and Medical</option>
+					<option class="3 2" value="6">Domain 3 and Non-Medical</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="casestatus">Status</label>
+				<select class="form-control" id="casestatus" name="casestatus">
+					<option value="0">Select</option>
+					<option value="1">Active</option>
+					<option value="2">Inactive</option>
+					<option value="3">On Hold</option>
+					<option value="4">Canceled</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="caseseverity">Severity</label>
+				<select class="form-control" id="caseseverity" name="caseseverity">
+					<option value="0">Select</option>
+					<option value="1">Low</option>
+					<option value="2">Medium</option>
+					<option value="3">High</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="casepriority">Priority</label>
+				<select class="form-control" id="casepriority" name="casepriority">
+					<option value="0">Select</option>
+					<option value="1">Priority 1</option>
+					<option value="2">Priority 2</option>
+					<option value="3">Priority 3</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="casestartdate">Start Date</label>
+				<input type="text" class="form-control" id="casestartdate" name="casestartdate" value=""/>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="caseduedate">Due Date</label>
+				<input type="text" class="form-control" id="caseduedate" name="caseduedate" value=""/>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="casecompletedate">Complete Date</label>
+				<input type="text" class="form-control" id="casecompletedate" name="casecompletedate" value=""/>
+			</div>
+		</div>
+	</div><!-- row -->
+</fieldset>
+	<div id="cancelsavecase" class="buttonrow">
+		<button type="reset" class="btn btn-warning btn-md mainresetbtn" id="resetcase" name="resetcase">Cancel</button>
+		<button type="submit" class="btn btn-warning btn-md mainsubmitbtn" id="submitcase" name="submitcase">Save</button>
+	</div>
+</form>
+	<div id="editdeletecase" class="buttonrow">
+		<!-- NOTE: Insert Code for Development/Production -->
+		<!-- Input route for id method=DELETE" method="POST" -->
+ 		<button class="btn btn-primary btn-md maineditbtn" id="editcase"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+        <form class="oneline" action="/case/<%= thiscase.case_id %>?_method=DELETE" method="post">
+            <button class="btn btn-danger btn-md maindeletebtn" id="deletecase" name="deletecase"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        </form>
+	</div>
+
+<div id="taskpanel">
+	<ul class="nav nav-pills" role="tablist" id="navmenu">
+		<li role="presentation" class="active"><a href="#cases_person" aria-controls="cases_person" role="tab" data-toggle="pill">Case Person</a></li>
+		<li role="presentation"><a href="#relatedcases" aria-controls="relatedcases" role="tab" data-toggle="pill">Related Cases</a></li>
+		<li role="presentation"><a href="#assignedpeople" aria-controls="assignedpeople" role="tab" data-toggle="pill">People</a></li>
+		<li role="presentation"><a href="#assignedorganizations" aria-controls="assignedorganizations" role="tab" data-toggle="pill">Organizations</a></li>
+		<li role="presentation"><a href="#needs" aria-controls="needs" role="tab" data-toggle="pill">Needs</a></li>
+		<li role="presentation"><a href="#goals" aria-controls="goals" role="tab" data-toggle="pill">Goals</a></li>
+		<li role="presentation"><a href="#plans" aria-controls="plans" role="tab" data-toggle="pill">Plans</a></li>
+		<li role="presentation"><a href="#actions" aria-controls="actions" role="tab" data-toggle="pill">Actions</a></li>
+		<li role="presentation"><a href="#casefiles" aria-controls="casefiles" role="tab" data-toggle="pill">Files</a></li>
+		<li role="presentation"><a href="#casenotes" aria-controls="casenotes" role="tab" data-toggle="pill">Notes</a></li>
+		<li role="presentation"><a href="#measurements" aria-controls="measurements" role="tab" data-toggle="pill">Measurements</a></li>
+		<li role="presentation"><a href="#questionnaires" aria-controls="questionnaires" role="tab" data-toggle="pill">Questionnaires</a></li>
+	</ul>
+	<div class="tab-content">
+
+	<div role="tabpanel" class="tab-pane active" id="cases_person">
+
+<div class="buttonrow creatediv">
+	<p><a href="/person" class="btn btn-primary btn-md" id="createpersonbtn">Create Person</a></p>
+</div>
+
+		<h4><button id="pluscaseperson" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Case Person</h4>
+
+		<form id="casepersonform" class="toggleform" action="/caseperson" method="post">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+					<label for="caseperson_personid">Case Person</label>
+					<select class="form-control" id="caseperson_personid" name="caseperson_personid">
+						<option value="0">Select</option>
+			<% person.sort(function(a,b) {
+				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+			<% for (var i = 0; i < person.length; i += 1) { %>
+				<option value="<%= person[i].person_id %>"><%= person[i].last_name %>, <%= person[i].first_name %> <%= person[i].middle_name %></option>
+            <% } %>
+					</select>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-sm-6" hidden>
+					<div class="form-group">
+						<label for="caseperson_caseid">Case ID</label>
+				        <input type="text" class="form-control" id="caseperson_caseid" name="caseperson_caseid" readonly value="<%= thiscase.case_id %>"/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="buttonrow">
+				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetcaseperson" name="resetcaseperson">Reset</button>
+				<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitcaseperson" name="submitcaseperson">Submit</button>
+			</div>
+		</form>
+	
+        <% if ((thiscase.caseperson_id !== "") && (thiscaseperson.length > 0)) { %>
+		<table id="casepersondisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Case Person Name</th>
+					<th>Primary Phone</th>
+					<th>Primary Email</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><a href="/person/<%= thiscaseperson[0].person_id %>"><%= thiscaseperson[0].person_name %></a></td>
+					<td><%= thiscaseperson[0].primary_phone %></td>
+					<td><%= thiscaseperson[0].primary_email %></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><strong>Primary Address</strong><br>
+					<% if (thiscaseperson[0].address !== "") { %>
+						<%= thiscaseperson[0].address %>, <%= thiscaseperson[0].city %>, <%= thiscaseperson[0].state %> <%= thiscaseperson[0].zipcode %><br>
+						<% if (thiscaseperson[0].statecode !== "") { %>
+							State Code: <%= thiscaseperson[0].statecode %> &nbsp;&nbsp; 
+						<% } %>
+						<% if (thiscaseperson[0].countrycode !== "") { %>
+							Country Code: <%= thiscaseperson[0].countrycode %></td>
+						<% } %>
+					<% } %>
+					<td class="tablebtns" id="<%= thiscaseperson[0].case_id %>">
+	                    <form action="#" method="post">
+	                        <button class="btn btn-danger btn-md tableremovebtn" id="removecaseperson" name="removecaseperson"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	                    </form>
+					</td>
+				</tr>
+ 			</tbody>
+		</table>
+        <% } %>
+
+		</div><!-- tabpanel case_person -->
+
+
+<!-- **************************************************************************************************** -->
+
+	<div role="tabpanel" class="tab-pane" id="relatedcases">
+
+<div class="buttonrow creatediv">
+	<p>
+	    <a href="/case" class="btn btn-primary btn-md" id="createcasebtn">Create Case</a>
+	</p>
+</div>
+
+		<h4><button id="plusrelatedcase" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Related Case</h4>
+
+		<form id="relatedcaseform" class="toggleform" action="/relatedcase" method="post">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+					<label for="relatedcase_id2">Related Case Title</label>
+					<select class="form-control" id="relatedcase_id2" name="relatedcase_id2">
+						<option value="0">Select</option>
+			<% cases.sort(function(a,b) {
+				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+			<% for (var i = 0; i < cases.length; i += 1) { %>
+						<option value="<%= cases[i].case_id %>"><%= cases[i].case_title %></option>
+            <% } %>
+					</select>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="caserelationshiptype">Relationship Type</label>
+						<select class="form-control" id="caserelationshiptype" name="caserelationshiptype">
+							<option value="0">Select</option>
+							<option value="1">Relationship Type 1</option>
+							<option value="2">Relationship Type 2</option>
+						</select>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-sm-6" hidden>
+					<div class="form-group">
+						<label for="relatedcase_id1">Case ID</label>
+				        <input type="text" class="form-control" id="relatedcase_id1" name="relatedcase_id1" readonly value="<%= thiscase.case_id %>"/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="buttonrow">
+				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetrelatedcase" name="resetrelatedcase">Reset</button>
+				<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitrelatedcase" name="submitrelatedcase">Submit</button>
+			</div>
+		</form>
+	
+		<% thisrelatedcase.sort(function(a,b) {
+			return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+		}); %>
+		<% if (thisrelatedcase.length > 0) { %>
+		<table id="relatedcasedisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Related Case Title</th>
+					<th>Relationship Type</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+            <% for (var i = 0; i < thisrelatedcase.length; i += 1) {
+				var relcase_caseid = "relcase_caseid" + i;
+				var relcase_type = "relcase_type" + i;
+				var removerelatedcase = "removerelatedcase" + i;
+			%>
+				<tr>
+					<td><span hidden id="<%= relcase_caseid %>"><%= thisrelatedcase[i].case_id2 %></span><a href="/case/<%= thisrelatedcase[i].case_id2 %>"><%= thisrelatedcase[i].case_title %></a></td>
+					<td><span id="<%= relcase_type %>"><%= thisrelatedcase[i].lk_case_relationship_type %></span></td>
+					<td class="tablebtns" id="<%= thisrelatedcase[i].case_relationship_id %>">
+	                    <form action="#" method="post">
+	                        <button class="btn btn-danger btn-md tableremovebtn" id="<%= removerelatedcase %>" name="removerelatedcase"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	                    </form>
+					</td>
+				</tr>
+            <% } %>
+			</tbody>
+		</table>
+        <% } %>
+
+		</div><!-- tabpanel relatedcases -->
+
+
+<!-- **************************************************************************************************** -->
+
+
+	<div role="tabpanel" class="tab-pane" id="assignedpeople">
+
+<div class="buttonrow creatediv">
+	<p><a href="/person" class="btn btn-primary btn-md" id="createpersonbtn">Create Person</a></p>
+</div>
+	
+    <h4><button id="pluspersonassignment" class="btn btn-default btn-md plusbtn2"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Person</h4>
+	
+		<form id="personassignmentform" class="toggleform" action="/personassignment" method="post">
+        <fieldset id="ablepersonassignment">
+			<div class="row">
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="personassignpersonid">Person Name</label>
+						<select class="form-control" id="personassignpersonid" name="personassignpersonid">
+							<option value="0" selected>Select</option>
+							<% for (var i = 0; i < person.length; i += 1) { %>
+							<option value="<%= person[i].person_id %>"><%= person[i].last_name %>, <%= person[i].first_name %> <%= person[i].middle_name %></option>
+                            <% } %>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="personassignrole">Assigned Role</label>
+						<select class="form-control" id="personassignrole" name="personassignrole">
+							<option value="0">Select</option>
+							<option value="1">Role 1</option>
+							<option value="2">Role 2</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="personassigntype">Assignment Type</label>
+						<select class="form-control" id="personassigntype" name="personassigntype">
+							<option value="0">Select</option>
+							<option value="1">Assignment Type 1</option>
+							<option value="2">Assignment Type 2</option>
+						</select>
+					</div>
+				</div>
+			</div><!-- row -->
+			</fieldset>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="personassignmentendreason">End Reason</label>
+						<textarea class="form-control" id="personassignmentendreason" name="personassignmentendreason"></textarea>
+					</div>
+				</div>
+				<div class="col-sm-6" hidden>
+					<div class="form-group">
+						<label for="personassign_caseid">Case ID</label>
+				        <input type="text" class="form-control" id="personassign_caseid" name="personassign_caseid" readonly value="<%= thiscase.case_id %>"/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="buttonrow">
+				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetpersonassignment" name="resetpersonassignment">Reset</button>
+				<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitpersonassignment" name="submitpersonassignment">Submit</button>
+			</div>
+		</form>
+
+		<% person_assignment.sort(function(a,b) {
+			return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+		}); %>
+		<% if (person_assignment.length > 0) { %>
+		<table id="casepeopledisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Person Name</th>
+					<th>Primary Phone</th>
+					<th>Primary Email</th>
+					<th>Assigned Role</th>
+					<th>Assignment Type</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+            <% for (var i = 0; i < person_assignment.length; i += 1) {
+				var passign_personid = "passign_personid" + i;
+				var passign_role = "passign_role" + i;
+				var passign_type = "passign_type" + i;
+				var passign_status = "passign_status" + i;
+				var passign_startdate = "passign_startdate" + i;
+				var passign_enddate = "passign_enddate" + i;
+				var passign_endreason = "passign_endreason" + i;
+				var endpersonassignment = "endpersonassignment" + i;
+				var removepersonassignment = "removepersonassignment" + i;
+			%>
+				<tr>
+					<td><span hidden id="<%= passign_personid %>"><%= person_assignment[i].person_id %></span><a href="/person/<%= person_assignment[i].person_id %>"><%= person_assignment[i].person_name %></a></td>
+					<td><%= person_assignment[i].primary_phone %></td>
+					<td><%= person_assignment[i].primary_email %></td>
+					<td><span id="<%= passign_role %>"><%= person_assignment[i].lk_assigned_role %></span></td>
+					<td><span id="<%= passign_type %>"><%= person_assignment[i].lk_case_assignment_type %></span></td>
+					<td><span id="<%= passign_status %>"><%= person_assignment[i].lk_status %></span></td>
+				</tr>
+				<tr>
+					<td colspan="5">
+						<p><strong>Start Date:</strong> <span id="<%= passign_startdate %>"><%= person_assignment[i].start_date %></span> &nbsp;&nbsp; <strong>End Date:</strong> <span class="endpa" id="<%= passign_enddate %>"><%= person_assignment[i].end_date %></span></p>				
+						<p><strong>End Reason:</strong> <span id="<%= passign_endreason %>"><%= person_assignment[i].end_reason %></span></p>
+					</td>
+					<td class="tablebtns" id="<%= person_assignment[i].case_assignment_id %>">
+						<button class="btn btn-warning btn-md tableendbtn personassignmentendbtn" id="<%= endpersonassignment %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	                    <form action="#" method="post">
+	                        <button class="btn btn-danger btn-md tableremovebtn endthisbtn" id="<%= removepersonassignment %>" name="removepersonassignment"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	                    </form>
+					</td>
+				</tr>
+            <% } %>
+			</tbody>
+		</table>
+        <% } %>
+
+		</div><!-- tabpanel assignedpeople -->
+
+ 
+<!-- **************************************************************************************************** -->
+
+
+	<div role="tabpanel" class="tab-pane" id="assignedorganizations">
+
+<div class="buttonrow creatediv">
+	<p><a href="/organization" class="btn btn-primary btn-md" id="createorganizationbtn">Create Organization</a></p>
+</div>
+
+	<h4><button id="plusorganizationassignment" class="btn btn-default btn-md plusbtn2"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Organization</h4>
+	
+		<form id="organizationassignmentform" class="toggleform" action="/organizationassignment" method="post">
+        <fieldset id="ableorganizationassignment">
+			<div class="row">
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="organizationassignorgid">Organization Name</label>
+						<select class="form-control" id="organizationassignorgid" name="organizationassignorgid">
+							<option value="0" selected>Select</option>
+			<% organization.sort(function(a,b) {
+				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+			<% for (var i = 0; i < organization.length; i += 1) { %>
+					<option value="<%= organization[i].organization_id %>"><%= organization[i].organization_name %></option>
+			<% } %>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="organizationassignrole">Assigned Role</label>
+						<select class="form-control" id="organizationassignrole" name="organizationassignrole">
+							<option value="0" selected>Select</option>
+							<option value="1">Assigned Role 1</option>
+							<option value="2">Assigned Role 2</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="organizationassigntype">Assignment Type</label>
+						<select class="form-control" id="organizationassigntype" name="organizationassigntype">
+							<option value="0" selected>Select</option>
+							<option value="1">Case Assignment Type 1</option>
+							<option value="2">Case Assignment Type 2</option>
+						</select>
+					</div>
+				</div>
+			</div><!-- row -->
+			</fieldset>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="organizationassignmentendreason">End Reason</label>
+						<textarea class="form-control" id="organizationassignmentendreason" name="organizationassignmentendreason" disabled></textarea>
+					</div>
+				</div>
+				<div class="col-sm-6" hidden>
+					<div class="form-group">
+						<label for="organizationassign_caseid">Case ID</label>
+				        <input type="text" class="form-control" id="organizationassign_caseid" name="organizationassign_caseid" readonly value="<%= thiscase.case_id %>"/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="buttonrow">
+				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetorganizationassignment" name="resetorganizationassignment">Reset</button>
+				<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitorganizationassignment" name="submitorganizationassignment">Submit</button>
+			</div>
+		</form>
+
+		<% organization_assignment.sort(function(a,b) {
+			return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+		}); %>
+		<% if (organization_assignment.length > 0) { %>
+		<table id="caseorganizationdisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Organization Name</th>
+					<th>Primary Phone</th>
+					<th>Primary Email</th>
+					<th>Assigned Role</th>
+					<th>Assignment Type</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+            <% for (var i = 0; i < organization_assignment.length; i += 1) {
+				var oassign_organizationid = "oassign_organizationid" + i;
+				var oassign_role = "oassign_role" + i;
+				var oassign_type = "oassign_type" + i;
+				var oassign_status = "oassign_status" + i;
+				var oassign_startdate = "oassign_startdate" + i;
+				var oassign_enddate = "oassign_enddate" + i;
+				var oassign_endreason = "oassign_endreason" + i;
+				var endorganizationassignment = "endorganizationassignment" + i;
+				var removeorganizationassignment = "removeorganizationassignment" + i;
+			%>
+				<tr>
+					<td><span hidden id="<%= oassign_organizationid %>"><%= organization_assignment[i].organization_id %></span><a href="/organization/<%= organization_assignment[i].organization_id %>"><%= organization_assignment[i].organization_name %></a></td>
+					<td><%= organization_assignment[i].primary_phone %></td>
+					<td><%= organization_assignment[i].primary_email %></td>
+					<td><span id="<%= oassign_role %>"><%= organization_assignment[i].lk_assigned_role %></span></td>
+					<td><span id="<%= oassign_type %>"><%= organization_assignment[i].lk_case_assignment_type %></span></td>
+					<td><span id="<%= oassign_status %>"><%= organization_assignment[i].lk_status %></span></td>
+				</tr>
+				<tr>
+					<td colspan="5">
+						<p><strong>Start Date:</strong> <span id="<%= oassign_startdate %>"><%= organization_assignment[i].start_date %></span> &nbsp;&nbsp; <strong>End Date:</strong> <span class="endoa" id="<%= oassign_enddate %>"><%= organization_assignment[i].end_date %></span></p>				
+						<p><strong>End Reason:</strong> <span id="<%= oassign_endreason %>"><%= organization_assignment[i].end_reason %></span></p>
+					</td>
+					<td class="tablebtns" id="<%= organization_assignment[i].case_assignment_id %>">
+						<button class="btn btn-warning btn-md tableendbtn organizationassignmentendbtn" id="<%= endorganizationassignment %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	                    <form action="#" method="post">
+	                        <button class="btn btn-danger btn-md tableremovebtn endthisbtn" id="<%= removeorganizationassignment %>" name="removeorganizationassignment"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	                    </form>
+					</td>
+				</tr>
+            <% } %>
+			</tbody>
+		</table>
+        <% } %>
+
+		</div><!-- tabpanel assignedorganizations -->
+
+
+
+
+<!-- ************************************************************************************************************************ -->
+
+
+
+		<div role="tabpanel" class="tab-pane" id="needs">
+
+		<h4><button id="plusneed" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Need</h4>
+
+		<form id="needform" class="toggleform" enctype="multipart/form-data" action="/need" method="post">
+
+			<div class="row">
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="needname">Need Name</label>
+						<input type="text" class="form-control" id="needname" name="needname" maxlength="150" value=""/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="needtype">Type</label><br>
+						<select class="form-control" id="needtype" name="needtype">
+							<option value="0" selected>Select</option>
+							<option value="1">Social</option>
+							<option value="2">Medical</option>
+							<option value="3">Financial</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="needdate">Assessment Date</label>
+						<input type="text" class="form-control" id="needdate" name="needdate"/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="needstage">Stage</label>
+						<select class="form-control" id="needstage" name="needstage">
+							<option value="0" selected>Select</option>
+							<option value="1">Identified</option>
+							<option value="2">Unidentified</option>
+							<option value="3">Reviewed</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="needstatus">Status</label>
+						<select class="form-control" id="needstatus" name="needstatus">
+							<option value="0" selected>Select</option>
+							<option value="1">Analyzing</option>
+							<option value="2">In Progress</option>
+							<option value="3">Done</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="needseverity">Severity</label>
+						<select class="form-control" id="needseverity" name="needseverity">
+							<option value="0" selected>Select</option>
+							<option value="1">High</option>
+							<option value="2">Medium</option>
+							<option value="3">Low</option>
+						</select>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="neednote">Note</label>
+						<textarea class="form-control" id="neednote" name="neednote"></textarea>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="needdocattachment">Document Attachment</label>
+						<input type="text" class="form-control" id="needdocattachment" name="needdocattachment" readonly value=""/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-sm-6" hidden>
+					<div class="form-group">
+						<label for="needcaseid">Case ID</label>
+						<input type="text" class="form-control" id="needcaseid" name="needcaseid" readonly value="<%= thiscase.case_id %>"/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div id="showuploaddocneed" class="row">
+				<div class="col-xs-12 col-sm-8 col-lg-9">
+					<input type="file" class="btn btn-primary btn-md uploadbtn" id="needbrowsebtn" name="userNeedFile" />
+				</div>
+				<div class="uploadbtns col-xs-12 col-sm-4 col-lg-3">
+					<button type="button" class="btn btn-default btn-md removeuploadbtn" id="removedocneed" name="removedocneed">Remove</button>
+					<button type="button" class="btn btn-default btn-md canceluploadbtn" id="canceldocneed" name="canceldocneed">Cancel</button>
+				</div>
+			</div><!-- row -->
+			<div class="buttonrow">
+				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetneed" name="resetneed">Reset</button>
+				<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitneed" name="submitneed">Submit</button>
+			</div>
+		</form>
+
+
+		<% this_cases_needs.sort(function(a,b) {
+			return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+		}); %>
+		<% this_cases_goals.sort(function(a,b) {
+			return (a.assocneed_id > b.assocneed_id) ? 1 : ((b.assocneed_id > a.assocneed_id) ? -1 : 0);
+			return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+		}); %>
+		<% this_cases_plans.sort(function(a,b) {
+			return (a.assocgoal_id > b.assocgoal_id) ? 1 : ((b.assocgoal_id > a.assocgoal_id) ? -1 : 0);
+			return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+		}); %>
+		<% this_cases_actions.sort(function(a,b) {
+			return (a.assocplan_id > b.assocplan_id) ? 1 : ((b.assocplan_id > a.assocplan_id) ? -1 : 0);
+			return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+		}); %>
+
+
+        <% if (this_cases_needs.length > 0) { %>
+		<% for (var i = 0; i < this_cases_needs.length; i += 1) {
+		        var needdisplaytable = "needdisplaytable" + i;
+				var needname = "needname" + i; 
+				var needtype = "needtype" + i; 
+				var needdate = "needdate" + i; 
+				var needstage = "needstage" + i; 
+				var needstatus = "needstatus" + i; 
+				var needseverity = "needseverity" + i; 
+				var neednote = "neednote" + i; 
+				var need = "need" + i; 
+				var needdoc = "needdoc" + i;
+				var moreneedbtn = "moreneedbtn" + i;
+				var goalsthruactionsdiv = "goalsthruactionsdiv" + i;
+				var goalsthruactionstable = "goalsthruactionstable" + i;
+				var editcasesneed = "editcasesneed" + i;
+				var removecasesneed = "removecasesneed" + i; 
+			%>
+		<table id="<%= needdisplaytable %>" class="table table-responsive table-striped2 table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Need Name</th>
+					<th>Type</th>
+					<th>Assessment Date</th>
+					<th>Stage</th>
+					<th>Status</th>
+					<th>Severity</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td id="<%= needname %>"><%= this_cases_needs[i].name %></td>
+					<td id="<%= needtype %>"><%= this_cases_needs[i].type %></td>
+					<td id="<%= needdate %>"><%= this_cases_needs[i].assessment_date %></td>
+					<td id="<%= needstage %>"><%= this_cases_needs[i].stage %></td>
+					<td id="<%= needstatus %>"><%= this_cases_needs[i].need_status %></td>
+					<td id="<%= needseverity %>"><%= this_cases_needs[i].severity %></td>
+					<td class="tablebtns" id="<%= this_cases_needs[i].need_id %>">
+						<button class="btn btn-primary btn-md tableeditbtn casesneededitbtn" id="<%= editcasesneed %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+						<button class="btn btn-default moreneedbtn" id="<%= moreneedbtn %>" type="button" data-toggle="collapse" data-target="#<%= need %>" aria-expanded="false" aria-controls="<%= need %>"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                        <button class="btn btn-danger btn-md tableremovebtn2" id="<%= removecasesneed %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+ 					</td>
+				</tr>
+				<tr>
+					<td colspan="7">						
+						<div class="collapse" class="" id="<%= need %>">
+						<% if (this_cases_needs[i].need_doc !== "") { %>
+							<form id="needdocdownloadform" method="GET" action="/download/needfiles/<%= this_cases_needs[i].need_doc %>">
+								<strong>Attachment:</strong>: <input type="text" class="downloadfilename" name="urlneedfile" readonly value="<%= this_cases_needs[i].need_doc %>"/>
+								<span hidden id="<%= needdoc %>"><%= this_cases_needs[i].need_doc %></span>
+								<input type="submit" value="Download" class="downloadbtn" id="submitneeddocdownload"/>
+							</form>
+						<% } %>
+							<p><strong>Note:</strong> <span id="<%= neednote %>"><%= this_cases_needs[i].note %></span></p>
+
+		<div id="<%= goalsthruactionsdiv %>">
+			<table id="<%= goalsthruactionstable %>"" class="table table-responsive table-condensed subtable">
+				<thead>
+					<tr class="info2">
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+						<th>Name</th>
+						<th>Type</th>
+						<th>Priority</th>
+						<th>Due Date</th>
+						<th>Assigned To</th>
+					</tr>
+				</thead>
+				<tbody>
+			   <% var needgoalbtn = "needgoalbtn" + this_cases_needs[i].need_id;
+				  var newneed = true;
+			   for (var j = 0; j < this_cases_goals.length; j += 1) {
+					if (this_cases_needs[i].need_id === this_cases_goals[j].assocneed_id) { %>
+					<tr>
+					<% if (newneed === true) { %>
+						<td class="bg-danger"><a href="#goals"><button class="needanchorbtn" id="btnheadassociatedneed<%= this_cases_needs[i].need_id %>">G</button></a></td>
+					<% } else { %>
+						<td class="bg-danger">&nbsp;</td>
+					<% }
+					   newneed = false;
+					%>
+						<td class="bg-danger">Goal:</td>
+						<td><%= this_cases_goals[j].name %></td>
+						<td><%= this_cases_goals[j].type %></td>
+						<td><%= this_cases_goals[j].priority %></td>
+						<td><%= this_cases_goals[j].due_date %></td>
+						<td><a href="/person/<%= this_cases_goals[j].assignedperson_id %>"><%= this_cases_goals[j].assignedperson_id %></a></td>
+					</tr>
+			    <% var needplanbtn = "needplanbtn" + this_cases_goals[j].goal_id;
+				    var newgoal = true;
+					for (var k = 0; k < this_cases_plans.length; k += 1) {
+					if (this_cases_goals[j].goal_id === this_cases_plans[k].assocgoal_id) { %>
+					<tr>
+					<% if (newgoal === true) { %>
+						<td class="bg-warning"><a href="#plans"><button class="needanchorbtn" id="btnheadassociatedgoal<%= this_cases_goals[j].goal_id %>">P</button></a></td>
+					<% } else { %>
+						<td class="bg-warning">&nbsp;</td>
+					<% } 
+					   newgoal = false;
+					%>
+						<td class="bg-warning">Plan:</td>
+						<td><%= this_cases_plans[k].name %></td>
+						<td><%= this_cases_plans[k].type %></td>
+						<td><%= this_cases_plans[k].priority %></td>
+						<td><%= this_cases_plans[k].due_date %></td>
+						<td><a href="/person/<%= this_cases_plans[j].assignedperson_id %>"><%= this_cases_plans[k].assignedperson_id %></a></td>
+					</tr>
+			    <% var needactionbtn = "needactionbtn" + this_cases_plans[k].plan_id;
+				   var newplan = true;
+				for (var m = 0; m < this_cases_actions.length; m += 1) {
+					if (this_cases_plans[k].plan_id === this_cases_actions[m].assocplan_id) { %>
+					<tr>
+					<% if (newplan === true) { %>
+						<td class="bg-success"><a href="#actions"><button class="needanchorbtn" id="btnheadassociatedplan<%= this_cases_plans[j].plan_id %>">A</button></a></td>
+					<% } else { %>
+						<td class="bg-success">&nbsp;</td>
+					<% }
+					   newplan = false;
+					%>
+						<td class="bg-success">Action:</td>
+						<td><%= this_cases_actions[m].name %></td>
+						<td><%= this_cases_actions[m].type %></td>
+						<td><%= this_cases_actions[m].priority %></td>
+						<td><%= this_cases_actions[m].due_date %></td>
+						<td><a href="/person/<%= this_cases_actions[j].assignedperson_id %>"><%= this_cases_actions[m].assignedperson_id %></a></td>
+					</tr>
+			     <% } } %>
+			   <% } } %>
+		    <% } } %>
+					</tbody>
+				</table>
+			</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+        <% } } %>
+
+		<div id="needspagination" class="paginationdiv">
+			<nav aria-label="Page navigation">
+			  <ul class="pagination">
+			    <li class="disabled">
+			      <a href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <li class="active"><a href="#">1</a></li>
+			    <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li>
+			      <a href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+		</div><!-- needspagination -->
+
+		</div><!-- tabpanel needs assessments -->
+
+
+
+<!-- ************************************************************************************************************************ -->
+
+
+
+		<div role="tabpanel" class="tab-pane" id="goals">
+
+		<h4><button id="plusgoal" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Goal</h4>
+
+		<form id="goalform" class="toggleform" enctype="multipart/form-data" action="/goal" method="post">
+			<div class="row">
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="goalname">Goal Name</label>
+						<input type="text" class="form-control" id="goalname" name="goalname" size="90" maxlength="100" value=""/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="goaltype">Type</label>
+						<select class="form-control" id="goaltype" name="goaltype">
+							<option value="0" selected>Select</option>
+							<option value="1">Rehabilitative</option>
+							<option value="2">Reintegrate</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="goalpriority">Priority</label>
+						<select class="form-control" id="goalpriority" name="goalpriority">
+							<option value="0" selected>Select</option>
+							<option value="1">High</option>
+							<option value="2">Medium</option>
+							<option value="3">Low</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="goalstartdate">Start Date</label>
+						<input type="text" class="form-control" id="goalstartdate" name="goalstartdate" value=""/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="goalduedate">Due Date</label>
+						<input type="text" class="form-control" id="goalduedate" name="goalduedate" value=""/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="goalcompletedate">Complete Date</label>
+						<input type="text" class="form-control" id="goalcompletedate" name="goalcompletedate" value=""/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="assocneedid">Associated Need</label>
+						<select class="form-control" id="assocneedid" name="assocneedid">
+							<option value="0" selected>Select</option>
+					<% for (var i = 0; i < this_cases_needs.length; i += 1) { %>
+							<option value="<%= this_cases_needs[i].need_id %>"><%= this_cases_needs[i].name %></option>
+					<% } %>
+							</select>
+						</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="goalassignedpersonid">Assigned To</label>
+						<select class="form-control" id="goalassignedpersonid" name="goalassignedpersonid">
+							<option value="0" selected>Select</option>
+							<% for (var i = 0; i < person.length; i += 1) { %>
+							<option value="<%= person[i].person_id %>"><%= person[i].last_name %>, <%= person[i].first_name %> <%= person[i].middle_name %></option>
+                            <% } %>
+						</select>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="goalnote">Note</label>
+						<textarea class="form-control" id="goalnote" name="goalnote"></textarea>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="goaldocattachment">Document Attachment</label>
+						<input type="text" class="form-control" id="goaldocattachment" name="goaldocattachment" readonly value=""/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-sm-6" hidden>
+					<div class="form-group">
+						<label for="goalcaseid">Case ID</label>
+						<input type="text" class="form-control" id="goalcaseid" name="goalcaseid" readonly value="<%= thiscase.case_id %>"/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div id="showuploaddocgoal" class="row">
+				<div class="col-xs-12 col-sm-8 col-lg-9">
+					<input type="file" class="btn btn-primary btn-md uploadbtn" id="goalbrowsebtn" name="userGoalFile" />
+				</div>
+				<div class="uploadbtns col-xs-12 col-sm-4 col-lg-3">
+					<button type="button" class="btn btn-default btn-md removeuploadbtn" id="removedocgoal" name="removedocgoal">Remove</button>
+					<button type="button" class="btn btn-default btn-md canceluploadbtn" id="canceldocgoal" name="canceldocgoal">Cancel</button>
+				</div>
+			</div><!-- row -->
+			<div class="buttonrow">
+				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetgoal" name="resetgoal">Reset</button>
+				<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitgoal" name="submitgoal">Submit</button>
+			</div>
+		</form>
+
+        <div class="form-group">
+           <label for="expandgoal" class="btn btn-sm btn-default">
+              <input type="radio" name="showgoals" id="expandgoal" class="expandgoalthruactionbtn" checked> Show Goal Tables
+           </label>
+           <label for="collapsegoal" class="btn btn-sm btn-default">
+              <input type="radio" name="showgoals" id="collapsegoal" class="collapsegoalthruactionbtn"> Hide Goal Tables
+           </label>
+           <span class="nobr" id="goaltypebtns"></span>
+		</div>
+
+		<% for (var i = 0; i < this_cases_goals.length; i += 1) {
+				var goalname = "goalname" + i; 
+				var goaltype = "goaltype" + i; 
+				var goalduedate = "goalduedate" + i; 
+				var goalpriority = "goalpriority" + i; 
+				var assocneedid = "assocneedid" + i; 
+				var goalassignedpersonid = "goalassignedpersonid" + i; 
+				var goalstartdate = "goalstartdate" + i; 
+				var goalcompletedate = "goalcompletedate" + i; 
+				var goaldoc = "goaldoc" + i; 
+				var goalnote = "goalnote" + i; 
+				var editcasesgoal = "editcasesgoal" + i;
+				var removecasesgoal = "removecasesgoal" + i;
+		%>
+		<% if ((i === 0) || ((i > 0) && (this_cases_goals[i - 1].assocneed_id !== this_cases_goals[i].assocneed_id))) {
+                var numgoals = 0;
+                var numcompletegoals = 0;
+		%>
+		<h6><button id="headassociatedneed<%= this_cases_goals[i].assocneed_id %>" class="btn btn-primary btn-md associatedheadbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Goal(s) for Associated Need: <%= this_cases_goals[i].assocneed_name %></h6>
+		<div id="divassociatedneed<%= this_cases_goals[i].assocneed_id %>" class="associatedgoal_table">
+		<table id="tableassociatedneed<%= this_cases_goals[i].assocneed_id %>" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Goal Name</th>
+					<th>Type</th>
+					<th>Priority</th>
+					<th>Due Date</th>
+					<th>Assigned To</th>
+				</tr>
+			</thead>
+			<tbody>
+		<% } %>
+				<tr class="goal<%= this_cases_goals[i].type %>row">
+					<td><span hidden id="<%= assocneedid %>"><%= this_cases_goals[i].assocneed_id %></span><span id="<%= goalname %>"><%= this_cases_goals[i].name %></span></td>
+					<td id="<%= goaltype %>"><%= this_cases_goals[i].type %></td>
+					<td id="<%= goalpriority %>"><%= this_cases_goals[i].priority %></td>
+					<td id="<%= goalduedate %>"><%= this_cases_goals[i].due_date %></td>
+					<td id="<%= goalassignedpersonid %>"><%= this_cases_goals[i].assignedperson_id %></td>
+				</tr>
+				<tr class="goal<%= this_cases_goals[i].type %>row">
+					<td colspan="4">						
+						<strong>Start Date:</strong> <span id="<%= goalstartdate %>"><%= this_cases_goals[i].start_date %></span> &nbsp;&nbsp; <strong>Complete Date:</strong> <span id="<%= goalcompletedate %>"><%= this_cases_goals[i].complete_date %></span><br>
+					<% if (this_cases_goals[i].goal_doc !== "") { %>
+						<form id="goaldocdownloadform" method="GET" action="/download/goalfiles/<%= this_cases_goals[i].goal_doc %>">
+							<strong>Attachment:</strong>: <input type="text" class="downloadfilename" id="urlgoalfile" name="urlfile" readonly value="<%= this_cases_goals[i].goal_doc %>"/>
+							<span hidden id="<%= goaldoc %>"><%= this_cases_goals[i].goal_doc %></span>
+							<input type="submit" value="Download" class="downloadbtn" id="submitgoaldocdownload"/>
+						</form>
+					<% } %>
+						<br>
+						<strong>Note:</strong> <span id="<%= goalnote %>"><%= this_cases_goals[i].note %></span>
+					</td>
+					<td class="tablebtns" id="<%= this_cases_goals[i].goal_id %>">
+						<button class="btn btn-primary btn-md tableeditbtn casesgoaleditbtn" id="<%= editcasesgoal %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                        <button class="btn btn-danger btn-md tableremovebtn" id="<%= removecasesgoal %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+ 					</td>
+				</tr>
+                <%  numgoals += 1;
+                    if (this_cases_goals[i].complete_date !== "") {
+					    numcompletegoals += 1;
+					}
+				%>
+			<% if ((this_cases_goals.length === 1) || (i === this_cases_goals.length - 1) || ((i < this_cases_goals.length) && (this_cases_goals[i].assocneed_id !== this_cases_goals[i + 1].assocneed_id))) {
+				  var percent_complete_need = ((numcompletegoals / numgoals) * 100).toFixed(2);
+			%>
+			    <tr>
+				<% if (percent_complete_need == 100) { %>
+					    <td class="totalcomplete-done">Need: <%= this_cases_goals[i].assocneed_name %> is <%= percent_complete_need %>&percnt; Complete</td>
+				<% } else if (percent_complete_need < 50) { %>
+					    <td class="totalcomplete-less">Need: <%= this_cases_goals[i].assocneed_name %> is <%= percent_complete_need %>&percnt; Complete</td>
+				<% } else { %>
+					    <td class="totalcomplete-more">Need: <%= this_cases_goals[i].assocneed_name %> is <%= percent_complete_need %>&percnt; Complete</td>
+                <% } %>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+        <% } } %>
+
+
+		<div id="goalspagination" class="paginationdiv">
+			<nav aria-label="Page navigation">
+			  <ul class="pagination">
+			    <li class="disabled">
+			      <a href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <li class="active"><a href="#">1</a></li>
+			    <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li>
+			      <a href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+		</div><!-- goalspagination -->
+
+		</div><!-- tabpanel goals -->
+
+
+
+<!-- ************************************************************************************************************************ -->
+
+
+
+		<div role="tabpanel" class="tab-pane" id="plans">
+
+		<h4><button id="plusplan" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Plan</h4>
+
+		<form id="planform" class="toggleform" enctype="multipart/form-data" action="/plan" method="post">
+			<div class="row">
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="planname">Plan Name</label>
+						<input type="text" class="form-control" id="planname" name="planname" size="90" maxlength="100" value=""/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="plantype">Type</label>
+						<select class="form-control" id="plantype" name="plantype">
+							<option value="0" selected>Select</option>
+							<option value="1">Social</option>
+							<option value="2">Medical</option>
+							<option value="3">Financial</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="planpriority">Priority</label>
+						<select class="form-control" id="planpriority" name="planpriority">
+							<option value="0" selected>Select</option>
+							<option value="1">High</option>
+							<option value="2">Medium</option>
+							<option value="3">Low</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="planstartdate">Start Date</label>
+						<input type="text" class="form-control" id="planstartdate" name="planstartdate" value=""/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="planduedate">Due Date</label>
+						<input type="text" class="form-control" id="planduedate" name="planduedate" value=""/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="plancompletedate">Complete Date</label>
+						<input type="text" class="form-control" id="plancompletedate" name="plancompletedate" value=""/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="assocgoalid">Associated Goal</label>
+						<select class="form-control" id="assocgoalid" name="assocgoalid">
+							<option value="0" selected>Select</option>
+					<% this_cases_goals.sort(function(a,b) {
+						return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+					}); %>
+					<% for (var i = 0; i < this_cases_goals.length; i += 1) { %>
+							<option value="<%= this_cases_goals[i].goal_id %>"><%= this_cases_goals[i].name %></option>
+					<% } %>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="planassignedpersonid">Assigned To</label>
+						<select class="form-control" id="planassignedpersonid" name="planassignedpersonid">
+							<option value="0" selected>Select</option>
+							<% for (var i = 0; i < person.length; i += 1) { %>
+							<option value="<%= person[i].person_id %>"><%= person[i].last_name %>, <%= person[i].first_name %> <%= person[i].middle_name %></option>
+                            <% } %>
+						</select>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="plannote">Note</label>
+						<textarea class="form-control" id="plannote" name="plannote"></textarea>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="plandocattachment">Document Attachment</label>
+						<input type="text" class="form-control" id="plandocattachment" name="plandocattachment" readonly value=""/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-sm-6" hidden>
+					<div class="form-group">
+						<label for="plancaseid">Case ID</label>
+						<input type="text" class="form-control" id="plancaseid" name="plancaseid" readonly value="<%= thiscase.case_id %>"/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div id="showuploaddocplan" class="row">
+				<div class="col-xs-12 col-sm-8 col-lg-9">
+					<input type="file" class="btn btn-primary btn-md uploadbtn" id="planbrowsebtn" name="userPlanFile" />
+				</div>
+				<div class="uploadbtns col-xs-12 col-sm-4 col-lg-3">
+					<button type="button" class="btn btn-default btn-md removeuploadbtn" id="removedocplan" name="removedocplan">Remove</button>
+					<button type="button" class="btn btn-default btn-md canceluploadbtn" id="canceldocplan" name="canceldocplan">Cancel</button>
+				</div>
+			</div><!-- row -->
+			<div class="buttonrow">
+				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetplan" name="resetplan">Reset</button>
+				<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitplan" name="submitplan">Submit</button>
+			</div>
+		</form>
+
+        <div class="form-group">
+           <label for="expandplan" class="btn btn-sm btn-default">
+              <input type="radio" name="showplans" id="expandplan" class="expandgoalthruactionbtn" checked> Show Plan Tables
+           </label>
+           <label for="collapseplan" class="btn btn-sm btn-default">
+              <input type="radio" name="showplans" id="collapseplan" class="collapsegoalthruactionbtn"> Hide Plan Tables
+           </label>
+           <span class="nobr" id="plantypebtns"></span>
+		</div>
+
+		<% for (var i = 0; i < this_cases_plans.length; i += 1) {
+				var planname = "planname" + i; 
+				var plantype = "plantype" + i; 
+				var planduedate = "planduedate" + i; 
+				var planpriority = "planpriority" + i; 
+				var assocgoalid = "assocgoalid" + i; 
+				var planassignedpersonid = "planassignedpersonid" + i; 
+				var planstartdate = "planstartdate" + i; 
+				var plancompletedate = "plancompletedate" + i; 
+				var plandoc = "plandoc" + i; 
+				var plannote = "plannote" + i; 
+				var editcasesplan = "editcasesplan" + i;
+				var removecasesplan = "removecasesplan" + i; 
+		%>
+		<% if ((i === 0) || ((i > 0) && (this_cases_plans[i - 1].assocgoal_id !== this_cases_plans[i].assocgoal_id))) { 
+                var numplans = 0;
+                var numcompleteplans = 0;
+		%>
+		<h6><button id="headassociatedgoal<%= this_cases_plans[i].assocgoal_id %>" class="btn btn-primary btn-md associatedheadbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Plan(s) for Associated Goal: <%= this_cases_plans[i].assocgoal_name %></h6>
+		<div id="divassociatedgoal<%= this_cases_plans[i].assocgoal_id %>" class="associatedplan_table">
+		<table id="tableassociatedgoal<%= this_cases_plans[i].assocgoal_id %>" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Plan Name</th>
+					<th>Type</th>
+					<th>Priority</th>
+					<th>Due Date</th>
+					<th>Assigned To</th>
+				</tr>
+			</thead>
+			<tbody>
+		<% } %>
+				<tr class="plan<%= this_cases_plans[i].type %>row">
+					<td><span hidden id="<%= assocgoalid %>"><%= this_cases_plans[i].assocgoal_id %></span><span id="<%= planname %>"><%= this_cases_plans[i].name %></span></td>
+					<td id="<%= plantype %>"><%= this_cases_plans[i].type %></td>
+					<td id="<%= planpriority %>"><%= this_cases_plans[i].priority %></td>
+					<td id="<%= planduedate %>"><%= this_cases_plans[i].due_date %></td>
+					<td id="<%= planassignedpersonid %>"><%= this_cases_plans[i].assignedperson_id %></td>
+				</tr>
+				<tr class="plan<%= this_cases_plans[i].type %>row">
+					<td colspan="4">						
+						<strong>Start Date:</strong> <span id="<%= planstartdate %>"><%= this_cases_plans[i].start_date %></span> &nbsp;&nbsp; <strong>Complete Date:</strong> <span id="<%= plancompletedate %>"><%= this_cases_plans[i].complete_date %></span><br>
+					<% if (this_cases_plans[i].plan_doc !== "") { %>
+						<form id="plandocdownloadform" method="GET" action="/download/planfiles/<%= this_cases_plans[i].plan_doc %>">
+							<strong>Attachment:</strong>: <input type="text" class="downloadfilename" id="urlplanfile" name="urlfile" readonly value="<%= this_cases_plans[i].plan_doc %>"/>
+							<span hidden id="<%= plandoc %>"><%= this_cases_plans[i].plan_doc %></span>
+							<input type="submit" value="Download" class="downloadbtn" id="submitplandocdownload"/>
+						</form>
+					<% } %>
+						<br>
+						<strong>Note:</strong> <span id="<%= plannote %>"><%= this_cases_plans[i].note %></span>
+					</td>
+					<td class="tablebtns" id="<%= this_cases_plans[i].plan_id %>">
+						<button class="btn btn-primary btn-md tableeditbtn casesplaneditbtn" id="<%= editcasesplan %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                        <button class="btn btn-danger btn-md tableremovebtn" id="<%= removecasesplan %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+ 					</td>
+				</tr>
+                <%  numplans += 1;
+                    if (this_cases_plans[i].complete_date !== "") {
+					    numcompleteplans += 1;
+					}
+				%>
+			<% if ((this_cases_plans.length === 1) || (i === this_cases_plans.length - 1) || ((i < this_cases_plans.length) && (this_cases_plans[i].assocgoal_id !== this_cases_plans[i + 1].assocgoal_id))) {
+				  var percent_complete_goal = ((numcompleteplans / numplans) * 100).toFixed(0);
+			%>
+			    <tr>
+				<% if (percent_complete_goal == 100) { %>
+					<td class="totalcomplete-done">Goal: <%= this_cases_plans[i].assocgoal_name %> is <%= percent_complete_goal %>&percnt; Complete</td>
+				<% } else if (percent_complete_goal < 50) { %>
+					<td class="totalcomplete-less">Goal: <%= this_cases_plans[i].assocgoal_name %> is <%= percent_complete_goal %>&percnt; Complete</td>
+				<% } else { %>
+					<td class="totalcomplete-more">Goal: <%= this_cases_plans[i].assocgoal_name %> is <%= percent_complete_goal %>&percnt; Complete</td>
+                <% } %>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+        <% } } %>
+
+
+		<div id="planspagination" class="paginationdiv">
+			<nav aria-label="Page navigation">
+			  <ul class="pagination">
+			    <li class="disabled">
+			      <a href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <li class="active"><a href="#">1</a></li>
+			    <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li>
+			      <a href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+		</div><!-- planspagination -->
+
+		</div><!-- tabpanel plans -->
+
+
+
+
+<!-- ************************************************************************************************************************ -->
+
+
+
+		<div role="tabpanel" class="tab-pane" id="actions">
+
+		<h4><button id="plustask" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Task</h4>
+
+		<form id="taskform" class="toggleform" action="/task" method="post">
+			<div class="row">
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="tasksubject">Subject</label>
+						<input type="text" class="form-control" id="tasksubject" name="tasksubject" size="90" maxlength="100" value=""/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="tasktype">Type</label>
+						<select class="form-control" id="tasktype" name="tasktype">
+							<option value="0" selected>Select</option>
+							<option value="1">Email</option>
+							<option value="2">Call</option>
+							<option value="3">Meeting</option>
+							<option value="4">Referral</option>
+							<option value="5">Research</option>
+							<option value="6">Other</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="taskpriority">Priority</label>
+						<select class="form-control" id="taskpriority" name="taskpriority">
+							<option value="0" selected>Select</option>
+							<option value="1">High</option>
+							<option value="2">Medium</option>
+							<option value="3">Low</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="taskstartdate">Start Date</label>
+						<input type="text" class="form-control" id="taskstartdate" name="taskstartdate" value=""/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="taskduedate">Due Date</label>
+						<input type="text" class="form-control" id="taskduedate" name="taskduedate" value=""/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="taskcompletedate">Complete Date</label>
+						<input type="text" class="form-control" id="taskcompletedate" name="taskcompletedate" value=""/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="taskassignedperson">Assigned To</label>
+						<select class="form-control" id="taskassignedperson" name="taskassignedperson">
+							<option value="0" selected>Select</option>
+							<% for (var i = 0; i < person.length; i += 1) { %>
+							<option value="<%= person[i].person_id %>"><%= person[i].last_name %>, <%= person[i].first_name %> <%= person[i].middle_name %></option>
+                            <% } %>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="taskstatus">Status</label>
+						<select class="form-control" id="taskstatus" name="taskstatus">
+							<option value="0" selected>Select</option>
+							<option value="1">Not Started</option>
+							<option value="2">In Progress</option>
+							<option value="3">Pending Input</option>
+							<option value="4">Completed</option>
+							<option value="5">Canceled</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="tasknote">Note</label>
+						<textarea class="form-control" id="tasknote" name="tasknote"></textarea>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-sm-6" hidden>
+					<div class="form-group">
+						<label for="taskcaseid">Case ID</label>
+						<input type="text" class="form-control" id="taskcaseid" name="taskcaseid" readonly value="<%= thiscase.case_id %>"/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="buttonrow">
+				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resettask" name="resettask">Reset</button>
+				<button type="submit" class="btn btn-warning btn-md submitbtn" id="submittask" name="submittask">Submit</button>
+			</div>
+			<br>
+		</form>
+
+	<button class="btn btn-primary moreactionlogbtn" id="btnactionstaskstable"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;Tasks</button>
+
+	<div id="actionstaskstable">
+
+		<table id="tasksdisplaytable" class="table table-responsive table-striped table-condensed 2rowremovebtntop">
+			<thead>
+				<tr class="info">
+					<th>Task Subject</th>
+					<th>Type</th>
+					<th>Priority</th>
+					<th>Due Date</th>
+					<th>Assigned To</th>
+					<th>Status</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+			<% taskscaselisting.sort(function(a,b) {
+			    return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+            <%  var numtasks = 0;
+                var numcompletetasks = 0;
+				var percent_complete_tasks = 0;
+		    %>
+           <% for (var i = 0; i < taskscaselisting.length; i += 1) {
+				var tsubject = "tsubject" + i;
+				var ttype = "ttype" + i;
+				var tpriority = "tpriority" + i;
+				var tstart = "tstart" + i;
+				var tdue = "tdue" + i;
+				var tcomplete = "tcomplete" + i;
+				var tpersonid = "tpersonid" + i;
+				var tstatus = "tstatus" + i;
+				var tnote = "tnote" + i;
+				var task = "task" + i;
+				var edittask = "edittask" + i;
+				var removetask = "removetask" + i;
+			%>
+				<tr>
+					<td id="<%= tsubject %>"><%= taskscaselisting[i].subject %></td>
+					<td id="<%= ttype %>"><%= taskscaselisting[i].type %></td>
+					<td id="<%= tpriority %>"><%= taskscaselisting[i].priority %></td>
+					<td id="<%= tdue %>"><%= taskscaselisting[i].due_date %></td>
+					<td><span hidden id="<%= tpersonid %>"><%= taskscaselisting[i].person_id %></span><a href="/person/<%= taskscaselisting[i].person_id %>"><%= taskscaselisting[i].person_name %></a></td>
+					<td id="<%= tstatus %>"><%= taskscaselisting[i].status %></td>
+					<td class="tablebtns" id="<%= taskscaselisting[i].task_id %>">
+						<button class="btn btn-primary btn-md tableeditbtn taskeditbtn" id="<%= edittask %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+						<button class="btn btn-default morebtn" type="button" data-toggle="collapse" data-target="#<%= task %>" aria-expanded="false" aria-controls="<%= task %>"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                        <button class="btn btn-danger btn-md tableremovebtn" id="<%= removetask %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="8">						
+						<div class="collapse" id="<%= task %>">
+							<p><strong>Start Date:</strong> <span id="<%= tstart %>"><%= taskscaselisting[i].start_date %></span> &nbsp;&nbsp; 
+							<strong>Complete Date:</strong> <span id="<%= tcomplete %>"><%= taskscaselisting[i].complete_date %></span>
+							</p>
+							<p><strong>Note:</strong> <span id="<%= tnote %>"><%= taskscaselisting[i].note %></span></p>
+						</div>
+					</td>
+				</tr>
+		      </tr>
+                <%  numtasks += 1;
+                    if (taskscaselisting[i].complete_date !== "") {
+					    numcompletetasks += 1;
+					}
+				%>
+			<% } %>
+				<%  if (numtasks != 0) {
+				      percent_complete_tasks = ((numcompletetasks / numtasks) * 100).toFixed(0);
+				}%>
+			    <tr>
+				<% if (percent_complete_tasks == 100) { %>
+					<td class="totalcomplete-done"><%= percent_complete_tasks %>&percnt; of Tasks Complete</td>
+				<% } else if (percent_complete_tasks < 50) { %>
+					<td class="totalcomplete-less"><%= percent_complete_tasks %>&percnt; of Tasks Complete</td>
+				<% } else { %>
+					<td class="totalcomplete-more"><%= percent_complete_tasks %>&percnt; of Tasks Complete</td>
+                <% } %>
+				</tr>
+			</tbody>
+		</table>
+
+		<div id="taskspagination" class="paginationdiv">
+			<nav aria-label="Page navigation">
+			  <ul class="pagination">
+			    <li class="disabled">
+			      <a href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <li class="active"><a href="#">1</a></li>
+			    <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li>
+			      <a href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+		</div><!-- taskspagination -->
+	</div><!-- actionstaskstable -->
+
+
+		<h4><button id="plusaction" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Action</h4>
+
+		<form id="actionform" class="toggleform" enctype="multipart/form-data" action="/action" method="post">
+			<div class="row">
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="actionname">Action Name</label>
+						<input type="text" class="form-control" id="actionname" name="actionname" size="90" maxlength="100"/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="actiontype">Type</label>
+						<select class="form-control" id="actiontype" name="actiontype">
+							<option value="0" selected>Select</option>
+							<option value="1">Email</option>
+							<option value="2">Call</option>
+							<option value="3">Meeting</option>
+							<option value="4">Referral</option>
+							<option value="5">Research</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="actionpriority">Priority</label>
+						<select class="form-control" id="actionpriority" name="actionpriority">
+							<option value="0" selected>Select</option>
+							<option value="1">High</option>
+							<option value="2">Medium</option>
+							<option value="3">Low</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="actionstartdate">Start Date</label>
+						<input type="text" class="form-control" id="actionstartdate" name="actionstartdate"/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="actionduedate">Due Date</label>
+						<input type="text" class="form-control" id="actionduedate" name="actionduedate"/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="actioncompletedate">Complete Date</label>
+						<input type="text" class="form-control" id="actioncompletedate" name="actioncompletedate"/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="assocplanid">Associated Plan</label>
+						<select class="form-control" id="assocplanid" name="assocplanid">
+							<option value="0" selected>Select</option>
+					<% this_cases_plans.sort(function(a,b) {
+						return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+					}); %>
+					<% for (var i = 0; i < this_cases_plans.length; i += 1) { %>
+							<option value="<%= this_cases_plans[i].plan_id %>"><%= this_cases_plans[i].name %></option>
+					<% } %>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="actionassignedpersonid">Assigned To</label>
+						<select class="form-control" id="actionassignedpersonid" name="actionassignedpersonid">
+							<option value="0" selected>Select</option>
+							<% for (var i = 0; i < person.length; i += 1) { %>
+							<option value="<%= person[i].person_id %>"><%= person[i].last_name %>, <%= person[i].first_name %> <%= person[i].middle_name %></option>
+                            <% } %>
+						</select>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="actionnote">Note</label>
+						<textarea class="form-control" id="actionnote" name="actionnote"></textarea>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="actiondocattachment">Document Attachment</label>
+						<input type="text" class="form-control" id="actiondocattachment" name="actiondocattachment" readonly />
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-sm-6" hidden>
+					<div class="form-group">
+						<label for="actioncaseid">Case ID</label>
+						<input type="text" class="form-control" id="actioncaseid" name="actioncaseid" readonly value="<%= thiscase.case_id %>"/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div id="showuploaddocaction"" class="row">
+				<div class="col-xs-12 col-sm-8 col-lg-9">
+					<input type="file" class="btn btn-primary btn-md uploadbtn" id="actionbrowsebtn" name="userActionFile" />
+				</div>
+				<div class="uploadbtns col-xs-12 col-sm-4 col-lg-3">
+					<button type="button" class="btn btn-default btn-md removeuploadbtn" id="removedocaction" name="removedocaction">Remove</button>
+					<button type="button" class="btn btn-default btn-md canceluploadbtn" id="canceldocaction" name="canceldocaction">Cancel</button>
+				</div>
+			</div><!-- row -->
+			<div class="buttonrow">
+				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetaction" name="resetaction">Reset</button>
+				<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitaction" name="submitaction">Submit</button>
+			</div>
+		</form>
+
+        <div class="form-group">
+           <label for="expandaction" class="btn btn-sm btn-default">
+              <input type="radio" name="showactions" id="expandaction" class="expandgoalthruactionbtn" checked> Show Action Tables
+           </label>
+           <label for="collapseaction" class="btn btn-sm btn-default">
+              <input type="radio" name="showactions" id="collapseaction" class="collapsegoalthruactionbtn"> Hide Action Tables
+           </label>
+           <span class="nobr" id="actiontypebtns"></span>           
+ 		</div>
+
+		<% this_cases_actions.sort(function(a,b) {
+			return (a.assocplan_id - b.assocplan_id) || (a.type - b.type);
+		}); %>
+		<% for (var i = 0; i < this_cases_actions.length; i += 1) {
+				var actionname = "actionname" + i; 
+				var actiontype = "actiontype" + i; 
+				var actionduedate = "actionduedate" + i; 
+				var actionpriority = "actionpriority" + i; 
+				var assocplanid = "assocplanid" + i; 
+				var actionassignedpersonid = "actionassignedpersonid" + i; 
+				var actionstartdate = "actionstartdate" + i; 
+				var actioncompletedate = "actioncompletedate" + i; 
+				var actiondoc = "actiondoc" + i; 
+				var actionnote = "actionnote" + i; 
+				var editcasesaction = "editcasesaction" + i;
+				var removecasesaction = "removecasesaction" + i; 
+		%>
+		<% if ((i === 0) || ((i > 0) && (this_cases_actions[i - 1].assocplan_id !== this_cases_actions[i].assocplan_id))) {
+                var numactions = 0;
+                var numcompleteactions = 0;
+		%>
+		<h6><button id="headassociatedplan<%= this_cases_actions[i].assocplan_id %>" class="btn btn-primary btn-md associatedheadbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Action(s) for Associated Plan: <%= this_cases_actions[i].assocplan_name %></h6>
+		<div id="divassociatedplan<%= this_cases_actions[i].assocplan_id %>" class="associatedaction_table">
+		<table id="tableassociatedplan<%= this_cases_actions[i].assocplan_id %>" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Action Name</th>
+					<th>Type</th>
+					<th>Priority</th>
+					<th>Due Date</th>
+					<th>Assigned To</th>
+				</tr>
+			</thead>
+			<tbody>
+		<% } %>
+				<tr class="action<%= this_cases_actions[i].type %>row">
+					<td><span hidden id="<%= assocplanid %>"><%= this_cases_actions[i].assocplan_id %></span><span id="<%= actionname %>"><%= this_cases_actions[i].name %></span></td>
+					<td id="<%= actiontype %>"><%= this_cases_actions[i].type %></td>
+					<td id="<%= actionpriority %>"><%= this_cases_actions[i].priority %></td>
+					<td id="<%= actionduedate %>"><%= this_cases_actions[i].due_date %></td>
+					<td id="<%= actionassignedpersonid %>"><%= this_cases_actions[i].assignedperson_id %></td>
+				</tr>
+				<tr class="action<%= this_cases_actions[i].type %>row">
+					<td colspan="4">						
+						<strong>Start Date:</strong> <span id="<%= actionstartdate %>"><%= this_cases_actions[i].start_date %></span> &nbsp;&nbsp; <strong>Complete Date:</strong> <span id="<%= actioncompletedate %>"><%= this_cases_actions[i].complete_date %></span><br>
+					<% if (this_cases_actions[i].action_doc !== "") { %>
+						<form id="actiondocdownloadform" method="GET" action="/download/actionfiles/<%= this_cases_actions[i].action_doc %>">
+							<strong>Attachment:</strong>: <input type="text" class="downloadfilename" id="urlactionfile" name="urlfile" readonly value="<%= this_cases_actions[i].action_doc %>"/>
+							<span hidden id="<%= actiondoc %>"><%= this_cases_actions[i].action_doc %></span>
+							<input type="submit" value="Download" class="downloadbtn" id="submitactiondocdownload"/>
+						</form>
+					<% } %>
+						<br>
+						<strong>Note:</strong> <span id="<%= actionnote %>"><%= this_cases_actions[i].note %></span>
+					</td>
+					<td class="tablebtns" id="<%= this_cases_actions[i].action_id %>">
+						<button class="btn btn-primary btn-md tableeditbtn casesactioneditbtn" id="<%= editcasesaction %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                        <button class="btn btn-danger btn-md tableremovebtn" id="<%= removecasesaction %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+ 					</td>
+				</tr>
+                <%  numactions += 1;
+                    if (this_cases_actions[i].complete_date !== "") {
+					    numcompleteactions += 1;
+					}
+				%>
+			<% if ((this_cases_actions.length === 1) || (i === this_cases_actions.length - 1) || ((i < this_cases_actions.length) && (this_cases_actions[i].assocplan_id !== this_cases_actions[i + 1].assocplan_id))) {
+				  var percent_complete_plan = ((numcompleteactions / numactions) * 100).toFixed(0);
+			%>
+			    <tr>
+				<% if (percent_complete_plan == 100) { %>
+					<td class="totalcomplete-done">Plan: <%= this_cases_actions[i].assocplan_name %> is <%= percent_complete_plan %>&percnt; Complete</td>
+				<% } else if (percent_complete_plan < 50) { %>
+					<td class="totalcomplete-less">Plan: <%= this_cases_actions[i].assocplan_name %> is <%= percent_complete_plan %>&percnt; Complete</td>
+				<% } else { %>
+					<td class="totalcomplete-more">Plan: <%= this_cases_actions[i].assocplan_name %> is <%= percent_complete_plan %>&percnt; Complete</td>
+                <% } %>
+				</tr>
+
+			</tbody>
+		</table>
+		</div>
+        <% } } %>
+
+		<div id="actionspagination" class="paginationdiv">
+			<nav aria-label="Page navigation">
+			  <ul class="pagination">
+			    <li class="disabled">
+			      <a href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <li class="active"><a href="#">1</a></li>
+			    <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li>
+			      <a href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+		</div><!-- actionspagination -->
+
+	</div><!-- tabpanel actions -->
+
+
+
+
+<!-- ******************************************************************************************************************** -->
+
+
+
+		<div role="tabpanel" class="tab-pane" id="casefiles">
+
+		<h4><button id="pluscasefile" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> File</h4>
+
+		<form id="casefileform" class="toggleform" enctype="multipart/form-data" action="/casefile" method="post">
+			<div class="row">
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="casefilename">File Name</label>
+						<input type="text" class="form-control" id="casefilename" name="casefilename"/>
+					</div>
+				</div>
+
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="casefilecasedomain">Case Domain</label>
+						<select class="form-control" id="casefilecasedomain" name="casefilecasedomain">
+							<option value="0" selected>Select</option>
+							<option value="1">Spiritual</option>
+							<option value="2">Health</option>
+							<option value="3">Legal</option>
+							<option value="4">Financial</option>
+							<option value="5">Benefits</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="casefileactiontype">Action Type</label>
+						<select class="form-control" id="casefileactiontype" name="casefileactiontype">
+							<option value="0" selected>Select</option>
+							<option value="1">Email</option>
+							<option value="2">Call</option>
+							<option value="3">Meeting</option>
+							<option value="4">Task</option>
+							<option value="5">Referral</option>
+							<option value="6">Research</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="casefiletype">File Type</label><br>
+						<select class="form-control" id="casefiletype" name="casefiletype">
+							<option value="0" selected>Select</option>
+							<option value="1">File Type 1</option>
+							<option value="2">File Type 2</option>
+							<option value="3">File Type 3</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="casefilepersonid">Person Name</label>
+						<select class="form-control" id="casefilepersonid" name="casefilepersonid">
+							<option value="0" selected>Select</option>
+			<% for (var i = 0; i < person.length; i += 1) { %>
+				<option value="<%= person[i].person_id %>"><%= person[i].last_name %>, <%= person[i].first_name %> <%= person[i].middle_name %></option>
+            <% } %>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="casefileorgid">Organization Name</label>
+						<select class="form-control" id="casefileorgid" name="casefileorgid">
+							<option value="0" selected>Select</option>
+			<% for (var i = 0; i < organization.length; i += 1) { %>
+					<option value="<%= organization[i].organization_id %>"><%= organization[i].organization_name %></option>
+			<% } %>
+						</select>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="casefilenote">Note</label>
+						<textarea class="form-control" id="casefilenote" name="casefilenote"></textarea>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="casefiledocattachment">Document Attachment</label>
+						<input type="text" class="form-control" id="casefiledocattachment" name="casefiledocattachment" required readonly value=""/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-sm-6" hidden>
+					<div class="form-group">
+						<label for="casefilecaseid">Case ID</label>
+						<input type="text" class="form-control" id="casefilecaseid" name="casefilecaseid" readonly value="<%= thiscase.case_id %>"/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div id="showuploaddoccasefile" class="row">
+				<div class="col-xs-12 col-sm-8 col-lg-9">
+					<input type="file" required class="btn btn-primary btn-md uploadbtn" id="casefilebrowsebtn" name="userCaseFile" /><br>
+				</div>
+				<div class="uploadbtns col-xs-12 col-sm-4 col-lg-3">
+					<button type="button" class="btn btn-default btn-md removeuploadbtn" id="removedoccasefile" name="removedoccasefile">Remove</button>
+					<button type="button" class="btn btn-default btn-md canceluploadbtn" id="canceldoccasefile" name="canceldoccasefile">Cancel</button>
+				</div>
+			</div><!-- row -->
+			<div class="buttonrow">
+				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetcasefile" name="resetcasefile">Reset</button>
+				<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitcasefile" name="submitcasefile">Submit</button>
+			</div>
+		</form>
+
+
+        <div class="form-group">
+           <span id="filecasedomainbtns"></span>
+		</div>
+
+		<% this_cases_files.sort(function(a,b) {
+			return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+		}); %>
+		<% if (this_cases_files.length > 0) { %>
+		<table id="casefiledisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>File Name</th>
+					<th>Case Domain</th>
+					<th>Action Type</th>
+					<th>Person Name</th>
+					<th>Organization Name</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% for (var i = 0; i < this_cases_files.length; i += 1) {
+					var filename = "filename" + i; 
+					var filedomain = "filedomain" + i; 
+					var fileactiontype = "fileactiontype" + i; 
+					var filepersonid = "filepersonid" + i; 
+					var fileorgid = "fileorgid" + i; 
+					var filenote = "filenote" + i; 
+					var filetype = "filetype" + i; 
+					var filedoc = "filedoc" + i; 
+					var editcasefile = "editcasefile" + i;
+					var removecasefile = "removecasefile" + i; 
+			%>
+				<tr class="filecasedomain<%= this_cases_files[i].domain %>row">
+					<td id="<%= filename %>"><%= this_cases_files[i].name %></td>
+					<td id="<%= filedomain %>"><%= this_cases_files[i].domain %></td>
+					<td id="<%= fileactiontype %>"><%= this_cases_files[i].actiontype %></td>
+					<td id="<%= filepersonid %>"><%= this_cases_files[i].fileperson_id %></td>
+					<td id="<%= fileorgid %>"><%= this_cases_files[i].fileorg_id %></td>						
+					<td><%= this_cases_files[i].filedate %></td>
+				</tr>
+				<tr class="filecasedomain<%= this_cases_files[i].domain %>row">
+					<td colspan="5">
+					    <p><strong>Type:</strong> <span id="<%= filetype %>"><%= this_cases_files[i].type %></span></p>
+					<% if (this_cases_files[i].file_doc !== "") { %>
+						<form id="filedocdownloadform" method="GET" action="/download/casefiles/<%= this_cases_files[i].file_doc %>">
+							<strong>Attachment:</strong>: <input type="text" class="downloadfilename" name="urlcasefile" readonly value="<%= this_cases_files[i].file_doc %>"/>
+							<span hidden id="<%= filedoc %>"><%= this_cases_files[i].file_doc %></span>
+							<input type="submit" value="Download" class="downloadbtn" id="submitfiledocdownload"/>
+						</form>
+					<% } %>
+						<br>
+						<strong>Note:</strong> <span id="<%= filenote %>"><%= this_cases_files[i].note %></span>
+					</td>
+					<td class="tablebtns" id="<%= this_cases_files[i].casefile_id %>">
+						<button class="btn btn-primary btn-md tableeditbtn casefileeditbtn" id="<%= editcasefile %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                        <button class="btn btn-danger btn-md tableremovebtn" id="<%= removecasefile %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+ 					</td>
+				</tr>
+        	<% } %>
+			</tbody>
+		</table>
+       	<% } %>
+
+		<div id="casefilespagination" class="paginationdiv">
+			<nav aria-label="Page navigation">
+			  <ul class="pagination">
+			    <li class="disabled">
+			      <a href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <li class="active"><a href="#">1</a></li>
+			    <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li>
+			      <a href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+		</div><!-- casefilespagination -->
+
+		</div><!-- tabpanel casefiles -->
+
+
+
+<!--   ************************************************************************************* -->
+
+
+
+		<div role="tabpanel" class="tab-pane" id="casenotes">
+
+		<h4><button id="pluscasenote" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Note</h4>
+
+		<form id="casenoteform" class="toggleform" action="/casenote" method="post">
+			<div class="row">
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="casenotename">Note Name</label>
+						<input type="text" class="form-control" id="casenotename" name="casenotename"/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="casenotecasedomain">Case Domain</label>
+						<select class="form-control" id="casenotecasedomain" name="casenotecasedomain">
+							<option value="0" selected>Select</option>
+							<option value="1">Spiritual</option>
+							<option value="2">Health</option>
+							<option value="3">Legal</option>
+							<option value="4">Financial</option>
+							<option value="5">Benefits</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="casenoteactiontype">Action Type</label>
+						<select class="form-control" id="casenoteactiontype" name="casenoteactiontype">
+							<option value="0" selected>Select</option>
+							<option value="1">Email</option>
+							<option value="2">Call</option>
+							<option value="3">Meeting</option>
+							<option value="4">Task</option>
+							<option value="5">Referral</option>
+							<option value="6">Research</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="casenotetype">Note Type</label><br>
+						<select class="form-control" id="casenotetype" name="casenotetype">
+							<option value="0" selected>Select</option>
+							<option value="1">Note Type 1</option>
+							<option value="2">Note Type 2</option>
+							<option value="3">Note Type 3</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="casenotepersonid">Person Name</label>
+						<select class="form-control" id="casenotepersonid" name="casenotepersonid">
+							<option value="0" selected>Select</option>
+			<% for (var i = 0; i < person.length; i += 1) { %>
+				<option value="<%= person[i].person_id %>"><%= person[i].last_name %>, <%= person[i].first_name %> <%= person[i].middle_name %></option>
+            <% } %>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="casenoteorgid">Organization Name</label>
+						<select class="form-control" id="casenoteorgid" name="casenoteorgid">
+							<option value="0" selected>Select</option>
+			<% for (var i = 0; i < organization.length; i += 1) { %>
+					<option value="<%= organization[i].organization_id %>"><%= organization[i].organization_name %></option>
+			<% } %>
+						</select>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="casenotetext">Note</label>
+						<textarea class="form-control" id="casenotetext" name="casenotetext" required></textarea>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-sm-6" hidden>
+					<div class="form-group">
+						<label for="casenotecaseid">Case ID</label>
+						<input type="text" class="form-control" id="casenotecaseid" name="casenotecaseid" readonly value="<%= thiscase.case_id %>"/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="buttonrow">
+				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetcasenote" name="resetcasenote">Reset</button>
+				<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitcasenote" name="submitcasenote">Submit</button>
+			</div>
+		</form>
+
+        <div class="form-group">
+           <span id="notecasedomainbtns"></span>
+		</div>
+
+		<% this_cases_notes.sort(function(a,b) {
+			return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+		}); %>
+		<%  if (this_cases_notes.length > 0) { %>
+		<table id="casenotedisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Note Name</th>
+					<th>Case Domain</th>
+					<th>Action Type</th>
+					<th>Person Name</th>
+					<th>Organization Name</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% for (var i = 0; i < this_cases_notes.length; i += 1) {
+					var notename = "notename" + i; 
+					var notedomain = "notedomain" + i; 
+					var noteactiontype = "noteactiontype" + i; 
+					var notepersonid = "notepersonid" + i; 
+					var noteorgid = "noteorgid" + i; 
+					var notetype = "notetype" + i; 
+					var notetext = "notetext" + i; 
+					var editcasenote = "editcasenote" + i;
+					var removecasenote = "removecasenote" + i; 
+			%>
+				<tr class="notecasedomain<%= this_cases_notes[i].domain %>row">
+					<td id="<%= notename %>"><%= this_cases_notes[i].name %></td>
+					<td id="<%= notedomain %>"><%= this_cases_notes[i].domain %></td>
+					<td id="<%= noteactiontype %>"><%= this_cases_notes[i].actiontype %></td>
+					<td id="<%= notepersonid %>"><%= this_cases_notes[i].noteperson_id %></td>
+					<td id="<%= noteorgid %>"><%= this_cases_notes[i].noteorg_id %></td>						
+					<td><%= this_cases_notes[i].notedate %></td>
+				</tr>
+				<tr class="notecasedomain<%= this_cases_notes[i].domain %>row">
+					<td colspan="5">
+					    <p><strong>Type:</strong> <span id="<%= notetype %>"><%= this_cases_notes[i].type %></span></p>
+						<strong>Note:</strong> <span id="<%= notetext %>"><%= this_cases_notes[i].notetext %></span>
+					</td>
+					<td class="tablebtns" id="<%= this_cases_notes[i].casenote_id %>">
+						<button class="btn btn-primary btn-md tableeditbtn casenoteeditbtn" id="<%= editcasenote %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                        <button class="btn btn-danger btn-md tableremovebtn" id="<%= removecasenote %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+ 					</td>
+				</tr>
+        	<% } %>
+			</tbody>
+		</table>
+        <% } %>
+
+		<div id="casenotespagination" class="paginationdiv">
+			<nav aria-label="Page navigation">
+			  <ul class="pagination">
+			    <li class="disabled">
+			      <a href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <li class="active"><a href="#">1</a></li>
+			    <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li>
+			      <a href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+		</div><!-- casenotespagination -->
+
+		</div><!-- tabpanel casenotes -->
+
+
+
+
+<!-- ******************************************************************************************************************** -->
+
+
+
+		<div role="tabpanel" class="tab-pane" id="measurements">
+
+		<p><strong>NOTE: To Come</strong></p>
+
+
+		</div><!-- tabpanel measurements -->
+
+
+
+<!-- **********************************************************************************************8 -->
+
+
+
+		<div role="tabpanel" class="tab-pane" id="questionnaires">
+
+        <p><strong>NOTE: To Come</strong></p>
+
+	 	</div><!-- tabpanel questionnaire -->
+
+ 
+
+ 
+ 	</div><!-- tab-content -->
+
+</div><!-- taskpanel -->
+
+</div><!-- cmscontent container -->
+
+<script src="../js/cms_case.js"></script>
+
+<script>
+function getcaseinfo() {
+	$("#casetitle").val("<%= thiscase.case_title %>");
+	$("#casedescription").val("<%= thiscase.case_description %>");
+	$("#casedomain").val("<%= thiscase.lk_case_domain %>");
+	$("#casecategory").val("<%= thiscase.lk_case_category %>");
+	$("#casestatus").val("<%= thiscase.lk_case_status %>");
+	$("#caseseverity").val("<%= thiscase.lk_case_severity %>");
+	$("#casepriority").val("<%= thiscase.lk_case_priority %>");
+	$("#casetype").val("<%= thiscase.lk_case_type %>");
+	$("#casestartdate").val("<%= thiscase.start_date %>");
+	$("#caseduedate").val("<%= thiscase.due_date %>");
+	$("#casecompletedate").val("<%= thiscase.complete_date %>");
+}
+getcaseinfo();
+
+
+for (var t = 1; t < document.getElementById('goaltype').options.length; t += 1) {
+	var goaltypeval = document.getElementById('goaltype').options[t].value;
+	var goaltypetext = document.getElementById('goaltype').options[t].text;
+	var goaltypebtn = '<label for="showgoal' + goaltypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showgoaltype" id="showgoal' + goaltypeval + '" class="goaltypebtn" value="' + goaltypeval + '" checked> ' + goaltypetext + '</label>';
+    $("#goaltypebtns").append(goaltypebtn);
+}
+
+for (var t = 1; t < document.getElementById('plantype').options.length; t += 1) {
+	var plantypeval = document.getElementById('plantype').options[t].value;
+	var plantypetext = document.getElementById('plantype').options[t].text;
+	var plantypebtn = '<label for="showplan' + plantypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showplantype" id="showplan' + plantypeval + '" class="plantypebtn" value="' + plantypeval + '" checked> ' + plantypetext + '</label>';
+    $("#plantypebtns").append(plantypebtn);
+}
+
+for (var t = 1; t < document.getElementById('actiontype').options.length; t += 1) {
+	var actiontypeval = document.getElementById('actiontype').options[t].value;
+	var actiontypetext = document.getElementById('actiontype').options[t].text;
+	var actiontypebtn = '<label for="showaction' + actiontypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showactiontype" id="showaction' + actiontypeval + '" class="actiontypebtn" value="' + actiontypeval + '" checked> ' + actiontypetext + '</label>';
+    $("#actiontypebtns").append(actiontypebtn);
+}
+
+for (var t = 1; t < document.getElementById('casefilecasedomain').options.length; t += 1) {
+	var filecasedomainval = document.getElementById('casefilecasedomain').options[t].value;
+	var filecasedomaintext = document.getElementById('casefilecasedomain').options[t].text;
+	var filecasedomainbtn = '<label for="showfile' + filecasedomainval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showfilecasedomain" id="showfile' + filecasedomainval + '" class="filecasedomainbtn" value="' + filecasedomainval + '" checked> ' + filecasedomaintext + '</label>';
+    $("#filecasedomainbtns").append(filecasedomainbtn);
+}
+
+for (var t = 1; t < document.getElementById('casenotecasedomain').options.length; t += 1) {
+	var notecasedomainval = document.getElementById('casenotecasedomain').options[t].value;
+	var notecasedomaintext = document.getElementById('casenotecasedomain').options[t].text;
+	var notecasedomainbtn = '<label for="shownote' + notecasedomainval + '" class="btn btn-sm btn-default"><input type="checkbox" name="shownotecasedomain" id="shownote' + notecasedomainval + '" class="notecasedomainbtn" value="' + notecasedomainval + '" checked> ' + notecasedomaintext + '</label>';
+    $("#notecasedomainbtns").append(notecasedomainbtn);
+}
+</script>
+
+
+<% include ../partials/footer2 %>
