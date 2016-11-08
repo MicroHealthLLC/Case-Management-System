@@ -1,0 +1,76 @@
+<% include ../partials/header2 %>
+
+<div id="cmscontent" class="container">
+
+<div id="topbar">
+	<h1>Organization</h1>
+</div><!-- topbar -->
+
+<form id="organizationform" action="/organization" method="post">
+<fieldset id="ableorganizationform">
+	<div class="row">
+		<div class="col-xs-12 col-sm-6">
+			<div class="form-group">
+				<label for="organizationname">Organization Name</label>
+				<input type="text" class="form-control" id="organizationname" name="organizationname" value=""/>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-6">
+			<div class="form-group">
+				<label for="organizationwebsite">Website</label>
+				<input type="text" class="form-control" id="organizationwebsite" name="organizationwebsite" value=""/>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="organizationrole">Role</label>
+				<select class="form-control" id="organizationrole" name="organizationrole">
+					<option value="0" selected>Select</option>
+					<option value="1">Role 1</option>
+					<option value="2">Role 2</option>
+					<option value="3">Role 3</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="organizationtype">Type</label>
+				<select class="form-control" id="organizationtype" name="organizationtype">
+					<option value="0" selected>Select</option>
+					<option value="1">Organization Type 1</option>
+					<option value="2">Organization Type 2</option>
+					<option value="3">Organization Type 3</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="organizationrolestatus">Role Status</label>
+				<select class="form-control" id="organizationrolestatus" name="organizationrolestatus">
+					<option value="0" selected>Select</option>
+					<option value="1">Active</option>
+					<option value="2">Inactive</option>
+				</select>
+			</div>
+		</div>
+	</div><!-- row -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="form-group">
+				<label for="organizationnote">Note</label>
+				<textarea class="form-control" id="organizationnote" name="organizationnote"></textarea>
+			</div>
+		</div>
+	</div><!-- row -->
+</fieldset>
+	<div id="resetsubmitorganization1" class="buttonrow">
+		<button type="reset" class="btn btn-warning btn-md mainresetbtn" id="resetorganization1" name="resetorganization1">Reset</button>
+		<button type="submit" class="btn btn-warning btn-md mainsubmitbtn" id="submitorganization1" name="submitorganization1">Submit</button>
+	</div>
+</form>
+
+</div><!-- cmscontent container -->
+
+<script src="../js/cms_organization.js"></script>
+
+<% include ../partials/footer3 %>
