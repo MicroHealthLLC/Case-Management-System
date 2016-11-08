@@ -1,0 +1,565 @@
+/*  CASE MANAGEMENT SYSTEM  */
+
+body {
+	font: 12px/120% "Helvetica Neue", Helvetica, Arial, sans-serif;
+	text-align: left;
+	background-color: #ccc;
+	color: #444;
+}
+.container {
+	width: 96%;
+	min-width: 400px;
+	max-width: 1200px;
+	margin: -10px auto 0 auto;
+	padding: 10px 20px;
+	background-color: #f6f6f6;
+}
+.tempnodisplay {
+	display: none;
+}
+#mainnav {
+	background-color: white;
+	margin-bottom: -10px;
+	padding-right: 20px;
+}
+#logo {
+	width: 190px;
+	height: 50px;
+	margin-top: -10px;
+}
+#forgotpassword {
+	padding: 7px 10px;
+	font-size: 90%;
+}
+#burgerbtn {
+	margin-top: 10px;
+	width: 44px;
+	background-color: black;
+	color: white;
+}
+.icon-bar {
+	background-color: white;
+}
+
+#bs-example-navbar-collapse-1 {
+	margin-top: 0;
+	padding-right: 10px;
+	margin-left: 0;
+}
+
+#navmenu {
+	margin-top: -30px;
+	padding: 15px 10px;
+	background-color: white;
+	border-bottom: 1px solid #f0ad4e;
+}
+
+#filterglyph {
+	font-size: 150%;
+	color: #337ab7;
+}
+
+button, input[type="submit"] {
+	width: 100px;
+	padding: 5px;
+}
+textarea {
+	width: 100%;
+}
+
+#personimage {
+	width: 30%;
+	float: none;
+	margin-left: 0%;
+	margin-bottom: 20px;
+	text-align: left;
+	}
+#personimage img {
+	width: 100%;
+	min-width: 150px;
+	max-width: 220px;
+	height: auto;
+	margin-bottom: 10px;
+}
+#removeimage, #cancelnewimage, #submitpersonimage {
+	margin-bottom: 10px;
+	margin-left: 10px;
+	color: #d9534f;
+}
+.uploadbtn  {
+	width: 100%;
+	margin-top: 10px;
+}
+.loadsubmitbtn { /* #submitdocneed, #submitdocgoal, #submitdocplan, #submitdocaction, #submitdoccasefile */
+	display: none;
+}
+#personuploadForm {
+	text-align: right;
+}
+#needuploadForm, #goaluploadForm, #planuploadForm, #actionuploadForm, #casefileuploadForm {
+	margin-bottom: 20px;
+	text-align: right;
+}
+.uploadbtns {
+	text-align: right;
+	padding-right: 15px;
+}
+#removedocneed, #canceldocneed, 
+#removedocgoal, #canceldocgoal, 
+#removedocplan, #canceldocplan, 
+#removedocaction, #canceldocaction, 
+#removedoccasefile, #canceldoccasefile {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	color: #d9534f;
+}
+#canceldocneed, #canceldocgoal, #canceldocplan, #canceldocaction, #canceldoccasefile {
+	margin-left: 10px;
+}
+
+#topbar {
+	background-color: #337ab7;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	padding: 10px;
+}
+#topcasepersoninfo {
+	margin-top: -15px;
+	text-align: right;
+	color: white;
+}
+#topcasepersoninfo a {
+	color: white;
+	text-decoration: none;
+}
+
+h1 {
+	font: 150%/150% verdana, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: white;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+h2 {
+	font: 150%/160% "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: bold;	
+}
+h3 {
+	font: 135%/150% "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: bold;	
+}
+h4 {
+	font: 125%/145% "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	color: #337ab7;
+}
+h5 {
+	font: 115%/135% "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #333;	
+	font-weight: bold;
+}
+h6 {
+	font: 100%/120% "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #333;	
+	font-weight: bold;
+	margin: 30px 0 -10px 0;
+}
+
+
+#searchform {
+	margin: 10px 0 0 0px;
+	padding: 0;
+	width: 100%;
+}
+
+#searchwhat {
+	width: 100%;
+}
+#searchform input {
+	width: 100%;
+}
+
+#searchbtn {
+	margin-top: 10px;
+	float: right;
+}
+
+.toggleform, .filterform {
+	margin-top: 30px;
+}
+
+
+#taskpanel {
+	margin-top: 30px;
+	padding-top: 30px;
+	border-top: 3px solid #337ab7;
+}
+#taskpanel ul li {
+	font-weight: bold;
+}
+.tab-content {
+	margin-top: 30px;
+}
+.tab-content h4 {
+	margin: 30px 0 20px auto;
+	font-weight: bold;
+	color: #337ab7;
+}
+.buttonrow {
+	clear: both;
+	text-align: right;
+}
+
+.mainresetbtn, .mainsubmitbtn, .submitbtn, .resetbtn, .savebtn, .cancelbtn {
+	margin-bottom: 10px;
+}
+.mainresetbtn, .resetbtn, .cancelbtn, #goback {
+	margin-right: 10px;
+}
+#totop {
+	margin-left: 10px;
+}
+.photosubmitbtn {
+	margin-right: 115px
+}
+#noimageform {
+	margin-top: -44px;
+	float:right;
+}
+.oneline {
+    display: -moz-inline-stack;
+    display: inline-block;
+}
+
+
+.createbtn, .submitfilterbtn {
+	margin-left: 10px;
+}
+.creatediv {
+	margin-top: 0 !important;
+	margin-bottom: -64px !important;
+}
+.creatediv_multi {
+	margin-top: 0 !important;
+	margin-bottom: 32px !important;
+}
+
+
+#inputrelationship {
+	margin-bottom: 20px;
+	padding-bottom: 10px;
+}
+
+.displayform {
+	padding-top: 10px;
+	border-top: 1px solid #337ab7;
+}
+
+table {
+	background-color: white;
+	margin-top: 30px;
+}
+
+.tablebtns {
+	text-align: right;
+	min-width: 120px;
+}
+
+.subtable {
+	width: 96%;
+	margin: 15px auto;
+}
+.subtable tr {
+	background-color: #f9f9f9;
+}
+
+.info2 th {
+	background-color: #dedede;
+	color: #333;
+	font-weight: normal;
+}
+
+.maineditbtn, .maindeletebtn, .tablemorebtn, .tableeditbtn, .tableendbtn, .tableremovebtn, .tableremovebtn2 {
+	width: 40px;
+	padding: 5px 2px 3px 2px;
+	margin-left: 10px;
+}
+.plusbtn, .plusbtn2, .filterbtn {
+	width: 40px;
+	padding: 5px 2px 3px 2px;
+	margin-right: 10px;
+	color: #337ab7;
+}
+
+.overduehdbtn, .associatedheadbtn {
+	width: 40px;
+	padding: 5px 2px 3px 2px;
+	margin-right: 10px;
+}
+.bg-danger, .bg-warning, .bg-success {
+	width: 50px;
+}
+.bg-danger {
+	height: 46px;
+}
+.needanchorbtn {
+	width: 40px;
+	font-weight: bold;	
+	color: #337ab7;
+}
+.morecolbtns {
+	text-align: right;
+	width: 50px;
+}
+.morebtn, .morecasebtn, .moreneedbtn {
+	width: 40px;
+	padding: 5px 2px 3px 2px;
+	margin-left: 10px;
+	color: #337ab7;
+}
+
+.moreactionlogbtn {
+	width: 100%;
+	text-align: left;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+#actionstaskstable {
+	margin-top: -20px;
+	display: block;
+}
+.totalcomplete-done {
+	color: #5cb85c;	
+	font-weight: bold;
+}
+.totalcomplete-more {
+	color: #428bca;	
+	font-weight: bold;
+}
+.totalcomplete-less {
+	color: #f0ad4e;	
+	font-weight: bold;
+}
+.table-striped > tbody > tr:nth-child(odd) > td {
+   background-color: white;
+}
+.table-striped > tbody > tr:nth-child(even) > td {
+	background-color: #eee;
+}
+.table-striped2 > tbody > tr:nth-child(odd) > td {
+   background-color: white;
+}
+.table-striped2 > tbody > tr:nth-child(even) > td {
+	background-color: #e6edef;
+}
+
+.paginationdiv {
+	margin-top: -20px;
+	margin-bottom: -10px;
+	text-align: right;
+}
+
+hr {
+	margin: 10px 0;
+	border: 1px solid #5bc0de;
+}
+.filter hr {
+	margin: 10px 0;
+	border: 1px solid #f0ad4e;
+	border: 1px solid #5bc0de;
+}
+#footer hr {
+	margin: 0 0 20px 0;
+	border: 2px solid #337ab7;
+}
+
+.nobr {
+	white-space: nowrap;
+}
+
+#casefiltersection, #taskfiltersection {
+	margin-top: 20px;
+	padding-bottom: 20px;
+	border-bottom: 2px solid #5bc0de;
+}
+
+
+.queststartbtn, .questeditbtn, .questremovebtn {
+	width: 40px;
+	padding: 5px 2px 3px 2px;
+	margin-left: 10px;
+}
+.questgroup {
+	margin-top: 20px;
+}
+.questansw {
+	font-weight: normal;
+}
+
+
+#loginbox {
+	width: 90%;
+	min-width: 400px;
+	max-width: 900px;
+	margin: 10px auto;
+}
+
+#loginbtn {
+	width: 100%;
+}
+#socialsignin table {
+	width: 100%;
+}
+#socialsignin tr {
+	padding: 10px;
+}
+#socialsignin td {
+	padding: 10px;
+}
+#indor {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	text-align: center;
+	padding: 10px;
+	font-style: italic;
+}
+.redflag {
+	color: #d9534f;
+}
+
+#topnavlinks {
+	margin-top: 50px;
+}
+
+
+/* INITIAL HIDDEN ELEMENTS  ******************************************/
+.toggleform, .filterform {
+	display: none;
+}
+/* Case Screen  */
+#cancelsavecase, #topcasepersoninfo2, /*  NOTE: BE SURE TO UNCOMMENT THIS  */
+#showuploaddocneed, #showuploaddocgoal, #showuploaddocplan, #showuploaddocaction, #showuploaddoccasefile {
+	display: none;
+}
+/* Person Screen  */
+#showuploadpersonimage, #cancelsaveperson {
+	display: none;
+}
+/* Organization Screen  */
+#cancelsaveorganization {
+	display: none;
+}
+
+.downloadfilename {
+	width: 48%;
+	min-width: 300px;
+	max-width: 700px;
+}
+.downloadbtn {
+	color: #337ab7;
+}
+
+
+
+@media all and (min-width: 600px) {
+	.creatediv_multi {
+		margin-top: 0 !important;
+		margin-bottom: -32px !important;
+	}
+}
+@media all and (max-width: 640px) {
+	.container {
+		width: 100%;
+		min-width: 422px;
+		max-width: 768px;
+	}
+}
+
+@media all and (min-width: 480px) and (max-width: 640px) {
+	#personimage {
+		width: 40%;
+		float:right;
+		margin-left: 30px;
+		text-align: right;
+	}
+}
+
+@media all and (min-width: 641px) and (max-width: 767px) {
+	#personimage {
+		width: 40%;
+		float:right;
+		margin-left: 30px;
+		text-align: right;
+	}
+}
+
+@media all and (min-width: 767px) {
+	#topnavlinks {
+		margin-top: 0px;
+	}
+}
+
+
+@media all and (min-width: 641px) and (max-width: 880px) {
+	.container {
+		width: 100%;
+		min-width: 641px;
+		max-width: 880px;
+	}
+}
+@media all and (min-width: 768px) {
+	#mainnav {
+		padding-right: 10px;
+	}
+	#indor {
+		margin-top: 100px;
+		margin-bottom: 30px;
+		background-color: #f6f6f6;
+	}
+	#personimage {
+		width: 30%;
+		float:right;
+		margin-left: 30px;
+		text-align: right;
+	}
+	#searchform {
+		margin: 10px 0 0 20px;
+		padding: 0;
+		width: 300px;
+	}
+	#searchwhat {
+		width: 190px;
+	}
+	#searchbtn {
+		margin-left: 10px;
+		margin-top: 0;
+	}
+}
+
+
+@media all and (min-width: 880px) and (max-width: 1020px) {
+	.container {
+		width: 96%;
+		min-width: 738px;
+		max-width: 980px;
+	}
+}
+
+
+@media all and (min-width: 1020px) {
+	.container {
+		width: 90%;
+		min-width: 980px;
+		max-width: 1200px;
+		padding: 10px 30px;
+	}
+	#mainnav {
+		padding-right: 20px;
+	}
+	#personimage {
+		width: 25%;
+		float:right;
+		margin-left: 30px;
+		text-align: right;
+	}
+}
