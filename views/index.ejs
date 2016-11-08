@@ -1,0 +1,408 @@
+<% include partials/header1 %>
+
+<div id="cmscontent" class="container">
+
+<div id="casefiltersection">
+
+	<h5><button id="casesfilterbtn" class="btn btn-default btn-md filterbtn"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span></button> Case Filter</h5>
+
+	<form id="casesfilterform" class="filterform" action="/" method="POST">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="form-group">
+				<label for="casefilterselectcase">Cases</label>
+				<select class="form-control" id="casefilterselectcase" name="casefilterselectcase">
+					<option value="0">All</option>
+					<option value="1" selected>My Cases</option>
+			<% organization.sort(function(a,b) {
+				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+			<% for (var i = 0; i < organization.length; i += 1) { %>
+					<option value="<%= organization[i].organization_id %>"><%= organization[i].organization_name %></option>
+			<% } %>
+				</select>
+			</div>
+		</div>
+	</div><!-- row -->
+	<div class="row">
+		<div class="col-xs-6 col-sm-3">
+			<div class="form-group">
+				<label for="casefilterfromstartdate">From Start Date</label>
+			 	<input type="text" class="form-control" id="casefilterfromstartdate" name="casefilterfromstartdate"/>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-3">
+			<div class="form-group">
+				<label for="casefiltertostartdate">To Start Date</label>
+				<input type="text" class="form-control" id="casefiltertostartdate" name="casefiltertostartdate"/>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-3">
+			<div class="form-group">
+				<label for="casefilterfromduedate">From Due Date</label>
+				<input type="text" class="form-control" id="casefilterfromduedate" name="casefilterfromduedate"/>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-3">
+			<div class="form-group">
+				<label for="casefiltertoduedate">To Due Date</label>
+				<input type="text" class="form-control" id="casefiltertoduedate" name="casefiltertoduedate"/>
+			</div>
+		</div>
+	</div><!-- row -->
+	<div class="buttonrow">
+		<button type="reset" class="btn btn-md btn-warning" id="resetcasesfilter">Reset</button>
+		<button type="submit" class="btn btn-md btn-warning submitfilterbtn" id="submitcasesfilter">Submit</button>
+	</div>
+	</form>
+	</div><!-- casefiltersection -->
+
+	<br>
+
+
+<div id="navbtns" class="buttonrow creatediv_multi">
+	<p>
+		<a href="/case" class="btn btn-primary btn-md" id="createcasebtn">Create Case</a>
+		<a href="/person" class="btn btn-primary btn-md createbtn" id="createpersonbtn">Create Person</a>
+		<a href="/organization" class="btn btn-primary btn-md createbtn" id="createorganizationbtn">Create Organization</a>
+	</p>
+</div>
+<br>
+
+<h4>Cases (<span id="totalcases"><%= cases.length %></span>)</h4>
+
+		<% cases.sort(function(a,b) {
+			return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+		}); %>
+		<% if (cases.length > 0) { %>
+		<% for (var i = 0; i < cases.length; i += 1) {
+			var casedisplaytable = "casedisplaytable" + i;
+			var morecasebtn = "morecasebtn" + i;
+			var more = "more" + i;
+			var persondiv = "persondiv" + i;
+			var case_person_info = "case_person_info" + i;
+			var peoplediv = "peoplediv" + i;
+			var p_assign = "p_assign" + i;
+			var orgdiv = "orgdiv" + i;
+			var o_assign = "o_assign" + i;
+			%>
+		<table id="<%= casedisplaytable %>" class="table table-responsive table-striped2 table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Case Title</th>
+					<th>Severity</th>
+					<th>Priority</th>
+					<th>Start Date</th>
+					<th>Due Date</th>
+					<th>Complete Date</th>
+					<th>Status</th>
+					<th class="morecolbtns"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><a href="/case/<%= cases[i].case_id %>" class="caselink"><%= cases[i].case_title %></a></td>
+					<td><%= cases[i].lk_case_severity %></td>
+					<td><%= cases[i].lk_case_priority %></td>
+					<td><%= cases[i].start_date %></td>
+					<td><%= cases[i].due_date %></td>
+					<td><%= cases[i].complete_date %></td>
+					<td><%= cases[i].lk_case_status %></td>
+					<td>
+						<button class="btn btn-default morecasebtn" id="<%= morecasebtn %>" type="button" data-toggle="collapse" data-target="#<%= more %>" aria-expanded="false" aria-controls="<%= more %>"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="8">
+						<div class="collapse" id="<%= more %>">
+			<div id="<%= persondiv %>">
+ 			<table id="<%= case_person_info %>" class="table table-responsive table-condensed subtable">
+				<thead>
+					<tr class="info2">
+						<th>Case Person Name</th>
+						<th>Gender</th>
+						<th>Birthdate</th>
+					</tr>
+				</thead>
+				<tbody>
+           <% if (cases[i].caseperson_id !== "") { %>
+				<% thesecasespeople.sort(function(a,b) {
+					return (a.case_id > b.case_id) ? 1 : ((b.case_id > a.case_id) ? -1 : 0);
+				}); %>
+				<% var p = -1;
+				   var found_caseperson = false;
+				   while ((found_caseperson === false) && (p < thesecasespeople.length - 1)) {
+				      p += 1;
+				      if (cases[i].case_id === thesecasespeople[p].case_id ) {
+					      found_caseperson = true;
+					  }
+				   }
+				   if (found_caseperson === true) {
+				%>
+				<tr>
+					<td><a href="/person/<%= thesecasespeople[p].person_id %>"><%= thesecasespeople[p].person_name %></a></td>
+					<td><%= thesecasespeople[p].gender %></td>
+					<td><%= thesecasespeople[p].birthdate %></td>
+				</tr>
+				<% } } %>
+				</tbody>
+			</table>
+			</div>
+
+			<% cases_person_assignment.sort(function(a,b) {
+				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+			<div id="<%= peoplediv %>">
+			<table id="<%= p_assign %>" class="table table-responsive table-condensed subtable">
+				<thead>
+					<tr class="info2">
+						<th>Person Name</th>
+						<th>Assigned Role</th>
+						<th>Assignment Type</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+				<% for (var j = 0; j < cases_person_assignment.length; j += 1) {
+				    if (cases[i].case_id === cases_person_assignment[j].case_id ) {
+				%>
+				<tr>
+					<td><a href="/person/<%= cases_person_assignment[j].person_id %>"><%= cases_person_assignment[j].person_name %></a></td>
+					<td><%= cases_person_assignment[j].lk_assigned_role %></td>
+					<td><%= cases_person_assignment[j].lk_case_assignment_type %></td>
+					<td><%= cases_person_assignment[j].start_date %></td>
+					<td><%= cases_person_assignment[j].end_date %></td>
+					<td><%= cases_person_assignment[j].lk_status %></td>
+				</tr>
+				<% } } %>
+				</tbody>
+			</table>
+ 			</div>
+
+			<% cases_org_assignment.sort(function(a,b) {
+				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+			<div id="<%= orgdiv %>">
+	    	<table id="<%= o_assign %>" class="table table-responsive table-condensed subtable">
+				<thead>
+					<tr class="info2">
+						<th>Organization Name</th>
+						<th>Assigned Role</th>
+						<th>Assignment Type</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+				<% for (var k = 0; k < cases_org_assignment.length; k += 1) {
+				    if (cases[i].case_id === cases_org_assignment[k].case_id ) {
+				%>
+				<tr>
+					<td><a href="/organization/<%= cases_org_assignment[k].organization_id %>"><%= cases_org_assignment[k].organization_name %></a></td>
+					<td><%= cases_org_assignment[k].lk_assigned_role %></td>
+					<td><%= cases_org_assignment[k].lk_case_assignment_type %></td>
+					<td><%= cases_org_assignment[k].start_date %></td>
+					<td><%= cases_org_assignment[k].end_date %></td>
+					<td><%= cases_org_assignment[k].lk_status %></td>
+				</tr>
+				<% } } %>
+				</tbody>
+			</table>
+			</div>
+	  					</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<% } } %>
+
+		<div id="casespagination" class="paginationdiv">
+			<nav aria-label="Page navigation">
+			  <ul class="pagination">
+			    <li class="disabled">
+			      <a href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <li class="active"><a href="#">1</a></li>
+			    <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li>
+			      <a href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+		</div><!-- casespagination -->
+
+
+<h4>Overdue</h4>
+
+<div class="form-group">
+	<label for="collapseoverdue" class="btn btn-sm btn-default">
+		<input type="radio" name="showoverdue" id="collapseoverdue" class="collapsealloverdue" value="0"> Collapse All Tables
+	</label>
+	<label for="expandoverdue" class="btn btn-sm btn-default">
+		<input type="radio" name="showoverdue" id="expandoverdue" class="expandalloverdue" value="1" checked> Expand All Tables
+	</label>
+</div>
+
+
+<h6><button id="headoverduecases" class="btn btn-primary btn-md overduehdbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Overdue Cases (<span id="overduecases"><%= overdue_cases.length %></span>)</h6>
+	<div id="divoverduecases" class="overdue_table">
+	<% if (overdue_cases.length > 0) { %>
+		<table id="overduecasesdisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Case Title</th>
+					<th>Severity</th>
+					<th>Priority</th>
+					<th>Start Date</th>
+					<th>Due Date</th>
+					<th>Complete Date</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% overdue_cases.sort(function(a,b) {
+				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+			<% for (var i = 0; i < overdue_cases.length; i += 1) { %>
+				<tr>
+					<td><a href="/case/<%= overdue_cases[i].case_id %>" class="caselink"><%= overdue_cases[i].case_title %></a></td>
+					<td><%= overdue_cases[i].lk_case_severity %></td>
+					<td><%= overdue_cases[i].lk_case_priority %></td>
+					<td><%= overdue_cases[i].start_date %></td>
+					<td><%= overdue_cases[i].due_date %></td>
+					<td><%= overdue_cases[i].complete_date %></td>
+					<td><%= overdue_cases[i].lk_case_status %></td>
+				</tr>
+			<% } %>
+			</tbody>
+		</table>
+	<% } %>
+	</div>
+
+<h6><button id="headoverduegoals" class="btn btn-primary btn-md overduehdbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Overdue Goals (<span id="overduegoals"><%= overdue_goals.length %></span>)</h6>
+	<div id="divoverduegoals" class="overdue_table">
+	<% if (overdue_goals.length > 0) { %>
+		<table id="overduegoalsdisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Goal Name</th>
+					<th>Type</th>
+					<th>Priority</th>
+					<th>Start Date</th>
+					<th>Due Date</th>
+					<th>Complete Date</th>
+					<th>Associated Need</th>
+					<th>Case Title</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% overdue_goals.sort(function(a,b) {
+				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+			<% for (var i = 0; i < overdue_goals.length; i += 1) { %>
+				<tr>
+					<td><%= overdue_goals[i].name %></td>
+					<td><%= overdue_goals[i].type %></td>
+					<td><%= overdue_goals[i].priority %></td>
+					<td><%= overdue_goals[i].start_date %></td>
+					<td><%= overdue_goals[i].due_date %></td>
+					<td><%= overdue_goals[i].complete_date %></td>
+					<td><%= overdue_goals[i].assocneed_id %></td>
+					<td><a href="/case/<%= overdue_goals[i].case_id %>" class="caselink"><%= overdue_goals[i].case_id %></a></td>
+				</tr>
+			<% } %>
+			</tbody>
+		</table>
+	<% } %>
+	</div>
+
+<h6><button id="headoverdueplans" class="btn btn-primary btn-md overduehdbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Overdue Plans (<span id="overdueplans"><%= overdue_plans.length %></span>)</h6>
+	<div id="divoverdueplans" class="overdue_table">
+	<% if (overdue_plans.length > 0) { %>
+		<table id="overdueplansdisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Plan Name</th>
+					<th>Type</th>
+					<th>Priority</th>
+					<th>Start Date</th>
+					<th>Due Date</th>
+					<th>Complete Date</th>
+					<th>Associated Goal</th>
+					<th>Case Title</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% overdue_plans.sort(function(a,b) {
+				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+			<% for (var i = 0; i < overdue_plans.length; i += 1) { %>
+				<tr>
+					<td><%= overdue_plans[i].name %></td>
+					<td><%= overdue_plans[i].type %></td>
+					<td><%= overdue_plans[i].priority %></td>
+					<td><%= overdue_plans[i].start_date %></td>
+					<td><%= overdue_plans[i].due_date %></td>
+					<td><%= overdue_plans[i].complete_date %></td>
+					<td><%= overdue_plans[i].assocgoal_id %></td>
+					<td><a href="/case/<%= overdue_plans[i].case_id %>" class="caselink"><%= overdue_plans[i].case_id %></a></td>
+				</tr>
+			<% } %>
+			</tbody>
+		</table>
+	<% } %>
+	</div>
+
+<h6><button id="headoverdueactions" class="btn btn-primary btn-md overduehdbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Overdue Actions (<span id="overdueactions"><%= overdue_actions.length %></span>)</h6>
+	<div id="divoverdueactions" class="overdue_table">
+	<% if (overdue_actions.length > 0) { %>
+		<table id="overdueactionsdisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Action Name</th>
+					<th>Type</th>
+					<th>Priority</th>
+					<th>Start Date</th>
+					<th>Due Date</th>
+					<th>Complete Date</th>
+					<th>Associated Plan</th>
+					<th>Case Title</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% overdue_actions.sort(function(a,b) {
+				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+			<% for (var i = 0; i < overdue_actions.length; i += 1) { %>
+				<tr>
+					<td><%= overdue_actions[i].name %></td>
+					<td><%= overdue_actions[i].type %></td>
+					<td><%= overdue_actions[i].priority %></td>
+					<td><%= overdue_actions[i].start_date %></td>
+					<td><%= overdue_actions[i].due_date %></td>
+					<td><%= overdue_actions[i].complete_date %></td>
+					<td><%= overdue_actions[i].assocplan_id %></td>
+					<td><a href="/case/<%= overdue_actions[i].case_id %>" class="caselink"><%= overdue_actions[i].case_id %></a></td>
+				</tr>
+			<% } %>
+			</tbody>
+		</table>
+	<% } %>
+	</div>
+
+	<br><br>
+
+</div><!-- cmscontent container -->
+
+<script src="js/cms_index.js"></script>
+
+
+<% include partials/footer1 %>
