@@ -1,0 +1,117 @@
+<% include ../partials/header2 %>
+
+<div id="cmscontent" class="container">
+
+<div id="topbar">
+	<h1>Person</h1>
+</div><!-- topbar -->
+
+<form id="personform" action="/person" method="POST">
+<fieldset id="ablepersonform">
+	<div class="row">
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="lastname">Last Name</label>
+				<input type="text" class="form-control" id="lastname" name="lastname" value=""/>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="firstname">First Name</label>
+				<input type="text" class="form-control" id="firstname" name="firstname" value=""/>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="middlename">Middle Name</label>
+				<input type="text" class="form-control" id="middlename" name="middlename" value=""/>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="persontitle">Title</label>
+				<input type="text" class="form-control" id="persontitle" name="persontitle" value=""/>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="gender">Gender</label>
+				<select class="form-control" id="gender" name="gender">
+					<option value="0" selected>Select</option>
+					<option value="1">Male</option>
+					<option value="2">Female</option>
+					<option value="3">Transgender Male</option>
+					<option value="4">Transgender Female</option>
+					<option value="5">Unknown</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="birthdate">Birth Date</label>
+				<input type="text" class="form-control" id="birthdate" name="birthdate" placeholder="mm/dd/yyyy" value=""/>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="personrole">Role</label>
+				<select class="form-control" id="personrole" name="personrole">
+					<option value="0" selected>Select</option>
+					<option value="1">Role 1</option>
+					<option value="2">Role 2</option>
+					<option value="3">Role 3</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="persontype">Type</label>
+				<select class="form-control" id="persontype" name="persontype">
+					<option value="0" selected>Select</option>
+					<option value="1">Person Type 1</option>
+					<option value="2">Person Type 2</option>
+					<option value="3">Person Type 3</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="personrolestatus">Role Status</label>
+				<select class="form-control" id="personrolestatus" name="personrolestatus">
+					<option value="0" selected>Select</option>
+					<option value="1">Active</option>
+					<option value="2">Inactive</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="religion">Religion</label>
+				<select class="form-control" id="religion" name="religion">
+					<option value="0" selected>Select</option>
+					<option value="1">Religion 1</option>
+					<option value="2">Religion 2</option>
+					<option value="3">Religion 3</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-8">
+			<div class="form-group">
+				<label for="personnote">Note</label>
+				<textarea class="form-control" id="personnote" name="personnote"></textarea>
+			</div>
+		</div>
+	</div><!-- row -->
+</fieldset>
+	<div id="resetsubmitperson1" class="buttonrow">
+		<button type="reset" class="btn btn-warning btn-md mainresetbtn" id="resetperson1" name="resetperson1">Reset</button>
+		<button type="submit" class="btn btn-warning btn-md mainsubmitbtn" id="submitperson1" name="submitperson1">Submit</button>
+	</div>
+</form>
+
+</div><!-- cmscontent container -->
+
+<script src="../js/cms_person.js"></script>
+
+
+<% include ../partials/footer3 %>
