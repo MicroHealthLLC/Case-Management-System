@@ -1,0 +1,1416 @@
+<% include ../partials/header2 %>
+
+<div id="cmscontent" class="container">
+
+<div id="topbar">
+	<h1>Person</h1>
+</div><!-- topbar -->
+
+<div id="showuploadpersonimage">
+    <form id    = "personuploadForm"
+		class   = "uploadform"
+        enctype = "multipart/form-data"
+        action  = "/personimage/<%= thisperson.person_id %>"
+        method  = "post"
+    >
+		<input type="file" class="btn btn-primary btn-md uploadbtn" id="personbrowsebtn" name="userPersonImageFile" /><br>
+		<button type="button" class="btn btn-default btn-md canceluploadbtn" id="cancelnewimage" name="cancelnewimage">Cancel</button>
+		<button type="submit" class="btn btn-default btn-md photosubmitbtn" id="submitpersonimage" name="submitpersonimage">Submit</button>
+    </form>
+	<form id="noimageform" class="oneline" action="/personnoimage/<%= thisperson.person_id %>" method="post">
+		<button type="submit" class="btn btn-default btn-md removeuploadbtn" id="removeimage" name="removeexistingimage">No Image</button>
+	</form>
+</div>
+	<div id="personimage">
+		<img src="../images/<%= thisperson.image %>" id="personimagesrc" alt="no image"/>
+		<p><a href="#" id="changeimage">Change</a></p>
+	</div><!-- personimage -->
+
+<form id="personform" action="/person/<%= thisperson.person_id %>?_method=PUT" method="POST">
+<fieldset id="ablepersonform" disabled="disabled">
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-lg-4">
+			<div class="form-group">
+				<label for="lastname">Last Name</label>
+				<input type="text" class="form-control" id="lastname" name="lastname" value=""/>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-lg-4">
+			<div class="form-group">
+				<label for="firstname">First Name</label>
+				<input type="text" class="form-control" id="firstname" name="firstname" value=""/>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-lg-4">
+			<div class="form-group">
+				<label for="middlename">Middle Name</label>
+				<input type="text" class="form-control" id="middlename" name="middlename" value=""/>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-lg-4">
+			<div class="form-group">
+				<label for="persontitle">Title</label>
+				<input type="text" class="form-control" id="persontitle" name="persontitle" value=""/>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="gender">Gender</label>
+				<select class="form-control" id="gender" name="gender">
+					<option value="0">Select</option>
+					<option value="1">Male</option>
+					<option value="2">Female</option>
+					<option value="3">Transgender Male</option>
+					<option value="4">Transgender Female</option>
+					<option value="5">Unknown</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="birthdate">Birth Date</label>
+				<input type="text" class="form-control" id="birthdate" name="birthdate" placeholder="mm/dd/yyyy" value=""/>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="personrole">Role</label>
+				<select class="form-control" id="personrole" name="personrole">
+					<option value="0">Select</option>
+					<option value="1">Role 1</option>
+					<option value="2">Role 2</option>
+					<option value="3">Role 3</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="persontype">Type</label>
+				<select class="form-control" id="persontype" name="persontype">
+					<option value="0">Select</option>
+					<option value="1">Person Type 1</option>
+					<option value="2">Person Type 2</option>
+					<option value="3">Person Type 3</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="personrolestatus">Role Status</label>
+				<select class="form-control" id="personrolestatus" name="personrolestatus">
+					<option value="0">Select</option>
+					<option value="1">Active</option>
+					<option value="2">Inactive</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="form-group">
+				<label for="religion">Religion</label>
+				<select class="form-control" id="religion" name="religion">
+					<option value="0">Select</option>
+					<option value="1">Religion 1</option>
+					<option value="2">Religion 2</option>
+					<option value="3">Religion 3</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-lg-8">
+			<div class="form-group">
+				<label for="personnote">Note</label>
+				<textarea class="form-control" id="personnote" name="personnote"></textarea>
+			</div>
+		</div>
+	</div><!-- row -->
+</fieldset>
+	<div id="cancelsaveperson" class="buttonrow">
+		<button type="reset" class="btn btn-warning btn-md mainresetbtn" id="resetperson" name="resetperson">Cancel</button>
+		<button type="submit" class="btn btn-warning btn-md mainsubmitbtn" id="submitperson" name="submitperson">Save</button>
+	</div>
+</form>
+	<div id="editdeleteperson" class="buttonrow">
+		<!-- NOTE: Insert Code for Development/Production -->
+		<!-- Input route for person_id method=DELETE" method="POST" -->
+ 		<button class="btn btn-primary btn-md maineditbtn" id="editperson"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+        <form class="deletebtnform oneline" action="/person/<%= thisperson.person_id %>?_method=DELETE" method="POST">
+            <button class="btn btn-danger btn-md maindeletebtn" id="deleteperson" name="deleteperson"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        </form>
+	</div>
+
+
+<div id="taskpanel">
+	<ul class="nav nav-pills" role="tablist" id="navmenu">
+		<li role="presentation" class="active"><a href="#contact" aria-controls="contact" role="tab" data-toggle="pill">Contact</a></li>
+		<li role="presentation"><a href="#identification" aria-controls="identification" role="tab" data-toggle="pill">Identification</a></li>
+		<li role="presentation"><a href="#personrelationships" aria-controls="personrelationships" role="tab" data-toggle="pill">People</a></li>
+		<li role="presentation"><a href="#personorgrelationships" aria-controls="personorgrelationships" role="tab" data-toggle="pill">Organizations</a></li>
+		<li role="presentation"><a href="#mycases" aria-controls="mycases" role="tab" data-toggle="pill">Cases</a></li>
+		<li role="presentation"><a href="#measurements" aria-controls="measurements" role="tab" data-toggle="pill">Measurements</a></li>
+	</ul>
+	<div class="tab-content">
+
+		<div role="tabpanel" class="tab-pane active" id="contact">
+			
+			<h4><button id="pluscontactphone" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Phone</h4>
+			
+			<form id="contactphoneform" class="toggleform" action="/contactphone" method="post">
+				<div class="row">
+					<div class="col-xs-6 col-sm-4">
+						<div class="form-group">
+							<label for="contactphonetype">Type</label>
+							<select class="form-control" id="contactphonetype" name="contactphonetype">
+								<option value="0" selected>Select</option>
+								<option value="1">Home</option>
+								<option value="2">Business</option>
+								<option value="3">Mobile</option>
+								<option value="4">Other</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4">
+						<div id="onephone">
+							<div class="form-group">
+								<label for="contactphonenumber">Number</label>
+								<input type="text" class="form-control" id="contactphonenumber" name="contactphonenumber" size="15" maxlength="15" value=""/>
+							</div>
+						</div><!-- onephone -->
+					</div>
+					<div class="col-xs-6 col-sm-4">
+						<div class="form-group">
+							<label for="phoneorgid">Organization Name</label>
+							<select class="form-control" id="phoneorgid" name="phoneorgid">
+								<option value="0" selected>Select</option>
+								<option value="1">Organization Name 1</option>
+								<option value="2">Organization Name 2</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-12">
+						<div class="form-group">
+							<label for="phonenote">Note</label>
+							<textarea class="form-control" id="phonenote" name="phonenote"></textarea>
+						</div>
+					</div>
+				</div><!-- row -->
+				<div class="row" hidden>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="phonepersonid">Person ID</label>
+							<input type="text" class="form-control" id="phonepersonid" name="phonepersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
+						</div>
+					</div>
+				</div><!-- row -->
+				<div class="buttonrow">
+					<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetcontactphone" name="resetcontactphone">Reset</button>
+					<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitcontactphone" name="submitcontactphone">Submit</button>
+				</div>
+			</form>
+
+		<table id="phonedisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Type</th>
+					<th>Phone Number</th>
+					<th>Organization Name</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% person_contact_phone.sort(function(a,b) {
+				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+			<%  for (var i = 0; i < person_contact_phone.length; i += 1) {
+					var phtype = "phtype" + i;
+					var phnumber = "phnumber" + i; 
+					var phorg = "phorg" + i; 
+					var phnote = "phnote" + i; 
+					var editphone = "editphone" + i;
+					var removephone = "removephone" + i; 
+			%>
+				<tr>
+					<td id="<%= phtype %>"><%= person_contact_phone[i].lk_phone_type %><%= person_contact_phone[i].phone_type %></td>
+					<td id="<%= phnumber %>"><%= person_contact_phone[i].phone_number %></td>
+					<td><a href="/organization/<%= person_contact_phone[i].organization_id %>"><span id="<%= phorg %>"><%= person_contact_phone[i].organization_id %></span></a></td>
+				</tr>
+				<tr>
+					<td colspan="2">						
+						<strong>Note:</strong> <span id="<%= phnote %>"><%= person_contact_phone[i].note %></span>
+					</td>
+					<td class="tablebtns" id="<%= person_contact_phone[i].phone_id %>">
+						<button class="btn btn-primary btn-md tableeditbtn contactphoneeditbtn" id="<%= editphone %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                        <button class="btn btn-danger btn-md tableremovebtn" id="<%= removephone %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+ 					</td>
+				</tr>
+        <% } %>
+			</tbody>
+		</table>
+		<hr>
+
+
+		<h4><button id="pluscontactemail" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Email</h4>
+
+		<form id="contactemailform" class="toggleform" action="/contactemail" method="post">
+			<div class="row">
+				<div class="col-xs-6 col-sm-6">
+					<div class="form-group">
+						<label for="contactemailtype">Type</label>
+						<select class="form-control" id="contactemailtype" name="contactemailtype">
+							<option value="0" selected>Select</option>
+							<option value="1">Personal</option>
+							<option value="2">Business</option>
+							<option value="3">Other</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6">
+					<div class="form-group">
+						<label for="contactemailaddress">Email</label>
+						<input type="text" class="form-control" id="contactemailaddress" name="contactemailaddress" size="90" maxlength="120" value=""/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6">
+					<div class="form-group">
+						<label for="emailorgid">Organization Name</label>
+						<select class="form-control" id="emailorgid" name="emailorgid">
+							<option value="0" selected>Select</option>
+							<option value="1">Organization Name 1</option>
+							<option value="2">Organization Name 2</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6">
+					<div class="form-group">
+						<label for="emailnote">Note</label>
+						<textarea class="form-control" id="emailnote" name="emailnote"></textarea>
+					</div>
+				</div>
+				</div><!-- row -->
+				<div class="row" hidden>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="emailpersonid">Person ID</label>
+							<input type="text" class="form-control" id="emailpersonid" name="emailpersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
+						</div>
+					</div>
+				</div><!-- row -->
+				<div class="buttonrow">
+					<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetcontactemail" name="resetcontactemail">Reset</button>
+					<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitcontactemail" name="submitcontactemail">Submit</button>
+				</div>
+			</form>			
+
+		<table id="emaildisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Type</th>
+					<th>Email Address</th>
+					<th>Organization Name</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% person_contact_email.sort(function(a,b) {
+				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+			<% for (var i = 0; i < person_contact_email.length; i += 1) {
+					var emtype = "emtype" + i; 
+					var emaddress = "emaddress" + i; 
+					var emorg = "emorg" + i; 
+					var emnote = "emnote" + i; 
+					var editemail = "editemail" + i;
+					var removeemail = "removeemail" + i; 
+			%>
+				<tr>
+					<td><span id="<%= emtype %>"><%= person_contact_email[i].lk_email_type %></span><%= person_contact_email[i].email_type %></td>
+					<td id="<%= emaddress %>"><%= person_contact_email[i].email_address %></td>
+					<td><a href="/organization/<%= person_contact_email[i].organization_id %>"><span id="<%= emorg %>"><%= person_contact_email[i].organization_id %></span></a></td>
+				</tr>
+				<tr>
+					<td colspan="2">						
+						<strong>Note:</strong> <span id="<%= emnote %>"><%= person_contact_email[i].note %></span>
+					</td>
+					<td class="tablebtns" id="<%= person_contact_email[i].email_id %>">
+						<button class="btn btn-primary btn-md tableeditbtn contactemaileditbtn" id="<%= editemail %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                        <button class="btn btn-danger btn-md tableremovebtn" id="<%= removeemail %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+ 					</td>
+				</tr>
+        <% } %>
+			</tbody>
+		</table>
+		<hr>
+
+
+		<h4><button id="pluscontactfax" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Fax</h4>
+			
+		<form id="contactfaxform" class="toggleform" action="/contactfax" method="post">
+			<div class="row">
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="contactfaxtype">Type</label>
+						<select class="form-control" id="contactfaxtype" name="contactfaxtype">
+							<option value="0" selected>Select</option>
+							<option value="1">Home</option>
+							<option value="2">Business</option>
+							<option value="3">Other</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div id="onefax">
+						<div class="form-group">
+							<label for="contactfaxnumber">Number</label>
+							<input type="text" class="form-control" id="contactfaxnumber" name="contactfaxnumber" size="15" maxlength="15" value=""/>
+						</div>
+					</div><!-- onefax -->
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="faxorgid">Organization Name</label>
+						<select class="form-control" id="faxorgid" name="faxorgid">
+							<option value="0" selected>Select</option>
+							<option value="1">Organization Name 1</option>
+							<option value="2">Organization Name 2</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-12">
+					<div class="form-group">
+						<label for="faxnote">Note</label>
+						<textarea class="form-control" id="faxnote" name="faxnote"></textarea>
+					</div>
+				</div>
+			    </div><!-- row -->
+				<div class="row" hidden>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="faxpersonid">Person ID</label>
+							<input type="text" class="form-control" id="faxpersonid" name="faxpersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
+						</div>
+					</div>
+			    </div><!-- row -->
+			<div class="buttonrow">
+				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetcontactfax" name="resetcontactfax">Reset</button>
+				<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitcontactfax" name="submitcontactfax">Submit</button>
+			</div>
+		</form>
+
+		<table id="faxdisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Type</th>
+					<th>Fax Number</th>
+					<th>Organization Name</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% person_contact_fax.sort(function(a,b) {
+				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+			<%  for (var i = 0; i < person_contact_fax.length; i += 1) {
+					var faxtype = "faxtype" + i;
+					var faxnumber = "faxnumber" + i; 
+					var faxorg = "faxorg" + i; 
+					var faxnote = "faxnote" + i; 
+					var editfax = "editfax" + i;
+					var removefax = "removefax" + i; 
+			%>
+				<tr>
+					<td id="<%= faxtype %>"><%= person_contact_fax[i].lk_fax_type %><%= person_contact_fax[i].fax_type %></td>
+					<td id="<%= faxnumber %>"><%= person_contact_fax[i].fax_number %></td>
+					<td><a href="/organization/<%= person_contact_fax[i].organization_id %>"><span id="<%= faxorg %>"><%= person_contact_fax[i].organization_id %></span></a></td>
+				</tr>
+				<tr>
+					<td colspan="2">						
+						<strong>Note:</strong> <span id="<%= faxnote %>"><%= person_contact_fax[i].note %></span>
+					</td>
+					<td class="tablebtns" id="<%= person_contact_fax[i].fax_id %>">
+						<button class="btn btn-primary btn-md tableeditbtn contactfaxeditbtn" id="<%= editfax %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                        <button class="btn btn-danger btn-md tableremovebtn" id="<%= removefax %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+ 					</td>
+				</tr>
+        <% } %>
+			</tbody>
+		</table>
+		<hr>
+
+
+		<h4><button id="pluscontactmedia" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Social Media</h4>
+
+		<form id="contactmediaform" class="toggleform" action="/contactmedia" method="post">
+			<div class="row">
+				<div class="col-xs-6 col-sm-6">
+					<div class="form-group">
+						<label for="contactmediatype">Type</label>
+						<select class="form-control" id="contactmediatype" name="contactmediatype">
+							<option value="0" selected>Select</option>
+							<option value="1">Facebook</option>
+							<option value="2">Snapchat</option>
+							<option value="3">Twitter</option>
+							<option value="4">Google Plus</option>
+							<option value="5">Instagram</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6">
+					<div class="form-group">
+						<label for="contactmediahandle">Social Media Handle</label>
+						<input type="text" class="form-control" id="contactmediahandle" name="contactmediahandle" size="90" maxlength="120"/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="medianote">Note</label>
+						<textarea class="form-control" id="medianote" name="medianote"></textarea>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row" hidden>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="mediapersonid">Person ID</label>
+						<input type="text" class="form-control" id="mediapersonid" name="mediapersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="mediaorgid">Org ID</label>
+						<input type="text" class="form-control" id="mediaorgid" name="mediaorgid" size="10" maxlength="10" value=""/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="buttonrow">
+				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetcontactmedia" name="resetcontactmedia">Reset</button>
+				<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitcontactmedia" name="submitcontactmedia">Submit</button>
+			</div>
+		</form>			
+
+		<table id="mediadisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Type</th>
+					<th>Social Media Handle</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+			<% person_contact_media.sort(function(a,b) {
+				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+			<%  for (var i = 0; i < person_contact_media.length; i += 1) {
+					var mediatype = "mediatype" + i;
+					var mediahandle = "mediahandle" + i; 
+					var medianote = "medianote" + i; 
+					var editmedia = "editmedia" + i;
+					var removemedia = "removemedia" + i; 
+			%>
+				<tr>
+					<td id="<%= mediatype %>"><%= person_contact_media[i].lk_media_type %><%= person_contact_media[i].media_type %></td>
+					<td id="<%= mediahandle %>"><%= person_contact_media[i].media_handle %></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td colspan="2">						
+						<strong>Note:</strong> <span id="<%= medianote %>"><%= person_contact_media[i].note %></span>
+					</td>
+					<td class="tablebtns" id="<%= person_contact_media[i].media_id %>">
+						<button class="btn btn-primary btn-md tableeditbtn contactmediaeditbtn" id="<%= editmedia %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                        <button class="btn btn-danger btn-md tableremovebtn" id="<%= removemedia %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+ 					</td>
+				</tr>
+        	<% } %>
+			</tbody>
+		</table>
+		<hr>
+
+
+		<h4><button id="pluscontactaddress" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Address</h4>
+
+		<form id="contactaddressform" class="toggleform" action="/contactaddress" method="post">
+			<div class="row">
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="contactaddresstype">Type</label>
+						<select class="form-control" id="contactaddresstype" name="contactaddresstype">
+							<option value="0" selected>Select</option>
+							<option value="1">Home</option>
+							<option value="2">Business</option>
+							<option value="3">Other</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="addressorgid">Organization Name</label>
+						<select class="form-control" id="addressorgid" name="addressorgid">
+							<option value="0" selected>Select</option>
+							<option value="1">Organization Name 1</option>
+							<option value="2">Organization Name 2</option>
+						</select>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="contactstreet">Address</label>
+						<textarea class="form-control" id="contactstreet" name="contactstreet" maxlength="500"></textarea>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="contactcity">City</label>
+						<input type="text" class="form-control" id="contactcity" name="contactcity" size="30" maxlength="30"/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="contactstate">State</label>
+						<input type="text" class="form-control" id="contactstate" name="contactstate" size="90" maxlength="100"/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="contactzipcode">Zip Code</label>
+						<input type="text" class="form-control" id="contactzipcode" name="contactzipcode" size="10" maxlength="10"/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="contactstatecode">State Code</label>
+						<input type="text" class="form-control" id="contactstatecode" name="contactstatecode" size="3" maxlength="3"/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="contactcountrycode">Country Code</label>
+						<input type="text" class="form-control" id="contactcountrycode" name="contactcountrycode" size="3" maxlength="3"/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-12">
+					<div class="form-group">
+						<label for="addressnote">Note</label>
+						<textarea class="form-control" id="addressnote" name="addressnote"></textarea>
+					</div>
+				</div>
+				</div><!-- row -->
+				<div class="row" hidden>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="addresspersonid">Person ID</label>
+							<input type="text" class="form-control" id="addresspersonid" name="addresspersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
+						</div>
+					</div>
+				</div><!-- row -->
+				<div class="buttonrow">
+					<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetcontactaddress" name="resetcontactaddress">Reset</button>
+					<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitcontactaddress" name="submitcontactaddress">Submit</button>
+				</div>
+			</form>
+
+		<table id="addressdisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Type</th>
+					<th>Address</th>
+					<th>City</th>
+					<th>State</th>
+					<th>Zip Code</th>
+					<th>Organization Name</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% person_contact_address.sort(function(a,b) {
+				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+			<%  for (var i = 0; i < person_contact_address.length; i += 1) {
+					var addresstype = "addresstype" + i;
+					var addressstreet = "addressstreet" + i; 
+					var addresscity = "addresscity" + i; 
+					var addressstate = "addressstate" + i; 
+					var addresszipcode = "addresszipcode" + i; 
+					var addressorg = "addressorg" + i; 
+					var addressstatecode = "addressstatecode" + i; 
+					var addresscountrycode = "addresscountrycode" + i; 
+					var addressnote = "addressnote" + i; 
+					var editaddress = "editaddress" + i;
+					var removeaddress = "removeaddress" + i; 
+			%>
+				<tr>
+					<td><span id="<%= addresstype %>"><%= person_contact_address[i].lk_address_type %></span><%= person_contact_address[i].address_type %></td>
+					<td id="<%= addressstreet %>"><%= person_contact_address[i].address %></td>
+					<td id="<%= addresscity %>"><%= person_contact_address[i].city %></td>
+					<td id="<%= addressstate %>"><%= person_contact_address[i].lk_state %></td>
+					<td id="<%= addresszipcode %>"><%= person_contact_address[i].zipcode %></td>
+					<td><a href="/organization/<%= person_contact_address[i].organization_id %>"><span id="<%= addressorg %>"><%= person_contact_address[i].organization_id %></span></a></td>
+				</tr>
+				<tr>
+					<td colspan="5">						
+						<p><strong>State Code:</strong> <span id="<%= addressstatecode %>"><%= person_contact_address[i].lk_statecode %></span> &nbsp; &nbsp;
+						<strong>Country Code:</strong> <span id="<%= addresscountrycode %>"><%= person_contact_address[i].lk_countrycode %></span></p>
+						<strong>Note:</strong> <span id="<%= addressnote %>"><%= person_contact_address[i].note %></span>
+					</td>
+					<td class="tablebtns" id="<%= person_contact_address[i].address_id %>">
+						<button class="btn btn-primary btn-md tableeditbtn contactaddresseditbtn" id="<%= editaddress %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                        <button class="btn btn-danger btn-md tableremovebtn" id="<%= removeaddress %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+ 					</td>
+				</tr>
+        	<% } %>
+			</tbody>
+		</table>
+
+		</div><!-- tabpanel contact -->
+
+
+<!-- ************************************************************************************************************************ -->
+
+
+		<div role="tabpanel" class="tab-pane" id="identification">
+
+		<h4><button id="pluspersonidentification" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Identification</h4>
+				
+		<form id="personidentificationform" class="toggleform" action="/personidentification" method="post">
+			<div class="row">
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="identificationnumber">Identification Number</label>
+						<input type="text" class="form-control" id="identificationnumber" name="identificationnumber" size="90" maxlength="100"/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="identificationtype">Type</label>
+						<select class="form-control" id="identificationtype" name="identificationtype">
+							<option value="0" selected>Select</option>
+							<option value="1">Drivers License</option>
+							<option value="2">Social Security</option>
+							<option value="3">Passport</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="identificationorg">Issued By</label>
+						<input type="text" class="form-control" id="identificationorg" name="identificationorg" size="90" maxlength="100"/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="issueddate">Date Issued</label>
+						<input type="text" class="form-control" id="issueddate" name="issueddate" placeholder="mm/dd/yyyy" value=""/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="expirationdate">Expiration Date</label>
+						<input type="text" class="form-control" id="expirationdate" name="expirationdate" placeholder="mm/dd/yyyy" value=""/>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<div class="form-group">
+						<label for="identificationstatus">Status</label>
+						<select class="form-control" id="identificationstatus" name="identificationstatus">
+							<option value="0" selected>Select</option>
+							<option value="1">Active</option>
+							<option value="2">Inactive</option>
+						</select>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+						<label for="identificationnote">Note</label>
+						<textarea class="form-control" id="identificationnote" name="identificationnote" maxlength="500"></textarea>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="row" hidden>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="identificationpersonid">Person ID</label>
+						<input type="text" class="form-control" id="identificationpersonid" name="identificationpersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="buttonrow">
+				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetpersonidentification" name="resetpersonidentification">Reset</button>
+				<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitpersonidentification" name="submitpersonidentification">Submit</button>
+			</div>
+		</form>
+
+		<table id="identificationdisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Identification Number</th>
+					<th>Type</th>
+					<th>Issue By</th>
+					<th>Issue Date</th>
+					<th>Expiration Date</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% person_identification.sort(function(a,b) {
+			    return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+            <% for (var i = 0; i < person_identification.length; i += 1) {
+				var pid_idnumber = "pid_idnumber" + i;
+				var pid_type = "pid_type" + i;
+				var pid_org = "pid_org" + i;
+				var pid_issueddate = "pid_issueddate" + i;
+				var pid_expdate = "pid_expdate" + i;
+				var pid_status = "pid_status" + i;
+				var pid_note = "pid_note" + i;
+				var editidentification = "editidentification" + i;
+				var removeidentification = "removeidentification" + i;
+			%>			
+				<tr>
+					<td id="<%= pid_idnumber %>"><%= person_identification[i].identification_number %></td>
+					<td id="<%= pid_type %>"><%= person_identification[i].lk_identification_type %></td>
+					<td id="<%= pid_org %>"><%= person_identification[i].issuedby_org %></td>
+					<td id="<%= pid_issueddate %>"><%= person_identification[i].issued_date %></td>
+					<td id="<%= pid_expdate %>"><%= person_identification[i].expiration_date %></td>
+					<td id="<%= pid_status %>"><%= person_identification[i].identification_status %></td>
+				</tr>
+				<tr>
+					<td colspan="5">						
+						<p><strong>Note:</strong> <span id="<%= pid_note %>"><%= person_identification[i].note %></span></p>
+					</td>
+					<td class="tablebtns" id="<%= person_identification[i].identification_id %>">
+						<button class="btn btn-primary btn-md tableeditbtn identificationeditbtn" id="<%= editidentification %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+	                    <button class="btn btn-danger btn-md tableremovebtn" id="<%= removeidentification %>" name="removeidentification"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+					</td>
+				</tr>
+			<% } %>
+			</tbody>
+		</table>
+
+		</div><!-- tabpanel identification -->
+
+
+
+<!-- ********************************************************************************************************** -->
+
+
+
+		<div role="tabpanel" class="tab-pane" id="personrelationships">
+
+
+<div class="buttonrow creatediv">
+	<p><a href="/person" class="btn btn-primary btn-md" id="createpersonbtn">Create Person</a></p>
+</div>
+
+		<h4><button id="pluspersonrelationship" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Person</h4>
+	
+		<form id="personrelationshipform" class="toggleform" action="/personrelationship" method="post">
+        <fieldset id="ablepersonrelationship">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-4">
+					<div class="form-group">
+						<label for="personreltwopersonid">Person Name</label>
+						<select class="form-control" id="personreltwopersonid" name="personreltwopersonid">
+							<option value="0" selected>Select</option>
+							<% person.sort(function(a,b) {
+				                return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			                }); %>
+							<% for (var i = 0; i < person.length; i += 1) { %>
+							<option value="<%= person[i].person_id %>"><%= person[i].last_name %>, <%= person[i].first_name %> <%= person[i].middle_name %></option>
+                            <% } %>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-4">
+					<div class="form-group">
+						<label for="personcontacttype">Contact Type</label>
+						<select class="form-control" id="personcontacttype" name="personcontacttype">
+							<option value="0" selected>Select</option>
+							<option value="1">Case Support</option>
+							<option value="2">Family Support</option>
+							<option value="3">External</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-4">
+					<div class="form-group">
+						<label for="personrelationshiptype">Relationship Type</label>
+						<select class="form-control" id="personrelationshiptype" name="personrelationshiptype">
+							<option value="0" selected>Select</option>
+							<option value="1">Relationship Type 1</option>
+							<option value="2">Relationship Type 2</option>
+						</select>
+					</div>
+				</div>
+			</div><!-- row -->
+			</fieldset>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="personrelationshipendreason">End Reason</label>
+						<textarea class="form-control" id="personrelationshipendreason" name="personrelationshipendreason" disabled></textarea>
+					</div>
+				</div>
+				<div class="col-sm-6" hidden>
+					<div class="form-group">
+						<label for="personrelonepersonid">Person ID</label>
+				        <input type="text" class="form-control" id="personrelonepersonid" name="personrelonepersonid" readonly value="<%= thisperson.person_id %>"/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="buttonrow">
+				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetpersonrelationship" name="resetpersonrelationship">Reset</button>
+				<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitpersonrelationship" name="submitpersonrelationship">Submit</button>
+			</div>
+		</form>
+
+		<h4>Case Support</h4>
+
+		<table id="person_casesupportdisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Person Name</th>
+					<th>Primary Phone</th>
+					<th>Primary Email</th>
+					<th>Relationship Type</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% person_relationship.sort(function(a,b) {
+			    return (a.lk_contact_type > b.lk_contact_type) ? 1 : ((b.lk_contact_type > a.lk_contact_type) ? -1 : 0);
+			    return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+            <% var i = 0;
+			   var contacttype = "1";
+			while ((i < person_relationship.length) && (person_relationship[i].lk_contact_type === contacttype)) {
+				var pprelation_personid = "pprelation_personid" + i;
+				var pprelation_contacttype = "pprelation_contacttype" + i;
+				var pprelation_relationshiptype = "pprelation_relationshiptype" + i;
+				var pprelation_status = "pprelation_status" + i;
+				var pprelation_startdate = "pprelation_startdate" + i;
+				var pprelation_enddate = "pprelation_enddate" + i;
+				var pprelation_endreason = "pprelation_endreason" + i;
+				var endpersonrelationship = "endpersonrelationship" + i;
+				var removepersonrelationship = "removepersonrelationship" + i;
+			%>
+				<tr>
+					<td><span hidden id="<%= pprelation_personid %>"><%= person_relationship[i].person_id2 %></span><a href="/person/<%= person_relationship[i].person_id2 %>"><%= person_relationship[i].person_name %></a></td>
+					<td><%= person_relationship[i].primary_phone %></td>
+					<td><%= person_relationship[i].primary_email %></td>
+					<td><span hidden id="<%= pprelation_contacttype %>"><%= person_relationship[i].lk_contact_type %></span><span id="<%= pprelation_relationshiptype %>"><%= person_relationship[i].lk_person_relationship_type %></span></td>
+					<td><span id="<%= pprelation_status %>"><%= person_relationship[i].lk_status %></span></td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<p><strong>Start Date:</strong> <span id="<%= pprelation_startdate %>"><%= person_relationship[i].start_date %></span> &nbsp;&nbsp; <strong>End Date:</strong> <span class="endppr" id="<%= pprelation_enddate %>"><%= person_relationship[i].end_date %></span></p>	
+						<p><strong>End Reason:</strong> <span id="<%= pprelation_endreason %>"><%= person_relationship[i].end_reason %></span></p>
+					</td>
+					<td class="tablebtns" id="<%= person_relationship[i].person_relationship_id %>">
+						<button class="btn btn-warning btn-md tableendbtn personrelationshipendbtn" id="<%= endpersonrelationship %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	                    <form action="#" method="post">
+	                        <button class="btn btn-danger btn-md tableremovebtn endthisbtn" id="<%= removepersonrelationship %>" name="removepersonrelationship"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	                    </form>
+					</td>
+				</tr>
+            <% i += 1;
+			} %>
+			</tbody>
+		</table>
+
+
+		<div id="person_casesupportpagination" class="paginationdiv">
+			<nav aria-label="Page navigation">
+			  <ul class="pagination">
+			    <li class="disabled">
+			      <a href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <li class="active"><a href="#">1</a></li>
+			    <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li>
+			      <a href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+		</div>
+
+	<h4>Family Support</h4>
+
+		<table id="familysupportdisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Person Name</th>
+					<th>Primary Phone</th>
+					<th>Primary Email</th>
+					<th>Relationship Type</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+            <% contacttype = "2";
+			while ((i < person_relationship.length) && (person_relationship[i].lk_contact_type === contacttype)) {
+				var pprelation_personid = "pprelation_personid" + i;
+				var pprelation_contacttype = "pprelation_contacttype" + i;
+				var pprelation_relationshiptype = "pprelation_relationshiptype" + i;
+				var pprelation_status = "pprelation_status" + i;
+				var pprelation_startdate = "pprelation_startdate" + i;
+				var pprelation_enddate = "pprelation_enddate" + i;
+				var pprelation_endreason = "pprelation_endreason" + i;
+				var endpersonrelationship = "endpersonrelationship" + i;
+				var removepersonrelationship = "removepersonrelationship" + i;
+			%>
+				<tr>
+					<td><span hidden id="<%= pprelation_personid %>"><%= person_relationship[i].person_id2 %></span><a href="/person/<%= person_relationship[i].person_id2 %>"><%= person_relationship[i].person_name %></a></td>
+					<td><%= person_relationship[i].primary_phone %></td>
+					<td><%= person_relationship[i].primary_email %></td>
+					<td><span hidden id="<%= pprelation_contacttype %>"><%= person_relationship[i].lk_contact_type %></span><span id="<%= pprelation_relationshiptype %>"><%= person_relationship[i].lk_person_relationship_type %></span></td>
+					<td><span id="<%= pprelation_status %>"><%= person_relationship[i].lk_status %></span></td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<p><strong>Start Date:</strong> <span id="<%= pprelation_startdate %>"><%= person_relationship[i].start_date %></span> &nbsp;&nbsp; <strong>End Date:</strong> <span class="endppr" id="<%= pprelation_enddate %>"><%= person_relationship[i].end_date %></span></p>	
+						<p><strong>End Reason:</strong> <span id="<%= pprelation_endreason %>"><%= person_relationship[i].end_reason %></span></p>
+					</td>
+					<td class="tablebtns" id="<%= person_relationship[i].person_relationship_id %>">
+						<button class="btn btn-warning btn-md tableendbtn personrelationshipendbtn" id="<%= endpersonrelationship %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	                    <form action="#" method="post">
+	                        <button class="btn btn-danger btn-md tableremovebtn endthisbtn" id="<%= removepersonrelationship %>" name="removepersonrelationship"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	                    </form>
+					</td>
+				</tr>
+            <% i += 1;
+			} %>
+			</tbody>
+		</table>
+
+		<div id="familysupportpagination" class="paginationdiv">
+			<nav aria-label="Page navigation">
+			  <ul class="pagination">
+			    <li class="disabled">
+			      <a href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <li class="active"><a href="#">1</a></li>
+			    <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li>
+			      <a href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+		</div>
+
+	<h4>External</h4>
+
+		<table id="person_externalsupportdisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Person Name</th>
+					<th>Primary Phone</th>
+					<th>Primary Email</th>
+					<th>Relationship Type</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+            <% contacttype = "3";
+			while ((i < person_relationship.length) && (person_relationship[i].lk_contact_type === contacttype)) {
+				var pprelation_personid = "pprelation_personid" + i;
+				var pprelation_contacttype = "pprelation_contacttype" + i;
+				var pprelation_relationshiptype = "pprelation_relationshiptype" + i;
+				var pprelation_status = "pprelation_status" + i;
+				var pprelation_startdate = "pprelation_startdate" + i;
+				var pprelation_enddate = "pprelation_enddate" + i;
+				var pprelation_endreason = "pprelation_endreason" + i;
+				var endpersonrelationship = "endpersonrelationship" + i;
+				var removepersonrelationship = "removepersonrelationship" + i;
+			%>
+				<tr>
+					<td><span hidden id="<%= pprelation_personid %>"><%= person_relationship[i].person_id2 %></span><a href="/person/<%= person_relationship[i].person_id2 %>"><%= person_relationship[i].person_name %></a></td>
+					<td><%= person_relationship[i].primary_phone %></td>
+					<td><%= person_relationship[i].primary_email %></td>
+					<td><span hidden id="<%= pprelation_contacttype %>"><%= person_relationship[i].lk_contact_type %></span><span id="<%= pprelation_relationshiptype %>"><%= person_relationship[i].lk_person_relationship_type %></span></td>
+					<td><span id="<%= pprelation_status %>"><%= person_relationship[i].lk_status %></span></td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<p><strong>Start Date:</strong> <span id="<%= pprelation_startdate %>"><%= person_relationship[i].start_date %></span> &nbsp;&nbsp; <strong>End Date:</strong> <span class="endppr" id="<%= pprelation_enddate %>"><%= person_relationship[i].end_date %></span></p>	
+						<p><strong>End Reason:</strong> <span id="<%= pprelation_endreason %>"><%= person_relationship[i].end_reason %></span></p>
+					</td>
+					<td class="tablebtns" id="<%= person_relationship[i].person_relationship_id %>">
+						<button class="btn btn-warning btn-md tableendbtn personrelationshipendbtn" id="<%= endpersonrelationship %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	                    <form action="#" method="post">
+	                        <button class="btn btn-danger btn-md tableremovebtn endthisbtn" id="<%= removepersonrelationship %>" name="removepersonrelationship"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	                    </form>
+					</td>
+				</tr>
+            <% i += 1;
+			} %>
+			</tbody>
+		</table>
+
+
+		<div id="person_externalsupportpagination" class="paginationdiv">
+			<nav aria-label="Page navigation">
+			  <ul class="pagination">
+			    <li class="disabled">
+			      <a href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <li class="active"><a href="#">1</a></li>
+			    <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li>
+			      <a href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+		</div>
+
+
+		</div><!-- tabpanel relatedpeople -->
+
+
+
+<!-- ********************************************************************************************************** -->
+
+
+
+		<div role="tabpanel" class="tab-pane" id="personorgrelationships">
+
+
+<div class="buttonrow creatediv">
+	<p><a href="/organization" class="btn btn-primary btn-md" id="createorganizationbtn">Create Organization</a></p>
+</div>
+
+		<h4><button id="pluspersonorgrelationship" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Organization</h4>
+	
+		<form id="personorgrelationshipform" class="toggleform" action="/personorgrelationship" method="post">
+        <fieldset id="ablepersonorgrelationship">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-4">
+					<div class="form-group">
+						<label for="personorgorganizationid">Organization Name</label>
+						<select class="form-control" id="personorgorganizationid" name="personorgorganizationid">
+							<option value="0" selected>Select</option>
+			<% organization.sort(function(a,b) {
+				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+			<% for (var i = 0; i < organization.length; i += 1) { %>
+					<option value="<%= organization[i].organization_id %>"><%= organization[i].organization_name %></option>
+			<% } %>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-4">
+					<div class="form-group">
+						<label for="personorgcontacttype">Contact Type</label>
+						<select class="form-control" id="personorgcontacttype" name="personorgcontacttype">
+							<option value="0" selected>Select</option>
+							<option value="1">Case Support</option>
+							<option value="3">External</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-4">
+					<div class="form-group">
+						<label for="personorgrelationshiptype">Relationship Type</label>
+						<select class="form-control" id="personorgrelationshiptype" name="personorgrelationshiptype">
+							<option value="0" selected>Select</option>
+							<option value="1">Person Org Relationship Type 1</option>
+							<option value="2">Person Org Relationship Type 2</option>
+							<option value="3">Person Org Relationship Type 3</option>
+						</select>
+					</div>
+				</div>
+			</div><!-- row -->
+			</fieldset>
+            <div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label for="personorgrelationshipendreason">End Reason</label>
+						<textarea class="form-control" id="personorgrelationshipendreason" name="personorgrelationshipendreason" maxlength="500" disabled></textarea>
+					</div>
+				</div>
+			</div><!-- row -->
+            <div class="row" hidden>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label for="personorgpersonid">Person ID</label>
+				        <input type="text" class="form-control" id="personorgpersonid" name="personorgpersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label for="personorgscreen">Screen</label>
+				        <input type="text" class="form-control" id="personorgscreen" name="personorgscreen" size="6" maxlength="6" readonly value="person"/>
+					</div>
+				</div>
+			</div><!-- row -->
+			<div class="buttonrow">
+				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetpersonorgrelationship" name="resetpersonorgrelationship">Reset</button>
+				<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitpersonorgrelationship" name="submitpersonorgrelationship">Submit</button>
+			</div>
+		</form>
+
+		<h4>Case Support</h4>
+
+		<table id="org_casesupportsdisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Organization Name</th>
+					<th>Primary Phone</th>
+					<th>Primary Email</th>
+					<th>Relationship Type</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% personorg_relationship.sort(function(a,b) {
+			    return (a.lk_contact_type > b.lk_contact_type) ? 1 : ((b.lk_contact_type > a.lk_contact_type) ? -1 : 0);
+			    return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+            <% var i = 0;
+			   var contacttype = "1";
+			while ((i < personorg_relationship.length) && (personorg_relationship[i].lk_contact_type === contacttype)) {
+				var porelation_organizationid = "porelation_organizationid" + i;
+				var porelation_contacttype = "porelation_contacttype" + i;
+				var porelation_relationshiptype = "porelation_relationshiptype" + i;
+				var porelation_status = "porelation_status" + i;
+				var porelation_startdate = "porelation_startdate" + i;
+				var porelation_enddate = "porelation_enddate" + i;
+				var porelation_endreason = "porelation_endreason" + i;
+				var endpersonorgrelationship = "endpersonorgrelationship" + i;
+				var removepersonorgrelationship = "removepersonorgrelationship" + i;
+			%>
+				<tr>
+					<td><span hidden id="<%= porelation_organizationid %>"><%= personorg_relationship[i].organization_id %></span><a href="/organization/<%= personorg_relationship[i].organization_id %>"><%= personorg_relationship[i].organization_name %></a></td>
+					<td><%= personorg_relationship[i].primary_phone %></td>
+					<td><%= personorg_relationship[i].primary_email %></td>
+					<td><span hidden id="<%= porelation_contacttype %>"><%= personorg_relationship[i].lk_contact_type %></span><span id="<%= porelation_relationshiptype %>"><%= personorg_relationship[i].lk_person_organization_relationship_type %></span></td>
+					<td><span id="<%= porelation_status %>"><%= personorg_relationship[i].lk_status %></span></td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<p><strong>Start Date:</strong> <span id="<%= porelation_startdate %>"><%= personorg_relationship[i].start_date %></span> &nbsp;&nbsp; <strong>End Date:</strong> <span class="endpor" id="<%= porelation_enddate %>"><%= personorg_relationship[i].end_date %></span></p>	
+						<p><strong>End Reason:</strong> <span id="<%= porelation_endreason %>"><%= personorg_relationship[i].end_reason %></span></p>
+					</td>
+					<td class="tablebtns" id="<%= personorg_relationship[i].person_organization_id %>">
+						<button class="btn btn-warning btn-md tableendbtn personorgrelationshipendbtn" id="<%= endpersonorgrelationship %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	                    <form action="#" method="post">
+	                        <button class="btn btn-danger btn-md tableremovebtn endthisbtn" id="<%= removepersonorgrelationship %>" name="removepersonorgrelationship"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	                    </form>
+					</td>
+				</tr>
+            <% i += 1;
+			} %>
+			</tbody>
+		</table>
+
+			<div id="org_casesupportpagination" class="paginationdiv">
+				<nav aria-label="Page navigation">
+				  <ul class="pagination">
+				    <li class="disabled">
+				      <a href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				    <li class="active"><a href="#">1</a></li>
+				    <li><a href="#">2</a></li>
+				    <li><a href="#">3</a></li>
+				    <li>
+				      <a href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  </ul>
+				</nav>
+			</div>
+
+		<h4>Exernal</h4>
+
+		<table id="org_externaldisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Organization Name</th>
+					<th>Primary Phone</th>
+					<th>Primary Email</th>
+					<th>Relationship Type</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+            <% var contacttype = "3";
+			while ((i < personorg_relationship.length) && (personorg_relationship[i].lk_contact_type === contacttype)) {
+				var porelation_organizationid = "porelation_organizationid" + i;
+				var porelation_contacttype = "porelation_contacttype" + i;
+				var porelation_relationshiptype = "porelation_relationshiptype" + i;
+				var porelation_status = "porelation_status" + i;
+				var porelation_startdate = "porelation_startdate" + i;
+				var porelation_enddate = "porelation_enddate" + i;
+				var porelation_endreason = "porelation_endreason" + i;
+				var endpersonorgrelationship = "endpersonorgrelationship" + i;
+				var removepersonorgrelationship = "removepersonorgrelationship" + i;
+			%>
+				<tr>
+					<td><span hidden id="<%= porelation_organizationid %>"><%= personorg_relationship[i].organization_id %></span><a href="/organization/<%= personorg_relationship[i].organization_id %>"><%= personorg_relationship[i].organization_name %></a></td>
+					<td><%= personorg_relationship[i].primary_phone %></td>
+					<td><%= personorg_relationship[i].primary_email %></td>
+					<td><span hidden id="<%= porelation_contacttype %>"><%= personorg_relationship[i].lk_contact_type %></span><span id="<%= porelation_relationshiptype %>"><%= personorg_relationship[i].lk_person_organization_relationship_type %></span></td>
+					<td><span id="<%= porelation_status %>"><%= personorg_relationship[i].lk_status %></span></td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<p><strong>Start Date:</strong> <span id="<%= porelation_startdate %>"><%= personorg_relationship[i].start_date %></span> &nbsp;&nbsp; <strong>End Date:</strong> <span class="endpor" id="<%= porelation_enddate %>"><%= personorg_relationship[i].end_date %></span></p>	
+						<p><strong>End Reason:</strong> <span id="<%= porelation_endreason %>"><%= personorg_relationship[i].end_reason %></span></p>
+					</td>
+					<td class="tablebtns" id="<%= personorg_relationship[i].person_organization_id %>">
+						<button class="btn btn-warning btn-md tableendbtn personorgrelationshipendbtn" id="<%= endpersonorgrelationship %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	                    <form action="#" method="post">
+	                        <button class="btn btn-danger btn-md tableremovebtn endthisbtn" id="<%= removepersonorgrelationship %>" name="removepersonorgrelationship"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	                    </form>
+					</td>
+				</tr>
+            <% i += 1;
+			} %>
+			</tbody>
+		</table>
+
+			<div id="org_externalpagination" class="paginationdiv">
+				<nav aria-label="Page navigation">
+				  <ul class="pagination">
+				    <li class="disabled">
+				      <a href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				    <li class="active"><a href="#">1</a></li>
+				    <li><a href="#">2</a></li>
+				    <li><a href="#">3</a></li>
+				    <li>
+				      <a href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  </ul>
+				</nav>
+			</div>
+
+		</div><!-- tabpanel relatedorganizations -->
+
+
+
+<!--  ************************************************************************************************************************ -->
+
+
+		<div role="tabpanel" class="tab-pane" id="mycases">
+
+<div class="buttonrow creatediv">
+	<p>
+	    <a href="/case" class="btn btn-primary btn-md" id="createcasebtn">Create Case</a>
+	</p>
+</div>
+<br>
+<h4>My Cases</h4>
+
+		<table id="casedisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Case Title</th>
+					<th>Due Date</th>
+					<th>Priority</th>
+					<th>Your Role</th>
+					<th>Your Start Date</th>
+					<th>Your End Date</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% my_cases.sort(function(a,b) {
+				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			}); %>
+			<%  for (var i = 0; i < my_cases.length; i += 1) { %>
+				<tr>
+					<td><a href="/case/<%= my_cases[i].case_id %>"><%= my_cases[i].title %></a></td>
+					<td><%= my_cases[i].duedate %></td>
+					<td><%= my_cases[i].priority %></td>
+					<td><%= my_cases[i].role %></td>
+					<td><%= my_cases[i].startdate %></td>
+					<td><%= my_cases[i].enddate %></td>
+				</tr>
+        	<% } %>
+			</tbody>
+		</table>
+
+			<div id="casespagination" class="paginationdiv">
+				<nav aria-label="Page navigation">
+				  <ul class="pagination">
+				    <li class="disabled">
+				      <a href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				    <li class="active"><a href="#">1</a></li>
+				    <li><a href="#">2</a></li>
+				    <li><a href="#">3</a></li>
+				    <li>
+				      <a href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  </ul>
+				</nav>
+			</div>
+
+		</div><!-- tabpanel cases -->
+
+
+
+
+<!-- ******************************************************************************************************************** -->
+
+
+
+		<div role="tabpanel" class="tab-pane" id="measurements">
+
+		<p><strong>NOTE: To Come</strong></p>
+
+		</div><!-- tabpanel measurements -->
+
+	</div><!-- tab-content -->
+	
+</div><!-- taskpanel -->
+
+</div><!-- cmscontent container -->
+
+<script src="../js/cms_person.js"></script>
+
+<script>
+function getpersoninfo() {
+	$("#lastname").val("<%= thisperson.last_name %>");
+	$("#firstname").val("<%= thisperson.first_name %>");
+	$("#middlename").val("<%= thisperson.middle_name %>");
+	$("#persontitle").val("<%= thisperson.title %>");
+	$("#gender").val("<%= thisperson.lk_gender %>");
+	$("#birthdate").val("<%= thisperson.birth_date %>");
+	$("#personrole").val("<%= thisperson.lk_user_role %>");
+	$("#persontype").val("<%= thisperson.lk_person_type %>");
+	$("#personrolestatus").val("<%= thisperson.lk_person_status %>");
+	$("#religion").val("<%= thisperson.lk_religion %>");
+	$("#personnote").val("<%= thisperson.note %>");
+}
+getpersoninfo();
+
+</script>
+
+<% include ../partials/footer2 %>
