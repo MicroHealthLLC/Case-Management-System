@@ -1,6 +1,5 @@
 <% include ../partials/header2 %>
 
-<div id="cmscontent" class="container">
 
 <div id="topbar">
 	<h1>Case</h1>
@@ -12,7 +11,7 @@
 		<div class="col-xs-12">
 			<div class="form-group">
 				<label for="casetitle">Title</label>
-				<input type="text" class="form-control" id="casetitle" name="casetitle" size="90" maxlength="150" value=""/>
+				<input type="text" class="form-control requiredfield" id="casetitle" name="casetitle" size="90" maxlength="150" value=""/>
 			</div>
 		</div>
 	</div><!-- row -->
@@ -30,9 +29,9 @@
 				<label for="casedomain">Domain</label>
 				<select class="form-control" id="casedomain" name="casedomain">
 					<option value="0" selected>Select</option>
-					<option value="1">Domain 1</option>
-					<option value="2">Domain 2</option>
-					<option value="3">Domain 3</option>
+					<% caseDomain.enums.forEach(function(enumItem) { %>
+					<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+					<% }); %>
 				</select>
 			</div>
 		</div>
@@ -41,8 +40,9 @@
 				<label for="casecategory">Category</label>
 				<select class="form-control" id="casecategory" name="casecategory">
 					<option value="0" selected>Select</option>
-					<option value="1">Medical</option>
-					<option value="2">Non-Medical</option>
+					<% caseCategory.enums.forEach(function(enumItem) { %>
+					<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+					<% }); %>
 				</select>
 			</div>
 		</div>
@@ -65,10 +65,9 @@
 				<label for="casestatus">Status</label>
 				<select class="form-control" id="casestatus" name="casestatus">
 					<option value="0" selected>Select</option>
-					<option value="1">Active</option>
-					<option value="2">Inactive</option>
-					<option value="3">On Hold</option>
-					<option value="4">Canceled</option>
+					<% caseStatus.enums.forEach(function(enumItem) { %>
+					<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+					<% }); %>
 				</select>
 			</div>
 		</div>
@@ -77,9 +76,9 @@
 				<label for="caseseverity">Severity</label>
 				<select class="form-control" id="caseseverity" name="caseseverity">
 					<option value="0" selected>Select</option>
-					<option value="1">Low</option>
-					<option value="2">Medium</option>
-					<option value="3">High</option>
+					<% caseSeverity.enums.forEach(function(enumItem) { %>
+					<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+					<% }); %>
 				</select>
 			</div>
 		</div>
@@ -88,9 +87,9 @@
 				<label for="casepriority">Priority</label>
 				<select class="form-control" id="casepriority" name="casepriority">
 					<option value="0" selected>Select</option>
-					<option value="1">Priority 1</option>
-					<option value="2">Priority 2</option>
-					<option value="3">Priority 3</option>
+					<% casePriority.enums.forEach(function(enumItem) { %>
+					<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+					<% }); %>
 				</select>
 			</div>
 		</div>
@@ -109,7 +108,7 @@
 		<div class="col-xs-6 col-sm-4">
 			<div class="form-group">
 				<label for="casecompletedate">Complete Date</label>
-				<input type="text" class="form-control" id="casecompletedate" name="casecompletedate" value=""/>
+				<input type="text" class="form-control" id="casecompletedate" name="casecompletedate" disabled value=""/>
 			</div>
 		</div>
 	</div><!-- row -->
