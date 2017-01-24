@@ -1,12 +1,10 @@
 <% include ../partials/header2 %>
 
 
-<div id="cmscontent" class="container">
-
 <div id="topbar">
 	<h1>Case</h1>
 	<div id="topcasepersoninfo">
-     <% if ((thiscase.caseperson_id !== "") && (thiscaseperson.length > 0)) { %>
+     <% if (thiscaseperson.length === 1) { %>
 		<p><span><strong><a href="/person/<%= thiscaseperson[0].person_id %>"><%= thiscaseperson[0].person_name %></a></strong></span></p>
 		<p>Gender: <span><%= thiscaseperson[0].gender %></span> &nbsp;&nbsp; DOB: <span><%= thiscaseperson[0].birthdate %></span></p>
     <% } else { %>
@@ -21,7 +19,7 @@
 		<div class="col-xs-12">
 			<div class="form-group">
 				<label for="casetitle">Title</label>
-				<input type="text" class="form-control" id="casetitle" name="casetitle" size="90" maxlength="150" value=""/>
+				<input type="text" class="form-control requiredfield" id="casetitle" name="casetitle" size="90" maxlength="150" value=""/>
 			</div>
 		</div>
 	</div><!-- row -->
@@ -39,9 +37,9 @@
 				<label for="casedomain">Domain</label>
 				<select class="form-control" id="casedomain" name="casedomain">
 					<option value="0">Select</option>
-					<option value="1">Domain 1</option>
-					<option value="2">Domain 2</option>
-					<option value="3">Domain 3</option>
+					<% caseDomain.enums.forEach(function(enumItem) { %>
+					<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+					<% }); %>
 				</select>
 			</div>
 		</div>
@@ -50,8 +48,9 @@
 				<label for="casecategory">Category</label>
 				<select class="form-control" id="casecategory" name="casecategory">
 					<option value="0">Select</option>
-					<option value="1">Medical</option>
-					<option value="2">Non-Medical</option>
+					<% caseCategory.enums.forEach(function(enumItem) { %>
+					<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+					<% }); %>
 				</select>
 			</div>
 		</div>
@@ -74,10 +73,9 @@
 				<label for="casestatus">Status</label>
 				<select class="form-control" id="casestatus" name="casestatus">
 					<option value="0">Select</option>
-					<option value="1">Active</option>
-					<option value="2">Inactive</option>
-					<option value="3">On Hold</option>
-					<option value="4">Canceled</option>
+					<% caseStatus.enums.forEach(function(enumItem) { %>
+					<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+					<% }); %>
 				</select>
 			</div>
 		</div>
@@ -86,9 +84,9 @@
 				<label for="caseseverity">Severity</label>
 				<select class="form-control" id="caseseverity" name="caseseverity">
 					<option value="0">Select</option>
-					<option value="1">Low</option>
-					<option value="2">Medium</option>
-					<option value="3">High</option>
+					<% caseSeverity.enums.forEach(function(enumItem) { %>
+					<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+					<% }); %>
 				</select>
 			</div>
 		</div>
@@ -97,9 +95,9 @@
 				<label for="casepriority">Priority</label>
 				<select class="form-control" id="casepriority" name="casepriority">
 					<option value="0">Select</option>
-					<option value="1">Priority 1</option>
-					<option value="2">Priority 2</option>
-					<option value="3">Priority 3</option>
+					<% casePriority.enums.forEach(function(enumItem) { %>
+					<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+					<% }); %>
 				</select>
 			</div>
 		</div>
@@ -139,99 +137,192 @@
 
 <div id="taskpanel">
 	<ul class="nav nav-pills" role="tablist" id="navmenu">
-		<li role="presentation" class="active"><a href="#cases_person" aria-controls="cases_person" role="tab" data-toggle="pill">Case Person</a></li>
+		<li role="presentation" class="active"><a href="#cases_brief" aria-controls="cases_brief" role="tab" data-toggle="pill">Case Brief</a></li>
 		<li role="presentation"><a href="#relatedcases" aria-controls="relatedcases" role="tab" data-toggle="pill">Related Cases</a></li>
 		<li role="presentation"><a href="#assignedpeople" aria-controls="assignedpeople" role="tab" data-toggle="pill">People</a></li>
 		<li role="presentation"><a href="#assignedorganizations" aria-controls="assignedorganizations" role="tab" data-toggle="pill">Organizations</a></li>
-		<li role="presentation"><a href="#needs" aria-controls="needs" role="tab" data-toggle="pill">Needs</a></li>
 		<li role="presentation"><a href="#goals" aria-controls="goals" role="tab" data-toggle="pill">Goals</a></li>
 		<li role="presentation"><a href="#plans" aria-controls="plans" role="tab" data-toggle="pill">Plans</a></li>
 		<li role="presentation"><a href="#actions" aria-controls="actions" role="tab" data-toggle="pill">Actions</a></li>
 		<li role="presentation"><a href="#casefiles" aria-controls="casefiles" role="tab" data-toggle="pill">Files</a></li>
 		<li role="presentation"><a href="#casenotes" aria-controls="casenotes" role="tab" data-toggle="pill">Notes</a></li>
-		<li role="presentation"><a href="#measurements" aria-controls="measurements" role="tab" data-toggle="pill">Measurements</a></li>
 		<li role="presentation"><a href="#questionnaires" aria-controls="questionnaires" role="tab" data-toggle="pill">Questionnaires</a></li>
 	</ul>
 	<div class="tab-content">
 
-	<div role="tabpanel" class="tab-pane active" id="cases_person">
+	<div role="tabpanel" class="tab-pane active" id="cases_brief">
 
-<div class="buttonrow creatediv">
-	<p><a href="/person" class="btn btn-primary btn-md" id="createpersonbtn">Create Person</a></p>
-</div>
 
-		<h4><button id="pluscaseperson" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Case Person</h4>
-
-		<form id="casepersonform" class="toggleform" action="/caseperson" method="post">
-			<div class="row">
-				<div class="col-sm-12">
-					<div class="form-group">
-					<label for="caseperson_personid">Case Person</label>
-					<select class="form-control" id="caseperson_personid" name="caseperson_personid">
-						<option value="0">Select</option>
-			<% person.sort(function(a,b) {
-				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
-			}); %>
-			<% for (var i = 0; i < person.length; i += 1) { %>
-				<option value="<%= person[i].person_id %>"><%= person[i].last_name %>, <%= person[i].first_name %> <%= person[i].middle_name %></option>
-            <% } %>
-					</select>
-					</div>
-				</div>
-			</div><!-- row -->
-			<div class="row">
-				<div class="col-sm-6" hidden>
-					<div class="form-group">
-						<label for="caseperson_caseid">Case ID</label>
-				        <input type="text" class="form-control" id="caseperson_caseid" name="caseperson_caseid" readonly value="<%= thiscase.case_id %>"/>
-					</div>
-				</div>
-			</div><!-- row -->
-			<div class="buttonrow">
-				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetcaseperson" name="resetcaseperson">Reset</button>
-				<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitcaseperson" name="submitcaseperson">Submit</button>
-			</div>
-		</form>
-	
-        <% if ((thiscase.caseperson_id !== "") && (thiscaseperson.length > 0)) { %>
+    <% if (thiscaseperson.length > 0) { %>
 		<table id="casepersondisplaytable" class="table table-responsive table-striped table-condensed">
 			<thead>
 				<tr class="info">
 					<th>Case Person Name</th>
+                <% if (thiscaseperson.length > 1) { %>
+					<th>Gender</th>
+					<th>DOB</th>
+                <% } %>
 					<th>Primary Phone</th>
 					<th>Primary Email</th>
-					<th>&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
+            <% for (var i = 0; i < thiscaseperson.length; i += 1) { %>
 				<tr>
-					<td><a href="/person/<%= thiscaseperson[0].person_id %>"><%= thiscaseperson[0].person_name %></a></td>
-					<td><%= thiscaseperson[0].primary_phone %></td>
-					<td><%= thiscaseperson[0].primary_email %></td>
-                    <td></td>
+					<td><a href="/person/<%= thiscaseperson[i].person_id %>"><%= thiscaseperson[i].person_name %></a></td>
+                <% if (thiscaseperson.length > 1) { %>
+                    <td><%= thiscaseperson[i].gender %></td>
+                    <td><%= thiscaseperson[i].birthdate %></td>
+                <% } %>
+					<td><%= thiscaseperson[i].primary_phone %></td>
+					<td><%= thiscaseperson[i].primary_email %></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><strong>Primary Address</strong><br>
-					<% if (thiscaseperson[0].address !== "") { %>
-						<%= thiscaseperson[0].address %>, <%= thiscaseperson[0].city %>, <%= thiscaseperson[0].state %> <%= thiscaseperson[0].zipcode %><br>
-						<% if (thiscaseperson[0].statecode !== "") { %>
-							State Code: <%= thiscaseperson[0].statecode %> &nbsp;&nbsp; 
+                <% if (thiscaseperson.length > 1) { %>
+                    <td colspan="5">
+                <% } else { %>
+                    <td colspan="3">
+                <% } %>
+                <strong>Primary Address</strong><br>
+					<% if (thiscaseperson[i].address !== "") { %>
+						<%= thiscaseperson[i].address %>, <%= thiscaseperson[i].city %>, <%= thiscaseperson[i].state %> <%= thiscaseperson[i].zipcode %><br>
+						<% if (thiscaseperson[i].statecode !== "") { %>
+							State Code: <%= thiscaseperson[i].statecode %> &nbsp;&nbsp; 
 						<% } %>
-						<% if (thiscaseperson[0].countrycode !== "") { %>
-							Country Code: <%= thiscaseperson[0].countrycode %></td>
+						<% if (thiscaseperson[i].countrycode !== "") { %>
+							Country Code: <%= thiscaseperson[i].countrycode %></td>
 						<% } %>
 					<% } %>
-					<td class="tablebtns" id="<%= thiscaseperson[0].case_id %>">
-	                    <form action="#" method="post">
-	                        <button class="btn btn-danger btn-md tableremovebtn" id="removecaseperson" name="removecaseperson"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-	                    </form>
-					</td>
 				</tr>
+            <% } %>
  			</tbody>
 		</table>
-        <% } %>
+<br><br><br>
+    <% } %>
 
-		</div><!-- tabpanel case_person -->
+
+	 <% var totalcompleteitems = 0;
+		var percentcompletecase = 0;
+	 %>
+
+		<% this_cases_goals.sort(function(a,b) {
+			return (a.goal_id > b.goal_id) ? 1 : ((b.goal_id > a.goal_id) ? -1 : 0);
+		}); %>
+		<% this_cases_plans.sort(function(a,b) {
+			return (a.assocgoal_id - b.assocgoal_id) || (a.plan_id - b.plan_id);
+		}); %>
+		<% this_cases_actions.sort(function(a,b) {
+			return (a.assocplan_id - b.assocplan_id) || (a.action_id - b.action_id);
+		}); %>
+
+        <div class="form-group">
+           <label for="expandbrief" class="btn btn-sm btn-default">
+              <input type="radio" name="showbriefs" id="expandbrief" class="expandtablesbtn" checked> Show Tables
+           </label>
+           <label for="collapsebrief" class="btn btn-sm btn-default">
+              <input type="radio" name="showbriefs" id="collapsebrief" class="collapsetablesbtn"> Hide Tables
+           </label>
+		</div>
+
+		<% for (var j = 0; j < this_cases_goals.length; j += 1) {
+			var headbrieftable = "headbrieftable" + j;
+			var briefhead = "briefhead" + j;
+			var divbrieftable = "divbrieftable" + j;
+			var goalsthruactionstable = "goalsthruactionstable" + j;
+			var goalcomplete = "goalcomplete" + j;
+		%>
+
+	<h6><button id="<%= headbrieftable %>" class="btn btn-primary btn-md associatedheadbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> 
+	<% if (this_cases_goals[j].complete_date !== "") { %>
+	<span id="<%= briefhead %>" class="briefhead prog-end">
+	<% } else { %>
+	<span id="<%= briefhead %>" class="briefhead prog-mid">
+	<% } %>
+	Goal: <%= this_cases_goals[j].name %></span></h6>
+
+<div id="<%= divbrieftable %>" class="displaybrief_div">
+	<table id="<%= goalsthruactionstable %>" class="table table-responsive table-condensed goalsthruactionstable">
+		<thead>
+			<tr class="info">
+				<th>&nbsp;</th>
+				<th>Name</th>
+				<th>Type</th>
+				<th>Priority</th>
+				<th>Due Date</th>
+				<th>Assigned To</th>
+				<th>Complete</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="bg-danger">Goal</td>
+				<td><a href="#goals" class="brieflink" id="briefgoaldisplayrow<%= this_cases_goals[j].goal_id %>"><%= this_cases_goals[j].name %></a></td>
+				<td><%= this_cases_goals[j].type %></td>
+				<td><%= this_cases_goals[j].priority %></td>
+				<td><%= this_cases_goals[j].due_date %></td>
+				<td><%= this_cases_goals[j].assignedperson_id %></td>
+				<td id="<%= goalcomplete %>"><span class="prog-end">
+					<% if (this_cases_goals[j].complete_date !== "") {
+						totalcompleteitems += 1; %>
+						&#10004;
+					<% } %></span>
+				</td>
+			</tr>
+		<%  for (var k = 0; k < this_cases_plans.length; k += 1) {
+				var plancomplete = "plancomplete" + k;
+				if (this_cases_goals[j].goal_id === this_cases_plans[k].assocgoal_id) { %>
+			<tr>
+				<td class="bg-warning">Plan</td>
+				<td><a href="#plans" class="brieflink" id="briefplandisplayrow<%= this_cases_plans[k].plan_id %>"><%= this_cases_plans[k].name %></a></td>
+				<td><%= this_cases_plans[k].type %></td>
+				<td><%= this_cases_plans[k].priority %></td>
+				<td><%= this_cases_plans[k].due_date %></td>
+				<td><%= this_cases_plans[k].assignedperson_id %></td>
+				<td id="<%= plancomplete %>"><span class="prog-end">
+					<% if (this_cases_plans[k].complete_date !== "") {
+						totalcompleteitems += 1; %>
+						&#10004;
+					<% } %></span>					
+				</td>
+			</tr>
+		<% for (var m = 0; m < this_cases_actions.length; m += 1) {
+				var actioncomplete = "actioncomplete" + m;
+				if (this_cases_plans[k].plan_id === this_cases_actions[m].assocplan_id) { %>
+			<tr>
+				<td class="bg-success">Action</td>
+				<td><a href="#actions" class="brieflink" id="briefactiondisplayrow<%= this_cases_actions[m].action_id %>"><%= this_cases_actions[m].name %></a></td>
+				<td><%= this_cases_actions[m].type %></td>
+				<td><%= this_cases_actions[m].priority %></td>
+				<td><%= this_cases_actions[m].due_date %></td>
+				<td><%= this_cases_actions[m].assignedperson_id %></td>
+				<td id="<%= actioncomplete %>"><span class="prog-end">
+					<% if (this_cases_actions[m].complete_date !== "") {
+						totalcompleteitems += 1; %>
+						&#10004;
+					<% } %></span>													
+				</td>
+			</tr>
+			<% } } %>
+		<% } } %>
+			</tbody>
+		</table>
+	</div>
+	<% } %>
+	
+<br>
+
+<%  var totalitems = this_cases_goals.length + this_cases_plans.length + this_cases_actions.length;
+ 	if (totalitems !== 0) {
+		var percentcompletecase = ((totalcompleteitems / totalitems) * 100).toFixed(0);
+	} else {
+		var percentcompletecase = 0;
+	}
+ %>
+ 		<div id="percentcompletecasediv">
+			<h5><%= percentcompletecase %>&percnt; Complete Case</h5>
+		</div>
+
+		</div><!-- tabpanel cases_brief -->
 
 
 <!-- **************************************************************************************************** -->
@@ -251,14 +342,14 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 					<label for="relatedcase_id2">Related Case Title</label>
-					<select class="form-control" id="relatedcase_id2" name="relatedcase_id2">
+					<select class="form-control requiredfield" id="relatedcase_id2" name="relatedcase_id2">
 						<option value="0">Select</option>
-			<% cases.sort(function(a,b) {
-				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
-			}); %>
-			<% for (var i = 0; i < cases.length; i += 1) { %>
+                    <% cases.sort(function(a,b) {
+                        return (a.case_id > b.case_id) ? 1 : ((b.case_id > a.case_id) ? -1 : 0);
+                    }); %>
+                    <% for (var i = 0; i < cases.length; i += 1) { %>
 						<option value="<%= cases[i].case_id %>"><%= cases[i].case_title %></option>
-            <% } %>
+                    <% } %>
 					</select>
 					</div>
 				</div>
@@ -267,18 +358,17 @@
 						<label for="caserelationshiptype">Relationship Type</label>
 						<select class="form-control" id="caserelationshiptype" name="caserelationshiptype">
 							<option value="0">Select</option>
-							<option value="1">Relationship Type 1</option>
-							<option value="2">Relationship Type 2</option>
+                        <% caseCaseRelationship.enums.forEach(function(enumItem) { %>
+                        <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                        <% }); %>
 						</select>
 					</div>
 				</div>
 			</div><!-- row -->
 			<div class="row">
 				<div class="col-sm-6" hidden>
-					<div class="form-group">
-						<label for="relatedcase_id1">Case ID</label>
-				        <input type="text" class="form-control" id="relatedcase_id1" name="relatedcase_id1" readonly value="<%= thiscase.case_id %>"/>
-					</div>
+					<label for="relatedcase_id1">Case ID</label>
+					<input type="text" class="form-control" id="relatedcase_id1" name="relatedcase_id1" readonly value="<%= thiscase.case_id %>"/>
 				</div>
 			</div><!-- row -->
 			<div class="buttonrow">
@@ -288,7 +378,7 @@
 		</form>
 	
 		<% thisrelatedcase.sort(function(a,b) {
-			return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			return (a.thisrelatedcase_id > b.thisrelatedcase_id) ? 1 : ((b.thisrelatedcase_id > a.thisrelatedcase_id) ? -1 : 0);
 		}); %>
 		<% if (thisrelatedcase.length > 0) { %>
 		<table id="relatedcasedisplaytable" class="table table-responsive table-striped table-condensed">
@@ -310,7 +400,7 @@
 					<td><span id="<%= relcase_type %>"><%= thisrelatedcase[i].lk_case_relationship_type %></span></td>
 					<td class="tablebtns" id="<%= thisrelatedcase[i].case_relationship_id %>">
 	                    <form action="#" method="post">
-	                        <button class="btn btn-danger btn-md tableremovebtn" id="<%= removerelatedcase %>" name="removerelatedcase"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	                        <button class="btn btn-warning btn-md tableremovebtn" id="<%= removerelatedcase %>" name="removerelatedcase"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
 	                    </form>
 					</td>
 				</tr>
@@ -339,7 +429,7 @@
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="personassignpersonid">Person Name</label>
-						<select class="form-control" id="personassignpersonid" name="personassignpersonid">
+						<select class="form-control requiredfield" id="personassignpersonid" name="personassignpersonid">
 							<option value="0" selected>Select</option>
 							<% for (var i = 0; i < person.length; i += 1) { %>
 							<option value="<%= person[i].person_id %>"><%= person[i].last_name %>, <%= person[i].first_name %> <%= person[i].middle_name %></option>
@@ -350,10 +440,11 @@
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="personassignrole">Assigned Role</label>
-						<select class="form-control" id="personassignrole" name="personassignrole">
+						<select class="form-control requiredfield" id="personassignrole" name="personassignrole">
 							<option value="0">Select</option>
-							<option value="1">Role 1</option>
-							<option value="2">Role 2</option>
+                        <% assignedRole.enums.forEach(function(enumItem) { %>
+                        <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                        <% }); %>
 						</select>
 					</div>
 				</div>
@@ -362,8 +453,9 @@
 						<label for="personassigntype">Assignment Type</label>
 						<select class="form-control" id="personassigntype" name="personassigntype">
 							<option value="0">Select</option>
-							<option value="1">Assignment Type 1</option>
-							<option value="2">Assignment Type 2</option>
+                        <% assignmentType.enums.forEach(function(enumItem) { %>
+                        <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                        <% }); %>
 						</select>
 					</div>
 				</div>
@@ -377,10 +469,8 @@
 					</div>
 				</div>
 				<div class="col-sm-6" hidden>
-					<div class="form-group">
-						<label for="personassign_caseid">Case ID</label>
-				        <input type="text" class="form-control" id="personassign_caseid" name="personassign_caseid" readonly value="<%= thiscase.case_id %>"/>
-					</div>
+					<label for="personassign_caseid">Case ID</label>
+					<input type="text" class="form-control" id="personassign_caseid" name="personassign_caseid" readonly value="<%= thiscase.case_id %>"/>
 				</div>
 			</div><!-- row -->
 			<div class="buttonrow">
@@ -390,7 +480,7 @@
 		</form>
 
 		<% person_assignment.sort(function(a,b) {
-			return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			return (a.cases_person_assignment_id > b.cases_person_assignment_id) ? 1 : ((b.cases_person_assignment_id > a.cases_person_assignment_id) ? -1 : 0);
 		}); %>
 		<% if (person_assignment.length > 0) { %>
 		<table id="casepeopledisplaytable" class="table table-responsive table-striped table-condensed">
@@ -461,24 +551,25 @@
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="organizationassignorgid">Organization Name</label>
-						<select class="form-control" id="organizationassignorgid" name="organizationassignorgid">
+						<select class="form-control requiredfield" id="organizationassignorgid" name="organizationassignorgid">
 							<option value="0" selected>Select</option>
-			<% organization.sort(function(a,b) {
-				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
-			}); %>
-			<% for (var i = 0; i < organization.length; i += 1) { %>
-					<option value="<%= organization[i].organization_id %>"><%= organization[i].organization_name %></option>
-			<% } %>
+					<% organization.sort(function(a,b) {
+						return (a.organization_id > b.organization_id) ? 1 : ((b.organization_id > a.organization_id) ? -1 : 0);
+					}); %>
+					<% for (var i = 0; i < organization.length; i += 1) { %>
+							<option value="<%= organization[i].organization_id %>"><%= organization[i].organization_name %></option>
+					<% } %>
 						</select>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="organizationassignrole">Assigned Role</label>
-						<select class="form-control" id="organizationassignrole" name="organizationassignrole">
+						<select class="form-control requiredfield" id="organizationassignrole" name="organizationassignrole">
 							<option value="0" selected>Select</option>
-							<option value="1">Assigned Role 1</option>
-							<option value="2">Assigned Role 2</option>
+                        <% assignedRole.enums.forEach(function(enumItem) { %>
+                        <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                        <% }); %>
 						</select>
 					</div>
 				</div>
@@ -487,8 +578,9 @@
 						<label for="organizationassigntype">Assignment Type</label>
 						<select class="form-control" id="organizationassigntype" name="organizationassigntype">
 							<option value="0" selected>Select</option>
-							<option value="1">Case Assignment Type 1</option>
-							<option value="2">Case Assignment Type 2</option>
+                        <% assignmentType.enums.forEach(function(enumItem) { %>
+                        <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                        <% }); %>
 						</select>
 					</div>
 				</div>
@@ -502,10 +594,8 @@
 					</div>
 				</div>
 				<div class="col-sm-6" hidden>
-					<div class="form-group">
-						<label for="organizationassign_caseid">Case ID</label>
-				        <input type="text" class="form-control" id="organizationassign_caseid" name="organizationassign_caseid" readonly value="<%= thiscase.case_id %>"/>
-					</div>
+					<label for="organizationassign_caseid">Case ID</label>
+					<input type="text" class="form-control" id="organizationassign_caseid" name="organizationassign_caseid" readonly value="<%= thiscase.case_id %>"/>
 				</div>
 			</div><!-- row -->
 			<div class="buttonrow">
@@ -515,7 +605,7 @@
 		</form>
 
 		<% organization_assignment.sort(function(a,b) {
-			return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			return (a.case_assignment_id > b.case_assignment_id) ? 1 : ((b.case_assignment_id > a.case_assignment_id) ? -1 : 0);
 		}); %>
 		<% if (organization_assignment.length > 0) { %>
 		<table id="caseorganizationdisplaytable" class="table table-responsive table-striped table-condensed">
@@ -570,296 +660,6 @@
 
 
 
-
-<!-- ************************************************************************************************************************ -->
-
-
-
-		<div role="tabpanel" class="tab-pane" id="needs">
-
-		<h4><button id="plusneed" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Need</h4>
-
-		<form id="needform" class="toggleform" enctype="multipart/form-data" action="/need" method="post">
-
-			<div class="row">
-				<div class="col-xs-6 col-sm-4">
-					<div class="form-group">
-						<label for="needname">Need Name</label>
-						<input type="text" class="form-control" id="needname" name="needname" maxlength="150" value=""/>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4">
-					<div class="form-group">
-						<label for="needtype">Type</label><br>
-						<select class="form-control" id="needtype" name="needtype">
-							<option value="0" selected>Select</option>
-							<option value="1">Social</option>
-							<option value="2">Medical</option>
-							<option value="3">Financial</option>
-						</select>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4">
-					<div class="form-group">
-						<label for="needdate">Assessment Date</label>
-						<input type="text" class="form-control" id="needdate" name="needdate"/>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4">
-					<div class="form-group">
-						<label for="needstage">Stage</label>
-						<select class="form-control" id="needstage" name="needstage">
-							<option value="0" selected>Select</option>
-							<option value="1">Identified</option>
-							<option value="2">Unidentified</option>
-							<option value="3">Reviewed</option>
-						</select>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4">
-					<div class="form-group">
-						<label for="needstatus">Status</label>
-						<select class="form-control" id="needstatus" name="needstatus">
-							<option value="0" selected>Select</option>
-							<option value="1">Analyzing</option>
-							<option value="2">In Progress</option>
-							<option value="3">Done</option>
-						</select>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4">
-					<div class="form-group">
-						<label for="needseverity">Severity</label>
-						<select class="form-control" id="needseverity" name="needseverity">
-							<option value="0" selected>Select</option>
-							<option value="1">High</option>
-							<option value="2">Medium</option>
-							<option value="3">Low</option>
-						</select>
-					</div>
-				</div>
-			</div><!-- row -->
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="form-group">
-						<label for="neednote">Note</label>
-						<textarea class="form-control" id="neednote" name="neednote"></textarea>
-					</div>
-				</div>
-			</div><!-- row -->
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="form-group">
-						<label for="needdocattachment">Document Attachment</label>
-						<input type="text" class="form-control" id="needdocattachment" name="needdocattachment" readonly value=""/>
-					</div>
-				</div>
-			</div><!-- row -->
-			<div class="row">
-				<div class="col-sm-6" hidden>
-					<div class="form-group">
-						<label for="needcaseid">Case ID</label>
-						<input type="text" class="form-control" id="needcaseid" name="needcaseid" readonly value="<%= thiscase.case_id %>"/>
-					</div>
-				</div>
-			</div><!-- row -->
-			<div id="showuploaddocneed" class="row">
-				<div class="col-xs-12 col-sm-8 col-lg-9">
-					<input type="file" class="btn btn-primary btn-md uploadbtn" id="needbrowsebtn" name="userNeedFile" />
-				</div>
-				<div class="uploadbtns col-xs-12 col-sm-4 col-lg-3">
-					<button type="button" class="btn btn-default btn-md removeuploadbtn" id="removedocneed" name="removedocneed">Remove</button>
-					<button type="button" class="btn btn-default btn-md canceluploadbtn" id="canceldocneed" name="canceldocneed">Cancel</button>
-				</div>
-			</div><!-- row -->
-			<div class="buttonrow">
-				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetneed" name="resetneed">Reset</button>
-				<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitneed" name="submitneed">Submit</button>
-			</div>
-		</form>
-
-
-		<% this_cases_needs.sort(function(a,b) {
-			return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
-		}); %>
-		<% this_cases_goals.sort(function(a,b) {
-			return (a.assocneed_id > b.assocneed_id) ? 1 : ((b.assocneed_id > a.assocneed_id) ? -1 : 0);
-			return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
-		}); %>
-		<% this_cases_plans.sort(function(a,b) {
-			return (a.assocgoal_id > b.assocgoal_id) ? 1 : ((b.assocgoal_id > a.assocgoal_id) ? -1 : 0);
-			return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
-		}); %>
-		<% this_cases_actions.sort(function(a,b) {
-			return (a.assocplan_id > b.assocplan_id) ? 1 : ((b.assocplan_id > a.assocplan_id) ? -1 : 0);
-			return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
-		}); %>
-
-
-        <% if (this_cases_needs.length > 0) { %>
-		<% for (var i = 0; i < this_cases_needs.length; i += 1) {
-		        var needdisplaytable = "needdisplaytable" + i;
-				var needname = "needname" + i; 
-				var needtype = "needtype" + i; 
-				var needdate = "needdate" + i; 
-				var needstage = "needstage" + i; 
-				var needstatus = "needstatus" + i; 
-				var needseverity = "needseverity" + i; 
-				var neednote = "neednote" + i; 
-				var need = "need" + i; 
-				var needdoc = "needdoc" + i;
-				var moreneedbtn = "moreneedbtn" + i;
-				var goalsthruactionsdiv = "goalsthruactionsdiv" + i;
-				var goalsthruactionstable = "goalsthruactionstable" + i;
-				var editcasesneed = "editcasesneed" + i;
-				var removecasesneed = "removecasesneed" + i; 
-			%>
-		<table id="<%= needdisplaytable %>" class="table table-responsive table-striped2 table-condensed">
-			<thead>
-				<tr class="info">
-					<th>Need Name</th>
-					<th>Type</th>
-					<th>Assessment Date</th>
-					<th>Stage</th>
-					<th>Status</th>
-					<th>Severity</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td id="<%= needname %>"><%= this_cases_needs[i].name %></td>
-					<td id="<%= needtype %>"><%= this_cases_needs[i].type %></td>
-					<td id="<%= needdate %>"><%= this_cases_needs[i].assessment_date %></td>
-					<td id="<%= needstage %>"><%= this_cases_needs[i].stage %></td>
-					<td id="<%= needstatus %>"><%= this_cases_needs[i].need_status %></td>
-					<td id="<%= needseverity %>"><%= this_cases_needs[i].severity %></td>
-					<td class="tablebtns" id="<%= this_cases_needs[i].need_id %>">
-						<button class="btn btn-primary btn-md tableeditbtn casesneededitbtn" id="<%= editcasesneed %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
-						<button class="btn btn-default moreneedbtn" id="<%= moreneedbtn %>" type="button" data-toggle="collapse" data-target="#<%= need %>" aria-expanded="false" aria-controls="<%= need %>"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
-                        <button class="btn btn-danger btn-md tableremovebtn2" id="<%= removecasesneed %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
- 					</td>
-				</tr>
-				<tr>
-					<td colspan="7">						
-						<div class="collapse" class="" id="<%= need %>">
-						<% if (this_cases_needs[i].need_doc !== "") { %>
-							<form id="needdocdownloadform" method="GET" action="/download/needfiles/<%= this_cases_needs[i].need_doc %>">
-								<strong>Attachment:</strong>: <input type="text" class="downloadfilename" name="urlneedfile" readonly value="<%= this_cases_needs[i].need_doc %>"/>
-								<span hidden id="<%= needdoc %>"><%= this_cases_needs[i].need_doc %></span>
-								<input type="submit" value="Download" class="downloadbtn" id="submitneeddocdownload"/>
-							</form>
-						<% } %>
-							<p><strong>Note:</strong> <span id="<%= neednote %>"><%= this_cases_needs[i].note %></span></p>
-
-		<div id="<%= goalsthruactionsdiv %>">
-			<table id="<%= goalsthruactionstable %>"" class="table table-responsive table-condensed subtable">
-				<thead>
-					<tr class="info2">
-						<th>&nbsp;</th>
-						<th>&nbsp;</th>
-						<th>Name</th>
-						<th>Type</th>
-						<th>Priority</th>
-						<th>Due Date</th>
-						<th>Assigned To</th>
-					</tr>
-				</thead>
-				<tbody>
-			   <% var needgoalbtn = "needgoalbtn" + this_cases_needs[i].need_id;
-				  var newneed = true;
-			   for (var j = 0; j < this_cases_goals.length; j += 1) {
-					if (this_cases_needs[i].need_id === this_cases_goals[j].assocneed_id) { %>
-					<tr>
-					<% if (newneed === true) { %>
-						<td class="bg-danger"><a href="#goals"><button class="needanchorbtn" id="btnheadassociatedneed<%= this_cases_needs[i].need_id %>">G</button></a></td>
-					<% } else { %>
-						<td class="bg-danger">&nbsp;</td>
-					<% }
-					   newneed = false;
-					%>
-						<td class="bg-danger">Goal:</td>
-						<td><%= this_cases_goals[j].name %></td>
-						<td><%= this_cases_goals[j].type %></td>
-						<td><%= this_cases_goals[j].priority %></td>
-						<td><%= this_cases_goals[j].due_date %></td>
-						<td><a href="/person/<%= this_cases_goals[j].assignedperson_id %>"><%= this_cases_goals[j].assignedperson_id %></a></td>
-					</tr>
-			    <% var needplanbtn = "needplanbtn" + this_cases_goals[j].goal_id;
-				    var newgoal = true;
-					for (var k = 0; k < this_cases_plans.length; k += 1) {
-					if (this_cases_goals[j].goal_id === this_cases_plans[k].assocgoal_id) { %>
-					<tr>
-					<% if (newgoal === true) { %>
-						<td class="bg-warning"><a href="#plans"><button class="needanchorbtn" id="btnheadassociatedgoal<%= this_cases_goals[j].goal_id %>">P</button></a></td>
-					<% } else { %>
-						<td class="bg-warning">&nbsp;</td>
-					<% } 
-					   newgoal = false;
-					%>
-						<td class="bg-warning">Plan:</td>
-						<td><%= this_cases_plans[k].name %></td>
-						<td><%= this_cases_plans[k].type %></td>
-						<td><%= this_cases_plans[k].priority %></td>
-						<td><%= this_cases_plans[k].due_date %></td>
-						<td><a href="/person/<%= this_cases_plans[j].assignedperson_id %>"><%= this_cases_plans[k].assignedperson_id %></a></td>
-					</tr>
-			    <% var needactionbtn = "needactionbtn" + this_cases_plans[k].plan_id;
-				   var newplan = true;
-				for (var m = 0; m < this_cases_actions.length; m += 1) {
-					if (this_cases_plans[k].plan_id === this_cases_actions[m].assocplan_id) { %>
-					<tr>
-					<% if (newplan === true) { %>
-						<td class="bg-success"><a href="#actions"><button class="needanchorbtn" id="btnheadassociatedplan<%= this_cases_plans[j].plan_id %>">A</button></a></td>
-					<% } else { %>
-						<td class="bg-success">&nbsp;</td>
-					<% }
-					   newplan = false;
-					%>
-						<td class="bg-success">Action:</td>
-						<td><%= this_cases_actions[m].name %></td>
-						<td><%= this_cases_actions[m].type %></td>
-						<td><%= this_cases_actions[m].priority %></td>
-						<td><%= this_cases_actions[m].due_date %></td>
-						<td><a href="/person/<%= this_cases_actions[j].assignedperson_id %>"><%= this_cases_actions[m].assignedperson_id %></a></td>
-					</tr>
-			     <% } } %>
-			   <% } } %>
-		    <% } } %>
-					</tbody>
-				</table>
-			</div>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-        <% } } %>
-
-		<div id="needspagination" class="paginationdiv">
-			<nav aria-label="Page navigation">
-			  <ul class="pagination">
-			    <li class="disabled">
-			      <a href="#" aria-label="Previous">
-			        <span aria-hidden="true">&laquo;</span>
-			      </a>
-			    </li>
-			    <li class="active"><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li>
-			      <a href="#" aria-label="Next">
-			        <span aria-hidden="true">&raquo;</span>
-			      </a>
-			    </li>
-			  </ul>
-			</nav>
-		</div><!-- needspagination -->
-
-		</div><!-- tabpanel needs assessments -->
-
-
-
 <!-- ************************************************************************************************************************ -->
 
 
@@ -868,12 +668,12 @@
 
 		<h4><button id="plusgoal" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Goal</h4>
 
-		<form id="goalform" class="toggleform" enctype="multipart/form-data" action="/goal" method="post">
+		<form id="goalform" class="toggleform" action="/goal" method="post">
 			<div class="row">
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="goalname">Goal Name</label>
-						<input type="text" class="form-control" id="goalname" name="goalname" size="90" maxlength="100" value=""/>
+						<input type="text" required class="form-control requiredfield" id="goalname" name="goalname" size="90" maxlength="100" value=""/>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
@@ -881,8 +681,9 @@
 						<label for="goaltype">Type</label>
 						<select class="form-control" id="goaltype" name="goaltype">
 							<option value="0" selected>Select</option>
-							<option value="1">Rehabilitative</option>
-							<option value="2">Reintegrate</option>
+                            <% goalType.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
@@ -891,9 +692,9 @@
 						<label for="goalpriority">Priority</label>
 						<select class="form-control" id="goalpriority" name="goalpriority">
 							<option value="0" selected>Select</option>
-							<option value="1">High</option>
-							<option value="2">Medium</option>
-							<option value="3">Low</option>
+                            <% casePriority.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
@@ -912,19 +713,8 @@
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="goalcompletedate">Complete Date</label>
-						<input type="text" class="form-control" id="goalcompletedate" name="goalcompletedate" value=""/>
+						<input type="text" class="form-control" id="goalcompletedate" name="goalcompletedate" disabled value=""/>
 					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4">
-					<div class="form-group">
-						<label for="assocneedid">Associated Need</label>
-						<select class="form-control" id="assocneedid" name="assocneedid">
-							<option value="0" selected>Select</option>
-					<% for (var i = 0; i < this_cases_needs.length; i += 1) { %>
-							<option value="<%= this_cases_needs[i].need_id %>"><%= this_cases_needs[i].name %></option>
-					<% } %>
-							</select>
-						</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
@@ -947,28 +737,9 @@
 				</div>
 			</div><!-- row -->
 			<div class="row">
-				<div class="col-xs-12">
-					<div class="form-group">
-						<label for="goaldocattachment">Document Attachment</label>
-						<input type="text" class="form-control" id="goaldocattachment" name="goaldocattachment" readonly value=""/>
-					</div>
-				</div>
-			</div><!-- row -->
-			<div class="row">
 				<div class="col-sm-6" hidden>
-					<div class="form-group">
-						<label for="goalcaseid">Case ID</label>
-						<input type="text" class="form-control" id="goalcaseid" name="goalcaseid" readonly value="<%= thiscase.case_id %>"/>
-					</div>
-				</div>
-			</div><!-- row -->
-			<div id="showuploaddocgoal" class="row">
-				<div class="col-xs-12 col-sm-8 col-lg-9">
-					<input type="file" class="btn btn-primary btn-md uploadbtn" id="goalbrowsebtn" name="userGoalFile" />
-				</div>
-				<div class="uploadbtns col-xs-12 col-sm-4 col-lg-3">
-					<button type="button" class="btn btn-default btn-md removeuploadbtn" id="removedocgoal" name="removedocgoal">Remove</button>
-					<button type="button" class="btn btn-default btn-md canceluploadbtn" id="canceldocgoal" name="canceldocgoal">Cancel</button>
+					<label for="goalcaseid">Case ID</label>
+					<input type="text" class="form-control" id="goalcaseid" name="goalcaseid" readonly value="<%= thiscase.case_id %>"/>
 				</div>
 			</div><!-- row -->
 			<div class="buttonrow">
@@ -977,37 +748,45 @@
 			</div>
 		</form>
 
-        <div class="form-group">
-           <label for="expandgoal" class="btn btn-sm btn-default">
-              <input type="radio" name="showgoals" id="expandgoal" class="expandgoalthruactionbtn" checked> Show Goal Tables
-           </label>
-           <label for="collapsegoal" class="btn btn-sm btn-default">
-              <input type="radio" name="showgoals" id="collapsegoal" class="collapsegoalthruactionbtn"> Hide Goal Tables
-           </label>
-           <span class="nobr" id="goaltypebtns"></span>
-		</div>
+		<div id="goaluploadformdiv" class="uploadform">
+			<h4>Upload File(s)</h4>
+			<p>Maximum 10 files uploaded at once.</p>
+		    <form id    = "goaluploadForm"			    
+		        enctype = "multipart/form-data"
+		        action  = "/goal/upload/"
+		        method  = "post"
+		    >
+			<div class="row" hidden>
+				<label for="uploadgoalcase_id">Case ID</label>
+				<input type="text" class="form-control" id="uploadgoalcase_id" name="uploadgoalcase_id" readonly value="<%= thiscase.case_id %>"/>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<input type="file" class="btn btn-primary btn-md uploadgoalbtn" id="goalbrowsebtn1" name="userFile" />
+				</div>
+				<div class="col-xs-12">
+					<input type="file" class="btn btn-primary btn-md uploadgoalbtn" id="goalbrowsebtn2" name="userFile" />
+				</div>
+				<div class="col-xs-12">
+					<input type="file" class="btn btn-primary btn-md uploadgoalbtn" id="goalbrowsebtn3" name="userFile" />
+				</div>
+			</div><!-- row -->
+			<div id="uploadgoalbtns" class="row">
+			</div><!-- row -->
+			<div class="buttonrow">
+				<button type="button" class="btn btn-primary btn-md adduploadbtn" id="addgoaluploadbtn" name="addgoaluploadbtn">Add File</button>
+				<button type="reset" class="btn btn-warning btn-md canceluploadbtn" id="canceldocgoal" name="canceldocgoal">Cancel</button>
+				<button type="submit" class="btn btn-warning btn-md uploadsubmitbtn" id="submitdocgoal" name="submitdocgoal">Submit</button>
+			</div><!-- row -->
+			</form>			
+		</div><!-- goaluploadformdiv -->
 
-		<% for (var i = 0; i < this_cases_goals.length; i += 1) {
-				var goalname = "goalname" + i; 
-				var goaltype = "goaltype" + i; 
-				var goalduedate = "goalduedate" + i; 
-				var goalpriority = "goalpriority" + i; 
-				var assocneedid = "assocneedid" + i; 
-				var goalassignedpersonid = "goalassignedpersonid" + i; 
-				var goalstartdate = "goalstartdate" + i; 
-				var goalcompletedate = "goalcompletedate" + i; 
-				var goaldoc = "goaldoc" + i; 
-				var goalnote = "goalnote" + i; 
-				var editcasesgoal = "editcasesgoal" + i;
-				var removecasesgoal = "removecasesgoal" + i;
-		%>
-		<% if ((i === 0) || ((i > 0) && (this_cases_goals[i - 1].assocneed_id !== this_cases_goals[i].assocneed_id))) {
-                var numgoals = 0;
-                var numcompletegoals = 0;
-		%>
-		<h6><button id="headassociatedneed<%= this_cases_goals[i].assocneed_id %>" class="btn btn-primary btn-md associatedheadbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Goal(s) for Associated Need: <%= this_cases_goals[i].assocneed_name %></h6>
-		<div id="divassociatedneed<%= this_cases_goals[i].assocneed_id %>" class="associatedgoal_table">
-		<table id="tableassociatedneed<%= this_cases_goals[i].assocneed_id %>" class="table table-responsive table-striped table-condensed">
+
+        <div class="form-group">
+           <span id="goaltypebtns"></span>
+		</div>
+	<% if (this_cases_goals.length > 0) { %>
+		<table id="goaldisplaytable" class="table table-responsive table-striped table-condensed 2rowremovebtntop">
 			<thead>
 				<tr class="info">
 					<th>Goal Name</th>
@@ -1015,77 +794,81 @@
 					<th>Priority</th>
 					<th>Due Date</th>
 					<th>Assigned To</th>
+					<th>&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
-		<% } %>
-				<tr class="goal<%= this_cases_goals[i].type %>row">
-					<td><span hidden id="<%= assocneedid %>"><%= this_cases_goals[i].assocneed_id %></span><span id="<%= goalname %>"><%= this_cases_goals[i].name %></span></td>
+		<%  var numcompletegoals = 0;
+	 		var percent_complete_goals = 0;
+			for (var i = 0; i < this_cases_goals.length; i += 1) {
+		        var goaldisplayrow = "goaldisplayrow" + this_cases_goals[i].goal_id;
+				var goalname = "goalname" + i; 
+				var goaltype = "goaltype" + i; 
+				var goalduedate = "goalduedate" + i; 
+				var goalpriority = "goalpriority" + i; 
+				var goalassignedpersonid = "goalassignedpersonid" + i; 
+				var goalstartdate = "goalstartdate" + i; 
+				var goalcompletedate = "goalcompletedate" + i; 
+				var goalnote = "goalnote" + i; 
+				var editcasesgoal = "editcasesgoal" + i;
+				var removecasesgoal = "removecasesgoal" + i;
+				var uploaddocgoalbtn = "uploaddocgoalbtn" + this_cases_goals[i].goal_id;
+		%>
+				<tr id="<%= goaldisplayrow %>" class="goal<%= this_cases_goals[i].type %>row">
+					<td><span id="<%= goalname %>"><%= this_cases_goals[i].name %></span></td>
 					<td id="<%= goaltype %>"><%= this_cases_goals[i].type %></td>
 					<td id="<%= goalpriority %>"><%= this_cases_goals[i].priority %></td>
 					<td id="<%= goalduedate %>"><%= this_cases_goals[i].due_date %></td>
-					<td id="<%= goalassignedpersonid %>"><%= this_cases_goals[i].assignedperson_id %></td>
-				</tr>
-				<tr class="goal<%= this_cases_goals[i].type %>row">
-					<td colspan="4">						
-						<strong>Start Date:</strong> <span id="<%= goalstartdate %>"><%= this_cases_goals[i].start_date %></span> &nbsp;&nbsp; <strong>Complete Date:</strong> <span id="<%= goalcompletedate %>"><%= this_cases_goals[i].complete_date %></span><br>
-					<% if (this_cases_goals[i].goal_doc !== "") { %>
-						<form id="goaldocdownloadform" method="GET" action="/download/goalfiles/<%= this_cases_goals[i].goal_doc %>">
-							<strong>Attachment:</strong>: <input type="text" class="downloadfilename" id="urlgoalfile" name="urlfile" readonly value="<%= this_cases_goals[i].goal_doc %>"/>
-							<span hidden id="<%= goaldoc %>"><%= this_cases_goals[i].goal_doc %></span>
-							<input type="submit" value="Download" class="downloadbtn" id="submitgoaldocdownload"/>
-						</form>
-					<% } %>
-						<br>
-						<strong>Note:</strong> <span id="<%= goalnote %>"><%= this_cases_goals[i].note %></span>
-					</td>
+					<td id="<%= goalassignedpersonid %>"><a href="/person/<%= this_cases_goals[i].assignedperson_id %>"><%= this_cases_goals[i].assignedperson_id %></a></td>
 					<td class="tablebtns" id="<%= this_cases_goals[i].goal_id %>">
 						<button class="btn btn-primary btn-md tableeditbtn casesgoaleditbtn" id="<%= editcasesgoal %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
                         <button class="btn btn-danger btn-md tableremovebtn" id="<%= removecasesgoal %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
  					</td>
 				</tr>
-                <%  numgoals += 1;
-                    if (this_cases_goals[i].complete_date !== "") {
-					    numcompletegoals += 1;
+				<tr class="goal<%= this_cases_goals[i].type %>row">
+					<td colspan="6">						
+                        <a href="#goaluploadformdiv"><button class="btn btn-default btn-md uploaddocbtn" id="<%= uploaddocgoalbtn %>">Upload File</button></a><br>
+						<p><strong>Start Date:</strong> <span id="<%= goalstartdate %>"><%= this_cases_goals[i].start_date %></span> &nbsp;&nbsp; <strong>Complete Date:</strong> <span id="<%= goalcompletedate %>"><%= this_cases_goals[i].complete_date %></span></p>
+						<p><strong>Note:</strong> <span id="<%= goalnote %>"><%= this_cases_goals[i].note %></span></p>
+					<% for (var f = 0; f < this_cases_goals[i].goal_doc.length; f += 1) {
+					   if (this_cases_goals[i].goal_doc[f] !== "") {
+				           var goaldoc = "goaldoc" + i + '-' + f; 
+						   var removegoaldoc = "removegoaldoc" + i + '-' + f; 
+					   %>
+						<form method="GET" action="/download/<%= thiscase.case_id %>/goalfiles/<%= this_cases_goals[i].goal_doc[f] %>">
+							<strong>Attachment:</strong>: <input type="text" class="downloadfilename" id="<%= goaldoc %>" name="urlgoalfile" readonly value="<%= this_cases_goals[i].goal_doc[f] %>"/>
+                        	<button type="submit" class="btn btn-default btn-md downloadbtn"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
+						</form>
+						<form id="removegoaldocform" method="POST" action="/goal/removedoc/<%= this_cases_goals[i].goal_id %>/<%= f %>">
+							<button class="btn btn-default btn-md oneline docremovebtn" id="<%= removegoaldoc %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+						</form>
+					<% } } %>
+					<div class="navchildren">
+						<p>Plans <a href="#plans"><button class="btn btn-default btn-md childrenanchorbtn" id="linkheadassociatedgoal<%= this_cases_goals[i].goal_id %>"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button></a></p>
+					</div>
+					</td>
+				</tr>
+				<% 	if (this_cases_goals[i].complete_date !== "") {
+						numcompletegoals += 1;
 					}
 				%>
-			<% if ((this_cases_goals.length === 1) || (i === this_cases_goals.length - 1) || ((i < this_cases_goals.length) && (this_cases_goals[i].assocneed_id !== this_cases_goals[i + 1].assocneed_id))) {
-				  var percent_complete_need = ((numcompletegoals / numgoals) * 100).toFixed(2);
-			%>
-			    <tr>
-				<% if (percent_complete_need == 100) { %>
-					    <td class="totalcomplete-done">Need: <%= this_cases_goals[i].assocneed_name %> is <%= percent_complete_need %>&percnt; Complete</td>
-				<% } else if (percent_complete_need < 50) { %>
-					    <td class="totalcomplete-less">Need: <%= this_cases_goals[i].assocneed_name %> is <%= percent_complete_need %>&percnt; Complete</td>
-				<% } else { %>
-					    <td class="totalcomplete-more">Need: <%= this_cases_goals[i].assocneed_name %> is <%= percent_complete_need %>&percnt; Complete</td>
-                <% } %>
-				</tr>
-			</tbody>
+				<% if ((this_cases_goals.length === 1) || (i === this_cases_goals.length - 1)) {
+						percent_complete_goals = ((numcompletegoals / this_cases_goals.length) * 100).toFixed(0);
+				%>
+					<tr>
+					<% if (percent_complete_goals == 100) { %>
+						<td class="totalcomplete-done">
+					<% } else if (percent_complete_goals < 50) { %>
+						<td class="totalcomplete-less">
+					<% } else { %>
+						<td class="totalcomplete-more">
+					<% } %>
+						<%= percent_complete_goals %>&percnt; Complete Goals</td>
+					</tr>
+			<% } } %>					
+ 			</tbody>
 		</table>
-		</div>
-        <% } } %>
-
-
-		<div id="goalspagination" class="paginationdiv">
-			<nav aria-label="Page navigation">
-			  <ul class="pagination">
-			    <li class="disabled">
-			      <a href="#" aria-label="Previous">
-			        <span aria-hidden="true">&laquo;</span>
-			      </a>
-			    </li>
-			    <li class="active"><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li>
-			      <a href="#" aria-label="Next">
-			        <span aria-hidden="true">&raquo;</span>
-			      </a>
-			    </li>
-			  </ul>
-			</nav>
-		</div><!-- goalspagination -->
+		<% } %>
 
 		</div><!-- tabpanel goals -->
 
@@ -1099,12 +882,12 @@
 
 		<h4><button id="plusplan" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Plan</h4>
 
-		<form id="planform" class="toggleform" enctype="multipart/form-data" action="/plan" method="post">
+		<form id="planform" class="toggleform" action="/plan" method="post">
 			<div class="row">
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="planname">Plan Name</label>
-						<input type="text" class="form-control" id="planname" name="planname" size="90" maxlength="100" value=""/>
+						<input type="text" required class="form-control requiredfield" id="planname" name="planname" size="90" maxlength="100" value=""/>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
@@ -1112,9 +895,9 @@
 						<label for="plantype">Type</label>
 						<select class="form-control" id="plantype" name="plantype">
 							<option value="0" selected>Select</option>
-							<option value="1">Social</option>
-							<option value="2">Medical</option>
-							<option value="3">Financial</option>
+                            <% planType.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
@@ -1123,9 +906,9 @@
 						<label for="planpriority">Priority</label>
 						<select class="form-control" id="planpriority" name="planpriority">
 							<option value="0" selected>Select</option>
-							<option value="1">High</option>
-							<option value="2">Medium</option>
-							<option value="3">Low</option>
+                            <% casePriority.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
@@ -1144,16 +927,16 @@
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="plancompletedate">Complete Date</label>
-						<input type="text" class="form-control" id="plancompletedate" name="plancompletedate" value=""/>
+						<input type="text" class="form-control" id="plancompletedate" name="plancompletedate" disabled value=""/>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="assocgoalid">Associated Goal</label>
-						<select class="form-control" id="assocgoalid" name="assocgoalid">
+						<select class="form-control requiredfield" id="assocgoalid" name="assocgoalid">
 							<option value="0" selected>Select</option>
 					<% this_cases_goals.sort(function(a,b) {
-						return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+						return (a.goal_id > b.goal_id) ? 1 : ((b.goal_id > a.goal_id) ? -1 : 0);
 					}); %>
 					<% for (var i = 0; i < this_cases_goals.length; i += 1) { %>
 							<option value="<%= this_cases_goals[i].goal_id %>"><%= this_cases_goals[i].name %></option>
@@ -1182,28 +965,9 @@
 				</div>
 			</div><!-- row -->
 			<div class="row">
-				<div class="col-xs-12">
-					<div class="form-group">
-						<label for="plandocattachment">Document Attachment</label>
-						<input type="text" class="form-control" id="plandocattachment" name="plandocattachment" readonly value=""/>
-					</div>
-				</div>
-			</div><!-- row -->
-			<div class="row">
 				<div class="col-sm-6" hidden>
-					<div class="form-group">
-						<label for="plancaseid">Case ID</label>
-						<input type="text" class="form-control" id="plancaseid" name="plancaseid" readonly value="<%= thiscase.case_id %>"/>
-					</div>
-				</div>
-			</div><!-- row -->
-			<div id="showuploaddocplan" class="row">
-				<div class="col-xs-12 col-sm-8 col-lg-9">
-					<input type="file" class="btn btn-primary btn-md uploadbtn" id="planbrowsebtn" name="userPlanFile" />
-				</div>
-				<div class="uploadbtns col-xs-12 col-sm-4 col-lg-3">
-					<button type="button" class="btn btn-default btn-md removeuploadbtn" id="removedocplan" name="removedocplan">Remove</button>
-					<button type="button" class="btn btn-default btn-md canceluploadbtn" id="canceldocplan" name="canceldocplan">Cancel</button>
+					<label for="plancaseid">Case ID</label>
+					<input type="text" class="form-control" id="plancaseid" name="plancaseid" readonly value="<%= thiscase.case_id %>"/>
 				</div>
 			</div><!-- row -->
 			<div class="buttonrow">
@@ -1212,17 +976,52 @@
 			</div>
 		</form>
 
+		<div id="planuploadformdiv" class="uploadform">
+			<h4>Upload File(s)</h4>
+			<p>Maximum 10 files uploaded at once.</p>
+		    <form id    = "planuploadForm"			    
+		        enctype = "multipart/form-data"
+		        action  = "/plan/upload/"
+		        method  = "post"
+		    >
+			<div class="row" hidden>
+				<label for="uploadplancase_id">Case ID</label>
+				<input type="text" class="form-control" id="uploadplancase_id" name="uploadplancase_id" readonly value="<%= thiscase.case_id %>"/>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<input type="file" class="btn btn-primary btn-md uploadplanbtn" id="planbrowsebtn1" name="userFile" />
+				</div>
+				<div class="col-xs-12">
+					<input type="file" class="btn btn-primary btn-md uploadplanbtn" id="planbrowsebtn2" name="userFile" />
+				</div>
+				<div class="col-xs-12">
+					<input type="file" class="btn btn-primary btn-md uploadplanbtn" id="planbrowsebtn3" name="userFile" />
+				</div>
+			</div><!-- row -->
+			<div id="uploadplanbtns" class="row">
+			</div><!-- row -->
+			<div class="buttonrow">
+				<button type="button" class="btn btn-primary btn-md adduploadbtn" id="addplanuploadbtn" name="addplanuploadbtn">Add File</button>
+				<button type="reset" class="btn btn-warning btn-md canceluploadbtn" id="canceldocplan" name="canceldocplan">Cancel</button>
+				<button type="submit" class="btn btn-warning btn-md uploadsubmitbtn" id="submitdocplan" name="submitdocplan">Submit</button>
+			</div><!-- row -->
+			</form>			
+		</div><!-- planuploadformdiv -->
+
         <div class="form-group">
            <label for="expandplan" class="btn btn-sm btn-default">
-              <input type="radio" name="showplans" id="expandplan" class="expandgoalthruactionbtn" checked> Show Plan Tables
+              <input type="radio" name="showplans" id="expandplan" class="expandtablesbtn" checked> Show Tables
            </label>
            <label for="collapseplan" class="btn btn-sm btn-default">
-              <input type="radio" name="showplans" id="collapseplan" class="collapsegoalthruactionbtn"> Hide Plan Tables
+              <input type="radio" name="showplans" id="collapseplan" class="collapsetablesbtn"> Hide Tables
            </label>
-           <span class="nobr" id="plantypebtns"></span>
+           <span id="plantypebtns"></span>
 		</div>
 
-		<% for (var i = 0; i < this_cases_plans.length; i += 1) {
+		<%  for (var i = 0; i < this_cases_plans.length; i += 1) {
+		        var plandisplaytable = "plandisplaytable" + i;
+		        var plandisplayrow = "plandisplayrow" + this_cases_plans[i].plan_id;
 				var planname = "planname" + i; 
 				var plantype = "plantype" + i; 
 				var planduedate = "planduedate" + i; 
@@ -1231,18 +1030,18 @@
 				var planassignedpersonid = "planassignedpersonid" + i; 
 				var planstartdate = "planstartdate" + i; 
 				var plancompletedate = "plancompletedate" + i; 
-				var plandoc = "plandoc" + i; 
 				var plannote = "plannote" + i; 
 				var editcasesplan = "editcasesplan" + i;
 				var removecasesplan = "removecasesplan" + i; 
+				var uploaddocplanbtn = "uploaddocplanbtn" + this_cases_plans[i].plan_id;
 		%>
 		<% if ((i === 0) || ((i > 0) && (this_cases_plans[i - 1].assocgoal_id !== this_cases_plans[i].assocgoal_id))) { 
                 var numplans = 0;
-                var numcompleteplans = 0;
+				var numcompleteplans = 0;
 		%>
-		<h6><button id="headassociatedgoal<%= this_cases_plans[i].assocgoal_id %>" class="btn btn-primary btn-md associatedheadbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Plan(s) for Associated Goal: <%= this_cases_plans[i].assocgoal_name %></h6>
-		<div id="divassociatedgoal<%= this_cases_plans[i].assocgoal_id %>" class="associatedplan_table">
-		<table id="tableassociatedgoal<%= this_cases_plans[i].assocgoal_id %>" class="table table-responsive table-striped table-condensed">
+		<h6><a href="#goals"><button class="btn btn-default btn-md parentanchorbtn" id="linkgoaldisplayrow<%= this_cases_plans[i].assocgoal_id %>"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></button></a> <button id="headassociatedgoal<%= this_cases_plans[i].assocgoal_id %>" class="btn btn-primary btn-md associatedheadbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Plan(s) For Associated Goal: <%= this_cases_plans[i].assocgoal_name %></h6>
+		<div id="divassociatedgoal<%= this_cases_plans[i].assocgoal_id %>" class="displayplan_div">
+		<table id="<%= plandisplaytable %>" class="table table-responsive table-striped table-condensed 2rowremovebtntop">
 			<thead>
 				<tr class="info">
 					<th>Plan Name</th>
@@ -1250,34 +1049,44 @@
 					<th>Priority</th>
 					<th>Due Date</th>
 					<th>Assigned To</th>
+					<th>&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
 		<% } %>
-				<tr class="plan<%= this_cases_plans[i].type %>row">
+				<tr id="<%= plandisplayrow %>" class="plan<%= this_cases_plans[i].type %>row">
 					<td><span hidden id="<%= assocgoalid %>"><%= this_cases_plans[i].assocgoal_id %></span><span id="<%= planname %>"><%= this_cases_plans[i].name %></span></td>
 					<td id="<%= plantype %>"><%= this_cases_plans[i].type %></td>
 					<td id="<%= planpriority %>"><%= this_cases_plans[i].priority %></td>
 					<td id="<%= planduedate %>"><%= this_cases_plans[i].due_date %></td>
 					<td id="<%= planassignedpersonid %>"><%= this_cases_plans[i].assignedperson_id %></td>
-				</tr>
-				<tr class="plan<%= this_cases_plans[i].type %>row">
-					<td colspan="4">						
-						<strong>Start Date:</strong> <span id="<%= planstartdate %>"><%= this_cases_plans[i].start_date %></span> &nbsp;&nbsp; <strong>Complete Date:</strong> <span id="<%= plancompletedate %>"><%= this_cases_plans[i].complete_date %></span><br>
-					<% if (this_cases_plans[i].plan_doc !== "") { %>
-						<form id="plandocdownloadform" method="GET" action="/download/planfiles/<%= this_cases_plans[i].plan_doc %>">
-							<strong>Attachment:</strong>: <input type="text" class="downloadfilename" id="urlplanfile" name="urlfile" readonly value="<%= this_cases_plans[i].plan_doc %>"/>
-							<span hidden id="<%= plandoc %>"><%= this_cases_plans[i].plan_doc %></span>
-							<input type="submit" value="Download" class="downloadbtn" id="submitplandocdownload"/>
-						</form>
-					<% } %>
-						<br>
-						<strong>Note:</strong> <span id="<%= plannote %>"><%= this_cases_plans[i].note %></span>
-					</td>
 					<td class="tablebtns" id="<%= this_cases_plans[i].plan_id %>">
 						<button class="btn btn-primary btn-md tableeditbtn casesplaneditbtn" id="<%= editcasesplan %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
                         <button class="btn btn-danger btn-md tableremovebtn" id="<%= removecasesplan %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
  					</td>
+				</tr>
+				<tr class="plan<%= this_cases_plans[i].type %>row">
+					<td colspan="6">	
+                        <a href="#planuploadformdiv"><button class="btn btn-default btn-md uploaddocbtn" id="<%= uploaddocplanbtn %>">Upload File</button></a><br>
+						<p><strong>Start Date:</strong> <span id="<%= planstartdate %>"><%= this_cases_plans[i].start_date %></span> &nbsp;&nbsp; <strong>Complete Date:</strong> <span id="<%= plancompletedate %>"><%= this_cases_plans[i].complete_date %></span></p>
+						<p><strong>Note:</strong> <span id="<%= plannote %>"><%= this_cases_plans[i].note %></span></p>
+					<% for (var f = 0; f < this_cases_plans[i].plan_doc.length; f += 1) {
+					   if (this_cases_plans[i].plan_doc[f] !== "") {
+					   	  var plandoc = "plandoc" + i + '-' + f;
+						  var removeplandoc = "removeplandoc" + i + '-' + f; 
+					   %>
+						<form method="GET" action="/download/<%= thiscase.case_id %>/planfiles/<%= this_cases_plans[i].plan_doc[f] %>">
+							<strong>Attachment:</strong>: <input type="text" class="downloadfilename" id="<%= plandoc %>" name="urlplanfile" readonly value="<%= this_cases_plans[i].plan_doc[f] %>"/>
+                        	<button type="submit" class="btn btn-default btn-md downloadbtn"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
+						</form>
+						<form id="removeplandocform" method="POST" action="/plan/removedoc/<%= this_cases_plans[i].plan_id %>/<%= f %>">
+							<button class="btn btn-default btn-md oneline docremovebtn" id="<%= removeplandoc %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+						</form>
+					<% } } %>
+					<div class="navchildren">
+						<p>Actions <a href="#actions"><button class="btn btn-default btn-md childrenanchorbtn" id="linkheadassociatedplan<%= this_cases_plans[i].plan_id %>"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button></a></p>
+					</div>
+					</td>
 				</tr>
                 <%  numplans += 1;
                     if (this_cases_plans[i].complete_date !== "") {
@@ -1285,42 +1094,26 @@
 					}
 				%>
 			<% if ((this_cases_plans.length === 1) || (i === this_cases_plans.length - 1) || ((i < this_cases_plans.length) && (this_cases_plans[i].assocgoal_id !== this_cases_plans[i + 1].assocgoal_id))) {
-				  var percent_complete_goal = ((numcompleteplans / numplans) * 100).toFixed(0);
+				if (numplans !== 0) {
+				  	var percent_complete_plans = ((numcompleteplans / numplans) * 100).toFixed(0);
+				} else {
+					var percent_complete_plans = 0;
+				}
 			%>
 			    <tr>
-				<% if (percent_complete_goal == 100) { %>
-					<td class="totalcomplete-done">Goal: <%= this_cases_plans[i].assocgoal_name %> is <%= percent_complete_goal %>&percnt; Complete</td>
-				<% } else if (percent_complete_goal < 50) { %>
-					<td class="totalcomplete-less">Goal: <%= this_cases_plans[i].assocgoal_name %> is <%= percent_complete_goal %>&percnt; Complete</td>
-				<% } else { %>
-					<td class="totalcomplete-more">Goal: <%= this_cases_plans[i].assocgoal_name %> is <%= percent_complete_goal %>&percnt; Complete</td>
-                <% } %>
+					<% if (percent_complete_plans == 100) { %>
+					<td class="totalcomplete-done">
+					<% } else if (percent_complete_plans < 50) { %>
+					<td class="totalcomplete-less">
+					<% } else { %>
+					<td class="totalcomplete-more">
+                	<% } %>
+					<%= percent_complete_plans %>&percnt; Complete Plans for Goal: <%= this_cases_plans[i].assocgoal_name %></td>
 				</tr>
 			</tbody>
 		</table>
 		</div>
         <% } } %>
-
-
-		<div id="planspagination" class="paginationdiv">
-			<nav aria-label="Page navigation">
-			  <ul class="pagination">
-			    <li class="disabled">
-			      <a href="#" aria-label="Previous">
-			        <span aria-hidden="true">&laquo;</span>
-			      </a>
-			    </li>
-			    <li class="active"><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li>
-			      <a href="#" aria-label="Next">
-			        <span aria-hidden="true">&raquo;</span>
-			      </a>
-			    </li>
-			  </ul>
-			</nav>
-		</div><!-- planspagination -->
 
 		</div><!-- tabpanel plans -->
 
@@ -1340,7 +1133,7 @@
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="tasksubject">Subject</label>
-						<input type="text" class="form-control" id="tasksubject" name="tasksubject" size="90" maxlength="100" value=""/>
+						<input type="text" required class="form-control requiredfield" id="tasksubject" name="tasksubject" size="90" maxlength="100" value=""/>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
@@ -1348,12 +1141,9 @@
 						<label for="tasktype">Type</label>
 						<select class="form-control" id="tasktype" name="tasktype">
 							<option value="0" selected>Select</option>
-							<option value="1">Email</option>
-							<option value="2">Call</option>
-							<option value="3">Meeting</option>
-							<option value="4">Referral</option>
-							<option value="5">Research</option>
-							<option value="6">Other</option>
+                            <% taskType.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
@@ -1362,9 +1152,9 @@
 						<label for="taskpriority">Priority</label>
 						<select class="form-control" id="taskpriority" name="taskpriority">
 							<option value="0" selected>Select</option>
-							<option value="1">High</option>
-							<option value="2">Medium</option>
-							<option value="3">Low</option>
+                            <% casePriority.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
@@ -1383,7 +1173,7 @@
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="taskcompletedate">Complete Date</label>
-						<input type="text" class="form-control" id="taskcompletedate" name="taskcompletedate" value=""/>
+						<input type="text" class="form-control" id="taskcompletedate" name="taskcompletedate" disabled value=""/>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
@@ -1402,11 +1192,9 @@
 						<label for="taskstatus">Status</label>
 						<select class="form-control" id="taskstatus" name="taskstatus">
 							<option value="0" selected>Select</option>
-							<option value="1">Not Started</option>
-							<option value="2">In Progress</option>
-							<option value="3">Pending Input</option>
-							<option value="4">Completed</option>
-							<option value="5">Canceled</option>
+                            <% taskStatus.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
@@ -1419,10 +1207,8 @@
 			</div><!-- row -->
 			<div class="row">
 				<div class="col-sm-6" hidden>
-					<div class="form-group">
-						<label for="taskcaseid">Case ID</label>
-						<input type="text" class="form-control" id="taskcaseid" name="taskcaseid" readonly value="<%= thiscase.case_id %>"/>
-					</div>
+					<label for="taskcaseid">Case ID</label>
+					<input type="text" class="form-control" id="taskcaseid" name="taskcaseid" readonly value="<%= thiscase.case_id %>"/>
 				</div>
 			</div><!-- row -->
 			<div class="buttonrow">
@@ -1432,7 +1218,7 @@
 			<br>
 		</form>
 
-	<button class="btn btn-primary moreactionlogbtn" id="btnactionstaskstable"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;Tasks</button>
+	<button class="btn btn-default moreactionlogbtn" id="btnactionstaskstable">Tasks</button>
 
 	<div id="actionstaskstable">
 
@@ -1450,11 +1236,10 @@
 			</thead>
 			<tbody>
 			<% taskscaselisting.sort(function(a,b) {
-			    return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			    return (a.task_id > b.task_id) ? 1 : ((b.task_id > a.task_id) ? -1 : 0);
 			}); %>
             <%  var numtasks = 0;
                 var numcompletetasks = 0;
-				var percent_complete_tasks = 0;
 		    %>
            <% for (var i = 0; i < taskscaselisting.length; i += 1) {
 				var tsubject = "tsubject" + i;
@@ -1476,7 +1261,7 @@
 					<td id="<%= tpriority %>"><%= taskscaselisting[i].priority %></td>
 					<td id="<%= tdue %>"><%= taskscaselisting[i].due_date %></td>
 					<td><span hidden id="<%= tpersonid %>"><%= taskscaselisting[i].person_id %></span><a href="/person/<%= taskscaselisting[i].person_id %>"><%= taskscaselisting[i].person_name %></a></td>
-					<td id="<%= tstatus %>"><%= taskscaselisting[i].status %></td>
+					<td id="<%= tstatus %>"><%= taskscaselisting[i].task_status %></td>
 					<td class="tablebtns" id="<%= taskscaselisting[i].task_id %>">
 						<button class="btn btn-primary btn-md tableeditbtn taskeditbtn" id="<%= edittask %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
 						<button class="btn btn-default morebtn" type="button" data-toggle="collapse" data-target="#<%= task %>" aria-expanded="false" aria-controls="<%= task %>"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
@@ -1487,8 +1272,7 @@
 					<td colspan="8">						
 						<div class="collapse" id="<%= task %>">
 							<p><strong>Start Date:</strong> <span id="<%= tstart %>"><%= taskscaselisting[i].start_date %></span> &nbsp;&nbsp; 
-							<strong>Complete Date:</strong> <span id="<%= tcomplete %>"><%= taskscaselisting[i].complete_date %></span>
-							</p>
+							<strong>Complete Date:</strong> <span id="<%= tcomplete %>"><%= taskscaselisting[i].complete_date %></span></p>
 							<p><strong>Note:</strong> <span id="<%= tnote %>"><%= taskscaselisting[i].note %></span></p>
 						</div>
 					</td>
@@ -1501,50 +1285,35 @@
 				%>
 			<% } %>
 				<%  if (numtasks != 0) {
-				      percent_complete_tasks = ((numcompletetasks / numtasks) * 100).toFixed(0);
-				}%>
+				    	var percent_complete_tasks = ((numcompletetasks / numtasks) * 100).toFixed(0);
+					} else {
+						var percent_complete_tasks = 0;
+					}
+				%>
 			    <tr>
-				<% if (percent_complete_tasks == 100) { %>
-					<td class="totalcomplete-done"><%= percent_complete_tasks %>&percnt; of Tasks Complete</td>
-				<% } else if (percent_complete_tasks < 50) { %>
-					<td class="totalcomplete-less"><%= percent_complete_tasks %>&percnt; of Tasks Complete</td>
-				<% } else { %>
-					<td class="totalcomplete-more"><%= percent_complete_tasks %>&percnt; of Tasks Complete</td>
-                <% } %>
+					<% if (percent_complete_tasks == 100) { %>
+					<td class="totalcomplete-done">
+					<% } else if (percent_complete_tasks < 50) { %>
+					<td class="totalcomplete-less">
+					<% } else { %>
+					<td class="totalcomplete-more">
+                	<% } %>
+					<%= percent_complete_tasks %>&percnt; of Tasks Complete</td>
 				</tr>
 			</tbody>
 		</table>
 
-		<div id="taskspagination" class="paginationdiv">
-			<nav aria-label="Page navigation">
-			  <ul class="pagination">
-			    <li class="disabled">
-			      <a href="#" aria-label="Previous">
-			        <span aria-hidden="true">&laquo;</span>
-			      </a>
-			    </li>
-			    <li class="active"><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li>
-			      <a href="#" aria-label="Next">
-			        <span aria-hidden="true">&raquo;</span>
-			      </a>
-			    </li>
-			  </ul>
-			</nav>
-		</div><!-- taskspagination -->
 	</div><!-- actionstaskstable -->
 
 
 		<h4><button id="plusaction" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Action</h4>
 
-		<form id="actionform" class="toggleform" enctype="multipart/form-data" action="/action" method="post">
+		<form id="actionform" class="toggleform" action="/action" method="post">
 			<div class="row">
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="actionname">Action Name</label>
-						<input type="text" class="form-control" id="actionname" name="actionname" size="90" maxlength="100"/>
+						<input type="text" required class="form-control requiredfield" id="actionname" name="actionname" size="90" maxlength="100"/>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
@@ -1552,11 +1321,9 @@
 						<label for="actiontype">Type</label>
 						<select class="form-control" id="actiontype" name="actiontype">
 							<option value="0" selected>Select</option>
-							<option value="1">Email</option>
-							<option value="2">Call</option>
-							<option value="3">Meeting</option>
-							<option value="4">Referral</option>
-							<option value="5">Research</option>
+                            <% actionType.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
@@ -1565,37 +1332,37 @@
 						<label for="actionpriority">Priority</label>
 						<select class="form-control" id="actionpriority" name="actionpriority">
 							<option value="0" selected>Select</option>
-							<option value="1">High</option>
-							<option value="2">Medium</option>
-							<option value="3">Low</option>
+                            <% casePriority.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="actionstartdate">Start Date</label>
-						<input type="text" class="form-control" id="actionstartdate" name="actionstartdate"/>
+						<input type="text" class="form-control" id="actionstartdate" name="actionstartdate" value=""/>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="actionduedate">Due Date</label>
-						<input type="text" class="form-control" id="actionduedate" name="actionduedate"/>
+						<input type="text" class="form-control" id="actionduedate" name="actionduedate" value=""/>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="actioncompletedate">Complete Date</label>
-						<input type="text" class="form-control" id="actioncompletedate" name="actioncompletedate"/>
+						<input type="text" class="form-control" id="actioncompletedate" name="actioncompletedate" disabled value=""/>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="assocplanid">Associated Plan</label>
-						<select class="form-control" id="assocplanid" name="assocplanid">
+						<select class="form-control requiredfield" id="assocplanid" name="assocplanid">
 							<option value="0" selected>Select</option>
 					<% this_cases_plans.sort(function(a,b) {
-						return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+						return (a.plan_id > b.plan_id) ? 1 : ((b.plan_id > a.plan_id) ? -1 : 0);
 					}); %>
 					<% for (var i = 0; i < this_cases_plans.length; i += 1) { %>
 							<option value="<%= this_cases_plans[i].plan_id %>"><%= this_cases_plans[i].name %></option>
@@ -1624,28 +1391,9 @@
 				</div>
 			</div><!-- row -->
 			<div class="row">
-				<div class="col-xs-12">
-					<div class="form-group">
-						<label for="actiondocattachment">Document Attachment</label>
-						<input type="text" class="form-control" id="actiondocattachment" name="actiondocattachment" readonly />
-					</div>
-				</div>
-			</div><!-- row -->
-			<div class="row">
 				<div class="col-sm-6" hidden>
-					<div class="form-group">
-						<label for="actioncaseid">Case ID</label>
-						<input type="text" class="form-control" id="actioncaseid" name="actioncaseid" readonly value="<%= thiscase.case_id %>"/>
-					</div>
-				</div>
-			</div><!-- row -->
-			<div id="showuploaddocaction"" class="row">
-				<div class="col-xs-12 col-sm-8 col-lg-9">
-					<input type="file" class="btn btn-primary btn-md uploadbtn" id="actionbrowsebtn" name="userActionFile" />
-				</div>
-				<div class="uploadbtns col-xs-12 col-sm-4 col-lg-3">
-					<button type="button" class="btn btn-default btn-md removeuploadbtn" id="removedocaction" name="removedocaction">Remove</button>
-					<button type="button" class="btn btn-default btn-md canceluploadbtn" id="canceldocaction" name="canceldocaction">Cancel</button>
+					<label for="actioncaseid">Case ID</label>
+					<input type="text" class="form-control" id="actioncaseid" name="actioncaseid" readonly value="<%= thiscase.case_id %>"/>
 				</div>
 			</div><!-- row -->
 			<div class="buttonrow">
@@ -1654,20 +1402,53 @@
 			</div>
 		</form>
 
+		<div id="actionuploadformdiv" class="uploadform">
+			<h4>Upload File(s)</h4>
+			<p>Maximum 10 files uploaded at once.</p>
+		    <form id    = "actionuploadForm"			    
+		        enctype = "multipart/form-data"
+		        action  = "/action/upload/"
+		        method  = "post"
+		    >
+			<div class="row" hidden>
+				<label for="uploadactioncase_id">Case ID</label>
+				<input type="text" class="form-control" id="uploadactioncase_id" name="uploadactioncase_id" readonly value="<%= thiscase.case_id %>"/>
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<input type="file" class="btn btn-primary btn-md uploadactionbtn" id="actionbrowsebtn1" name="userFile" />
+				</div>
+				<div class="col-xs-12">
+					<input type="file" class="btn btn-primary btn-md uploadactionbtn" id="actionbrowsebtn2" name="userFile" />
+				</div>
+				<div class="col-xs-12">
+					<input type="file" class="btn btn-primary btn-md uploadactionbtn" id="actionbrowsebtn3" name="userFile" />
+				</div>
+			</div><!-- row -->
+
+			<div id="uploadactionbtns" class="row">
+			</div><!-- row -->
+			<div class="buttonrow">
+				<button type="button" class="btn btn-primary btn-md adduploadbtn" id="addactionuploadbtn" name="addactionuploadbtn">Add File</button>
+				<button type="reset" class="btn btn-warning btn-md canceluploadbtn" id="canceldocaction" name="canceldocaction">Cancel</button>
+				<button type="submit" class="btn btn-warning btn-md uploadsubmitbtn" id="submitdocaction" name="submitdocaction">Submit</button>
+			</div><!-- row -->
+			</form>			
+		</div><!-- actionuploadformdiv -->
+
         <div class="form-group">
            <label for="expandaction" class="btn btn-sm btn-default">
-              <input type="radio" name="showactions" id="expandaction" class="expandgoalthruactionbtn" checked> Show Action Tables
+              <input type="radio" name="showactions" id="expandaction" class="expandtablesbtn" checked> Show Tables
            </label>
            <label for="collapseaction" class="btn btn-sm btn-default">
-              <input type="radio" name="showactions" id="collapseaction" class="collapsegoalthruactionbtn"> Hide Action Tables
+              <input type="radio" name="showactions" id="collapseaction" class="collapsetablesbtn"> Hide Tables
            </label>
-           <span class="nobr" id="actiontypebtns"></span>           
+           <span id="actiontypebtns"></span>           
  		</div>
 
-		<% this_cases_actions.sort(function(a,b) {
-			return (a.assocplan_id - b.assocplan_id) || (a.type - b.type);
-		}); %>
-		<% for (var i = 0; i < this_cases_actions.length; i += 1) {
+		<%  for (var i = 0; i < this_cases_actions.length; i += 1) {
+		        var actiondisplaytable = "actiondisplaytable" + i;
+				var actiondisplayrow = "actiondisplayrow" + this_cases_actions[i].action_id;
 				var actionname = "actionname" + i; 
 				var actiontype = "actiontype" + i; 
 				var actionduedate = "actionduedate" + i; 
@@ -1676,18 +1457,18 @@
 				var actionassignedpersonid = "actionassignedpersonid" + i; 
 				var actionstartdate = "actionstartdate" + i; 
 				var actioncompletedate = "actioncompletedate" + i; 
-				var actiondoc = "actiondoc" + i; 
 				var actionnote = "actionnote" + i; 
 				var editcasesaction = "editcasesaction" + i;
 				var removecasesaction = "removecasesaction" + i; 
+				var uploaddocactionbtn = "uploaddocactionbtn" + this_cases_actions[i].action_id;
 		%>
 		<% if ((i === 0) || ((i > 0) && (this_cases_actions[i - 1].assocplan_id !== this_cases_actions[i].assocplan_id))) {
                 var numactions = 0;
-                var numcompleteactions = 0;
+				var numcompleteactions = 0;
 		%>
-		<h6><button id="headassociatedplan<%= this_cases_actions[i].assocplan_id %>" class="btn btn-primary btn-md associatedheadbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Action(s) for Associated Plan: <%= this_cases_actions[i].assocplan_name %></h6>
-		<div id="divassociatedplan<%= this_cases_actions[i].assocplan_id %>" class="associatedaction_table">
-		<table id="tableassociatedplan<%= this_cases_actions[i].assocplan_id %>" class="table table-responsive table-striped table-condensed">
+		<h6><a href="#plans"><button class="btn btn-default btn-md parentanchorbtn" id="linkplandisplayrow<%= this_cases_actions[i].assocplan_id %>"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></button></a> <button id="headassociatedplan<%= this_cases_actions[i].assocplan_id %>" class="btn btn-primary btn-md associatedheadbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Action(s) For Associated Plan: <%= this_cases_actions[i].assocplan_name %></h6>
+		<div id="divassociatedplan<%= this_cases_actions[i].assocplan_id %>" class="displayaction_div">
+		<table id="<%= actiondisplaytable %>" class="table table-responsive table-striped table-condensed 2rowremovebtntop">
 			<thead>
 				<tr class="info">
 					<th>Action Name</th>
@@ -1695,34 +1476,40 @@
 					<th>Priority</th>
 					<th>Due Date</th>
 					<th>Assigned To</th>
+					<th>&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
 		<% } %>
-				<tr class="action<%= this_cases_actions[i].type %>row">
+				<tr id="<%= actiondisplayrow %>"  class="action<%= this_cases_actions[i].type %>row">
 					<td><span hidden id="<%= assocplanid %>"><%= this_cases_actions[i].assocplan_id %></span><span id="<%= actionname %>"><%= this_cases_actions[i].name %></span></td>
 					<td id="<%= actiontype %>"><%= this_cases_actions[i].type %></td>
 					<td id="<%= actionpriority %>"><%= this_cases_actions[i].priority %></td>
 					<td id="<%= actionduedate %>"><%= this_cases_actions[i].due_date %></td>
 					<td id="<%= actionassignedpersonid %>"><%= this_cases_actions[i].assignedperson_id %></td>
-				</tr>
-				<tr class="action<%= this_cases_actions[i].type %>row">
-					<td colspan="4">						
-						<strong>Start Date:</strong> <span id="<%= actionstartdate %>"><%= this_cases_actions[i].start_date %></span> &nbsp;&nbsp; <strong>Complete Date:</strong> <span id="<%= actioncompletedate %>"><%= this_cases_actions[i].complete_date %></span><br>
-					<% if (this_cases_actions[i].action_doc !== "") { %>
-						<form id="actiondocdownloadform" method="GET" action="/download/actionfiles/<%= this_cases_actions[i].action_doc %>">
-							<strong>Attachment:</strong>: <input type="text" class="downloadfilename" id="urlactionfile" name="urlfile" readonly value="<%= this_cases_actions[i].action_doc %>"/>
-							<span hidden id="<%= actiondoc %>"><%= this_cases_actions[i].action_doc %></span>
-							<input type="submit" value="Download" class="downloadbtn" id="submitactiondocdownload"/>
-						</form>
-					<% } %>
-						<br>
-						<strong>Note:</strong> <span id="<%= actionnote %>"><%= this_cases_actions[i].note %></span>
-					</td>
 					<td class="tablebtns" id="<%= this_cases_actions[i].action_id %>">
 						<button class="btn btn-primary btn-md tableeditbtn casesactioneditbtn" id="<%= editcasesaction %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
                         <button class="btn btn-danger btn-md tableremovebtn" id="<%= removecasesaction %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
- 					</td>
+				</tr>
+				<tr class="action<%= this_cases_actions[i].type %>row">
+					<td colspan="6">						
+                        <a href="#actionuploadformdiv"><button class="btn btn-default btn-md uploaddocbtn" id="<%= uploaddocactionbtn %>">Upload File</button></a><br>
+						<p><strong>Start Date:</strong> <span id="<%= actionstartdate %>"><%= this_cases_actions[i].start_date %></span> &nbsp;&nbsp; <strong>Complete Date:</strong> <span id="<%= actioncompletedate %>"><%= this_cases_actions[i].complete_date %></span></p>
+						<p><strong>Note:</strong> <span id="<%= actionnote %>"><%= this_cases_actions[i].note %></span></p>
+					<% for (var f = 0; f < this_cases_actions[i].action_doc.length; f += 1) {
+					    if (this_cases_actions[i].action_doc[f] !== "") {
+				           var actiondoc = "actiondoc" + i + '-' + f;
+						   var removeactiondoc = "removeactiondoc" + i + '-' + f; 
+						%>
+						<form method="GET" action="/download/<%= thiscase.case_id %>/actionfiles/<%= this_cases_actions[i].action_doc[f] %>">
+							<strong>Attachment:</strong>: <input type="text" class="downloadfilename" id="<%= actiondoc %>" name="urlactionfile" readonly value="<%= this_cases_actions[i].action_doc[f] %>"/>
+                        	<button type="submit" class="btn btn-default btn-md downloadbtn"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
+						</form>
+						<form id="removeactiondocform" method="POST" action="/action/removedoc/<%= this_cases_actions[i].action_id %>/<%= f %>">
+							<button class="btn btn-default btn-md oneline docremovebtn" id="<%= removeactiondoc %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+						</form>
+					<% } } %>
+					</td>
 				</tr>
                 <%  numactions += 1;
                     if (this_cases_actions[i].complete_date !== "") {
@@ -1730,46 +1517,28 @@
 					}
 				%>
 			<% if ((this_cases_actions.length === 1) || (i === this_cases_actions.length - 1) || ((i < this_cases_actions.length) && (this_cases_actions[i].assocplan_id !== this_cases_actions[i + 1].assocplan_id))) {
-				  var percent_complete_plan = ((numcompleteactions / numactions) * 100).toFixed(0);
+				  if (numactions !== 0) {
+				  	var percent_complete_actions = ((numcompleteactions / numactions) * 100).toFixed(0);
+				  } else {
+				  	var percent_complete_actions = 0;
+				  }
 			%>
 			    <tr>
-				<% if (percent_complete_plan == 100) { %>
-					<td class="totalcomplete-done">Plan: <%= this_cases_actions[i].assocplan_name %> is <%= percent_complete_plan %>&percnt; Complete</td>
-				<% } else if (percent_complete_plan < 50) { %>
-					<td class="totalcomplete-less">Plan: <%= this_cases_actions[i].assocplan_name %> is <%= percent_complete_plan %>&percnt; Complete</td>
+				<% if (percent_complete_actions == 100) { %>
+					<td class="totalcomplete-done">
+				<% } else if (percent_complete_actions < 50) { %>
+					<td class="totalcomplete-less">
 				<% } else { %>
-					<td class="totalcomplete-more">Plan: <%= this_cases_actions[i].assocplan_name %> is <%= percent_complete_plan %>&percnt; Complete</td>
+					<td class="totalcomplete-more">
                 <% } %>
+				<%= percent_complete_actions %>&percnt; Complete Actions for Plan: <%= this_cases_actions[i].assocplan_name %></td>
 				</tr>
-
 			</tbody>
 		</table>
 		</div>
         <% } } %>
 
-		<div id="actionspagination" class="paginationdiv">
-			<nav aria-label="Page navigation">
-			  <ul class="pagination">
-			    <li class="disabled">
-			      <a href="#" aria-label="Previous">
-			        <span aria-hidden="true">&laquo;</span>
-			      </a>
-			    </li>
-			    <li class="active"><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li>
-			      <a href="#" aria-label="Next">
-			        <span aria-hidden="true">&raquo;</span>
-			      </a>
-			    </li>
-			  </ul>
-			</nav>
-		</div><!-- actionspagination -->
-
 	</div><!-- tabpanel actions -->
-
-
 
 
 <!-- ******************************************************************************************************************** -->
@@ -1785,7 +1554,7 @@
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="casefilename">File Name</label>
-						<input type="text" class="form-control" id="casefilename" name="casefilename"/>
+						<input type="text" class="form-control requiredfield" id="casefilename" name="casefilename"/>
 					</div>
 				</div>
 
@@ -1794,11 +1563,9 @@
 						<label for="casefilecasedomain">Case Domain</label>
 						<select class="form-control" id="casefilecasedomain" name="casefilecasedomain">
 							<option value="0" selected>Select</option>
-							<option value="1">Spiritual</option>
-							<option value="2">Health</option>
-							<option value="3">Legal</option>
-							<option value="4">Financial</option>
-							<option value="5">Benefits</option>
+					<% caseDomain.enums.forEach(function(enumItem) { %>
+					<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+					<% }); %>
 						</select>
 					</div>
 				</div>
@@ -1807,12 +1574,9 @@
 						<label for="casefileactiontype">Action Type</label>
 						<select class="form-control" id="casefileactiontype" name="casefileactiontype">
 							<option value="0" selected>Select</option>
-							<option value="1">Email</option>
-							<option value="2">Call</option>
-							<option value="3">Meeting</option>
-							<option value="4">Task</option>
-							<option value="5">Referral</option>
-							<option value="6">Research</option>
+                            <% actionType.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
@@ -1821,20 +1585,17 @@
 						<label for="casefiletype">File Type</label><br>
 						<select class="form-control" id="casefiletype" name="casefiletype">
 							<option value="0" selected>Select</option>
-							<option value="1">File Type 1</option>
-							<option value="2">File Type 2</option>
-							<option value="3">File Type 3</option>
+                            <% caseFileType.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
-						<label for="casefilepersonid">Person Name</label>
-						<select class="form-control" id="casefilepersonid" name="casefilepersonid">
-							<option value="0" selected>Select</option>
-			<% for (var i = 0; i < person.length; i += 1) { %>
-				<option value="<%= person[i].person_id %>"><%= person[i].last_name %>, <%= person[i].first_name %> <%= person[i].middle_name %></option>
-            <% } %>
+						<label for="casefilepersoniddisplay">Person Name</label>
+						<select class="form-control" id="casefilepersoniddisplay" name="casefilepersoniddisplay" disabled>
+							<option value="0" selected>Logged In User Name</option>
 						</select>
 					</div>
 				</div>
@@ -1843,9 +1604,9 @@
 						<label for="casefileorgid">Organization Name</label>
 						<select class="form-control" id="casefileorgid" name="casefileorgid">
 							<option value="0" selected>Select</option>
-			<% for (var i = 0; i < organization.length; i += 1) { %>
-					<option value="<%= organization[i].organization_id %>"><%= organization[i].organization_name %></option>
-			<% } %>
+					<% for (var i = 0; i < organization.length; i += 1) { %>
+							<option value="<%= organization[i].organization_id %>"><%= organization[i].organization_name %></option>
+					<% } %>
 						</select>
 					</div>
 				</div>
@@ -1858,32 +1619,26 @@
 					</div>
 				</div>
 			</div><!-- row -->
+			<div class="row" hidden>
+				<div class="col-sm-6">
+					<!--  NOTE: Value will be Logged In User person_id  -->
+					<label for="casefilepersonid">Person_Id of Logged In User</label>
+					<input type="text" class="form-control" id="casefilepersonid" name="casefilepersonid" value="1"/>
+				</div>
+				<div class="col-sm-6">
+					<label for="casefilecaseid">Case ID</label>
+					<input type="text" class="form-control" id="casefilecaseid" name="casefilecaseid" readonly value="<%= thiscase.case_id %>"/>
+				</div>
+			</div><!-- row -->
 			<div class="row">
 				<div class="col-xs-12">
-					<div class="form-group">
-						<label for="casefiledocattachment">Document Attachment</label>
-						<input type="text" class="form-control" id="casefiledocattachment" name="casefiledocattachment" required readonly value=""/>
-					</div>
+					<input type="file" class="btn btn-primary btn-md uploadcasefilebtn" id="casefilebrowsebtn" name="userFile" />
 				</div>
 			</div><!-- row -->
-			<div class="row">
-				<div class="col-sm-6" hidden>
-					<div class="form-group">
-						<label for="casefilecaseid">Case ID</label>
-						<input type="text" class="form-control" id="casefilecaseid" name="casefilecaseid" readonly value="<%= thiscase.case_id %>"/>
-					</div>
-				</div>
-			</div><!-- row -->
-			<div id="showuploaddoccasefile" class="row">
-				<div class="col-xs-12 col-sm-8 col-lg-9">
-					<input type="file" required class="btn btn-primary btn-md uploadbtn" id="casefilebrowsebtn" name="userCaseFile" /><br>
-				</div>
-				<div class="uploadbtns col-xs-12 col-sm-4 col-lg-3">
-					<button type="button" class="btn btn-default btn-md removeuploadbtn" id="removedoccasefile" name="removedoccasefile">Remove</button>
-					<button type="button" class="btn btn-default btn-md canceluploadbtn" id="canceldoccasefile" name="canceldoccasefile">Cancel</button>
-				</div>
+			<div id="uploadcasefilebtns" class="row">
 			</div><!-- row -->
 			<div class="buttonrow">
+				<button type="button" class="btn btn-primary btn-md adduploadbtn" id="addfileuploadbtn" name="addfileuploadbtn">Add File</button>
 				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetcasefile" name="resetcasefile">Reset</button>
 				<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitcasefile" name="submitcasefile">Submit</button>
 			</div>
@@ -1895,83 +1650,60 @@
 		</div>
 
 		<% this_cases_files.sort(function(a,b) {
-			return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			return (a.casefile_id > b.casefile_id) ? 1 : ((b.casefile_id > a.casefile_id) ? -1 : 0);
 		}); %>
-		<% if (this_cases_files.length > 0) { %>
-		<table id="casefiledisplaytable" class="table table-responsive table-striped table-condensed">
+		<% if (this_cases_files.length > 0) {
+			for (var i = 0; i < this_cases_files.length; i += 1) {
+				var casefiledisplaytable = "casefiledisplaytable" + i;
+				var filename = "filename" + i; 
+				var filedomain = "filedomain" + i; 
+				var fileactiontype = "fileactiontype" + i; 
+				var filepersonid = "filepersonid" + i; 
+				var fileorgid = "fileorgid" + i; 
+				var filenote = "filenote" + i; 
+				var filetype = "filetype" + i; 
+		%>
+		<div class="filecasedomain<%= this_cases_files[i].domain %>table">
+		<table id="<%= casefiledisplaytable %>" class="table table-responsive table-striped table-condensed 2rowremovebtntop">
 			<thead>
 				<tr class="info">
 					<th>File Name</th>
 					<th>Case Domain</th>
-					<th>Action Type</th>
 					<th>Person Name</th>
 					<th>Organization Name</th>
 					<th>Date</th>
 				</tr>
 			</thead>
 			<tbody>
-			<% for (var i = 0; i < this_cases_files.length; i += 1) {
-					var filename = "filename" + i; 
-					var filedomain = "filedomain" + i; 
-					var fileactiontype = "fileactiontype" + i; 
-					var filepersonid = "filepersonid" + i; 
-					var fileorgid = "fileorgid" + i; 
-					var filenote = "filenote" + i; 
-					var filetype = "filetype" + i; 
-					var filedoc = "filedoc" + i; 
-					var editcasefile = "editcasefile" + i;
-					var removecasefile = "removecasefile" + i; 
-			%>
-				<tr class="filecasedomain<%= this_cases_files[i].domain %>row">
+				<tr>
 					<td id="<%= filename %>"><%= this_cases_files[i].name %></td>
-					<td id="<%= filedomain %>"><%= this_cases_files[i].domain %></td>
-					<td id="<%= fileactiontype %>"><%= this_cases_files[i].actiontype %></td>
+					<td id="<%= filedomain %>"><%= this_cases_files[i].domain %></td>					
 					<td id="<%= filepersonid %>"><%= this_cases_files[i].fileperson_id %></td>
 					<td id="<%= fileorgid %>"><%= this_cases_files[i].fileorg_id %></td>						
 					<td><%= this_cases_files[i].filedate %></td>
 				</tr>
-				<tr class="filecasedomain<%= this_cases_files[i].domain %>row">
+				<tr>
 					<td colspan="5">
-					    <p><strong>Type:</strong> <span id="<%= filetype %>"><%= this_cases_files[i].type %></span></p>
-					<% if (this_cases_files[i].file_doc !== "") { %>
-						<form id="filedocdownloadform" method="GET" action="/download/casefiles/<%= this_cases_files[i].file_doc %>">
-							<strong>Attachment:</strong>: <input type="text" class="downloadfilename" name="urlcasefile" readonly value="<%= this_cases_files[i].file_doc %>"/>
-							<span hidden id="<%= filedoc %>"><%= this_cases_files[i].file_doc %></span>
-							<input type="submit" value="Download" class="downloadbtn" id="submitfiledocdownload"/>
+					    <p><strong>File Type:</strong> <span id="<%= filetype %>"><%= this_cases_files[i].type %></span> &nbsp;&nbsp; <strong>Action Type:</strong> <span id="<%= fileactiontype %>"><%= this_cases_files[i].actiontype %></span></p>
+						<p><strong>Note:</strong> <span id="<%= filenote %>"><%= this_cases_files[i].note %></span></p>
+					<% if (this_cases_files[i].file_doc.length < 1) { %>
+                       <p class="redflag"><strong>WARNING: No file!</strong></p>
+                    <% }
+                       for (var f = 0; f < this_cases_files[i].file_doc.length; f += 1) {
+					   if (this_cases_files[i].file_doc[f] !== "") {
+					   	  var filedoc = "filedoc" + i + '-' + f;
+					   %>
+						<form method="GET" action="/download/<%= thiscase.case_id %>/casefiles/<%= this_cases_files[i].file_doc[f] %>">
+							<strong>Attachment:</strong>: <input type="text" id="<%= filedoc %>" class="downloadfilename" name="urlcasefile" readonly value="<%= this_cases_files[i].file_doc[f] %>"/>
+                        	<button type="submit" class="btn btn-default btn-md downloadbtn"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
 						</form>
-					<% } %>
-						<br>
-						<strong>Note:</strong> <span id="<%= filenote %>"><%= this_cases_files[i].note %></span>
+					<% } } %>
 					</td>
-					<td class="tablebtns" id="<%= this_cases_files[i].casefile_id %>">
-						<button class="btn btn-primary btn-md tableeditbtn casefileeditbtn" id="<%= editcasefile %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
-                        <button class="btn btn-danger btn-md tableremovebtn" id="<%= removecasefile %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
- 					</td>
 				</tr>
-        	<% } %>
-			</tbody>
+ 			</tbody>
 		</table>
-       	<% } %>
-
-		<div id="casefilespagination" class="paginationdiv">
-			<nav aria-label="Page navigation">
-			  <ul class="pagination">
-			    <li class="disabled">
-			      <a href="#" aria-label="Previous">
-			        <span aria-hidden="true">&laquo;</span>
-			      </a>
-			    </li>
-			    <li class="active"><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li>
-			      <a href="#" aria-label="Next">
-			        <span aria-hidden="true">&raquo;</span>
-			      </a>
-			    </li>
-			  </ul>
-			</nav>
-		</div><!-- casefilespagination -->
+		</div>
+       	<% } } %>
 
 		</div><!-- tabpanel casefiles -->
 
@@ -1990,7 +1722,7 @@
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="casenotename">Note Name</label>
-						<input type="text" class="form-control" id="casenotename" name="casenotename"/>
+						<input type="text" class="form-control requiredfield" id="casenotename" name="casenotename"/>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
@@ -1998,11 +1730,9 @@
 						<label for="casenotecasedomain">Case Domain</label>
 						<select class="form-control" id="casenotecasedomain" name="casenotecasedomain">
 							<option value="0" selected>Select</option>
-							<option value="1">Spiritual</option>
-							<option value="2">Health</option>
-							<option value="3">Legal</option>
-							<option value="4">Financial</option>
-							<option value="5">Benefits</option>
+						<% caseDomain.enums.forEach(function(enumItem) { %>
+						<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+						<% }); %>
 						</select>
 					</div>
 				</div>
@@ -2011,12 +1741,9 @@
 						<label for="casenoteactiontype">Action Type</label>
 						<select class="form-control" id="casenoteactiontype" name="casenoteactiontype">
 							<option value="0" selected>Select</option>
-							<option value="1">Email</option>
-							<option value="2">Call</option>
-							<option value="3">Meeting</option>
-							<option value="4">Task</option>
-							<option value="5">Referral</option>
-							<option value="6">Research</option>
+                            <% actionType.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
@@ -2025,20 +1752,17 @@
 						<label for="casenotetype">Note Type</label><br>
 						<select class="form-control" id="casenotetype" name="casenotetype">
 							<option value="0" selected>Select</option>
-							<option value="1">Note Type 1</option>
-							<option value="2">Note Type 2</option>
-							<option value="3">Note Type 3</option>
+                            <% caseNoteType.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
-						<label for="casenotepersonid">Person Name</label>
-						<select class="form-control" id="casenotepersonid" name="casenotepersonid">
-							<option value="0" selected>Select</option>
-			<% for (var i = 0; i < person.length; i += 1) { %>
-				<option value="<%= person[i].person_id %>"><%= person[i].last_name %>, <%= person[i].first_name %> <%= person[i].middle_name %></option>
-            <% } %>
+						<label for="casenotepersoniddisplay">Person Name</label>
+						<select class="form-control" id="casenotepersoniddisplay" name="casenotepersoniddisplay" disabled>
+							<option value="0" selected>Logged In User Name</option>
 						</select>
 					</div>
 				</div>
@@ -2047,9 +1771,9 @@
 						<label for="casenoteorgid">Organization Name</label>
 						<select class="form-control" id="casenoteorgid" name="casenoteorgid">
 							<option value="0" selected>Select</option>
-			<% for (var i = 0; i < organization.length; i += 1) { %>
-					<option value="<%= organization[i].organization_id %>"><%= organization[i].organization_name %></option>
-			<% } %>
+					<% for (var i = 0; i < organization.length; i += 1) { %>
+							<option value="<%= organization[i].organization_id %>"><%= organization[i].organization_name %></option>
+					<% } %>
 						</select>
 					</div>
 				</div>
@@ -2058,16 +1782,19 @@
 				<div class="col-xs-12">
 					<div class="form-group">
 						<label for="casenotetext">Note</label>
-						<textarea class="form-control" id="casenotetext" name="casenotetext" required></textarea>
+						<textarea class="form-control requiredfield" id="casenotetext" name="casenotetext" required></textarea>
 					</div>
 				</div>
 			</div><!-- row -->
-			<div class="row">
-				<div class="col-sm-6" hidden>
-					<div class="form-group">
-						<label for="casenotecaseid">Case ID</label>
-						<input type="text" class="form-control" id="casenotecaseid" name="casenotecaseid" readonly value="<%= thiscase.case_id %>"/>
-					</div>
+			<div class="row" hidden>
+				<div class="col-sm-6">
+					<!--  NOTE: Value will be Logged In User person_id  -->
+					<label for="casenotepersonid">Person_Id of Logged In User</label>
+					<input type="text" class="form-control" id="casenotepersonid" name="casenotepersonid" value="1"/>
+				</div>
+				<div class="col-sm-6">
+					<label for="casenotecaseid">Case ID</label>
+					<input type="text" class="form-control" id="casenotecaseid" name="casenotecaseid" readonly value="<%= thiscase.case_id %>"/>
 				</div>
 			</div><!-- row -->
 			<div class="buttonrow">
@@ -2081,22 +1808,11 @@
 		</div>
 
 		<% this_cases_notes.sort(function(a,b) {
-			return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+			return (a.casenote_id > b.casenote_id) ? 1 : ((b.casenote_id > a.casenote_id) ? -1 : 0);
 		}); %>
-		<%  if (this_cases_notes.length > 0) { %>
-		<table id="casenotedisplaytable" class="table table-responsive table-striped table-condensed">
-			<thead>
-				<tr class="info">
-					<th>Note Name</th>
-					<th>Case Domain</th>
-					<th>Action Type</th>
-					<th>Person Name</th>
-					<th>Organization Name</th>
-					<th>Date</th>
-				</tr>
-			</thead>
-			<tbody>
-			<% for (var i = 0; i < this_cases_notes.length; i += 1) {
+		<%  if (this_cases_notes.length > 0) {
+			   for (var i = 0; i < this_cases_notes.length; i += 1) {
+					var casenotedisplaytable = "casenotedisplaytable" + i;
 					var notename = "notename" + i; 
 					var notedomain = "notedomain" + i; 
 					var noteactiontype = "noteactiontype" + i; 
@@ -2104,67 +1820,46 @@
 					var noteorgid = "noteorgid" + i; 
 					var notetype = "notetype" + i; 
 					var notetext = "notetext" + i; 
-					var editcasenote = "editcasenote" + i;
-					var removecasenote = "removecasenote" + i; 
-			%>
-				<tr class="notecasedomain<%= this_cases_notes[i].domain %>row">
+					var casenote = "casenote" + this_cases_notes[i].casenote_id;
+		%>
+	<div class="notecasedomain<%= this_cases_notes[i].domain %>table">
+		<table id="<%= casenotedisplaytable %>" class="table table-responsive table-striped table-condensed 2rowremovebtntop">
+			<thead>
+				<tr class="info">
+					<th>Note Name</th>
+					<th>Case Domain</th>
+					<th>Person Name</th>
+					<th>Organization Name</th>
+					<th>Date</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
 					<td id="<%= notename %>"><%= this_cases_notes[i].name %></td>
-					<td id="<%= notedomain %>"><%= this_cases_notes[i].domain %></td>
-					<td id="<%= noteactiontype %>"><%= this_cases_notes[i].actiontype %></td>
+					<td id="<%= notedomain %>"><%= this_cases_notes[i].domain %></td>					
 					<td id="<%= notepersonid %>"><%= this_cases_notes[i].noteperson_id %></td>
 					<td id="<%= noteorgid %>"><%= this_cases_notes[i].noteorg_id %></td>						
 					<td><%= this_cases_notes[i].notedate %></td>
-				</tr>
-				<tr class="notecasedomain<%= this_cases_notes[i].domain %>row">
-					<td colspan="5">
-					    <p><strong>Type:</strong> <span id="<%= notetype %>"><%= this_cases_notes[i].type %></span></p>
-						<strong>Note:</strong> <span id="<%= notetext %>"><%= this_cases_notes[i].notetext %></span>
-					</td>
-					<td class="tablebtns" id="<%= this_cases_notes[i].casenote_id %>">
-						<button class="btn btn-primary btn-md tableeditbtn casenoteeditbtn" id="<%= editcasenote %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
-                        <button class="btn btn-danger btn-md tableremovebtn" id="<%= removecasenote %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+					<td class="tablebtns">
+						<button class="btn btn-default morebtn morenotebtn" type="button" data-toggle="collapse" data-target="#<%= casenote %>" aria-expanded="false" aria-controls="<%= casenote %>"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
  					</td>
 				</tr>
-        	<% } %>
+				<tr>
+					<td colspan="6">
+					    <p><strong>Note Type:</strong> <span id="<%= notetype %>"><%= this_cases_notes[i].type %></span> &nbsp;&nbsp; <strong>Action Type:</strong> <span id="<%= noteactiontype %>"><%= this_cases_notes[i].actiontype %></span></p>
+						<div class="collapse in casenote" id="<%= casenote %>">
+						    <p id="<%= notetext %>"><%= this_cases_notes[i].note_text %></p>
+						</div><!-- casenotesdisplay-->
+ 					</td>
+				</tr>
 			</tbody>
 		</table>
-        <% } %>
+		</div>
+        <% } } %>
 
-		<div id="casenotespagination" class="paginationdiv">
-			<nav aria-label="Page navigation">
-			  <ul class="pagination">
-			    <li class="disabled">
-			      <a href="#" aria-label="Previous">
-			        <span aria-hidden="true">&laquo;</span>
-			      </a>
-			    </li>
-			    <li class="active"><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li>
-			      <a href="#" aria-label="Next">
-			        <span aria-hidden="true">&raquo;</span>
-			      </a>
-			    </li>
-			  </ul>
-			</nav>
-		</div><!-- casenotespagination -->
 
 		</div><!-- tabpanel casenotes -->
-
-
-
-
-<!-- ******************************************************************************************************************** -->
-
-
-
-		<div role="tabpanel" class="tab-pane" id="measurements">
-
-		<p><strong>NOTE: To Come</strong></p>
-
-
-		</div><!-- tabpanel measurements -->
 
 
 
@@ -2174,11 +1869,182 @@
 
 		<div role="tabpanel" class="tab-pane" id="questionnaires">
 
-        <p><strong>NOTE: To Come</strong></p>
+<div class="buttonrow creatediv">
+	<p>
+	    <a href="/questionnaires" class="btn btn-primary btn-md" id="managequestionnairebtn">Manage Questionnaire</a>
+	</p>
+</div>
+
+<h4><button id="pluscasequestionnaire" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Questionnaire</h4>
+
+	<form id="casequestionnaireform" class="toggleform" action="/casequestionnaire" method="post">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				<div class="form-group">
+					<label for="casequestionnairetype">Questionnaire Type</label>
+					<select class="form-control" id="casequestionnairetype" name="casequestionnairetype">
+						<option value="0" selected>Select</option>
+						<% questionnaireType.enums.forEach(function(enumItem) { %>
+						<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+						<% }); %>
+					</select>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<div class="form-group">
+					<label for="casequestionnairename">Questionnaire Name</label>
+					<select class="form-control requiredfield" id="casequestionnairename" name="casequestionnairename">
+						<option value="0" selected>Select</option>
+					<% for (var i = 0; i < questionnaire.length; i += 1) { %>
+						<option class="<%= questionnaire[i].quest_type %>" value="<%= questionnaire[i].questionnaire_id %>"><%= questionnaire[i].name %></option>
+					<% } %>
+					</select>
+				</div>
+			</div>
+		</div><!-- row -->
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				<div class="form-group">
+					<label for="questcaseassocwith">Associated With</label>
+					<select class="form-control" id="questcaseassocwith" name="questcaseassocwith">
+						<option value="0" selected>Select</option>
+						<% questAssociatedWith.enums.forEach(function(enumItem) { %>
+						<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+						<% }); %>
+					</select>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<div class="form-group">
+					<label for="questassocwithname">Associated With Name</label>
+					<select class="form-control" id="questassocwithname" name="questassocwithname">
+						<option value="0" selected>Select</option>
+				<% this_cases_goals.sort(function(a,b) {
+					return (a.goal_id > b.goal_id) ? 1 : ((b.goal_id > a.goal_id) ? -1 : 0);
+				}); %>
+				<% for (var i = 0; i < this_cases_goals.length; i += 1) { %>
+						<option class="1" value="<%= this_cases_goals[i].goal_id %>"><%= this_cases_goals[i].name %></option>
+				<% } %>
+				<% this_cases_plans.sort(function(a,b) {
+					return (a.plan_id > b.plan_id) ? 1 : ((b.plan_id > a.plan_id) ? -1 : 0);
+				}); %>
+				<% for (var i = 0; i < this_cases_plans.length; i += 1) { %>
+						<option class="2" value="<%= this_cases_plans[i].plan_id %>"><%= this_cases_plans[i].name %></option>
+				<% } %>
+				<% this_cases_actions.sort(function(a,b) {
+					return (a.action_id > b.action_id) ? 1 : ((b.action_id > a.action_id) ? -1 : 0);
+				}); %>
+				<% for (var i = 0; i < this_cases_actions.length; i += 1) { %>
+						<option class="3" value="<%= this_cases_actions[i].action_id %>"><%= this_cases_actions[i].name %></option>
+				<% } %>
+					</select>
+				</div>
+			</div>
+		</div><!-- row -->
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				<div class="form-group">
+					<label for="casequeststatus">Status</label>
+					<select class="form-control requiredfield" id="casequeststatus" name="casequeststatus">
+						<option value="0">Select</option>
+						<% questionnaireStatus.enums.forEach(function(enumItem) { %>
+						<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+						<% }); %>
+					</select>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 ">
+				<div class="form-group">
+					<label for="questnote">Note</label>
+					<textarea class="form-control" id="questnote" name="questnote"></textarea>
+				</div>
+			</div>
+		</div><!-- row -->
+		<div class="row">
+			<div hidden class="col-xs-12 col-sm-6">
+				<div class="form-group">
+					<label for="casequestcaseid">Case ID</label>
+					<input type="text" class="form-control" id="casequestcaseid" name="casequestcaseid" readonly value="<%= thiscase.case_id %>"/>
+				</div>
+			</div>
+		</div><!-- row -->
+		<div class="buttonrow">
+			<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetcasequestionnaire" name="resetcasequestionnaire">Reset</button>
+			<button type="submit" class="btn btn-warning btn-md submitbtn" id="submitcasequestionnaire" name="submitcasequestionnaire">Submit</button>
+		</div>
+	</form>
+
+
+	<% this_cases_questionnaires.sort(function(a,b) {
+		return (a.casequest_id > b.casequest_id) ? 1 : ((b.casequest_id > a.casequest_id) ? -1 : 0);
+	}); %>
+	<% if (this_cases_questionnaires.length > 0) { %>
+		<table id="questionnairedisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Questionnaire Name</th>
+					<th>Type</th>
+					<th>Associated With: Name</th>
+					<th>Date Administered</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+		<%  for (var i = 0; i < this_cases_questionnaires.length; i += 1) {
+				var linkcasequestid = "linkcasequestid" + i;
+				var linkquestcaseid = "linkquestcaseid" + i;
+				var linkquestpersonid = "linkquestpersonid" + i;
+				var linkquestionnaire = "linkquestionnaire" + i;
+				var casequestionnaireid = "casequestionnaireid" + i;
+				var casequestname = "casequestname" + i;
+				var casequesttype = "casequesttype" + i;
+				var casequestcaseassocwith = "casequestcaseassocwith" + i;
+				var casequestassocwithnameid = "casequestassocwithnameid" + i;
+				var casequeststatus = "casequeststatus" + i;
+				var casequestnote = "casequestnote" + i;
+				var viewquestionnaire = "viewquestionnaire" + this_cases_questionnaires[i].questionnaire_id;
+				var editcasequest = "editcasequest" + i;
+				var removecasequest = "removecasequest" + i;
+		%>
+				<tr>
+					<td><span hidden id="<%= casequestionnaireid %>"><%= this_cases_questionnaires[i].questionnaire_id %></span><span id="<%= casequestname %>"><%= this_cases_questionnaires[i].quest_name %></span></td>
+					<td id="<%= casequesttype %>"><%= this_cases_questionnaires[i].quest_type %></td>
+					<% if ((this_cases_questionnaires[i].assoc_with !== "0") && (this_cases_questionnaires[i].assocwith_nameid !== "0")) { %>					
+					<td><span id="<%= casequestcaseassocwith %>"><%= this_cases_questionnaires[i].assoc_with %></span>: <span id="<%= casequestassocwithnameid %>"><%= this_cases_questionnaires[i].assocwith_nameid %></span></td>
+					<% } else { %>
+					<td>&nbsp;</td>
+					<% } %>					
+					<td><%= this_cases_questionnaires[i].date_administered %></td>
+					<td id="<%= casequeststatus %>"><%= this_cases_questionnaires[i].quest_status %></td>
+				</tr>
+				<tr>
+					<td colspan="4">
+					<p><strong>Total Assigned:</strong> <%= this_cases_questionnaires[i].totalquestassigned %> &nbsp;&nbsp; <strong>Status Started:</strong> <%= this_cases_questionnaires[i].startedquestusers %> &nbsp;&nbsp; <strong>Status Completed:</strong> <%= this_cases_questionnaires[i].completedquestusers %></p>			
+						<p><strong>Note:</strong> <span id="<%= casequestnote %>"><%= this_cases_questionnaires[i].note %></span></p>
+					</td>
+					<td class="tablebtns" id="<%= this_cases_questionnaires[i].casequest_id %>">
+	                    <form class="oneline" action="/questionnaire/<%= this_cases_questionnaires[i].questionnaire_id %>" method="POST">
+							<input hidden type="text" id="<%= linkcasequestid %>" name="linkcasequestid" readonly value="<%= this_cases_questionnaires[i].casequest_id %>"/>
+							<input hidden type="text" id="<%= linkquestcaseid %>" name="linkquestcaseid" readonly value="<%= thiscase.case_id %>"/>
+	                        <input hidden type="text" id="<%= linkquestpersonid %>" name="linkquestpersonid" readonly value="<%= person[0].person_id %>"/>
+	                        <button type="submit" class="btn btn-success btn-md questviewbtn" id="<%= linkquestionnaire %>" name="linkquestionnaire"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></button>
+	                    </form>
+
+						<button class="btn btn-primary btn-md questeditbtn" id="<%= editcasequest %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></button>
+
+						<% if ((this_cases_questionnaires[i].quest_status === "1") || (this_cases_questionnaires[i].quest_status === "3") || (this_cases_questionnaires[i].quest_status === "4")){ %>
+	                        <button class="btn btn-danger btn-md questremovebtn" id="<%= removecasequest %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+						<% } else { %>
+	                        <button disabled class="btn btn-danger btn-md questremovebtn" id="<%= removecasequest %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+						<% } %>
+					</td>
+				</tr>
+			<% } %>		
+			</tbody>
+		</table>
+		<% } %>		
 
 	 	</div><!-- tabpanel questionnaire -->
-
- 
 
  
  	</div><!-- tab-content -->
@@ -2190,6 +2056,7 @@
 <script src="../js/cms_case.js"></script>
 
 <script>
+
 function getcaseinfo() {
 	$("#casetitle").val("<%= thiscase.case_title %>");
 	$("#casedescription").val("<%= thiscase.case_description %>");
@@ -2202,44 +2069,119 @@ function getcaseinfo() {
 	$("#casestartdate").val("<%= thiscase.start_date %>");
 	$("#caseduedate").val("<%= thiscase.due_date %>");
 	$("#casecompletedate").val("<%= thiscase.complete_date %>");
-}
+};
 getcaseinfo();
 
+$("#actionstaskstable").hide();
 
+var removereq = $("#caseform .requiredfield");
+for (var r = 0; r < removereq.length; r += 1) {
+	removereq[r].style.borderColor = "#cccccc";
+}
+
+
+var goaltable = false;
 for (var t = 1; t < document.getElementById('goaltype').options.length; t += 1) {
 	var goaltypeval = document.getElementById('goaltype').options[t].value;
 	var goaltypetext = document.getElementById('goaltype').options[t].text;
-	var goaltypebtn = '<label for="showgoal' + goaltypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showgoaltype" id="showgoal' + goaltypeval + '" class="goaltypebtn" value="' + goaltypeval + '" checked> ' + goaltypetext + '</label>';
-    $("#goaltypebtns").append(goaltypebtn);
+	var hasgoaltype = document.querySelector(".goal" + goaltypeval + "row");
+	if (hasgoaltype !== null) {
+		goaltable = true;
+		var goaltypebtn = '<label for="showgoal' + goaltypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showgoaltype" id="showgoal' + goaltypeval + '" class="goaltypebtn" value="' + goaltypeval + '" checked> ' + goaltypetext + '</label>';
+	} else {
+		var goaltypebtn = '<label for="showgoal' + goaltypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showgoaltype" id="showgoal' + goaltypeval + '" class="goaltypebtn" value="' + goaltypeval + '" disabled> ' + goaltypetext + '</label>';		
+	}
+	$("#goaltypebtns").append(goaltypebtn);
 }
+
 
 for (var t = 1; t < document.getElementById('plantype').options.length; t += 1) {
 	var plantypeval = document.getElementById('plantype').options[t].value;
 	var plantypetext = document.getElementById('plantype').options[t].text;
-	var plantypebtn = '<label for="showplan' + plantypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showplantype" id="showplan' + plantypeval + '" class="plantypebtn" value="' + plantypeval + '" checked> ' + plantypetext + '</label>';
+	var hasplantype = document.querySelector(".plan" + plantypeval + "row");
+	if (hasplantype !== null) {
+		var plantypebtn = '<label for="showplan' + plantypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showplantype" id="showplan' + plantypeval + '" class="plantypebtn" value="' + plantypeval + '" checked> ' + plantypetext + '</label>';
+	} else {
+		var plantypebtn = '<label for="showplan' + plantypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showplantype" id="showplan' + plantypeval + '" class="plantypebtn" value="' + plantypeval + '" disabled> ' + plantypetext + '</label>';
+	}
     $("#plantypebtns").append(plantypebtn);
 }
+
 
 for (var t = 1; t < document.getElementById('actiontype').options.length; t += 1) {
 	var actiontypeval = document.getElementById('actiontype').options[t].value;
 	var actiontypetext = document.getElementById('actiontype').options[t].text;
-	var actiontypebtn = '<label for="showaction' + actiontypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showactiontype" id="showaction' + actiontypeval + '" class="actiontypebtn" value="' + actiontypeval + '" checked> ' + actiontypetext + '</label>';
+	var hasactiontype = document.querySelector(".action" + actiontypeval + "row");
+	if (hasactiontype !== null) {
+		var actiontypebtn = '<label for="showaction' + actiontypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showactiontype" id="showaction' + actiontypeval + '" class="actiontypebtn" value="' + actiontypeval + '" checked> ' + actiontypetext + '</label>';
+	} else {
+		var actiontypebtn = '<label for="showaction' + actiontypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showactiontype" id="showaction' + actiontypeval + '" class="actiontypebtn" value="' + actiontypeval + '" disabled> ' + actiontypetext + '</label>';		
+	}
     $("#actiontypebtns").append(actiontypebtn);
 }
+
 
 for (var t = 1; t < document.getElementById('casefilecasedomain').options.length; t += 1) {
 	var filecasedomainval = document.getElementById('casefilecasedomain').options[t].value;
 	var filecasedomaintext = document.getElementById('casefilecasedomain').options[t].text;
-	var filecasedomainbtn = '<label for="showfile' + filecasedomainval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showfilecasedomain" id="showfile' + filecasedomainval + '" class="filecasedomainbtn" value="' + filecasedomainval + '" checked> ' + filecasedomaintext + '</label>';
+	var hasfiledomain = document.querySelector(".filecasedomain" + filecasedomainval + "table");
+	if (hasfiledomain !== null) {
+		var filecasedomainbtn = '<label for="showfile' + filecasedomainval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showfilecasedomain" id="showfile' + filecasedomainval + '" class="filecasedomainbtn" value="' + filecasedomainval + '" checked> ' + filecasedomaintext + '</label>';
+	} else {
+		var filecasedomainbtn = '<label for="showfile' + filecasedomainval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showfilecasedomain" id="showfile' + filecasedomainval + '" class="filecasedomainbtn" value="' + filecasedomainval + '" disabled> ' + filecasedomaintext + '</label>';		
+	}
     $("#filecasedomainbtns").append(filecasedomainbtn);
 }
+
 
 for (var t = 1; t < document.getElementById('casenotecasedomain').options.length; t += 1) {
 	var notecasedomainval = document.getElementById('casenotecasedomain').options[t].value;
 	var notecasedomaintext = document.getElementById('casenotecasedomain').options[t].text;
-	var notecasedomainbtn = '<label for="shownote' + notecasedomainval + '" class="btn btn-sm btn-default"><input type="checkbox" name="shownotecasedomain" id="shownote' + notecasedomainval + '" class="notecasedomainbtn" value="' + notecasedomainval + '" checked> ' + notecasedomaintext + '</label>';
+	var hasnotedomain = document.querySelector(".notecasedomain" + notecasedomainval + "table");
+	if (hasnotedomain !== null) {
+		var notecasedomainbtn = '<label for="shownote' + notecasedomainval + '" class="btn btn-sm btn-default"><input type="checkbox" name="shownotecasedomain" id="shownote' + notecasedomainval + '" class="notecasedomainbtn" value="' + notecasedomainval + '" checked> ' + notecasedomaintext + '</label>';
+	} else {
+		var notecasedomainbtn = '<label for="shownote' + notecasedomainval + '" class="btn btn-sm btn-default"><input type="checkbox" name="shownotecasedomain" id="shownote' + notecasedomainval + '" class="notecasedomainbtn" value="' + notecasedomainval + '" disabled> ' + notecasedomaintext + '</label>';
+	}
     $("#notecasedomainbtns").append(notecasedomainbtn);
 }
+
+
+var childrennavlink = document.querySelectorAll(".childrenanchorbtn");
+for (var c = 0; c < childrennavlink.length; c += 1) {
+	var btnid = childrennavlink[c].id.slice(4);
+	if (document.getElementById(btnid) === null) {
+		childrennavlink[c].disabled = true;
+	} else {
+		childrennavlink[c].disabled = false;		
+	}
+}
+
+
+var goalsthruactionstable = document.querySelectorAll(".goalsthruactionstable");
+for (var b = 0; b < goalsthruactionstable.length; b += 1) {
+	var numrows = document.getElementById("goalsthruactionstable" + b).getElementsByTagName("tbody")[0].getElementsByTagName("tr").length;
+    if (numrows === 1) {
+		var briefhead = $("#briefhead" + b);
+        briefhead.addClass("prog-start");
+	}
+}
+
+
+for (var i = 0; i < document.getElementById("casequeststatus").length; i += 1) {
+	if (i !== 1) {
+		document.getElementById("casequeststatus").options[i].style.display = "none";
+	} else {
+		document.getElementById("casequeststatus").options[i].style.display = "block";
+	}
+}
+
+
+for (var i = 1; i < document.getElementById("questassocwithname").length; i += 1) {
+    document.getElementById("questassocwithname").options[i].style.display = "none";
+}
+
+
 </script>
 
 
