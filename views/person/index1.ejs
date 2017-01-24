@@ -1,6 +1,5 @@
 <% include ../partials/header2 %>
 
-<div id="cmscontent" class="container">
 
 <div id="topbar">
 	<h1>Person</h1>
@@ -12,13 +11,13 @@
 		<div class="col-xs-6 col-sm-4">
 			<div class="form-group">
 				<label for="lastname">Last Name</label>
-				<input type="text" class="form-control" id="lastname" name="lastname" value=""/>
+				<input type="text" class="form-control requiredfield" id="lastname" name="lastname" value=""/>
 			</div>
 		</div>
 		<div class="col-xs-6 col-sm-4">
 			<div class="form-group">
 				<label for="firstname">First Name</label>
-				<input type="text" class="form-control" id="firstname" name="firstname" value=""/>
+				<input type="text" class="form-control requiredfield" id="firstname" name="firstname" value=""/>
 			</div>
 		</div>
 		<div class="col-xs-6 col-sm-4">
@@ -38,11 +37,9 @@
 				<label for="gender">Gender</label>
 				<select class="form-control" id="gender" name="gender">
 					<option value="0" selected>Select</option>
-					<option value="1">Male</option>
-					<option value="2">Female</option>
-					<option value="3">Transgender Male</option>
-					<option value="4">Transgender Female</option>
-					<option value="5">Unknown</option>
+                    <% personGender.enums.forEach(function(enumItem) { %>
+                    <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                    <% }); %>
 				</select>
 			</div>
 		</div>
@@ -57,9 +54,9 @@
 				<label for="personrole">Role</label>
 				<select class="form-control" id="personrole" name="personrole">
 					<option value="0" selected>Select</option>
-					<option value="1">Role 1</option>
-					<option value="2">Role 2</option>
-					<option value="3">Role 3</option>
+                    <% userRole.enums.forEach(function(enumItem) { %>
+                    <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                    <% }); %>
 				</select>
 			</div>
 		</div>
@@ -68,9 +65,9 @@
 				<label for="persontype">Type</label>
 				<select class="form-control" id="persontype" name="persontype">
 					<option value="0" selected>Select</option>
-					<option value="1">Person Type 1</option>
-					<option value="2">Person Type 2</option>
-					<option value="3">Person Type 3</option>
+                    <% personType.enums.forEach(function(enumItem) { %>
+                    <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                    <% }); %>
 				</select>
 			</div>
 		</div>
@@ -79,8 +76,9 @@
 				<label for="personrolestatus">Role Status</label>
 				<select class="form-control" id="personrolestatus" name="personrolestatus">
 					<option value="0" selected>Select</option>
-					<option value="1">Active</option>
-					<option value="2">Inactive</option>
+                    <% userRoleStatus.enums.forEach(function(enumItem) { %>
+                    <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                    <% }); %>
 				</select>
 			</div>
 		</div>
@@ -89,9 +87,9 @@
 				<label for="religion">Religion</label>
 				<select class="form-control" id="religion" name="religion">
 					<option value="0" selected>Select</option>
-					<option value="1">Religion 1</option>
-					<option value="2">Religion 2</option>
-					<option value="3">Religion 3</option>
+                    <% personReligion.enums.forEach(function(enumItem) { %>
+                    <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                    <% }); %>
 				</select>
 			</div>
 		</div>
