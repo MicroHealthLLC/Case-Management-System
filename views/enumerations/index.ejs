@@ -1,0 +1,1487 @@
+<% include ../partials/header %>
+
+
+<div id="topbar">
+	<h1>Enumerations</h1>
+</div><!-- topbar -->
+
+<div class="form-group">
+	<label for="expandenums" class="btn btn-sm btn-default">
+		<input type="radio" name="showenums" id="expandenums" class="expandallenums"> Show Enums
+	</label>
+	<label for="collapseenums" class="btn btn-sm btn-default">
+		<input type="radio" name="showenums" id="collapseenums" class="collapseallenums" checked> Hide Enums
+	</label>
+</div>
+
+
+<h6><button id="headuser" class="btn btn-primary btn-md enumhdbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> User</h6>
+
+	<div id="divuser" class="enumsectdiv">
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#userRole" aria-expanded="false" aria-controls="userRole">
+        User Role
+        </button>
+        <div class="collapse" id="userRole">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% userRole.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_userRole">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_userRole" name="required_userRole" readonly value="<%= enumRequired.top_userRole %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_userRole">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_userRole" name="freeze_userRole" value="<%= enumFreeze.top_userRole %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_userRole">Edit</button></div>
+            </div>  
+        </div>
+
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#userRoleStatus" aria-expanded="false" aria-controls="userRoleStatus">
+        User Role Status
+        </button>
+        <div class="collapse" id="userRoleStatus">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% userRoleStatus.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                    <p class="redflag">WARNING: First two must remain unchanged!</p>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_userRoleStatus">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_userRoleStatus" name="required_userRoleStatus" readonly value="<%= enumRequired.top_userRoleStatus %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_userRoleStatus">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_userRoleStatus" name="freeze_userRoleStatus" value="<%= enumFreeze.top_userRoleStatus %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_userRoleStatus">Edit</button></div>
+            </div>  
+        </div>
+    </div><!-- divuser -->
+
+
+<h6><button id="headcase" class="btn btn-primary btn-md enumhdbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Case</h6>
+
+	<div id="divcase" class="enumsectdiv">
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#caseDomain" aria-expanded="false" aria-controls="caseDomain">
+        Domain
+        </button>
+        <div class="collapse" id="caseDomain">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% caseDomain.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_caseDomain">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_caseDomain" name="required_caseDomain" readonly value="<%= enumRequired.top_caseDomain %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_caseDomain">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_caseDomain" name="freeze_caseDomain" value="<%= enumFreeze.top_caseDomain %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_caseDomain">Edit</button></div>
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#caseCategory" aria-expanded="false" aria-controls="caseCategory">
+        Category
+        </button>
+        <div class="collapse" id="caseCategory">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% caseCategory.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_caseCategory">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_caseCategory" name="required_caseCategory" readonly value="<%= enumRequired.top_caseCategory %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_caseCategory">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_caseCategory" name="freeze_caseCategory" value="<%= enumFreeze.top_caseCategory %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_caseCategory">Edit</button></div>
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#caseStatus" aria-expanded="false" aria-controls="caseStatus">
+        Status
+        </button>
+        <div class="collapse" id="caseStatus">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% caseStatus.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                    <p class="redflag">WARNING: First two must remain unchanged!</p>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_caseStatus">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_caseStatus" name="required_caseStatus" readonly value="<%= enumRequired.top_caseStatus %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_caseStatus">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_caseStatus" name="freeze_caseStatus" value="<%= enumFreeze.top_caseStatus %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_caseStatus">Edit</button></div>
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#caseSeverity" aria-expanded="false" aria-controls="caseSeverity">
+        Severity
+        </button>
+        <div class="collapse" id="caseSeverity">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% caseSeverity.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_caseSeverity">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_caseSeverity" name="required_caseSeverity" readonly value="<%= enumRequired.top_caseSeverity %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_caseSeverity">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_caseSeverity" name="freeze_caseSeverity" value="<%= enumFreeze.top_caseSeverity %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_caseSeverity">Edit</button></div>
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#casePriority" aria-expanded="false" aria-controls="casePriority">
+        Priority
+        </button>
+        <div class="collapse" id="casePriority">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% casePriority.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_casePriority">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_casePriority" name="required_casePriority" readonly value="<%= enumRequired.top_casePriority %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_casePriority">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_casePriority" name="freeze_casePriority" value="<%= enumFreeze.top_casePriority %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_casePriority">Edit</button></div>
+            </div>  
+        </div>
+
+
+       <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#assignedRole" aria-expanded="false" aria-controls="assignedRole">
+        Assigned Role
+        </button>
+        <div class="collapse" id="assignedRole">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% assignedRole.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_assignedRole">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_assignedRole" name="required_assignedRole" readonly value="<%= enumRequired.top_assignedRole %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_assignedRole">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_assignedRole" name="freeze_assignedRole" value="<%= enumFreeze.top_assignedRole %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_assignedRole">Edit</button></div>
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#assignmentType" aria-expanded="false" aria-controls="assignmentType">
+        Assignment Type
+        </button>
+        <div class="collapse" id="assignmentType">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% assignmentType.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_assignmentType">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_assignmentType" name="required_assignmentType" readonly value="<%= enumRequired.top_assignmentType %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_assignmentType">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_assignmentType" name="freeze_assignmentType" value="<%= enumFreeze.top_assignmentType %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_assignmentType">Edit</button></div>
+            </div>  
+        </div>
+
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#goalType" aria-expanded="false" aria-controls="goalType">
+        Goal Type
+        </button>
+        <div class="collapse" id="goalType">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% goalType.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_goalType">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_goalType" name="required_goalType" readonly value="<%= enumRequired.top_goalType %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_goalType">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_goalType" name="freeze_goalType" value="<%= enumFreeze.top_goalType %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_goalType">Edit</button></div>
+            </div>  
+        </div>
+
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#planType" aria-expanded="false" aria-controls="planType">
+        Plan Type
+        </button>
+        <div class="collapse" id="planType">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% planType.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_planType">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_planType" name="required_planType" readonly value="<%= enumRequired.top_planType %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_planType">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_planType" name="freeze_planType" value="<%= enumFreeze.top_planType %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_planType">Edit</button></div>
+            </div>  
+        </div>
+
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#actionType" aria-expanded="false" aria-controls="actionType">
+        Action Type
+        </button>
+        <div class="collapse" id="actionType">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% actionType.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_actionType">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_actionType" name="required_actionType" readonly value="<%= enumRequired.top_actionType %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_actionType">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_actionType" name="freeze_actionType" value="<%= enumFreeze.top_actionType %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_actionType">Edit</button></div>
+            </div>  
+        </div>
+
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#caseFileType" aria-expanded="false" aria-controls="caseFileType">
+        File Type
+        </button>
+        <div class="collapse" id="caseFileType">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% caseFileType.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_caseFileType">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_caseFileType" name="required_caseFileType" readonly value="<%= enumRequired.top_caseFileType %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_caseFileType">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_caseFileType" name="freeze_caseFileType" value="<%= enumFreeze.top_caseFileType %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_caseFileType">Edit</button></div>
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#caseNoteType" aria-expanded="false" aria-controls="caseNoteType">
+        Note Type
+        </button>
+        <div class="collapse" id="caseNoteType">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% caseNoteType.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_caseNoteType">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_caseNoteType" name="required_caseNoteType" readonly value="<%= enumRequired.top_caseNoteType %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_caseNoteType">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_caseNoteType" name="freeze_caseNoteType" value="<%= enumFreeze.top_caseNoteType %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_caseNoteType">Edit</button></div>
+            </div>  
+        </div>
+
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#questionnaireType" aria-expanded="false" aria-controls="questionnaireType">
+        Questionnaire Type
+        </button>
+        <div class="collapse" id="questionnaireType">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% questionnaireType.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_questionnaireType">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_questionnaireType" name="required_questionnaireType" readonly value="<%= enumRequired.top_questionnaireType %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_questionnaireType">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_questionnaireType" name="freeze_questionnaireType" value="<%= enumFreeze.top_questionnaireType %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_questionnaireType">Edit</button></div>
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#questAssociatedWith" aria-expanded="false" aria-controls="questAssociatedWith">
+        Questionnaire Associated With
+        </button>
+        <div class="collapse" id="questAssociatedWith">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% questAssociatedWith.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <!-- <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_questAssociatedWith">Edit</button></div> -->
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#questionnaireStatus" aria-expanded="false" aria-controls="questionnaireStatus">
+        Questionnaire Status
+        </button>
+        <div class="collapse" id="questionnaireStatus">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% questionnaireStatus.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <!-- <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_questionnaireStatus">Edit</button></div> -->
+            </div>  
+        </div>  
+    </div><!-- divcase -->
+
+
+
+<h6><button id="headtask" class="btn btn-primary btn-md enumhdbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Task</h6>
+
+	<div id="divtask" class="enumsectdiv">
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#taskType" aria-expanded="false" aria-controls="taskType">
+        Task Type
+        </button>
+        <div class="collapse" id="taskType">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% taskType.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_taskType">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_taskType" name="required_taskType" readonly value="<%= enumRequired.top_taskType %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_taskType">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_taskType" name="freeze_taskType" value="<%= enumFreeze.top_taskType %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_taskType">Edit</button></div>
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#taskStatus" aria-expanded="false" aria-controls="taskStatus">
+        Task Status
+        </button>
+        <div class="collapse" id="taskStatus">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% taskStatus.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_taskStatus">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_taskStatus" name="required_taskStatus" readonly value="<%= enumRequired.top_taskStatus %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_taskStatus">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_taskStatus" name="freeze_taskStatus" value="<%= enumFreeze.top_taskStatus %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_taskStatus">Edit</button></div>
+            </div>  
+        </div>
+    </div><!-- divtask -->
+
+
+<h6><button id="headperson" class="btn btn-primary btn-md enumhdbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Person</h6>
+
+	<div id="divperson" class="enumsectdiv">
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#personGender" aria-expanded="false" aria-controls="personGender">
+        Gender
+        </button>
+        <div class="collapse" id="personGender">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% personGender.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                    <p class="redflag">WARNING: First two must remain unchanged!</p>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_personGender">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_personGender" name="required_personGender" readonly value="<%= enumRequired.top_personGender %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_personGender">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_personGender" name="freeze_personGender" value="<%= enumFreeze.top_personGender %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_personGender">Edit</button></div>
+            </div>  
+        </div>
+
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#personType" aria-expanded="false" aria-controls="personType">
+        Person Type
+        </button>
+        <div class="collapse" id="personType">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% personType.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_personType">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_personType" name="required_personType" readonly value="<%= enumRequired.top_personType %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_personType">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_personType" name="freeze_personType" value="<%= enumFreeze.top_personType %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_personType">Edit</button></div>
+            </div>  
+        </div>
+
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#personReligion" aria-expanded="false" aria-controls="personReligion">
+        Religion
+        </button>
+        <div class="collapse" id="personReligion">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% personReligion.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_personReligion">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_personReligion" name="required_personReligion" readonly value="<%= enumRequired.top_personReligion %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_personReligion">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_personReligion" name="freeze_personReligion" value="<%= enumFreeze.top_personReligion %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_personReligion">Edit</button></div>
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#identificationType" aria-expanded="false" aria-controls="identificationType">
+        Identification Type
+        </button>
+        <div class="collapse" id="identificationType">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% identificationType.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                    <p class="redflag">WARNING: First four must remain unchanged!</p>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_identificationType">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_identificationType" name="required_identificationType" readonly value="<%= enumRequired.top_identificationType %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_identificationType">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_identificationType" name="freeze_identificationType" value="<%= enumFreeze.top_identificationType %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_identificationType">Edit</button></div>
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#identificationStatus" aria-expanded="false" aria-controls="identificationStatus">
+        Identification Status
+        </button>
+        <div class="collapse" id="identificationStatus">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% identificationStatus.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                    <p class="redflag">WARNING: First two must remain unchanged!</p>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_identificationStatus">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_identificationStatus" name="required_identificationStatus" readonly value="<%= enumRequired.top_identificationStatus %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_identificationStatus">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_identificationStatus" name="freeze_identificationStatus" value="<%= enumFreeze.top_identificationStatus %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_identificationStatus">Edit</button></div>
+            </div>  
+        </div>
+    </div><!-- divperson -->
+
+
+
+<h6><button id="headorganization" class="btn btn-primary btn-md enumhdbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Organization</h6>
+
+	<div id="divorganization" class="enumsectdiv">
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#organizationType" aria-expanded="false" aria-controls="organizationType">
+        Organization Type
+        </button>
+        <div class="collapse" id="organizationType">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% organizationType.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_organizationType">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_organizationType" name="required_organizationType" readonly value="<%= enumRequired.top_organizationType %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_organizationType">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_organizationType" name="freeze_organizationType" value="<%= enumFreeze.top_organizationType %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_organizationType">Edit</button></div>
+            </div>  
+        </div>
+    </div><!-- divorganization -->
+
+
+<h6><button id="headrelationship" class="btn btn-primary btn-md enumhdbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Relationship</h6>
+
+	<div id="divrelationship" class="enumsectdiv">
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#caseCaseRelationship" aria-expanded="false" aria-controls="caseCaseRelationship">
+        Case Case Relationship
+        </button>
+        <div class="collapse" id="caseCaseRelationship">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% caseCaseRelationship.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_caseCaseRelationship">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_caseCaseRelationship" name="required_caseCaseRelationship" readonly value="<%= enumRequired.top_caseCaseRelationship %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_caseCaseRelationship">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_caseCaseRelationship" name="freeze_caseCaseRelationship" value="<%= enumFreeze.top_caseCaseRelationship %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_caseCaseRelationship">Edit</button></div>
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#personPersonRelationship" aria-expanded="false" aria-controls="personPersonRelationship">
+        Person Person Relationship
+        </button>
+        <div class="collapse" id="personPersonRelationship">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% personPersonRelationship.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_personPersonRelationship">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_personPersonRelationship" name="required_personPersonRelationship" readonly value="<%= enumRequired.top_personPersonRelationship %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_personPersonRelationship">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_personPersonRelationship" name="freeze_personPersonRelationship" value="<%= enumFreeze.top_personPersonRelationship %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_personPersonRelationship">Edit</button></div>
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#personOrganizationRelationship" aria-expanded="false" aria-controls="personOrganizationRelationship">
+        Person Organization Relationship
+        </button>
+        <div class="collapse" id="personOrganizationRelationship">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% personOrganizationRelationship.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_personOrganizationRelationship">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_personOrganizationRelationship" name="required_personOrganizationRelationship" readonly value="<%= enumRequired.top_personOrganizationRelationship %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_personOrganizationRelationship">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_personOrganizationRelationship" name="freeze_personOrganizationRelationship" value="<%= enumFreeze.top_personOrganizationRelationship %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_personOrganizationRelationship">Edit</button></div>
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#organizationOrganizationRelationship" aria-expanded="false" aria-controls="organizationOrganizationRelationship">
+        Organization Organization Relationship
+        </button>
+        <div class="collapse" id="organizationOrganizationRelationship">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% organizationOrganizationRelationship.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_organizationOrganizationRelationship">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_organizationOrganizationRelationship" name="required_organizationOrganizationRelationship" readonly value="<%= enumRequired.top_organizationOrganizationRelationship %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_organizationOrganizationRelationship">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_organizationOrganizationRelationship" name="freeze_organizationOrganizationRelationship" value="<%= enumFreeze.top_organizationOrganizationRelationship %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_organizationOrganizationRelationship">Edit</button></div>
+            </div>  
+        </div>
+    </div><!-- divrelationships -->
+
+
+<h6><button id="headcontact" class="btn btn-primary btn-md enumhdbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Contact</h6>
+
+	<div id="divcontact" class="enumsectdiv">
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#contactType" aria-expanded="false" aria-controls="contactType">
+        Contact Type
+        </button>
+        <div class="collapse" id="contactType">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% contactType.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <!-- <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_contactType">Edit</button></div> -->
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#contactPhoneType" aria-expanded="false" aria-controls="contactPhoneType">
+        Contact Phone Type
+        </button>
+        <div class="collapse" id="contactPhoneType">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% contactPhoneType.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                    <p class="redflag">WARNING: First three must remain unchanged!</p>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_contactPhoneType">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_contactPhoneType" name="required_contactPhoneType" readonly value="<%= enumRequired.top_contactPhoneType %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_contactPhoneType">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_contactPhoneType" name="freeze_contactPhoneType" value="<%= enumFreeze.top_contactPhoneType %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_contactPhoneType">Edit</button></div>
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#contactEmailType" aria-expanded="false" aria-controls="contactEmailType">
+        Contact Email Type
+        </button>
+        <div class="collapse" id="contactEmailType">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% contactEmailType.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                    <p class="redflag">WARNING: First two must remain unchanged!</p>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_contactEmailType">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_contactEmailType" name="required_contactEmailType" readonly value="<%= enumRequired.top_contactEmailType %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_contactEmailType">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_contactEmailType" name="freeze_contactEmailType" value="<%= enumFreeze.top_contactEmailType %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_contactEmailType">Edit</button></div>
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#contactFaxType" aria-expanded="false" aria-controls="contactFaxType">
+        Contact Fax Type
+        </button>
+        <div class="collapse" id="contactFaxType">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% contactFaxType.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                    <p class="redflag">WARNING: First two must remain unchanged!</p>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_contactFaxType">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_contactFaxType" name="required_contactFaxType" readonly value="<%= enumRequired.top_contactFaxType %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_contactFaxType">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_contactFaxType" name="freeze_contactFaxType" value="<%= enumFreeze.top_contactFaxType %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_contactFaxType">Edit</button></div>
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#contactMediaType" aria-expanded="false" aria-controls="contactMediaType">
+        Contact Social Media Type
+        </button>
+        <div class="collapse" id="contactMediaType">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% contactMediaType.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                    <p class="redflag">WARNING: First two must remain unchanged!</p>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_contactMediaType">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_contactMediaType" name="required_contactMediaType" readonly value="<%= enumRequired.top_contactMediaType %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_contactMediaType">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_contactMediaType" name="freeze_contactMediaType" value="<%= enumFreeze.top_contactMediaType %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_contactMediaType">Edit</button></div>
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#contactAddressType" aria-expanded="false" aria-controls="contactAddressType">
+        Contact Address Type
+        </button>
+        <div class="collapse" id="contactAddressType">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% contactAddressType.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                    <p class="redflag">WARNING: First two must remain unchanged!</p>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_contactAddressType">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_contactAddressType" name="required_contactAddressType" readonly value="<%= enumRequired.top_contactAddressType %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_contactAddressType">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_contactAddressType" name="freeze_contactAddressType" value="<%= enumFreeze.top_contactAddressType %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_contactAddressType">Edit</button></div>
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#contactStateCode" aria-expanded="false" aria-controls="contactStateCode">
+        Contact State Code
+        </button>
+        <div class="collapse" id="contactStateCode">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% contactStateCode.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_contactStateCode">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_contactStateCode" name="required_contactStateCode" readonly value="<%= enumRequired.top_contactStateCode %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_contactStateCode">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_contactStateCode" name="freeze_contactStateCode" value="<%= enumFreeze.top_contactStateCode %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_contactStateCode">Edit</button></div>
+            </div>  
+        </div>
+
+        <button class="btn btn-default enumnamebtn" type="button" data-toggle="collapse" data-target="#contactCountryCode" aria-expanded="false" aria-controls="contactCountryCode">
+        Contact Country Code
+        </button>
+        <div class="collapse" id="contactCountryCode">
+            <div class="well">
+                    <table class="table table-responsive table-condensed enumlisttable">
+                        <thead>
+                            <tr class="info">
+                                <th>Value</th>
+                                <th>Key</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% contactCountryCode.enums.forEach(function(enumItem) { %>
+                            <tr>
+                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                    <p class="redflag">WARNING: First one must remain unchanged!</p>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_contactCountryCode">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_contactCountryCode" name="required_contactCountryCode" readonly value="<%= enumRequired.top_contactCountryCode %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_contactCountryCode">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_contactCountryCode" name="freeze_contactCountryCode" value="<%= enumFreeze.top_contactCountryCode %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_contactCountryCode">Edit</button></div>
+            </div>  
+        </div>
+
+    </div><!-- divcontact -->
+
+
+<br><br><br>
+
+<div id="enumformdiv">
+    <hr>
+    <h3>Edit Enumeration</h3>
+
+	<form id="enumform" action="/editenumeration/" method="POST">
+        <div class="row" hidden>
+            <div class="col-xs-6">
+                <label for="totalenumkeys">Total Enum Keys</label>
+                <input type="text" class="form-control" id="totalenumkeys" name="totalenumkeys" readonly value="0"/>
+            </div>
+            <div class="col-xs-6">
+                <label for="freezeenumkeys">Freeze Enum Keys</label>
+                <input type="text" class="form-control" id="freezeenumkeys" name="freezeenumkeys" readonly value="0"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label for="enumname">Enumeration Name</label>
+                    <input type="text" class="form-control" id="enumname" name="enumname" readonly value=""/>
+                </div>
+            </div>
+		</div>
+    <h4>Keys</h4>
+        <div id="userenumkeysdiv">
+        </div>
+        <br><br><br>
+		<div id="resetsubmitenum" class="buttonrow">
+            <button type="reset" class="btn btn-warning btn-md mainresetbtn" id="resetenum" name="resetenum">Reset</button>
+			<input type="submit" class="btn btn-warning btn-md mainsubmitbtn" id="submitenum" name="submitenum" value="Submit">
+		</div>
+	</form>
+
+<p><button class="btn btn-primary btn-md enumformbtn" id="closeeditenum">Close</button><button class="btn btn-primary btn-md enumformbtn" id="adduserenumkey"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;Add Key</button><button class="btn btn-primary btn-md enumformbtn" id="freezeuserenumkey">Freeze Key</button></p>
+
+</div>
+
+
+<script>
+$("#enumformdiv").hide();
+$(".enumsectdiv").hide();
+</script>
+
+<script src="../js/cms_enumerations.js"></script>
+
+<% include ../partials/footer %>
