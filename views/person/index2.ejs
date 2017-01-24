@@ -1,6 +1,5 @@
 <% include ../partials/header2 %>
 
-<div id="cmscontent" class="container">
 
 <div id="topbar">
 	<h1>Person</h1>
@@ -8,7 +7,7 @@
 
 <div id="showuploadpersonimage">
     <form id    = "personuploadForm"
-		class   = "uploadform"
+		class   = "uploadimageform"
         enctype = "multipart/form-data"
         action  = "/personimage/<%= thisperson.person_id %>"
         method  = "post"
@@ -32,13 +31,13 @@
 		<div class="col-xs-12 col-sm-6 col-lg-4">
 			<div class="form-group">
 				<label for="lastname">Last Name</label>
-				<input type="text" class="form-control" id="lastname" name="lastname" value=""/>
+				<input type="text" class="form-control requiredfield" id="lastname" name="lastname" value=""/>
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-6 col-lg-4">
 			<div class="form-group">
 				<label for="firstname">First Name</label>
-				<input type="text" class="form-control" id="firstname" name="firstname" value=""/>
+				<input type="text" class="form-control requiredfield" id="firstname" name="firstname" value=""/>
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-6 col-lg-4">
@@ -58,11 +57,9 @@
 				<label for="gender">Gender</label>
 				<select class="form-control" id="gender" name="gender">
 					<option value="0">Select</option>
-					<option value="1">Male</option>
-					<option value="2">Female</option>
-					<option value="3">Transgender Male</option>
-					<option value="4">Transgender Female</option>
-					<option value="5">Unknown</option>
+                    <% personGender.enums.forEach(function(enumItem) { %>
+                    <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                    <% }); %>
 				</select>
 			</div>
 		</div>
@@ -77,9 +74,9 @@
 				<label for="personrole">Role</label>
 				<select class="form-control" id="personrole" name="personrole">
 					<option value="0">Select</option>
-					<option value="1">Role 1</option>
-					<option value="2">Role 2</option>
-					<option value="3">Role 3</option>
+                    <% userRole.enums.forEach(function(enumItem) { %>
+                    <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                    <% }); %>
 				</select>
 			</div>
 		</div>
@@ -88,9 +85,9 @@
 				<label for="persontype">Type</label>
 				<select class="form-control" id="persontype" name="persontype">
 					<option value="0">Select</option>
-					<option value="1">Person Type 1</option>
-					<option value="2">Person Type 2</option>
-					<option value="3">Person Type 3</option>
+                    <% personType.enums.forEach(function(enumItem) { %>
+                    <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                    <% }); %>
 				</select>
 			</div>
 		</div>
@@ -99,8 +96,9 @@
 				<label for="personrolestatus">Role Status</label>
 				<select class="form-control" id="personrolestatus" name="personrolestatus">
 					<option value="0">Select</option>
-					<option value="1">Active</option>
-					<option value="2">Inactive</option>
+                    <% userRoleStatus.enums.forEach(function(enumItem) { %>
+                    <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                    <% }); %>
 				</select>
 			</div>
 		</div>
@@ -109,9 +107,9 @@
 				<label for="religion">Religion</label>
 				<select class="form-control" id="religion" name="religion">
 					<option value="0">Select</option>
-					<option value="1">Religion 1</option>
-					<option value="2">Religion 2</option>
-					<option value="3">Religion 3</option>
+                    <% personReligion.enums.forEach(function(enumItem) { %>
+                    <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                    <% }); %>
 				</select>
 			</div>
 		</div>
@@ -145,7 +143,6 @@
 		<li role="presentation"><a href="#personrelationships" aria-controls="personrelationships" role="tab" data-toggle="pill">People</a></li>
 		<li role="presentation"><a href="#personorgrelationships" aria-controls="personorgrelationships" role="tab" data-toggle="pill">Organizations</a></li>
 		<li role="presentation"><a href="#mycases" aria-controls="mycases" role="tab" data-toggle="pill">Cases</a></li>
-		<li role="presentation"><a href="#measurements" aria-controls="measurements" role="tab" data-toggle="pill">Measurements</a></li>
 	</ul>
 	<div class="tab-content">
 
@@ -160,10 +157,9 @@
 							<label for="contactphonetype">Type</label>
 							<select class="form-control" id="contactphonetype" name="contactphonetype">
 								<option value="0" selected>Select</option>
-								<option value="1">Home</option>
-								<option value="2">Business</option>
-								<option value="3">Mobile</option>
-								<option value="4">Other</option>
+                            <% contactPhoneType.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 							</select>
 						</div>
 					</div>
@@ -171,7 +167,7 @@
 						<div id="onephone">
 							<div class="form-group">
 								<label for="contactphonenumber">Number</label>
-								<input type="text" class="form-control" id="contactphonenumber" name="contactphonenumber" size="15" maxlength="15" value=""/>
+								<input type="text" class="form-control requiredfield" id="contactphonenumber" name="contactphonenumber" size="15" maxlength="15" value=""/>
 							</div>
 						</div><!-- onephone -->
 					</div>
@@ -180,8 +176,12 @@
 							<label for="phoneorgid">Organization Name</label>
 							<select class="form-control" id="phoneorgid" name="phoneorgid">
 								<option value="0" selected>Select</option>
-								<option value="1">Organization Name 1</option>
-								<option value="2">Organization Name 2</option>
+						<% organization.sort(function(a,b) {
+							return (a.organization_id > b.organization_id) ? 1 : ((b.organization_id > a.organization_id) ? -1 : 0);
+						}); %>
+						<% for (var i = 0; i < organization.length; i += 1) { %>
+								<option value="<%= organization[i].organization_id %>"><%= organization[i].organization_name %></option>
+						<% } %>
 							</select>
 						</div>
 					</div>
@@ -193,12 +193,8 @@
 					</div>
 				</div><!-- row -->
 				<div class="row" hidden>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="phonepersonid">Person ID</label>
-							<input type="text" class="form-control" id="phonepersonid" name="phonepersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
-						</div>
-					</div>
+					<label for="phonepersonid">Person ID</label>
+					<input type="text" class="form-control" id="phonepersonid" name="phonepersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
 				</div><!-- row -->
 				<div class="buttonrow">
 					<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetcontactphone" name="resetcontactphone">Reset</button>
@@ -206,6 +202,7 @@
 				</div>
 			</form>
 
+		<% if (person_contact_phone.length > 0) { %>
 		<table id="phonedisplaytable" class="table table-responsive table-striped table-condensed">
 			<thead>
 				<tr class="info">
@@ -240,11 +237,12 @@
                         <button class="btn btn-danger btn-md tableremovebtn" id="<%= removephone %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
  					</td>
 				</tr>
-        <% } %>
+        	<% } %>
 			</tbody>
 		</table>
-		<hr>
+        <% } %>
 
+		<hr>
 
 		<h4><button id="pluscontactemail" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Email</h4>
 
@@ -255,16 +253,16 @@
 						<label for="contactemailtype">Type</label>
 						<select class="form-control" id="contactemailtype" name="contactemailtype">
 							<option value="0" selected>Select</option>
-							<option value="1">Personal</option>
-							<option value="2">Business</option>
-							<option value="3">Other</option>
+                            <% contactEmailType.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-6">
 					<div class="form-group">
 						<label for="contactemailaddress">Email</label>
-						<input type="text" class="form-control" id="contactemailaddress" name="contactemailaddress" size="90" maxlength="120" value=""/>
+						<input type="text" class="form-control requiredfield" id="contactemailaddress" name="contactemailaddress" size="90" maxlength="120" value=""/>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-6">
@@ -272,8 +270,9 @@
 						<label for="emailorgid">Organization Name</label>
 						<select class="form-control" id="emailorgid" name="emailorgid">
 							<option value="0" selected>Select</option>
-							<option value="1">Organization Name 1</option>
-							<option value="2">Organization Name 2</option>
+						<% for (var i = 0; i < organization.length; i += 1) { %>
+								<option value="<%= organization[i].organization_id %>"><%= organization[i].organization_name %></option>
+						<% } %>
 						</select>
 					</div>
 				</div>
@@ -285,12 +284,8 @@
 				</div>
 				</div><!-- row -->
 				<div class="row" hidden>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="emailpersonid">Person ID</label>
-							<input type="text" class="form-control" id="emailpersonid" name="emailpersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
-						</div>
-					</div>
+					<label for="emailpersonid">Person ID</label>
+					<input type="text" class="form-control" id="emailpersonid" name="emailpersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
 				</div><!-- row -->
 				<div class="buttonrow">
 					<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetcontactemail" name="resetcontactemail">Reset</button>
@@ -298,6 +293,7 @@
 				</div>
 			</form>			
 
+		<% if (person_contact_email.length > 0) { %>
 		<table id="emaildisplaytable" class="table table-responsive table-striped table-condensed">
 			<thead>
 				<tr class="info">
@@ -332,11 +328,12 @@
                         <button class="btn btn-danger btn-md tableremovebtn" id="<%= removeemail %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
  					</td>
 				</tr>
-        <% } %>
+        	<% } %>
 			</tbody>
 		</table>
-		<hr>
+        <% } %>
 
+		<hr>
 
 		<h4><button id="pluscontactfax" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Fax</h4>
 			
@@ -347,9 +344,9 @@
 						<label for="contactfaxtype">Type</label>
 						<select class="form-control" id="contactfaxtype" name="contactfaxtype">
 							<option value="0" selected>Select</option>
-							<option value="1">Home</option>
-							<option value="2">Business</option>
-							<option value="3">Other</option>
+                            <% contactFaxType.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
@@ -357,7 +354,7 @@
 					<div id="onefax">
 						<div class="form-group">
 							<label for="contactfaxnumber">Number</label>
-							<input type="text" class="form-control" id="contactfaxnumber" name="contactfaxnumber" size="15" maxlength="15" value=""/>
+							<input type="text" class="form-control requiredfield" id="contactfaxnumber" name="contactfaxnumber" size="15" maxlength="15" value=""/>
 						</div>
 					</div><!-- onefax -->
 				</div>
@@ -366,8 +363,9 @@
 						<label for="faxorgid">Organization Name</label>
 						<select class="form-control" id="faxorgid" name="faxorgid">
 							<option value="0" selected>Select</option>
-							<option value="1">Organization Name 1</option>
-							<option value="2">Organization Name 2</option>
+						<% for (var i = 0; i < organization.length; i += 1) { %>
+								<option value="<%= organization[i].organization_id %>"><%= organization[i].organization_name %></option>
+						<% } %>
 						</select>
 					</div>
 				</div>
@@ -379,12 +377,8 @@
 				</div>
 			    </div><!-- row -->
 				<div class="row" hidden>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="faxpersonid">Person ID</label>
-							<input type="text" class="form-control" id="faxpersonid" name="faxpersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
-						</div>
-					</div>
+					<label for="faxpersonid">Person ID</label>
+					<input type="text" class="form-control" id="faxpersonid" name="faxpersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
 			    </div><!-- row -->
 			<div class="buttonrow">
 				<button type="reset" class="btn btn-warning btn-md resetbtn" id="resetcontactfax" name="resetcontactfax">Reset</button>
@@ -392,6 +386,7 @@
 			</div>
 		</form>
 
+		<% if (person_contact_fax.length > 0) { %>
 		<table id="faxdisplaytable" class="table table-responsive table-striped table-condensed">
 			<thead>
 				<tr class="info">
@@ -426,11 +421,12 @@
                         <button class="btn btn-danger btn-md tableremovebtn" id="<%= removefax %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
  					</td>
 				</tr>
-        <% } %>
+        	<% } %>
 			</tbody>
 		</table>
-		<hr>
+        <% } %>
 
+		<hr>
 
 		<h4><button id="pluscontactmedia" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Social Media</h4>
 
@@ -441,18 +437,16 @@
 						<label for="contactmediatype">Type</label>
 						<select class="form-control" id="contactmediatype" name="contactmediatype">
 							<option value="0" selected>Select</option>
-							<option value="1">Facebook</option>
-							<option value="2">Snapchat</option>
-							<option value="3">Twitter</option>
-							<option value="4">Google Plus</option>
-							<option value="5">Instagram</option>
+                            <% contactMediaType.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-6">
 					<div class="form-group">
 						<label for="contactmediahandle">Social Media Handle</label>
-						<input type="text" class="form-control" id="contactmediahandle" name="contactmediahandle" size="90" maxlength="120"/>
+						<input type="text" class="form-control requiredfield" id="contactmediahandle" name="contactmediahandle" size="90" maxlength="120"/>
 					</div>
 				</div>
 			</div><!-- row -->
@@ -466,16 +460,12 @@
 			</div><!-- row -->
 			<div class="row" hidden>
 				<div class="col-sm-6">
-					<div class="form-group">
-						<label for="mediapersonid">Person ID</label>
-						<input type="text" class="form-control" id="mediapersonid" name="mediapersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
-					</div>
+					<label for="mediapersonid">Person ID</label>
+					<input type="text" class="form-control" id="mediapersonid" name="mediapersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
 				</div>
 				<div class="col-sm-6">
-					<div class="form-group">
-						<label for="mediaorgid">Org ID</label>
-						<input type="text" class="form-control" id="mediaorgid" name="mediaorgid" size="10" maxlength="10" value=""/>
-					</div>
+					<label for="mediaorgid">Org ID</label>
+					<input type="text" class="form-control" id="mediaorgid" name="mediaorgid" size="10" maxlength="10" value=""/>
 				</div>
 			</div><!-- row -->
 			<div class="buttonrow">
@@ -484,6 +474,7 @@
 			</div>
 		</form>			
 
+		<% if (person_contact_media.length > 0) { %>
 		<table id="mediadisplaytable" class="table table-responsive table-striped table-condensed">
 			<thead>
 				<tr class="info">
@@ -520,8 +511,9 @@
         	<% } %>
 			</tbody>
 		</table>
-		<hr>
+        <% } %>
 
+		<hr>
 
 		<h4><button id="pluscontactaddress" class="btn btn-default btn-md plusbtn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button> Address</h4>
 
@@ -532,9 +524,9 @@
 						<label for="contactaddresstype">Type</label>
 						<select class="form-control" id="contactaddresstype" name="contactaddresstype">
 							<option value="0" selected>Select</option>
-							<option value="1">Home</option>
-							<option value="2">Business</option>
-							<option value="3">Other</option>
+                            <% contactAddressType.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
@@ -543,8 +535,9 @@
 						<label for="addressorgid">Organization Name</label>
 						<select class="form-control" id="addressorgid" name="addressorgid">
 							<option value="0" selected>Select</option>
-							<option value="1">Organization Name 1</option>
-							<option value="2">Organization Name 2</option>
+						<% for (var i = 0; i < organization.length; i += 1) { %>
+								<option value="<%= organization[i].organization_id %>"><%= organization[i].organization_name %></option>
+						<% } %>
 						</select>
 					</div>
 				</div>
@@ -553,7 +546,7 @@
 				<div class="col-xs-12">
 					<div class="form-group">
 						<label for="contactstreet">Address</label>
-						<textarea class="form-control" id="contactstreet" name="contactstreet" maxlength="500"></textarea>
+						<textarea class="form-control requiredfield" id="contactstreet" name="contactstreet" maxlength="500"></textarea>
 					</div>
 				</div>
 			</div><!-- row -->
@@ -561,31 +554,41 @@
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="contactcity">City</label>
-						<input type="text" class="form-control" id="contactcity" name="contactcity" size="30" maxlength="30"/>
+						<input type="text" class="form-control requiredfield" id="contactcity" name="contactcity" size="30" maxlength="30"/>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="contactstate">State</label>
-						<input type="text" class="form-control" id="contactstate" name="contactstate" size="90" maxlength="100"/>
+						<input type="text" class="form-control requiredfield" id="contactstate" name="contactstate" size="90" maxlength="100"/>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="contactzipcode">Zip Code</label>
-						<input type="text" class="form-control" id="contactzipcode" name="contactzipcode" size="10" maxlength="10"/>
+						<input type="text" class="form-control requiredfield" id="contactzipcode" name="contactzipcode" size="10" maxlength="10"/>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="contactstatecode">State Code</label>
-						<input type="text" class="form-control" id="contactstatecode" name="contactstatecode" size="3" maxlength="3"/>
+						<select class="form-control" id="contactstatecode" name="contactstatecode">
+							<option value="0" selected>Select</option>
+                            <% contactStateCode.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
+						</select>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="contactcountrycode">Country Code</label>
-						<input type="text" class="form-control" id="contactcountrycode" name="contactcountrycode" size="3" maxlength="3"/>
+						<select class="form-control" id="contactcountrycode" name="contactcountrycode">
+							<option value="0" selected>Select</option>
+                            <% contactCountryCode.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
+						</select>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-12">
@@ -597,10 +600,8 @@
 				</div><!-- row -->
 				<div class="row" hidden>
 					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="addresspersonid">Person ID</label>
-							<input type="text" class="form-control" id="addresspersonid" name="addresspersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
-						</div>
+						<label for="addresspersonid">Person ID</label>
+						<input type="text" class="form-control" id="addresspersonid" name="addresspersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
 					</div>
 				</div><!-- row -->
 				<div class="buttonrow">
@@ -609,6 +610,7 @@
 				</div>
 			</form>
 
+		<% if (person_contact_address.length > 0) { %>
 		<table id="addressdisplaytable" class="table table-responsive table-striped table-condensed">
 			<thead>
 				<tr class="info">
@@ -659,6 +661,7 @@
         	<% } %>
 			</tbody>
 		</table>
+        <% } %>
 
 		</div><!-- tabpanel contact -->
 
@@ -675,17 +678,17 @@
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="identificationnumber">Identification Number</label>
-						<input type="text" class="form-control" id="identificationnumber" name="identificationnumber" size="90" maxlength="100"/>
+						<input type="text" class="form-control requiredfield" id="identificationnumber" name="identificationnumber" size="90" maxlength="100"/>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-4">
 					<div class="form-group">
 						<label for="identificationtype">Type</label>
-						<select class="form-control" id="identificationtype" name="identificationtype">
+						<select class="form-control requiredfield" id="identificationtype" name="identificationtype">
 							<option value="0" selected>Select</option>
-							<option value="1">Drivers License</option>
-							<option value="2">Social Security</option>
-							<option value="3">Passport</option>
+                            <% identificationType.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
@@ -712,8 +715,9 @@
 						<label for="identificationstatus">Status</label>
 						<select class="form-control" id="identificationstatus" name="identificationstatus">
 							<option value="0" selected>Select</option>
-							<option value="1">Active</option>
-							<option value="2">Inactive</option>
+                            <% identificationStatus.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
@@ -728,10 +732,8 @@
 			</div><!-- row -->
 			<div class="row" hidden>
 				<div class="col-sm-6">
-					<div class="form-group">
-						<label for="identificationpersonid">Person ID</label>
-						<input type="text" class="form-control" id="identificationpersonid" name="identificationpersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
-					</div>
+					<label for="identificationpersonid">Person ID</label>
+					<input type="text" class="form-control" id="identificationpersonid" name="identificationpersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
 				</div>
 			</div><!-- row -->
 			<div class="buttonrow">
@@ -740,6 +742,7 @@
 			</div>
 		</form>
 
+		<% if (person_identification.length > 0) { %>
 		<table id="identificationdisplaytable" class="table table-responsive table-striped table-condensed">
 			<thead>
 				<tr class="info">
@@ -786,6 +789,7 @@
 			<% } %>
 			</tbody>
 		</table>
+		<% } %>
 
 		</div><!-- tabpanel identification -->
 
@@ -810,10 +814,10 @@
 				<div class="col-xs-12 col-sm-12 col-md-4">
 					<div class="form-group">
 						<label for="personreltwopersonid">Person Name</label>
-						<select class="form-control" id="personreltwopersonid" name="personreltwopersonid">
+						<select class="form-control requiredfield" id="personreltwopersonid" name="personreltwopersonid">
 							<option value="0" selected>Select</option>
 							<% person.sort(function(a,b) {
-				                return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+				                return (a.person_id > b.person_id) ? 1 : ((b.person_id > a.person_id) ? -1 : 0);
 			                }); %>
 							<% for (var i = 0; i < person.length; i += 1) { %>
 							<option value="<%= person[i].person_id %>"><%= person[i].last_name %>, <%= person[i].first_name %> <%= person[i].middle_name %></option>
@@ -824,11 +828,11 @@
 				<div class="col-xs-6 col-sm-6 col-md-4">
 					<div class="form-group">
 						<label for="personcontacttype">Contact Type</label>
-						<select class="form-control" id="personcontacttype" name="personcontacttype">
+						<select class="form-control requiredfield" id="personcontacttype" name="personcontacttype">
 							<option value="0" selected>Select</option>
-							<option value="1">Case Support</option>
-							<option value="2">Family Support</option>
-							<option value="3">External</option>
+                            <% contactType.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
@@ -837,8 +841,9 @@
 						<label for="personrelationshiptype">Relationship Type</label>
 						<select class="form-control" id="personrelationshiptype" name="personrelationshiptype">
 							<option value="0" selected>Select</option>
-							<option value="1">Relationship Type 1</option>
-							<option value="2">Relationship Type 2</option>
+                            <% personPersonRelationship.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
@@ -852,10 +857,8 @@
 					</div>
 				</div>
 				<div class="col-sm-6" hidden>
-					<div class="form-group">
-						<label for="personrelonepersonid">Person ID</label>
-				        <input type="text" class="form-control" id="personrelonepersonid" name="personrelonepersonid" readonly value="<%= thisperson.person_id %>"/>
-					</div>
+					<label for="personrelonepersonid">Person ID</label>
+					<input type="text" class="form-control" id="personrelonepersonid" name="personrelonepersonid" readonly value="<%= thisperson.person_id %>"/>
 				</div>
 			</div><!-- row -->
 			<div class="buttonrow">
@@ -864,8 +867,20 @@
 			</div>
 		</form>
 
-		<h4>Case Support</h4>
+	<div class="form-group">
+		<label for="expandpersonrelationships" class="btn btn-sm btn-default">
+			<input type="radio" name="showpersonrelationships" id="expandpersonrelationships" class="expandpersonrelbtn"> Show Tables
+		</label>
+		<label for="collapsepersonrelationships" class="btn btn-sm btn-default">
+			<input type="radio" name="showpersonrelationships" id="collapsepersonrelationships" class="collapsepersonrelbtn" checked> Hide Tables
+		</label>
+	</div>
 
+<br>
+
+	<button class="btn btn-default morerelationshipbtn" id="btnpersoncasesupporttable">Case Support</button>
+
+	<div id="personcasesupporttable" class="personrelationshiptable">
 		<table id="person_casesupportdisplaytable" class="table table-responsive table-striped table-condensed">
 			<thead>
 				<tr class="info">
@@ -917,30 +932,13 @@
 			} %>
 			</tbody>
 		</table>
+	</div><!-- personcasesupporttable -->
 
+<br><br>
 
-		<div id="person_casesupportpagination" class="paginationdiv">
-			<nav aria-label="Page navigation">
-			  <ul class="pagination">
-			    <li class="disabled">
-			      <a href="#" aria-label="Previous">
-			        <span aria-hidden="true">&laquo;</span>
-			      </a>
-			    </li>
-			    <li class="active"><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li>
-			      <a href="#" aria-label="Next">
-			        <span aria-hidden="true">&raquo;</span>
-			      </a>
-			    </li>
-			  </ul>
-			</nav>
-		</div>
+	<button class="btn btn-default morerelationshipbtn" id="btnfamilysupporttable">Family Support</button>
 
-	<h4>Family Support</h4>
-
+	<div id="familysupporttable" class="personrelationshiptable">
 		<table id="familysupportdisplaytable" class="table table-responsive table-striped table-condensed">
 			<thead>
 				<tr class="info">
@@ -987,29 +985,13 @@
 			} %>
 			</tbody>
 		</table>
+	</div><!-- familysupporttable -->
 
-		<div id="familysupportpagination" class="paginationdiv">
-			<nav aria-label="Page navigation">
-			  <ul class="pagination">
-			    <li class="disabled">
-			      <a href="#" aria-label="Previous">
-			        <span aria-hidden="true">&laquo;</span>
-			      </a>
-			    </li>
-			    <li class="active"><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li>
-			      <a href="#" aria-label="Next">
-			        <span aria-hidden="true">&raquo;</span>
-			      </a>
-			    </li>
-			  </ul>
-			</nav>
-		</div>
+<br><br>
 
-	<h4>External</h4>
+	<button class="btn btn-default morerelationshipbtn" id="btnpersonexternalsupporttable">External Support</button>
 
+	<div id="personexternalsupporttable" class="personrelationshiptable">
 		<table id="person_externalsupportdisplaytable" class="table table-responsive table-striped table-condensed">
 			<thead>
 				<tr class="info">
@@ -1056,28 +1038,7 @@
 			} %>
 			</tbody>
 		</table>
-
-
-		<div id="person_externalsupportpagination" class="paginationdiv">
-			<nav aria-label="Page navigation">
-			  <ul class="pagination">
-			    <li class="disabled">
-			      <a href="#" aria-label="Previous">
-			        <span aria-hidden="true">&laquo;</span>
-			      </a>
-			    </li>
-			    <li class="active"><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li>
-			      <a href="#" aria-label="Next">
-			        <span aria-hidden="true">&raquo;</span>
-			      </a>
-			    </li>
-			  </ul>
-			</nav>
-		</div>
-
+	</div><!-- personexternalsupporttable -->
 
 		</div><!-- tabpanel relatedpeople -->
 
@@ -1102,24 +1063,22 @@
 				<div class="col-xs-12 col-sm-12 col-md-4">
 					<div class="form-group">
 						<label for="personorgorganizationid">Organization Name</label>
-						<select class="form-control" id="personorgorganizationid" name="personorgorganizationid">
+						<select class="form-control requiredfield" id="personorgorganizationid" name="personorgorganizationid">
 							<option value="0" selected>Select</option>
-			<% organization.sort(function(a,b) {
-				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
-			}); %>
-			<% for (var i = 0; i < organization.length; i += 1) { %>
-					<option value="<%= organization[i].organization_id %>"><%= organization[i].organization_name %></option>
-			<% } %>
+					<% for (var i = 0; i < organization.length; i += 1) { %>
+							<option value="<%= organization[i].organization_id %>"><%= organization[i].organization_name %></option>
+					<% } %>
 						</select>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-6 col-md-4">
 					<div class="form-group">
 						<label for="personorgcontacttype">Contact Type</label>
-						<select class="form-control" id="personorgcontacttype" name="personorgcontacttype">
+						<select class="form-control requiredfield" id="personorgcontacttype" name="personorgcontacttype">
 							<option value="0" selected>Select</option>
-							<option value="1">Case Support</option>
-							<option value="3">External</option>
+                            <% contactType.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
@@ -1128,9 +1087,9 @@
 						<label for="personorgrelationshiptype">Relationship Type</label>
 						<select class="form-control" id="personorgrelationshiptype" name="personorgrelationshiptype">
 							<option value="0" selected>Select</option>
-							<option value="1">Person Org Relationship Type 1</option>
-							<option value="2">Person Org Relationship Type 2</option>
-							<option value="3">Person Org Relationship Type 3</option>
+                            <% personOrganizationRelationship.enums.forEach(function(enumItem) { %>
+                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
+                            <% }); %>
 						</select>
 					</div>
 				</div>
@@ -1146,16 +1105,12 @@
 			</div><!-- row -->
             <div class="row" hidden>
 				<div class="col-xs-6">
-					<div class="form-group">
-						<label for="personorgpersonid">Person ID</label>
-				        <input type="text" class="form-control" id="personorgpersonid" name="personorgpersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
-					</div>
+					<label for="personorgpersonid">Person ID</label>
+					<input type="text" class="form-control" id="personorgpersonid" name="personorgpersonid" size="10" maxlength="10" readonly value="<%= thisperson.person_id %>"/>
 				</div>
 				<div class="col-xs-6">
-					<div class="form-group">
-						<label for="personorgscreen">Screen</label>
-				        <input type="text" class="form-control" id="personorgscreen" name="personorgscreen" size="6" maxlength="6" readonly value="person"/>
-					</div>
+					<label for="personorgscreen">Screen</label>
+					<input type="text" class="form-control" id="personorgscreen" name="personorgscreen" size="6" maxlength="6" readonly value="person"/>
 				</div>
 			</div><!-- row -->
 			<div class="buttonrow">
@@ -1164,8 +1119,21 @@
 			</div>
 		</form>
 
-		<h4>Case Support</h4>
 
+	<div class="form-group">
+		<label for="expandorgrelationships" class="btn btn-sm btn-default">
+			<input type="radio" name="showorgrelationships" id="expandorgrelationships" class="expandorgrelbtn"> Show Tables
+		</label>
+		<label for="collapseorgrelationships" class="btn btn-sm btn-default">
+			<input type="radio" name="showorgrelationships" id="collapseorgrelationships" class="collapseorgrelbtn" checked> Hide Tables
+		</label>
+	</div>
+
+<br>
+
+	<button class="btn btn-default morerelationshipbtn" id="btnorgcasesupporttable">Case Support</button>
+
+	<div id="orgcasesupporttable" class="orgrelationshiptable">
 		<table id="org_casesupportsdisplaytable" class="table table-responsive table-striped table-condensed">
 			<thead>
 				<tr class="info">
@@ -1217,29 +1185,13 @@
 			} %>
 			</tbody>
 		</table>
+	</div><!-- orgcasesupporttable -->
 
-			<div id="org_casesupportpagination" class="paginationdiv">
-				<nav aria-label="Page navigation">
-				  <ul class="pagination">
-				    <li class="disabled">
-				      <a href="#" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				      </a>
-				    </li>
-				    <li class="active"><a href="#">1</a></li>
-				    <li><a href="#">2</a></li>
-				    <li><a href="#">3</a></li>
-				    <li>
-				      <a href="#" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-				    </li>
-				  </ul>
-				</nav>
-			</div>
+<br><br>
 
-		<h4>Exernal</h4>
+	<button class="btn btn-default morerelationshipbtn" id="btnorgexternalsupporttable">External Support</button>
 
+	<div id="orgexternalsupporttable" class="orgrelationshiptable">
 		<table id="org_externaldisplaytable" class="table table-responsive table-striped table-condensed">
 			<thead>
 				<tr class="info">
@@ -1286,26 +1238,8 @@
 			} %>
 			</tbody>
 		</table>
+	</div><!-- orgexternalsupporttable -->
 
-			<div id="org_externalpagination" class="paginationdiv">
-				<nav aria-label="Page navigation">
-				  <ul class="pagination">
-				    <li class="disabled">
-				      <a href="#" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				      </a>
-				    </li>
-				    <li class="active"><a href="#">1</a></li>
-				    <li><a href="#">2</a></li>
-				    <li><a href="#">3</a></li>
-				    <li>
-				      <a href="#" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-				    </li>
-				  </ul>
-				</nav>
-			</div>
 
 		</div><!-- tabpanel relatedorganizations -->
 
@@ -1324,6 +1258,7 @@
 <br>
 <h4>My Cases</h4>
 
+	<% if (my_cases.length > 0) { %>
 		<table id="casedisplaytable" class="table table-responsive table-striped table-condensed">
 			<thead>
 				<tr class="info">
@@ -1351,41 +1286,10 @@
         	<% } %>
 			</tbody>
 		</table>
-
-			<div id="casespagination" class="paginationdiv">
-				<nav aria-label="Page navigation">
-				  <ul class="pagination">
-				    <li class="disabled">
-				      <a href="#" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				      </a>
-				    </li>
-				    <li class="active"><a href="#">1</a></li>
-				    <li><a href="#">2</a></li>
-				    <li><a href="#">3</a></li>
-				    <li>
-				      <a href="#" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-				    </li>
-				  </ul>
-				</nav>
-			</div>
+       	<% } %>
 
 		</div><!-- tabpanel cases -->
 
-
-
-
-<!-- ******************************************************************************************************************** -->
-
-
-
-		<div role="tabpanel" class="tab-pane" id="measurements">
-
-		<p><strong>NOTE: To Come</strong></p>
-
-		</div><!-- tabpanel measurements -->
 
 	</div><!-- tab-content -->
 	
@@ -1411,6 +1315,13 @@ function getpersoninfo() {
 }
 getpersoninfo();
 
+$(".personrelationshiptable").hide();
+$(".orgrelationshiptable").hide();
+
+var removereq = $("#personform .requiredfield");
+for (var r = 0; r < removereq.length; r += 1) {
+	removereq[r].style.borderColor = "#cccccc";
+}
 </script>
 
 <% include ../partials/footer2 %>
