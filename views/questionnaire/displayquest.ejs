@@ -1,0 +1,117 @@
+<% include ../partials/header %>
+
+		<div id="topbar">
+			<h1><span hidden id="questionnaireid"><%= questionnaire.questionnaire_id %></span>Questionnaire: <%= questionnaire.name %></h1>
+			<div id="topcasepersoninfo">
+				<% if ((viewmode === "2") || (viewmode === "3")) { %>
+					<p><span hidden id="questpersonid"><%= person.person_id %></span><strong><%= person.last_name %>, <%= person.first_name %> <%= person.middle_name %></strong></p>
+				<% } else { %>
+					<p class="view">View Only Mode</p>
+				<% } %>
+				<% if ((viewmode === "1") || (viewmode === "2") || (viewmode === "3")) { %>
+					<p><span hidden id="questcaseid"><%= cases.case_id %></span><strong><%= cases.case_title %></strong></p>
+					<% if ((cases_questionnaires.assoc_with !== "0") && (cases_questionnaires.assocwith_nameid !== "0")) { %>					
+					<p><%= cases_questionnaires.assoc_with %> <strong><%= cases_questionnaires.assocwith_nameid %></strong></p>
+				<% } } %>
+			</div>
+		</div><!-- topbar -->
+
+	<form id="questform" action="/personquestionnaire/<%= person.person_id %>/<%= cases_questionnaires.casequest_id %>" method="POST">
+	<% if (viewmode === "2") { %>
+		<fieldset id="ablequestionnaireform">
+	<% } else { %>
+		<fieldset disabled id="ablequestionnaireform">
+	<% } %>
+			<div id="q_and_a" class="row questgroup">
+				<div class="col-xs-12">
+
+<% for (var q = 0; q < questionnaire.qa.length; q += 1) {
+        var questno = questionnaire.qa[q].question_id;
+        var questtext = questionnaire.qa[q].questtext;
+        var questtype = questionnaire.qa[q].questtype;
+        var totalansw = Number(questionnaire.qa[q].totalansw);
+        var thisansw = questionnaire.qa[q].answers;
+%>
+
+    <p class="question"><span class="questno">Question <%= questno %></span> <%= questtext %></p>
+
+    <%  for (var i = 1; i <= totalansw; i += 1) {
+            if ((questtype === "radio") || (questtype === "radio_input_sm") || (questtype === "radio_input_lg")) { %>
+                <% if (((questtype === "radio_input_sm") || (questtype === "radio_input_lg")) && (i === totalansw)) { %>
+                    <p><label for="answer<%= questno %>-<%= i %>" class="btn btn-sm btn-default"><input type="radio" name="answer<%= questno %>_radio" id="answer<%= questno %>-<%= i %>" class="userchoice" value="<%= i %>"> <%= thisansw[i - 1] %></label></p>
+                <% } else { %>
+                    <p><label for="answer<%= questno %>-<%= i %>" class="btn btn-sm btn-default"><input type="radio" name="answer<%= questno %>_radio" id="answer<%= questno %>-<%= i %>" value="<%= i %>"> <%= thisansw[i - 1] %></label></p>
+                <% } %>
+                <% if ((questtype === "radio_input_sm") && (i === totalansw)) { %>
+                        <p><input disabled type="text" class="form-control userinput" name="answer<%= questno %>-<%= i %>_textbox" id="answer<%= questno %>-<%= i %>-1" value=""/></p>
+                <% } else {
+                    if ((questtype === "radio_input_lg") && (i === totalansw)) { %>
+                        <p><textarea disabled class="form-control userinput" id="answer<%= questno %>-<%= i %>-1" name="answer<%= questno %>-<%= i %>_textarea"></textarea></p>
+                    <% } %>
+                <% } %>
+            <% } else if ((questtype === "checkbox") || (questtype === "checkbox_input_sm")) { %>                   
+                    <% if ((questtype === "checkbox_input_sm") && (i === totalansw)) { %>
+                    <p><label for="answer<%= questno %>-<%= i %>" class="btn btn-sm btn-default"><input type="checkbox" name="answer<%= questno %>-<%= i %>_checkbox" id="answer<%= questno %>-<%= i %>" class="userchoice" value="<%= i %>"> <%= thisansw[i - 1] %></label></p>
+                    <p><input disabled type="text" class="form-control userinput" name="answer<%= questno %>-<%= i %>_textbox" id="answer<%= questno %>-<%= i %>-1" value=""/></p>
+                    <% } else { %>
+                    <p><label for="answer<%= questno %>-<%= i %>" class="btn btn-sm btn-default"><input type="checkbox" name="answer<%= questno %>-<%= i %>_checkbox" id="answer<%= questno %>-<%= i %>" value="<%= i %>"> <%= thisansw[i - 1] %></label></p>
+                    <% } %>
+            <% } else if (questtype === "textbox") { %>
+                    <p><input type="text" class="form-control" id="answer<%= questno %>-<%= i %>" name="answer<%= questno %>-<%= i %>_textbox" value=""/></p>
+            <% } else {
+                    if (questtype === "textarea") { %>
+                        <p><textarea class="form-control" id="answer<%= questno %>-<%= i %>" name="answer<%= questno %>-<%= i %>_textarea"></textarea></p>
+                <% } %>
+            <% } %> <!-- first questtype if -->
+    <% } %> <!-- totalansw loop -->
+<% } %> <!-- questemp loop -->
+
+
+				</div><!-- row -->
+			</div><!-- q_and_a -->
+			<div hidden id="answers_group">
+				<input readonly type="text" class="form-control" id="finished" name="finished" value="0"/>
+				<input readonly type="text" class="form-control" id="answers" name="answers" value="<%= questanswers %>"/>
+			</div><!-- answers_group-->
+			<div id="resetsubmitquestionnaire" class="buttonrow">
+				<button type="reset" class="btn btn-warning btn-md mainresetbtn" id="resetquestionnaire" name="resetquestionnaire">Reset</button>
+				<input type="submit" class="btn btn-warning btn-md mainsavebtn" id="savequestionnaire" name="savequestionnaire" value="Save">
+				<input type="submit" class="btn btn-danger btn-md mainsubmitbtn" id="submitquestionnaire" name="submitquestionnaire" value="Finished">
+			</div>
+		</fieldset>
+	</form>
+
+
+<script src="../js/cms_questionnaire.js"></script>
+
+<script>
+var resultJSON = $("#answers").val();
+JSON.stringify(resultJSON);
+var result = $.parseJSON(resultJSON);
+$.each(result, function(k, v) {
+//	alert('k = ' + k + '; and v = ' + v);
+	if (k.indexOf("_radio") > -1) {
+    	$("input[name=" + k + "][value=" + v + "]").prop("checked", true);		
+	} else if (k.indexOf("_checkbox") > -1) {
+    	$("input[name=" + k + "]").prop("checked", true);
+	} else if (k.indexOf("_textbox") > -1) {
+    	$("input[name=" + k + "]").val(v);
+		var thisone = $("input[name=" + k + "]").attr('id');
+		var bb = document.getElementById(thisone).className;
+		if (bb.indexOf(" userinput") > -1) {
+			$("input[name=" + k + "]").prop("disabled", false);
+		}
+	} else {
+		if (k.indexOf("_textarea") > -1) {
+			$("textarea[name=" + k + "]").val(v);
+			var thisone = $("textarea[name=" + k + "]").attr('id');
+			var bb = document.getElementById(thisone).className;
+			if (bb.indexOf(" userinput") > -1) {
+				$("textarea[name=" + k + "]").prop("disabled", false);
+			}
+		}
+	}
+});
+</script>
+
+<% include ../partials/footer %>

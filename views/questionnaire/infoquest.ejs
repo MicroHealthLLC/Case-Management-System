@@ -1,0 +1,81 @@
+<% include ../partials/header %>
+
+		<div id="topbar">
+			<h1><span hidden id="questionnaireid"><%= questionnaire.questionnaire_id %></span>Questionnaire: <%= questionnaire.name %></h1>
+		</div><!-- topbar -->
+
+    <% if (casequestlisting.length > 0) { %>
+        <table class="table table-responsive table-striped table-condensed">
+            <thead>
+                <tr class="info">
+                    <th>Case Name</th>
+                    <th>Associated with</th>
+                    <th>Date Administered</th>
+                    <th>Status</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% for (var j = 0; j < casequestlisting.length; j += 1) {
+                var morequestbtn = "morequestbtn" + j;
+                var more = "more" + j;
+                var persondiv = "persondiv" + j;
+            %>
+            <tr>
+                <td><a href="/case/<%= casequestlisting[j].case_id %>"><%= casequestlisting[j].case_id %></a></td>
+                <td><%= casequestlisting[j].assoc_with %>: <%= casequestlisting[j].assocwith_nameid %></td>
+                <td><%= casequestlisting[j].date_administered %></td>
+                <td><%= casequestlisting[j].quest_status %></td>
+                <td>
+                    <button class="btn btn-default morequestbtn" id="<%= morequestbtn %>" type="button" data-toggle="collapse" data-target="#<%= more %>" aria-expanded="false" aria-controls="<%= more %>"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    <div class="collapse" id="<%= more %>">
+        <div id="<%= persondiv %>">
+ 			<table class="table table-responsive table-condensed subtable">
+            <thead>
+                <tr class="info">
+                    <th>Person Name</th>
+                    <th>Date Complete</th>
+                    <th>Status</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (var i = 0; i < personquestansw.length; i += 1) {
+                    var linkcasequestid = "linkcasequestid" + i;
+                    var linkquestanswerid = "linkquestanswerid" + i;
+				    var linkquestionnaire = "linkquestionnaire" + i;
+                    if (personquestansw[i].casequest_id === casequestlisting[j].casequest_id) {
+                %>
+                <tr>
+                    <td><a href="/person/<%= personquestansw[i].person_id %>"><%= personquestansw[i].person_id %></a></td>
+                    <td><%= personquestansw[i].date_complete %></td>
+                    <td><%= personquestansw[i].quest_status %></td>
+                    <td><% if (personquestansw[i].quest_status === "3") { %>
+	                    <form class="oneline" action="/questionnaireresults/<%= casequestlisting[j].questionnaire_id %>" method="POST">
+							<input hidden type="text" id="<%= linkcasequestid %>" name="linkcasequestid" readonly value="<%= personquestansw[i].casequest_id %>"/>
+	                        <input hidden type="text" id="<%= linkquestanswerid %>" name="linkquestanswerid" readonly value="<%= personquestansw[i].questanswer_id %>"/>
+	                        <button type="submit" class="btn btn-success btn-md questviewbtn" id="<%= linkquestionnaire %>" name="linkquestionnaire"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></button>
+	                    </form>
+                        <% } %>
+                    </td>
+                </tr>
+                <% } } %>
+            </tbody>
+            </table>
+            </div>
+	    <% } %>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+	<% } else { %>
+    <p>This questionnaire has not been assigned to a case.</p>
+    <% } %>
+
+
+<% include ../partials/footer %>

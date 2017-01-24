@@ -1,0 +1,68 @@
+<% include ../partials/header %>
+
+    <div id="topbar">
+        <h1>Edit Questionnaire: <%= questionnaire.name %></h1>
+    </div><!-- topbar -->
+
+	<form id="questionnaireform" action="/questionnaire/<%= questionnaire.questionnaire_id %>?_method=PUT" method="POST">
+        <div id="q_and_a" class="questform">
+ 							 
+<% include ../partials/questform %>
+
+<script src="../js/cms_questionnaire2.js"></script>
+
+
+<script>
+$("#totop").click(function () {
+    "use strict";
+    window.scrollTo(0, 0);
+});
+
+$("#currquestno").val("0");
+$("#questionnairename").val("<%= questionnaire.name %>");
+$("#questionnairetype").val("<%= questionnaire.quest_type %>");
+
+</script>
+
+<% for (var i = 0; i < questionnaire.qa.length; i += 1) {
+    var questtype = questionnaire.qa[i].questtype;
+    var totalansw = questionnaire.qa[i].totalansw;
+%>
+<script>
+    $("#question_type").val("<%= questtype %>");
+    $("#total_answers").val("<%= totalansw %>");
+    $("#addquestiongroup").click();
+</script>
+<% } %>
+
+<%  for (var i = 0; i < questionnaire.qa.length; i += 1) {
+        var questtext = questionnaire.qa[i].questtext;
+        var questanswers = questionnaire.qa[i].answers;
+%>
+<script>
+    var j = <%= i %> + 1;
+    var questgroup = document.getElementById("qa" + j);
+    questgroup.querySelector(".questiontext").value = "<%= questtext %>";
+    var questtype = questgroup.querySelector(".questtype");   
+    if ((questtype.value !== "6") && (questtype.value !== "7")) {
+        var anstextbox = questgroup.querySelectorAll("input[type='text'].answer");
+    }
+    var a = 0;
+</script>
+<%  for (var q = 0; q < questanswers.length; q += 1) {
+        var thisanswer = questanswers[q];
+%>
+<script>
+    anstextbox[a].value = "<%= thisanswer %>";
+    if (a < anstextbox.length) {
+        a += 1;
+    }
+</script>
+<% } } %>
+<script>
+    $("#question_type").val("0");
+    $("#total_answers").val("0");
+ </script>
+
+
+<% include ../partials/footer %>
