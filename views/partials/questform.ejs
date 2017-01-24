@@ -1,0 +1,90 @@
+
+            <div class="row" hidden>
+                <div class="col-xs-6">
+                    <label for="currquestno">Total QA</label>
+                    <input type="text" class="form-control" id="currquestno" name="currquestno" readonly value="0"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="questionnairename">Questionnaire Name</label>
+                        <input type="text" class="form-control" id="questionnairename" name="questionnairename" value=""/>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                <div class="form-group">
+                        <label for="questionnairetype">Questionnaire Type</label>
+                        <select class="form-control" id="questionnairetype" name="questionnairetype">
+                            <option value="0" selected>Select</option>
+                            <option value="1">Questionnaire Type 1</option>
+                            <option value="2">Questionnaire Type 2</option>
+                            <option value="3">Questionnaire Type 3</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div id="qa">
+            </div>
+
+			</div><!-- q_and_a -->
+		</fieldset>
+		<br>
+		<div id="resetsubmitquestionnaire" class="buttonrow">
+			<button type="reset" class="btn btn-warning btn-md mainresetbtn" id="resetquestionnaire" name="resetquestionnaire">Reset</button>
+			<input type="submit" class="btn btn-warning btn-md mainsubmitbtn" id="submitquestionnaire" name="submitquestionnaire" value="Submit">
+		</div>
+	</form>
+
+<br><br>
+
+<h4>New Question/Answer Group</h4>
+
+<div id="selectqa">
+	<div class="form-group">
+        <label for="question_type">Question Type</label>
+        <select class="form-control" id="question_type" name="question_type">
+            <option value="0" selected>Select</option>
+            <option value="radio">radio</option>
+            <option value="radio_input_sm">radio_input_sm</option>
+            <option value="radio_input_lg">radio_input_lg</option>
+            <option value="checkbox">checkbox</option>
+            <option value="checkbox_input_sm">checkbox_input_sm</option>
+            <option value="textbox">textbox</option>
+            <option value="textarea">textarea</option>
+        </select>
+    </div>
+	<div class="form-group">
+        <label for="total_answers">Total Answers</label>
+        <select class="form-control" id="total_answers" name="total_answers">
+            <option value="0" selected>Select</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+        </select>
+    </div>
+	<button class="btn btn-primary btn-md addquestbtn" id="addquestiongroup" name="addquestiongroup">Add Question Group</button>
+	<button class="btn btn-primary btn-md addquestbtn" id="showquestionexample" name="showquestionexample">Show Question Example</button>
+</div>
+
+<div id="displayviewquestiontype">
+</div>
