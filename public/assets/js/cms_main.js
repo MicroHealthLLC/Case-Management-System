@@ -1,10 +1,13 @@
 //Case Management System
 
-
 $(window).load(function () {
     "use strict";
-    $(".toggleform, .filterform, .uploadform").each(function () {
+    $(".toggleform, .filterform").each(function () {
         this.reset();
+    });
+    $(".uploadform").each(function () {
+        this.reset();
+        this.hide();
     });
     if ($(window).width() <= 640) {
         $("div").removeClass("col-xs-6");
@@ -13,9 +16,28 @@ $(window).load(function () {
 
 
 
+$(".brieflink").click(function (e) {
+    "use strict";
+    e.preventDefault();
+    var brieflink = this.id;
+    var words = brieflink.slice(5);
+    $("div#taskpanel ul#navmenu li").removeClass("active");
+    if (brieflink.indexOf("goal") > -1) {
+        $("div#taskpanel ul#navmenu li:nth-child(5)").addClass("active");
+    } else if (brieflink.indexOf("plan") > -1) {
+        $("div#taskpanel ul#navmenu li:nth-child(6)").addClass("active");
+    } else {
+        $("div#taskpanel ul#navmenu li:nth-child(7)").addClass("active");
+    }
+    setTimeout(function () {
+        location.hash = words;
+    }, 100);
+});
+
+
+
 $("a").click(function () {
     var thislink = this.getAttribute("href");
-//    alert(thislink);
     window.location.assign(thislink);
 });
 
@@ -37,7 +59,6 @@ $(".filterbtn").click(function () {
     "use strict";
     var filterbtn = this.id;
     var words = filterbtn.slice(0,-3);
-//    alert(words);
     if (document.getElementById(words + "form").style.display !== "block") {
         document.getElementById(words + "form").style.display = "block";
     } else {
@@ -58,22 +79,6 @@ $(".plusbtn").click(function () {
         document.getElementById(words + "form").style.display = "block";
     } else {
         document.getElementById(words + "form").style.display = "none";
-//NOTE: The following IFs are for Case Screen
-        if (document.getElementById("needform").style.visibility !== "visible") {
-            $("#showuploaddocneed").hide();
-        }
-        if (document.getElementById("goalform").style.visibility !== "visible") {
-            $("#showuploaddocgoal").hide();
-        }
-        if (document.getElementById("planform").style.visibility !== "visible") {
-            $("#showuploaddocplan").hide();
-        }
-        if (document.getElementById("actionform").style.visibility !== "visible") {
-            $("#showuploaddocaction").hide();
-        }
-        if (document.getElementById("casefileform").style.visibility !== "visible") {
-            $("#showuploaddoccasefile").hide();
-        }
     }
 });
 
@@ -108,8 +113,6 @@ $(".tableeditbtn").click(function () {
         words = "contactaddress";
     } else if (edititem.indexOf("identification") >= 0) {
         words = "personidentification";
-    } else if (edititem.indexOf("need") >= 0) {
-        words = "need";
     } else if (edititem.indexOf("goal") >= 0) {
         words = "goal";
     } else if (edititem.indexOf("plan") >= 0) {
@@ -138,19 +141,23 @@ $(".tableeditbtn").click(function () {
     document.getElementById("reset" + words).textContent = "Cancel";
     document.getElementById("submit" + words).textContent = "Save";
     document.getElementById(words + "form").style.display = "block";
-//    alert("Put content for " + edititem + " in form to edit");
 });
 
 
 
 //****************    TASKS    ****************************************
 
+$("#resettask").click(function () {
+    "use strict";
+    document.getElementById("taskform").action = "/task";
+    document.getElementById("taskcompletedate").disabled = true;
+});
+
 
 $(".taskeditbtn").click(function () {
     "use strict";
     var taskid = this.closest("td").id;
     var i = this.id.slice(8);
-//    alert('edit task btn clicked for ' + taskid);
     location.hash = "#plustask";
     document.getElementById("taskform").reset();
     document.getElementById("taskform").action = "/task/" + taskid + "?_method=PUT";
@@ -159,6 +166,7 @@ $(".taskeditbtn").click(function () {
     $("#taskpriority").val(document.getElementById("tpriority" + i).innerHTML);
     $("#taskstartdate").val(document.getElementById("tstart" + i).innerHTML);    
     $("#taskduedate").val(document.getElementById("tdue" + i).innerHTML);    
+    document.getElementById("taskcompletedate").disabled = false;
     $("#taskcompletedate").val(document.getElementById("tcomplete" + i).innerHTML);    
     $("#taskstatus").val(document.getElementById("tstatus" + i).innerHTML);    
     $("#taskassignedperson").val(document.getElementById("tpersonid" + i).innerHTML);    
@@ -178,15 +186,32 @@ $("#submittask").click(function (e) {
 //  NOTE VALIDATE TASK FORM
     if (passvalidation === true) {
         $("#taskform").submit();
-    };
+    }
 });
 
 
-$("#resettask").click(function () {
+
+$(".moretaskbtn").click(function () {
     "use strict";
-    document.getElementById("taskform").action = "/task";
+    var thisdiv = this.id.slice(3);
+    if (document.getElementById(thisdiv).style.display !== "block") {
+        document.getElementById(thisdiv).style.display = "block";
+    } else {
+        document.getElementById(thisdiv).style.display = "none";
+    }
 });
 
+// *******  SHOW/HIDE TASK TABLES ***********
+
+$(".collapsetasksbtn").click(function () {
+    "use strict";
+    $(".tasktable").hide();
+});
+
+$(".expandtasksbtn").click(function () {
+    "use strict";
+    $(".tasktable").show();
+});
 
 
 //**********************   CONTACT PHONE *****************************************************
@@ -200,7 +225,7 @@ $("#submitcontactphone").click(function (e) {
 //  NOTE VALIDATE CONTACT PHONE FORM
     if (passvalidation === true) {
         $("#contactphoneform").submit();
-    };
+    }
 });
 
 
@@ -214,7 +239,6 @@ $(".contactphoneeditbtn").click(function () {
     "use strict";
     var phid = this.closest("td").id;
     var i = this.id.slice(9);
-//    alert('edit contact phone btn clicked for ' + phid);
     location.hash = "#pluscontactphone";
     document.getElementById("contactphoneform").reset();
     document.getElementById("contactphoneform").action = "/contactphone/" + phid + "?_method=PUT";
@@ -242,7 +266,7 @@ $("#submitcontactemail").click(function (e) {
 //  NOTE VALIDATE CONTACT EMAIL FORM
     if (passvalidation === true) {
         $("#contactemailform").submit();
-    };
+    }
 });
 
 
@@ -256,7 +280,6 @@ $(".contactemaileditbtn").click(function () {
     "use strict";
     var emid = this.closest("td").id;
     var i = this.id.slice(9);
-//    alert('edit contact email btn clicked for ' + emid);
     location.hash = "#pluscontactemail";
     document.getElementById("contactemailform").reset();
     document.getElementById("contactemailform").action = "/contactemail/" + emid + "?_method=PUT";
@@ -284,7 +307,7 @@ $("#submitcontactfax").click(function (e) {
 //  NOTE VALIDATE CONTACT FAX FORM
     if (passvalidation === true) {
         $("#contactfaxform").submit();
-    };
+    }
 });
 
 
@@ -298,7 +321,6 @@ $(".contactfaxeditbtn").click(function () {
     "use strict";
     var faxid = this.closest("td").id;
     var i = this.id.slice(7);
-//    alert('edit contact fax btn clicked for ' + faxid);
     location.hash = "#pluscontactfax";
     document.getElementById("contactfaxform").reset();
     document.getElementById("contactfaxform").action = "/contactfax/" + faxid + "?_method=PUT";
@@ -329,7 +351,7 @@ $("#submitcontactmedia").click(function (e) {
 //  NOTE VALIDATE CONTACT SOCIAL MEDIA FORM
     if (passvalidation === true) {
         $("#contactmediaform").submit();
-    };
+    }
 });
 
 
@@ -343,7 +365,6 @@ $(".contactmediaeditbtn").click(function () {
     "use strict";
     var mediaid = this.closest("td").id;
     var i = this.id.slice(9);
-//    alert('edit contact media btn clicked for ' + mediaid);
     location.hash = "#pluscontactmedia";
     document.getElementById("contactmediaform").reset();
     document.getElementById("contactmediaform").action = "/contactmedia/" + mediaid + "?_method=PUT";
@@ -373,7 +394,7 @@ $("#submitcontactaddress").click(function (e) {
 //  NOTE VALIDATE CONTACT ADDRESS FORM
     if (passvalidation === true) {
         $("#contactaddressform").submit();
-    };
+    }
 });
 
 
@@ -387,7 +408,6 @@ $(".contactaddresseditbtn").click(function () {
     "use strict";
     var addressid = this.closest("td").id;
     var i = this.id.slice(11);
-//    alert('edit contact address btn clicked for ' + addressid);
     location.hash = "#pluscontactaddress";
     document.getElementById("contactaddressform").reset();
     document.getElementById("contactaddressform").action = "/contactaddress/" + addressid + "?_method=PUT";
@@ -415,7 +435,7 @@ $(".contactaddresseditbtn").click(function () {
 $(".tableremovebtn").click(function () {
     "use strict";
     var removeitem = this.id;
-    var checkstr = window.confirm("Are you sure you want to remove this?");
+    var checkstr = window.confirm("Sure you want to remove this?");
     if (checkstr === true) {
         alert("Handle remove record " + removeitem);
         var tableRef = $(this).closest("table").attr("id");
@@ -438,7 +458,7 @@ $(".tableremovebtn").click(function () {
 $(".tableremovebtn2").click(function () {
     "use strict";
     var removeitem = this.id;
-    var checkstr = window.confirm("Are you sure you want to remove this?");
+    var checkstr = window.confirm("Sure you want to remove this?");
     if (checkstr === true) {
         var tableRef = $(this).closest("table").attr("id");
         alert("Handle remove table" + tableRef);
@@ -461,7 +481,7 @@ $("#submitpersonidentification").click(function (e) {
 //  NOTE VALIDATE PERSON IDENTIFICATION FORM
     if (passvalidation === true) {
         $("#personidentificationform").submit();
-    };
+    }
 });
 
 
@@ -475,7 +495,6 @@ $(".identificationeditbtn").click(function () {
     "use strict";
     var identificationid = this.closest("td").id;
     var i = this.id.slice(18);
-//    alert('edit identification btn clicked for ' + identificationid);
     location.hash = "#pluspersonidentification";
     document.getElementById("personidentificationform").reset();
     document.getElementById("personidentificationform").action = "/personidentification/" + identificationid + "?_method=PUT";
@@ -530,11 +549,10 @@ $(".plusbtn2").click(function () {
 
 $(".personassignmentendbtn").click(function () {
     "use strict";
-    var checkstr = window.confirm("Are you sure you want to end this assignment?");
+    var checkstr = window.confirm("Sure you want to end this assignment?");
     if (checkstr === true) {
         var caseassignmentid = this.closest("td").id;
         var i = this.id.slice(19);
-    //    alert('end case person assignment btn clicked for ' + caseassignmentid);
         location.hash = "#pluspersonassignment";
         document.getElementById("personassignmentform").reset();
         document.getElementById("personassignmentform").action = "/personassignment/" + caseassignmentid + "?_method=PUT";
@@ -584,11 +602,10 @@ for (var i = 0; i < x.length; i += 1) {
 
 $(".organizationassignmentendbtn").click(function () {
     "use strict";
-    var checkstr = window.confirm("Are you sure you want to end this assignment?");
+    var checkstr = window.confirm("Sure you want to end this assignment?");
     if (checkstr === true) {
         var caseassignmentid = this.closest("td").id;
         var i = this.id.slice(25);
-    //    alert('end case organization assignment btn clicked for ' + caseassignmentid);
         location.hash = "#plusorganizationassignment";
         document.getElementById("organizationassignmentform").reset();
         document.getElementById("organizationassignmentform").action = "/organizationassignment/" + caseassignmentid + "?_method=PUT";
@@ -641,11 +658,10 @@ for (var i = 0; i < x.length; i += 1) {
 
 $(".personrelationshipendbtn").click(function () {
     "use strict";
-    var checkstr = window.confirm("Are you sure you want to end this relationship?");
+    var checkstr = window.confirm("Sure you want to end this relationship?");
     if (checkstr === true) {
         var personrelationshipid = this.closest("td").id;
         var i = this.id.slice(21);
-    //    alert('end person relationship btn clicked for ' + personrelationshipid);
         location.hash = "#pluspersonrelationship";
         document.getElementById("personrelationshipform").reset();
         document.getElementById("personrelationshipform").action = "/personrelationship/" + personrelationshipid + "?_method=PUT";
@@ -697,11 +713,10 @@ for (var i = 0; i < x.length; i += 1) {
 
 $(".personorgrelationshipendbtn").click(function () {
     "use strict";
-    var checkstr = window.confirm("Are you sure you want to end this relationship?");
+    var checkstr = window.confirm("Sure you want to end this relationship?");
     if (checkstr === true) {
         var personorganizationid = this.closest("td").id;
         var i = this.id.slice(24);
-    //    alert('end person organization relationship btn clicked for ' + personorganizationid);
         location.hash = "#pluspersonorgrelationship";
         document.getElementById("personorgrelationshipform").reset();
         document.getElementById("personorgrelationshipform").action = "/personorgrelationship/" + personorganizationid + "?_method=PUT";
@@ -756,11 +771,10 @@ for (var i = 0; i < x.length; i += 1) {
 
 $(".organizationrelationshipendbtn").click(function () {
     "use strict";
-    var checkstr = window.confirm("Are you sure you want to end this relationship?");
+    var checkstr = window.confirm("Sure you want to end this relationship?");
     if (checkstr === true) {
         var organizationrelationshipid = this.closest("td").id;
         var i = this.id.slice(27);
-    //    alert('end organization relationship btn clicked for ' + organizationrelationshipid);
         location.hash = "#plusorganizationrelationship";
         document.getElementById("organizationrelationshipform").reset();
         document.getElementById("organizationrelationshipform").action = "/organizationrelationship/" + organizationrelationshipid + "?_method=PUT";
@@ -806,145 +820,103 @@ for (var i = 0; i < x.length; i += 1) {
 
 
 
-
-
-
-//******** CASE  NEEDS  ***********************************************************
-
-$("#needdocattachment").focus(function () {
+$(".morerelationshipbtn").click(function () {
     "use strict";
-    $("#showuploaddocneed").show();
-});
-
-$("#removedocneed").click(function () {
-    "use strict";
-    $("#needbrowsebtn").val("");
-    $("#needdocattachment").val("");
-});
-
-$("#resetneed").click(function () {
-    "use strict";
-    document.getElementById("needform").action = "/need";
-    $("#needbrowsebtn").val("");
-    $("#needdocattachment").val("");
-});
-
-$("#canceldocneed").click(function () {
-    "use strict";
-    $("#needbrowsebtn").val("");
-    $("#needdocattachment").val("");
-    $("#showuploaddocneed").hide();
-});
-
-$("#needbrowsebtn").change(function () {
-    "use strict";
-    $("#needdocattachment").val($("#needbrowsebtn").val());
-});
-
-$("#submitneed").click(function (e) {
-    "use strict";
-    e.preventDefault();
-//  NOTE VALIDATE CASE NEED FORM
-//    var passvalidation = validatecaseneed();
-    var passvalidation = true;
-    if (passvalidation === true) {
-        $("#needform").submit();
-    }
-});
-
-$("#submitneeddocdownload").click(function () {
-    "use strict";
-    $("#needdocdownloadform").submit();
-});
-
-
-$(".casesneededitbtn").click(function () {
-    "use strict";
-    var needid = this.closest("td").id;
-    var i = this.id.slice(13);
-//    alert('edit cases need btn clicked for ' + needid);
-    location.hash = "#plusneed";
-    document.getElementById("needform").reset();
-    document.getElementById("needform").action = "/need/" + needid + "?_method=PUT";
-    $("#needname").val(document.getElementById("needname" + i).innerHTML);
-    $("#needtype").val(document.getElementById("needtype" + i).innerHTML);
-    $("#needdate").val(document.getElementById("needdate" + i).innerHTML);
-    $("#needstage").val(document.getElementById("needstage" + i).innerHTML);
-    $("#needstatus").val(document.getElementById("needstatus" + i).innerHTML);
-    $("#needseverity").val(document.getElementById("needseverity" + i).innerHTML);
-    $("#neednote").val(document.getElementById("neednote" + i).innerHTML);
-    $("#needdocattachment").val(document.getElementById("needdoc" + i).innerHTML);
-    $("#needcaseid").val(document.getElementById("needcaseid" + i).innerHTML);    
-    document.getElementById("resetneed").textContent = "Cancel";
-    document.getElementById("submitneed").textContent = "Save";
-    document.getElementById("needform").style.display = "block";
-});
-
-
-$(".moreneedbtn").click(function () {
-    "use strict";
-    var morebtn = this.id;
-    var words = morebtn.slice(11);
-    var goalsthruactionstablerows = document.getElementById("goalsthruactionstable" + words).getElementsByTagName("tbody")[0].getElementsByTagName("tr").length;
-    if (goalsthruactionstablerows > 0) {
-        document.getElementById("goalsthruactionsdiv" + words).style.display = "block";
+    var thisdiv = this.id.slice(3);
+    document.getElementById(thisdiv)
+    if (document.getElementById(thisdiv).style.display !== "block") {
+        document.getElementById(thisdiv).style.display = "block";
     } else {
-        document.getElementById("goalsthruactionsdiv" + words).style.display = "none";
+        document.getElementById(thisdiv).style.display = "none";
     }
 });
 
 
+// *******  SHOW/HIDE RELATIONSHIP TABLES ***********
 
-
-$(".needanchorbtn").click(function (e) {
+$(".collapsepersonrelbtn").click(function () {
     "use strict";
-    e.preventDefault();
+    $(".personrelationshiptable").hide();
+});
+
+$(".expandpersonrelbtn").click(function () {
+    "use strict";
+    $(".personrelationshiptable").show();
+});
+
+$(".collapseorgrelbtn").click(function () {
+    "use strict";
+    $(".orgrelationshiptable").hide();
+});
+
+$(".expandorgrelbtn").click(function () {
+    "use strict";
+    $(".orgrelationshiptable").show();
+});
+
+
+
+//****************** GOALS, PLANS, ACTIONS, CASE FILES *************************************************
+
+// DOC UPLOAD BUTTON CLICKED
+
+$(".uploaddocbtn").click(function () {
+    "use strict";
     var btn = this.id;
-//    alert(btn);
-    var words = btn.slice(3);
-//    alert(words);
-    $("div#taskpanel ul#navmenu li").removeClass("active");
-    if (btn.indexOf("need") > -1) {
-        $("div#taskpanel ul#navmenu li:nth-child(6)").addClass("active");
-    } else if (btn.indexOf("goal") > -1) {
-        $("div#taskpanel ul#navmenu li:nth-child(7)").addClass("active");
+    if (btn.indexOf("goal") > -1) {
+        $("#goaluploadformdiv").show();
+        var goalid = btn.slice(16);
+        document.getElementById("goaluploadForm").action = "/goal/upload/" + goalid;
+    } else if (btn.indexOf("plan") > -1) {
+        $("#planuploadformdiv").show();
+        var planid = btn.slice(16);
+        document.getElementById("planuploadForm").action = "/plan/upload/" + planid;
+    } else if (btn.indexOf("action") > -1) {
+        $("#actionuploadformdiv").show();
+        var actionid = btn.slice(18);
+        document.getElementById("actionuploadForm").action = "/action/upload/" + actionid;
     } else {
-        $("div#taskpanel ul#navmenu li:nth-child(8)").addClass("active");
+        if (btn.indexOf("file") > -1) {
+            $("#fileuploadformdiv").show();
+            var casefileid = btn.slice(16);
+            document.getElementById("fileuploadForm").action = "/casefile/upload/" + casefileid;
+        }
     }
-    setTimeout(function () {
-        location.hash = words;
-    }, 100);
 });
 
 
+$(".docremovebtn").click(function (e) {
+    "use strict";
+    e.preventDefault();
+    var thisform = this.closest("form").id;
+    var checkstr = window.confirm("Sure you want to remove this?");
+    if (checkstr === true) {
+        document.getElementById(thisform).submit();
+    }
+});
 
 
-//****************** SHOW/HIDE GOAL THRU ACTION TABLES ***********************
+// *******  SHOW/HIDE GOAL THRU NOTE TABLES ***********
 
-$(".collapsegoalthruactionbtn").click(function () {
+$(".collapsetablesbtn").click(function () {
     "use strict";
     var collapsebtn = this.id;
-//    alert(collapsebtn);
     var words = collapsebtn.slice(8);
-//    alert(words);
-    $(".associated" + words + "_table").hide();
+    $(".display" + words + "_div").hide();
 });
 
-$(".expandgoalthruactionbtn").click(function () {
+$(".expandtablesbtn").click(function () {
     "use strict";
     var expandbtn = this.id;
-//    alert(expandbtn);
     var words = expandbtn.slice(6);
-//    alert(words);
-    $(".associated" + words + "_table").show();
+    $(".display" + words + "_div").show();
 });
+
 
 $(".associatedheadbtn").click(function () {
     "use strict";
     var hdbtn = this.id;
-//    alert(hdbtn);
     var words = hdbtn.slice(4);
-//    alert(words);
     if (document.getElementById("div" + words).style.display !== "block") {
         document.getElementById("div" + words).style.display = "block";
     } else {
@@ -954,43 +926,62 @@ $(".associatedheadbtn").click(function () {
 
 
 
+//************* ANCHOR BUTTONS AND HYPERLINKS  ************************************************
+
+$(".parentanchorbtn").click(function (e) {
+    "use strict";
+    e.preventDefault();
+    var btn = this.id.slice(4);
+    $("div#taskpanel ul#navmenu li").removeClass("active");
+    if (btn.indexOf("goal") > -1) {
+        $("div#taskpanel ul#navmenu li:nth-child(5)").addClass("active");
+    } else {
+        if (btn.indexOf("plan") > -1) {
+            $("div#taskpanel ul#navmenu li:nth-child(6)").addClass("active");
+        }
+    }
+    setTimeout(function () {
+        location.hash = btn;
+    }, 100);
+});
+
+
+$(".childrenanchorbtn").click(function (e) {
+    "use strict";
+    e.preventDefault();
+    var btn = this.id.slice(4);
+    if (document.getElementById(btn) !== null) {
+        $("div#taskpanel ul#navmenu li").removeClass("active");
+        if (btn.indexOf("goal") > -1) {
+            $("div#taskpanel ul#navmenu li:nth-child(6)").addClass("active");
+        } else {
+            if (btn.indexOf("plan") > -1) {
+                $("div#taskpanel ul#navmenu li:nth-child(7)").addClass("active");
+            }
+        }
+        setTimeout(function () {
+            location.hash = btn;
+        }, 100);
+    } else {
+        alert("this does not exist");
+        window.history.back();
+    }
+});
+
+
+
 //********  CASE GOALS ***********************************************************
-
-$("#goaldocattachment").focus(function () {
-    "use strict";
-    $("#showuploaddocgoal").show();
-});
-
-$("#removedocgoal").click(function () {
-    "use strict";
-    $("#goalbrowsebtn").val("");
-    $("#goaldocattachment").val("");
-});
 
 $("#resetgoal").click(function () {
     "use strict";
     document.getElementById("goalform").action = "/goal";
-    $("#goalbrowsebtn").val("");
-    $("#goaldocattachment").val("");
+    document.getElementById("goalcompletedate").disabled = true;
 });
-
-$("#canceldocgoal").click(function () {
-    "use strict";
-    $("#goalbrowsebtn").val("");
-    $("#goaldocattachment").val("");
-    $("#showuploaddocgoal").hide();
-});
-
-$("#goalbrowsebtn").change(function () {
-    "use strict";
-    $("#goaldocattachment").val($("#goalbrowsebtn").val());
-});
-
 
 $("#submitgoal").click(function (e) {
     "use strict";
     e.preventDefault();
-//  NOTE VALIDATE CASE NEED FORM
+//  NOTE VALIDATE CASE GOAL FORM
 //    var passvalidation = validatecasegoal();
     var passvalidation = true;
     if (passvalidation === true) {   
@@ -998,18 +989,10 @@ $("#submitgoal").click(function (e) {
     }
 });
 
-
-$("#submitgoaldocdownload").click(function () {
-    "use strict";
-    $("#goaldocdownloadform").submit();
-});
-
-
 $(".casesgoaleditbtn").click(function () {
     "use strict";
     var goalid = this.closest("td").id;
     var i = this.id.slice(13);
-//    alert('edit cases goal btn clicked for ' + goalid);
     location.hash = "#plusgoal";
     document.getElementById("goalform").reset();
     document.getElementById("goalform").action = "/goal/" + goalid + "?_method=PUT";
@@ -1018,28 +1001,56 @@ $(".casesgoaleditbtn").click(function () {
     $("#goalpriority").val(document.getElementById("goalpriority" + i).innerHTML);
     $("#goalstartdate").val(document.getElementById("goalstartdate" + i).innerHTML);
     $("#goalduedate").val(document.getElementById("goalduedate" + i).innerHTML);
+    document.getElementById("goalcompletedate").disabled = false;
     $("#goalcompletedate").val(document.getElementById("goalcompletedate" + i).innerHTML);
-    $("#assocneedid").val(document.getElementById("assocneedid" + i).innerHTML);
     $("#goalassignedpersonid").val(document.getElementById("goalassignedpersonid" + i).innerHTML);
     $("#goalnote").val(document.getElementById("goalnote" + i).innerHTML);
-    $("#goaldocattachment").val(document.getElementById("goaldoc" + i).innerHTML);
-    $("#goalcaseid").val(document.getElementById("goalcaseid" + i).innerHTML);    
+    $("#goalcaseid").val(document.getElementById("goalcaseid" + i).innerHTML);  
     document.getElementById("resetgoal").textContent = "Cancel";
     document.getElementById("submitgoal").textContent = "Save";
     document.getElementById("goalform").style.display = "block";
 });
 
+$("#canceldocgoal").click(function () {
+    "use strict";
+    var thisdiv = document.getElementById("uploadgoalbtns");
+    while (thisdiv.hasChildNodes()) {
+        thisdiv.removeChild(thisdiv.lastChild);
+    }
+    $("#goaluploadformdiv").hide();
+});
 
+
+$("#addgoaluploadbtn").click(function () {
+	"use strict";
+    var goalfilenames = document.querySelectorAll(".uploadgoalbtn");
+    var k = 0;
+    var emptyupload = false;
+    while ((emptyupload === false) && (k < goalfilenames.length)) {
+        if (goalfilenames[k].value === "") {
+            emptyupload = true;
+        }
+        k += 1;
+    }
+    if ((emptyupload === true) && (k <= 10)) {
+        alert("Use empty upload.");
+    } else if (emptyupload === false) {
+        if (k < 10) {
+	        var newgoaluploadbtn = '<div class="col-xs-12"><input type="file" class="btn btn-primary btn-md uploadgoalbtn" name="userFile" /></div>';
+    	    $("#uploadgoalbtns").append(newgoaluploadbtn);
+        } else {
+            alert("Maximum 10 files uploaded at once.");
+        }
+    } 
+});
 
 // GOAL TYPE BUTTONS
 
 $(".goaltypebtn").click(function () {
     "use strict";
     var goaltype = this.id.slice(8);
-//    alert(goaltype);
     var goalbtn = document.getElementById("showgoal" + goaltype);
     var words = $(goalbtn).val();
-//    alert(words);
     if (goalbtn.checked === true) {
         $(".goal" + words + "row").removeClass("collapse out");
     } else {
@@ -1050,37 +1061,22 @@ $(".goaltypebtn").click(function () {
 
 
 
+
 //********  CASE PLANS ***********************************************************
-
-$("#plandocattachment").focus(function () {
-    "use strict";
-    $("#showuploaddocplan").show();
-});
-
-$("#removedocplan").click(function () {
-    "use strict";
-    $("#planbrowsebtn").val("");
-    $("#plandocattachment").val("");
-});
 
 $("#resetplan").click(function () {
     "use strict";
     document.getElementById("planform").action = "/plan";
-    $("#planbrowsebtn").val("");
-    $("#plandocattachment").val("");
+    document.getElementById("plancompletedate").disabled = true;
 });
 
-$("#canceldocplan").click(function () {
-    "use strict";
-    $("#planbrowsebtn").val("");
-    $("#plandocattachment").val("");
-    $("#showuploaddocplan").hide();
-});
-
-$("#planbrowsebtn").change(function () {
-    "use strict";
-    $("#plandocattachment").val($("#planbrowsebtn").val());
-});
+function validatecaseplan() {
+    if (($("#planname").val() !== "") && ($("#assocgoalid").val() !== "0")) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 $("#submitplan").click(function (e) {
     "use strict";
@@ -1090,19 +1086,15 @@ $("#submitplan").click(function (e) {
     var passvalidation = true;
     if (passvalidation === true) {   
         $("#planform").submit();
+    } else {
+        alert("Enter Name and Associated Goal");
     }
-});
-
-$("#submitplandocdownload").click(function () {
-    "use strict";
-    $("#plandocdownloadform").submit();
 });
 
 $(".casesplaneditbtn").click(function () {
     "use strict";
     var planid = this.closest("td").id;
     var i = this.id.slice(13);
-//    alert('edit cases plan btn clicked for ' + planid);
     location.hash = "#plusplan";
     document.getElementById("planform").reset();
     document.getElementById("planform").action = "/plan/" + planid + "?_method=PUT";
@@ -1111,27 +1103,56 @@ $(".casesplaneditbtn").click(function () {
     $("#planpriority").val(document.getElementById("planpriority" + i).innerHTML);
     $("#planstartdate").val(document.getElementById("planstartdate" + i).innerHTML);
     $("#planduedate").val(document.getElementById("planduedate" + i).innerHTML);
+    document.getElementById("plancompletedate").disabled = false;
     $("#plancompletedate").val(document.getElementById("plancompletedate" + i).innerHTML);
     $("#assocgoalid").val(document.getElementById("assocgoalid" + i).innerHTML);
     $("#planassignedpersonid").val(document.getElementById("planassignedpersonid" + i).innerHTML);
     $("#plannote").val(document.getElementById("plannote" + i).innerHTML);
-    $("#plandocattachment").val(document.getElementById("plandoc" + i).innerHTML);
     $("#plancaseid").val(document.getElementById("plancaseid" + i).innerHTML);    
     document.getElementById("resetplan").textContent = "Cancel";
     document.getElementById("submitplan").textContent = "Save";
     document.getElementById("planform").style.display = "block";
 });
 
+$("#canceldocplan").click(function () {
+    "use strict";
+    var thisdiv = document.getElementById("uploadplanbtns");
+    while (thisdiv.hasChildNodes()) {
+        thisdiv.removeChild(thisdiv.lastChild);
+    }
+    $("#planuploadformdiv").hide();
+});
+
+$("#addplanuploadbtn").click(function () {
+	"use strict";
+    var planfilenames = document.querySelectorAll(".uploadplanbtn");
+    var k = 0;
+    var emptyupload = false;
+    while ((emptyupload === false) && (k < planfilenames.length)) {
+        if (planfilenames[k].value === "") {
+            emptyupload = true;
+        }
+        k += 1;
+    }
+    if ((emptyupload === true) && (k <= 10)) {
+        alert("Use empty upload.");
+    } else if (emptyupload === false) {
+        if (k < 10) {
+	        var newplanuploadbtn = '<div class="col-xs-12"><input type="file" class="btn btn-primary btn-md uploadplanbtn" name="userFile" /></div>';
+    	    $("#uploadplanbtns").append(newplanuploadbtn);
+        } else {
+            alert("Maximum 10 files uploaded at once.");
+        }
+    }
+});
 
 // PLAN TYPE BUTTONS
 
 $(".plantypebtn").click(function () {
     "use strict";
     var plantype = this.id.slice(8);
-//    alert(plantype);
     var planbtn = document.getElementById("showplan" + plantype);
     var words = $(planbtn).val();
-//    alert(words);
     if (planbtn.checked === true) {
         $(".plan" + words + "row").removeClass("collapse out");
     } else {
@@ -1147,35 +1168,19 @@ $(".plantypebtn").click(function () {
 
 //********  CASE ACTIONS ***********************************************************
 
-$("#actiondocattachment").focus(function () {
-    "use strict";
-    $("#showuploaddocaction").show();
-});
-
-$("#removedocaction").click(function () {
-    "use strict";
-    $("#actionbrowsebtn").val("");
-    $("#actiondocattachment").val("");
-});
-
 $("#resetaction").click(function () {
     "use strict";
     document.getElementById("actionform").action = "/action";
-    $("#actionbrowsebtn").val("");
-    $("#actiondocattachment").val("");
+    document.getElementById("actioncompletedate").disabled = true;
 });
 
-$("#canceldocaction").click(function () {
-    "use strict";
-    $("#actionbrowsebtn").val("");
-    $("#actiondocattachment").val("");
-    $("#showuploaddocaction").hide();
-});
-
-$("#actionbrowsebtn").change(function () {
-    "use strict";
-    $("#actiondocattachment").val($("#actionbrowsebtn").val());
-});
+function validatecaseaction() {
+    if (($("#actionname").val() !== "") && ($("#assocplanid").val() !== "0")) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 $("#submitaction").click(function (e) {
     "use strict";
@@ -1185,19 +1190,15 @@ $("#submitaction").click(function (e) {
     var passvalidation = true;
     if (passvalidation === true) {   
         $("#actionform").submit();
+    } else {
+        alert("Enter Name and Associated Plan");
     }
-});
-
-$("#submitactiondocdownload").click(function () {
-    "use strict";
-    $("#actiondocdownloadform").submit();
 });
 
 $(".casesactioneditbtn").click(function () {
     "use strict";
     var actionid = this.closest("td").id;
     var i = this.id.slice(15);
-//    alert('edit cases action btn clicked for ' + actionid);
     location.hash = "#plusaction";
     document.getElementById("actionform").reset();
     document.getElementById("actionform").action = "/action/" + actionid + "?_method=PUT";
@@ -1206,32 +1207,54 @@ $(".casesactioneditbtn").click(function () {
     $("#actionpriority").val(document.getElementById("actionpriority" + i).innerHTML);
     $("#actionstartdate").val(document.getElementById("actionstartdate" + i).innerHTML);
     $("#actionduedate").val(document.getElementById("actionduedate" + i).innerHTML);
+    document.getElementById("actioncompletedate").disabled = false;
     $("#actioncompletedate").val(document.getElementById("actioncompletedate" + i).innerHTML);
     $("#assocplanid").val(document.getElementById("assocplanid" + i).innerHTML);
     $("#actionassignedpersonid").val(document.getElementById("actionassignedpersonid" + i).innerHTML);
     $("#actionnote").val(document.getElementById("actionnote" + i).innerHTML);
-    $("#actiondocattachment").val(document.getElementById("actiondoc" + i).innerHTML);
     $("#actioncaseid").val(document.getElementById("actioncaseid" + i).innerHTML);    
     document.getElementById("resetaction").textContent = "Cancel";
     document.getElementById("submitaction").textContent = "Save";
     document.getElementById("actionform").style.display = "block";
 });
 
-
-// ACTION TASK SHOW/HIDE TASKS BUTTON
-
-$("#btnactionstaskstable").click(function () {
+$("#canceldocaction").click(function () {
     "use strict";
-    $("#actionstaskstable").toggle();
+    var thisdiv = document.getElementById("uploadactionbtns");
+    while (thisdiv.hasChildNodes()) {
+        thisdiv.removeChild(thisdiv.lastChild);
+    }
+    $("#actionuploadformdiv").hide();
 });
 
+$("#addactionuploadbtn").click(function () {
+	"use strict";
+    var actionfilenames = document.querySelectorAll(".uploadactionbtn");
+    var k = 0;
+    var emptyupload = false;
+    while ((emptyupload === false) && (k < actionfilenames.length)) {
+        if (actionfilenames[k].value === "") {
+            emptyupload = true;
+        }
+        k += 1;
+    }
+    if ((emptyupload === true) && (k <= 10)) {
+        alert("Use empty upload.");
+    } else if (emptyupload === false) {
+        if (k < 10) {
+    	    var newactionuploadbtn = '<div class="col-xs-12"><input type="file" class="btn btn-primary btn-md uploadactionbtn" name="userFile" /></div>';
+	        $("#uploadactionbtns").append(newactionuploadbtn);
+        } else {
+            alert("Maximum 10 files uploaded at once.");
+        }
+    }
+});
 
 // ACTION TYPE BUTTONS
 
 $(".actiontypebtn").click(function () {
     "use strict";
     var actiontype = this.id.slice(10);
-//    alert(actiontype);
     var actionbtn = document.getElementById("showaction" + actiontype);
     var words = $(actionbtn).val();
     if (actionbtn.checked === true) {
@@ -1241,39 +1264,25 @@ $(".actiontypebtn").click(function () {
     }
 });
 
+// ACTION TASK SHOW/HIDE TASKS BUTTON
+
+$("#btnactionstaskstable").click(function () {
+    "use strict";
+    $("#actionstaskstable").toggle();
+});
+
+
 
 
 
 //CASE FILES ***********************************************************
 
-$("#casefiledocattachment").focus(function () {
-    "use strict";
-    $("#showuploaddoccasefile").show();
-});
-
-$("#removedoccasefile").click(function () {
-    "use strict";
-    $("#casefilebrowsebtn").val("");
-    $("#casefiledocattachment").val("");
-});
-
 $("#resetcasefile").click(function () {
     "use strict";
-    document.getElementById("casefileform").action = "/casefile";
-    $("#casefilebrowsebtn").val("");
-    $("#casefiledocattachment").val("");
-});
-
-$("#canceldoccasefile").click(function () {
-    "use strict";
-    $("#casefilebrowsebtn").val("");
-    $("#casefiledocattachment").val("");
-    $("#showuploaddoccasefile").hide();
-});
-
-$("#casefilebrowsebtn").change(function () {
-    "use strict";
-    $("#casefiledocattachment").val($("#casefilebrowsebtn").val());
+    var thisdiv = document.getElementById("uploadcasefilebtns");
+    while (thisdiv.hasChildNodes()) {
+        thisdiv.removeChild(thisdiv.lastChild);
+    }
 });
 
 
@@ -1288,30 +1297,29 @@ $("#submitcasefile").click(function (e) {
     }
 });
 
-$("#submitfiledocdownload").click(function () {
-    "use strict";
-    $("#filedocdownloadform").submit();
-});
 
-$(".casefileeditbtn").click(function () {
-    "use strict";
-    var casefileid = this.closest("td").id;
-    var i = this.id.slice(12);
-//    alert('edit cases file btn clicked for ' + casefileid);
-    location.hash = "#pluscasefile";
-    document.getElementById("casefileform").reset();
-    document.getElementById("casefileform").action = "/casefile/" + casefileid + "?_method=PUT";
-    $("#casefilename").val(document.getElementById("filename" + i).innerHTML);
-    $("#casefilecasedomain").val(document.getElementById("filedomain" + i).innerHTML);
-    $("#casefileactiontype").val(document.getElementById("fileactiontype" + i).innerHTML);
-    $("#casefiletype").val(document.getElementById("filetype" + i).innerHTML);
-    $("#casefilepersonid").val(document.getElementById("filepersonid" + i).innerHTML);
-    $("#casefileorgid").val(document.getElementById("fileorgid" + i).innerHTML);
-    $("#casefilenote").val(document.getElementById("filenote" + i).innerHTML);
-    $("#casefiledocattachment").val(document.getElementById("filedoc" + i).innerHTML);
-    document.getElementById("resetcasefile").textContent = "Cancel";
-    document.getElementById("submitcasefile").textContent = "Save";
-    document.getElementById("casefileform").style.display = "block";
+
+$("#addfileuploadbtn").click(function () {
+	"use strict";
+    var casefilenames = document.querySelectorAll(".uploadcasefilebtn");
+    var k = 0;
+    var emptyupload = false;
+    while ((emptyupload === false) && (k < casefilenames.length)) {
+        if (casefilenames[k].value === "") {
+            emptyupload = true;
+        }
+        k += 1;
+    }
+    if ((emptyupload === true) && (k <= 10)) {
+        alert("Use empty upload.");
+    } else if (emptyupload === false) {
+        if (k < 10) {
+            var newfileuploadbtn = '<div class="col-xs-12"><input type="file" class="btn btn-primary btn-md uploadcasefilebtn" name="userFile" /></div>';
+            $("#uploadcasefilebtns").append(newfileuploadbtn);
+        } else {
+            alert("Maximum 10 files uploaded at once.");
+        }
+    }
 });
 
 
@@ -1320,13 +1328,12 @@ $(".casefileeditbtn").click(function () {
 $(".filecasedomainbtn").click(function () {
     "use strict";
     var filecasedomain = this.id.slice(8);
-//    alert(filecasedomain);
     var filecasedomainbtn = document.getElementById("showfile" + filecasedomain);
     var words = $(filecasedomainbtn).val();
     if (filecasedomainbtn.checked === true) {
-        $(".filecasedomain" + words + "row").removeClass("collapse out");
+        $(".filecasedomain" + words + "table").show();
     } else {
-        $(".filecasedomain" + words + "row").addClass("collapse out");
+        $(".filecasedomain" + words + "table").hide();
     }
 });
 
@@ -1357,7 +1364,6 @@ $(".casenoteeditbtn").click(function () {
     "use strict";
     var casenoteid = this.closest("td").id;
     var i = this.id.slice(12);
-//    alert('edit cases note btn clicked for ' + casenoteid);
     location.hash = "#pluscasenote";
     document.getElementById("casenoteform").reset();
     document.getElementById("casenoteform").action = "/casenote/" + casenoteid + "?_method=PUT";
@@ -1367,40 +1373,163 @@ $(".casenoteeditbtn").click(function () {
     $("#casenotetype").val(document.getElementById("notetype" + i).innerHTML);
     $("#casenotepersonid").val(document.getElementById("notepersonid" + i).innerHTML);
     $("#casenoteorgid").val(document.getElementById("noteorgid" + i).innerHTML);
-    $("#casenotetext").val(document.getElementById("notetext" + i).innerHTML);
+    $("#casenotetext").val(document.getElementById("notetext" + i + "-0").innerHTML);
     document.getElementById("resetcasenote").textContent = "Cancel";
     document.getElementById("submitcasenote").textContent = "Save";
     document.getElementById("casenoteform").style.display = "block";
 });
 
-
 // NOTE CASE DOMAIN BUTTONS
-
 $(".notecasedomainbtn").click(function () {
     "use strict";
     var notecasedomain = this.id.slice(8);
-//    alert(notecasedomain);
     var notecasedomainbtn = document.getElementById("shownote" + notecasedomain);
     var words = $(notecasedomainbtn).val();
     if (notecasedomainbtn.checked === true) {
-        $(".notecasedomain" + words + "row").removeClass("collapse out");
+        $(".notecasedomain" + words + "table").show();
     } else {
-        $(".notecasedomain" + words + "row").addClass("collapse out");
+        $(".notecasedomain" + words + "table").hide();
+    }
+});
+
+
+
+//******************************   QUESTIONNAIRES   *******************************************************************
+
+//*** Case Questionnaires ******************************
+
+$("#casequestionnairetype").change(function () {
+    "use strict";
+    var typequest = $("#casequestionnairetype").val();
+    document.getElementById("casequestionnairename").selectedIndex = "0";
+    if (typequest === "0") {
+        for (var i = 1; i < document.getElementById("casequestionnairename").length; i += 1) {
+            document.getElementById("casequestionnairename").options[i].style.display = "block";
+        }
+    } else {
+        for (var i = 1; i < document.getElementById("casequestionnairename").length; i += 1) {
+            if (document.getElementById("casequestionnairename").options[i].className === typequest) {
+                document.getElementById("casequestionnairename").options[i].style.display = "block";
+            } else {
+                document.getElementById("casequestionnairename").options[i].style.display = "none";
+            }
+        }
+    }
+});
+
+$("#casequestionnairename").change(function () {
+    "use strict";
+    var i = document.getElementById("casequestionnairename").selectedIndex;
+    if (i !== 0) {
+        var questClass = document.getElementById("casequestionnairename").options[i].className;
+        document.getElementById("casequestionnairetype").selectedIndex = questClass;
+    } else {
+        $("#casequestionnairetype").change();
+    }
+});
+
+$("#questcaseassocwith").change(function () {
+    "use strict";
+    var assocwith = $("#questcaseassocwith").val();
+    document.getElementById("questassocwithname").selectedIndex = "0";
+    if (assocwith !== 0) {
+        for (var i = 1; i < document.getElementById("questassocwithname").length; i += 1) {
+            if (document.getElementById("questassocwithname").options[i].className === assocwith) {
+                document.getElementById("questassocwithname").options[i].style.display = "block";
+            } else {
+                document.getElementById("questassocwithname").options[i].style.display = "none";
+            }
+        }
+    } else {
+        for (var i = 1; i < document.getElementById("questassocwithname").length; i += 1) {
+            document.getElementById("questassocwithname").options[i].style.display = "none";
+        }
+    }
+});
+
+$(".questeditbtn").click(function() {
+    "use strict";
+    var casequestid = this.closest("td").id;
+    var i = this.id.slice(13);
+    location.hash = "#pluscasequestionnaire";
+    document.getElementById("casequestionnaireform").reset();
+    document.getElementById("casequestionnaireform").action = "/casequestionnaire/" + casequestid + "?_method=PUT";
+    $("#casequestionnairetype").val(document.getElementById("casequesttype" + i).innerHTML);
+    document.getElementById("casequestionnairetype").disabled = true;
+    $("#casequestionnairename").val(document.getElementById("casequestionnaireid" + i).innerHTML);
+    document.getElementById("casequestionnairename").disabled = true;
+    if (document.getElementById("casequestcaseassocwith" + i).innerHTML !== "") {
+        $("#questcaseassocwith").val(document.getElementById("casequestcaseassocwith" + i).innerHTML);
+        var questcaseclass = $("#questcaseassocwith").val();
+    } else {
+        $("#questcaseassocwith").val("0");      
+    }
+    if (document.getElementById("casequestassocwithnameid" + i).innerHTML !== "") {
+        var questcaseassocnameid = document.getElementById("casequestassocwithnameid" + i).innerHTML;
+        for (var g = 1; g < document.getElementById("questassocwithname").length; g += 1) {
+            document.getElementById("questassocwithname").options[g].style.display = "block";
+        }
+        document.getElementById("questassocwithname").disabled = false;
+        var found = false;
+        var j = 0;
+        while ((found === false) && (j < document.getElementById("questassocwithname").length)) {   
+            j += 1;
+            if ((document.getElementById("questassocwithname").options[j].className === questcaseclass) && (document.getElementById("questassocwithname").options[j].value === questcaseassocnameid)) {
+                found = true;
+                document.getElementById("questassocwithname").selectedIndex = j;
+            }
+        }
+    } else {
+        for (var g = 1; g < document.getElementById("questassocwithname").length; g += 1) {
+            document.getElementById("questassocwithname").options[g].style.display = "none";
+        }        
+    }
+	for (var q = 0; q < document.getElementById("casequeststatus").length; q += 1) {
+		document.getElementById("casequeststatus").options[q].style.display = "block";
+	}
+    document.getElementById("questcaseassocwith").disabled = true;
+    document.getElementById("questassocwithname").disabled = true;
+    $("#casequeststatus").val(document.getElementById("casequeststatus" + i).innerHTML);
+    $("#questnote").val(document.getElementById("casequestnote" + i).innerHTML);
+    document.getElementById("resetcasequestionnaire").textContent = "Cancel";
+    document.getElementById("submitcasequestionnaire").textContent = "Save";
+    document.getElementById("casequestionnaireform").style.display = "block";
+});
+
+$("#resetcasequestionnaire").click(function() {
+    "use strict";
+    document.getElementById("casequestionnaireform").action = "/casequestionnaire";
+    document.getElementById("casequestionnairetype").disabled = false;
+    document.getElementById("casequestionnairename").disabled = false;
+    document.getElementById("questcaseassocwith").disabled = false;
+    document.getElementById("questassocwithname").disabled = false;
+    for (var i = 0; i < document.getElementById("casequeststatus").length; i += 1) {
+        if (i !== 1) {
+            document.getElementById("casequeststatus").options[i].style.display = "none";
+        } else {
+            document.getElementById("casequeststatus").options[i].style.display = "block";
+        }
+    }
+});
+
+
+//NOTE: Will be updated for development
+$(".questremovebtn").click(function() {
+    "use strict";
+    var casequestid = this.closest("td").id;
+    var i = this.id.slice(15);
+    var checkstr = window.confirm("Sure you want to remove this questionnaire?");
+    if (checkstr === true) {
+        alert("Handle remove Case Questionnaire " + i);
     }
 });
 
 
 
 
-
-
-
-
-
-
 //NAVBAR LINKS
 
-$("#contact a, #identification a, #cases a, #needs a, #goals a, #plans a, #actions a, #case_person a, #related_cases a, #assigned_people a, #assigned_organizations a, #measurements a, #casefiles a, #casenotes a, #questionnaire a").click(function (e) {
+$("#contact a, #identification a, #cases a, #goals a, #plans a, #actions a, #cases_brief a, #related_cases a, #assigned_people a, #assigned_organizations a, #measurements a, #casefiles a, #casenotes a, #questionnaire a").click(function (e) {
     "use strict";
     e.preventDefault();
     $(this).tab("show");
@@ -1423,3 +1552,8 @@ $("#tonavbtns").click(function () {
     location.href = "#";
     location.href = "#navbtns";
 });
+$("#goback").click(function () {
+    "use strict";
+    window.history.back();
+});
+

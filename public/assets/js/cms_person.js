@@ -17,7 +17,7 @@ $("#cancelnewimage").click(function () {
 
 $("#submitpersonimage").click(function () {
     "use strict";
-    $("#personuploadFormalert").submit();
+    $("#personuploadForm").submit();
 });
 
 $("#removeimage").click(function () {
@@ -67,6 +67,10 @@ $("#resetperson").click(function (e) {
     $("#ablepersonform").prop("disabled", true);
     document.getElementById("persontype").disabled = true;
     document.getElementById("personrolestatus").disabled = true;
+    var removereq = $("#personform .requiredfield");
+    for (var r = 0; r < removereq.length; r += 1) {
+        removereq[r].style.borderColor = "#cccccc";
+    }
     $("#cancelsaveperson").hide();
     $("#editdeleteperson").show();
     $("#personform").reset();
@@ -77,13 +81,9 @@ $("#resetperson").click(function (e) {
 function validateperson() {
     "use strict";
     var passvalidation = false;
-/*    if ((($("#lastname").val()).trim() !== "") && (($("#firstname").val()).trim() !== "")
-            && (($("#birthdate").val()).trim() !== "") && ($("#gender").val() !== "0")
-            && ($("#personrole").val() !== "0") && ($("#persontype").val() !== "0") && ($("#personrolestatus").val() !== "0")) {
-*/
     if ((($("#lastname").val()).trim() !== "") && (($("#firstname").val()).trim() !== "")
             && (($("#birthdate").val()).trim() !== "") && ($("#gender").val() !== "0")
-            && ($("#personrole").val() !== "0")) {
+            && ($("#personrole").val() !== "0") && ($("#persontype").val() !== "0") && ($("#personrolestatus").val() !== "0")) {
         passvalidation = true;
     } else {
         alert("invalid input");
@@ -127,6 +127,10 @@ $("#editperson").click(function () {
     $("#ablepersonform").prop("disabled", false);
     document.getElementById("persontype").disabled = false;
     document.getElementById("personrolestatus").disabled = false;
+    var removereq = $("#personform .requiredfield");
+    for (var r = 0; r < removereq.length; r += 1) {
+        removereq[r].style.borderColor = "#ffb8af";
+    }
     if (document.getElementById("cancelsaveperson").style.visibility !== "visible") {
         $("#editdeleteperson").hide();
         $("#cancelsaveperson").show();

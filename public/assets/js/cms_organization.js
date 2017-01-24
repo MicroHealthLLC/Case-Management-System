@@ -39,6 +39,10 @@ $("#resetorganization").click(function (e) {
     $("#ableorganizationform").prop("disabled", true);
     document.getElementById("organizationtype").disabled = true;
     document.getElementById("organizationrolestatus").disabled = true;
+    var removereq = $("#organizationform .requiredfield");
+    for (var r = 0; r < removereq.length; r += 1) {
+        removereq[r].style.borderColor = "#cccccc";
+    }
     $("#cancelsaveorganization").hide();
     $("#editdeleteorganization").show();
     $("#organizationform").reset();
@@ -96,6 +100,10 @@ $("#editorganization").click(function () {
     $("#ableorganizationform").prop("disabled", false);
     document.getElementById("organizationtype").disabled = false;
     document.getElementById("organizationrolestatus").disabled = false;
+    var removereq = $("#organizationform .requiredfield");
+    for (var r = 0; r < removereq.length; r += 1) {
+        removereq[r].style.borderColor = "#ffb8af";
+    }
     if (document.getElementById("cancelsaveorganization").style.visibility !== "visible") {
         $("#editdeleteorganization").hide();
         $("#cancelsaveorganization").show();

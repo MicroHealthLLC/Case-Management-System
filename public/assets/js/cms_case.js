@@ -56,15 +56,19 @@ $("#casetype").change(function () {
 });
 
 
-
 $("#resetcase").click(function (e) {
     "use strict";
     e.preventDefault();
     getcaseinfo();
+    $("#selectparentmodule").hide();
     $("#ablecaseform").prop("disabled", true);
     document.getElementById("casecategory").disabled = true;
     document.getElementById("casetype").disabled = true;
     document.getElementById("casestatus").disabled = true;
+    var removereq = $("#caseform .requiredfield");
+    for (var r = 0; r < removereq.length; r += 1) {
+        removereq[r].style.borderColor = "#cccccc";
+    }
     $("#cancelsavecase").hide();
     $("#editdeletecase").show();
     $("#caseform").reset();
@@ -75,13 +79,9 @@ $("#resetcase").click(function (e) {
 function validatecase() {
     "use strict";
     var passvalidation = false;
-/*    if ((($("#casetitle").val()).trim() !== "") && (($("#casestartdate").val()).trim() !== "")
-            && ($("#casedomain").val() !== "0") && ($("#casecategory").val() !== "0")
-            && ($("#casetype").val() !== "0") && ($("#casestatus").val() !== "0")
-            && ($("#caseseverity").val() !== "0") && ($("#casepriority").val() !== "0")) {
-*/
     if ((($("#casetitle").val()).trim() !== "") && (($("#casestartdate").val()).trim() !== "")
             && ($("#casedomain").val() !== "0") && ($("#casecategory").val() !== "0")
+            && ($("#casetype").val() !== "0") && ($("#casestatus").val() !== "0")
             && ($("#caseseverity").val() !== "0") && ($("#casepriority").val() !== "0")) {
         passvalidation = true;
     } else {
@@ -94,6 +94,7 @@ function validatecase() {
 $("#submitcase1").click(function (e) {
     "use strict";
     e.preventDefault();
+//    $("#selectparentmodule").hide();	
 //    var passvalidation = validatecase();
     var passvalidation = true;
 //  NOTE VALIDATE CASE FORM and POST back to Case Screen if passes
@@ -115,7 +116,6 @@ $("#submitcase").click(function (e) {
         $("#cancelsavecase").hide();
         $("#editdeletecase").show();
         $("#caseform").submit();
-//        $("#ablecaseform").prop("disabled", true);
     }
 });
 
@@ -125,11 +125,17 @@ $("#submitcase").click(function (e) {
 //Enables Case Form
 $("#editcase").click(function () {
     "use strict";
-//    alert("edit case");
     $("#ablecaseform").prop("disabled", false);
     document.getElementById("casecategory").disabled = false;
     document.getElementById("casetype").disabled = false;
+    var thistype = document.getElementById("casetype").selectedIndex;
+    $("#casecategory").change();
+    document.getElementById("casetype").selectedIndex = thistype;
     document.getElementById("casestatus").disabled = false;
+    var removereq = $("#caseform .requiredfield");
+    for (var r = 0; r < removereq.length; r += 1) {
+        removereq[r].style.borderColor = "#ffb8af";
+    }
     if (document.getElementById("cancelsavecase").style.visibility !== "visible") {
         $("#editdeletecase").hide();
         $("#cancelsavecase").show();
@@ -150,10 +156,5 @@ $("#deletecase").click(function () {
     }
 });
 
-
-$("#submitcaseperson").click(function () {
-    "use strict";
-    $("#casepersonform").submit();
-});
 
 
