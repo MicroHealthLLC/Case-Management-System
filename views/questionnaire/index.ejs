@@ -1,0 +1,80 @@
+<% include ../partials/header %>
+
+		<div id="topbar">
+			<h1>Questionnaires</h1>
+		</div><!-- topbar -->
+
+<div class="buttonrow creatediv">
+	<p>
+	    <a href="/questionnaire" class="btn btn-primary btn-md" id="createquestionnairebtn">Create Questionnaire</a>
+	</p>
+</div>
+
+<br><br><br>
+
+<% questionnaireslisting.sort(function(a,b) {
+    return (a.questionnaire_id > b.questionnaire_id) ? 1 : ((b.questionnaire_id > a.questionnaire_id) ? -1 : 0);
+}); %>
+
+	<% if (questionnaireslisting.length > 0) { %>
+		<table id="questionnairedisplaytable" class="table table-responsive table-striped table-condensed">
+			<thead>
+				<tr class="info">
+					<th>Questionnaire Name</th>
+					<th>Type</th>
+					<th>Date Created</th>
+					<th>Last Updated</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+		<%  for (var i = 0; i < questionnaireslisting.length; i += 1) {
+				var infoquestionnaire = "infoquestionnaire" + questionnaireslisting[i].questionnaire_id;
+				var linkquestionnaire = "linkquestionnaire" + questionnaireslisting[i].questionnaire_id;
+				var viewmode = "viewmode" + i;
+				var editquestionnaire = "editquestionnaire" + questionnaireslisting[i].questionnaire_id;
+				var removequestionnaire = "removequestionnaire" + questionnaireslisting[i].questionnaire_id;
+		%>
+				<tr>
+					<td><%= questionnaireslisting[i].name %></td>
+					<td><%= questionnaireslisting[i].quest_type %></td>
+					<td><%= questionnaireslisting[i].date_created %></td>
+					<td><%= questionnaireslisting[i].date_updated %></td>
+					<td class="tablebtns" id="<%= questionnaireslisting[i].questionnaire_id %>">
+						<% if (questionnaireslisting[i].inuse === "yes") { %>
+	                    <form class="oneline" action="/infoquestionnaire/<%= questionnaireslisting[i].questionnaire_id %>" method="POST">
+	                        <button type="submit" class="btn btn-primary btn-md questinfobtn" id="<%= infoquestionnaire %>"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></button>
+	                    </form>
+						<% } else { %>
+	                        <button disabled type="submit" class="btn btn-primary btn-md questinfobtn" id="<%= infoquestionnaire %>"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></button>
+						<% } %>
+
+	                    <form class="oneline" action="/questionnaire/<%= questionnaireslisting[i].questionnaire_id %>" method="GET">
+	                        <button type="submit" class="btn btn-success btn-md questviewbtn" id="<%= linkquestionnaire %>"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></button>
+	                    </form>
+
+						<% if (questionnaireslisting[i].inuse === "no") { %>
+	                    <form class="oneline" action="/editquestionnaire/<%= questionnaireslisting[i].questionnaire_id %>" method="POST">
+	                        <button type="submit" class="btn btn-primary btn-md questeditbtn" id="<%= editquestionnaire %>" name="editquestionnaire"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></button>
+	                    </form>
+						<% } else { %>
+	                        <button disabled type="submit" class="btn btn-primary btn-md questeditbtn" id="<%= editquestionnaire %>" name="editquestionnaire"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></button>
+						<% } %>
+
+						<% if (questionnaireslisting[i].inuse === "no") { %>
+	                    <form class="oneline" action="/deletequestionnaire/<%= questionnaireslisting[i].questionnaire_id %>" method="POST">
+	                        <button type="submit" class="btn btn-danger btn-md questremovebtn" id="<%= removequestionnaire %>" name="removequestionnaire"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	                    </form>
+						<% } else { %>
+	                        <button disabled type="submit" class="btn btn-danger btn-md questremovebtn" id="<%= removequestionnaire %>" name="removequestionnaire"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+						<% } %>
+					</td>
+				</tr>
+			<% } %>	
+			</tbody>
+		</table>
+	<% } %>
+		
+<br>
+
+<% include ../partials/footer %>
