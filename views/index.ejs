@@ -1,6 +1,5 @@
 <% include partials/header1 %>
 
-<div id="cmscontent" class="container">
 
 <div id="casefiltersection">
 
@@ -65,9 +64,11 @@
 		<a href="/case" class="btn btn-primary btn-md" id="createcasebtn">Create Case</a>
 		<a href="/person" class="btn btn-primary btn-md createbtn" id="createpersonbtn">Create Person</a>
 		<a href="/organization" class="btn btn-primary btn-md createbtn" id="createorganizationbtn">Create Organization</a>
+		<a href="/questionnaires" class="btn btn-primary btn-md createbtn" id="managequestionnairebtn">Manage Questionnaire</a>
 	</p>
 </div>
-<br>
+
+<br><br>
 
 <h4>Cases (<span id="totalcases"><%= cases.length %></span>)</h4>
 
@@ -115,40 +116,6 @@
 				<tr>
 					<td colspan="8">
 						<div class="collapse" id="<%= more %>">
-			<div id="<%= persondiv %>">
- 			<table id="<%= case_person_info %>" class="table table-responsive table-condensed subtable">
-				<thead>
-					<tr class="info2">
-						<th>Case Person Name</th>
-						<th>Gender</th>
-						<th>Birthdate</th>
-					</tr>
-				</thead>
-				<tbody>
-           <% if (cases[i].caseperson_id !== "") { %>
-				<% thesecasespeople.sort(function(a,b) {
-					return (a.case_id > b.case_id) ? 1 : ((b.case_id > a.case_id) ? -1 : 0);
-				}); %>
-				<% var p = -1;
-				   var found_caseperson = false;
-				   while ((found_caseperson === false) && (p < thesecasespeople.length - 1)) {
-				      p += 1;
-				      if (cases[i].case_id === thesecasespeople[p].case_id ) {
-					      found_caseperson = true;
-					  }
-				   }
-				   if (found_caseperson === true) {
-				%>
-				<tr>
-					<td><a href="/person/<%= thesecasespeople[p].person_id %>"><%= thesecasespeople[p].person_name %></a></td>
-					<td><%= thesecasespeople[p].gender %></td>
-					<td><%= thesecasespeople[p].birthdate %></td>
-				</tr>
-				<% } } %>
-				</tbody>
-			</table>
-			</div>
-
 			<% cases_person_assignment.sort(function(a,b) {
 				return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
 			}); %>
@@ -219,35 +186,17 @@
 		</table>
 		<% } } %>
 
-		<div id="casespagination" class="paginationdiv">
-			<nav aria-label="Page navigation">
-			  <ul class="pagination">
-			    <li class="disabled">
-			      <a href="#" aria-label="Previous">
-			        <span aria-hidden="true">&laquo;</span>
-			      </a>
-			    </li>
-			    <li class="active"><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li>
-			      <a href="#" aria-label="Next">
-			        <span aria-hidden="true">&raquo;</span>
-			      </a>
-			    </li>
-			  </ul>
-			</nav>
-		</div><!-- casespagination -->
+<br><br>
 
 
 <h4>Overdue</h4>
 
 <div class="form-group">
-	<label for="collapseoverdue" class="btn btn-sm btn-default">
-		<input type="radio" name="showoverdue" id="collapseoverdue" class="collapsealloverdue" value="0"> Collapse All Tables
-	</label>
 	<label for="expandoverdue" class="btn btn-sm btn-default">
-		<input type="radio" name="showoverdue" id="expandoverdue" class="expandalloverdue" value="1" checked> Expand All Tables
+		<input type="radio" name="showoverdue" id="expandoverdue" class="expandalloverdue" checked> Show Tables
+	</label>
+	<label for="collapseoverdue" class="btn btn-sm btn-default">
+		<input type="radio" name="showoverdue" id="collapseoverdue" class="collapsealloverdue"> Hide Tables
 	</label>
 </div>
 
