@@ -63,10 +63,16 @@ button, input[type="submit"] {
 	width: 100px;
 	padding: 5px;
 }
+
 textarea {
-	width: 100%;
+	min-width: 100%;
+	max-width: 100%;
+	max-height: 100%;
 }
 
+div .casenote {
+	background-color: #fcfcfc;
+}
 #personimage {
 	width: 30%;
 	float: none;
@@ -81,40 +87,46 @@ textarea {
 	height: auto;
 	margin-bottom: 10px;
 }
-#removeimage, #cancelnewimage, #submitpersonimage {
-	margin-bottom: 10px;
-	margin-left: 10px;
+#cancelnewimage, #submitpersonimage, #removeimage {
 	color: #d9534f;
 }
-.uploadbtn  {
-	width: 100%;
+#cancelnewimage {
 	margin-top: 10px;
 }
-.loadsubmitbtn { /* #submitdocneed, #submitdocgoal, #submitdocplan, #submitdocaction, #submitdoccasefile */
-	display: none;
+#submitpersonimage {
+	margin-top: -6px;	
 }
+
+#removeimage {
+	margin-top: -5px;
+	margin-left: 10px;
+}
+
+.uploadbtn, .uploadcasefilebtn, .uploadgoalbtn, .uploadplanbtn, .uploadactionbtn {
+	width: 100%;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
 #personuploadForm {
 	text-align: right;
 }
-#needuploadForm, #goaluploadForm, #planuploadForm, #actionuploadForm, #casefileuploadForm {
+
+
+.uploadform {
+	display: none;
+}
+
+#goaluploadForm, #planuploadForm, #actionuploadForm, #casefileuploadForm {
 	margin-bottom: 20px;
-	text-align: right;
 }
-.uploadbtns {
-	text-align: right;
-	padding-right: 15px;
-}
-#removedocneed, #canceldocneed, 
-#removedocgoal, #canceldocgoal, 
-#removedocplan, #canceldocplan, 
-#removedocaction, #canceldocaction, 
-#removedoccasefile, #canceldoccasefile {
-	margin-top: 15px;
+
+.canceluploadbtn, .uploadsubmitbtn {
+	margin-top: 10px;
 	margin-bottom: 15px;
-	color: #d9534f;
 }
-#canceldocneed, #canceldocgoal, #canceldocplan, #canceldocaction, #canceldoccasefile {
-	margin-left: 10px;
+.canceluploadbtn {
+	margin-right: 10px;
 }
 
 #topbar {
@@ -132,7 +144,6 @@ textarea {
 	color: white;
 	text-decoration: none;
 }
-
 h1 {
 	font: 150%/150% verdana, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: white;
@@ -165,6 +176,10 @@ h6 {
 }
 
 
+.requiredfield {
+	border: 1px solid #ffb8af;
+}
+
 #searchform {
 	margin: 10px 0 0 0px;
 	padding: 0;
@@ -185,6 +200,7 @@ h6 {
 
 .toggleform, .filterform {
 	margin-top: 30px;
+	margin-bottom: 30px;
 }
 
 
@@ -209,10 +225,10 @@ h6 {
 	text-align: right;
 }
 
-.mainresetbtn, .mainsubmitbtn, .submitbtn, .resetbtn, .savebtn, .cancelbtn {
+.mainresetbtn, .mainsubmitbtn, .mainsavebtn, .submitbtn, .resetbtn, .savebtn, .cancelbtn {
 	margin-bottom: 10px;
 }
-.mainresetbtn, .resetbtn, .cancelbtn, #goback {
+.mainresetbtn, .mainsavebtn, .resetbtn, .cancelbtn {
 	margin-right: 10px;
 }
 #totop {
@@ -268,6 +284,7 @@ table {
 	width: 96%;
 	margin: 15px auto;
 }
+
 .subtable tr {
 	background-color: #f9f9f9;
 }
@@ -283,6 +300,28 @@ table {
 	padding: 5px 2px 3px 2px;
 	margin-left: 10px;
 }
+.docremovebtn {
+	width: 40px;
+	padding: 5px 2px 3px 2px;
+	margin-top: -32px;
+	margin-left: 10px;
+	color: #d9534f;
+	float: right;
+}
+.adduploadbtn {
+	margin-right: 10px;
+	margin-top: -4px;
+}
+#addfileuploadbtn {
+	margin-top: -9px;	
+}
+.removefileuploadbtn {
+	width: 40px;
+	padding: 5px 2px 3px 2px;
+	margin-top: 15px;
+	margin-left: 0;
+	color: #d9534f;
+}
 .plusbtn, .plusbtn2, .filterbtn {
 	width: 40px;
 	padding: 5px 2px 3px 2px;
@@ -290,7 +329,7 @@ table {
 	color: #337ab7;
 }
 
-.overduehdbtn, .associatedheadbtn {
+.moretaskbtn, .overduehdbtn, .associatedheadbtn, .enumhdbtn {
 	width: 40px;
 	padding: 5px 2px 3px 2px;
 	margin-right: 10px;
@@ -298,35 +337,57 @@ table {
 .bg-danger, .bg-warning, .bg-success {
 	width: 50px;
 }
-.bg-danger {
-	height: 46px;
-}
-.needanchorbtn {
+
+.taskcasebtn, .parentanchorbtn, .childrenanchorbtn, .briefanchorbtn {
 	width: 40px;
-	font-weight: bold;	
+	padding: 5px 2px 3px 2px;
+	margin-right: 10px;
 	color: #337ab7;
+	font-weight: bold;
+}
+.navchildren {
+	margin-top: 10px;
+	text-align: right;
+	font-weight: bold;
+	color: #337ab7;
+}
+.childrenanchorbtn {
+	margin-left: 10px;
+	margin-right: 0;
 }
 .morecolbtns {
 	text-align: right;
 	width: 50px;
 }
-.morebtn, .morecasebtn, .moreneedbtn {
+.morebtn, .morecasebtn, .morequestbtn {
 	width: 40px;
 	padding: 5px 2px 3px 2px;
 	margin-left: 10px;
 	color: #337ab7;
 }
 
-.moreactionlogbtn {
+.morerelationshipbtn, .moreactionlogbtn {
 	width: 100%;
 	text-align: left;
 	font-weight: bold;
+	color: #337ab7;
 	margin-bottom: 10px;
 }
-
+.personrelationshiptable, .orgrelationshiptable {
+	margin-top: -20px;
+}
 #actionstaskstable {
 	margin-top: -20px;
 	display: block;
+}
+.prog-end {
+	color: #5cb85c;	
+}
+.prog-mid {
+	color: #428bca;	
+}
+.prog-start {
+	color: #f0ad4e;	
 }
 .totalcomplete-done {
 	color: #5cb85c;	
@@ -365,11 +426,10 @@ hr {
 }
 .filter hr {
 	margin: 10px 0;
-	border: 1px solid #f0ad4e;
 	border: 1px solid #5bc0de;
 }
 #footer hr {
-	margin: 0 0 20px 0;
+	margin: 10px 0 20px 0;
 	border: 2px solid #337ab7;
 }
 
@@ -383,20 +443,95 @@ hr {
 	border-bottom: 2px solid #5bc0de;
 }
 
-
-.queststartbtn, .questeditbtn, .questremovebtn {
+.view {
+	font-weight: bold;
+	color: yellow;
+}
+.queststartbtn, .questeditpersonbtn, .questcancelbtn, .questinfobtn, .questviewbtn, .questeditbtn, .questremovebtn {
 	width: 40px;
 	padding: 5px 2px 3px 2px;
 	margin-left: 10px;
 }
-.questgroup {
+
+#questform {
+	margin-top: -30px;
+}
+#resetsubmitquestionnaire {
 	margin-top: 20px;
 }
-.questansw {
-	font-weight: normal;
+.questform, .questgroup {
+	margin-top: 20px;
 }
 
+.question {
+	margin-top: 30px;
+}
+.questno {
+	font-weight: bold;
+	color: #337ab7;
+}
 
+#addquestiongroup, #displayquestiongroup, #showquestionexample, #hidequestionexample {
+	width: 180px;
+	float: right;
+	margin-left: 10px;
+}
+
+.enumformbtn {
+	width: 100px;
+	float: right;
+	margin-left: 15px;
+	margin-top: 20px;
+}
+.enumnamebtn {
+	margin-top: 20px;
+	width: 100%;
+	text-align: left;
+	color: #333;
+}
+.editenumbtndiv {
+	margin-bottom: 50px;
+}
+.editenumbtn, .editenumbtn2 {
+	float: right;
+}
+.enumlisttable {
+	margin-top: 0;
+}
+.addanswerbtn, .removequestbtn, .answremove67btn {
+	width: 140px;
+	float: right;
+	margin-left: 10px;
+	color: #d9534f;
+}
+.answbtntext {
+	color: #337ab7;
+}
+#displayviewquestiontype {
+	margin-top: 80px;
+}
+.corresp1-2 {
+	border: 1px solid #f0ad4e;
+}
+.corresp1-2note  {
+	font-size: 75%;
+}
+
+.answremovebtn, .enumkeyremovebtn {
+	width: 40px;
+	padding: 5px 2px 3px 2px;
+	color: #d9534f;
+	float: right;
+}
+#enumformdiv {
+	margin-bottom: 60px !important;
+}
+#freezeuserenumkey {
+	display:none;
+}
+#saveenumfile {
+	float: right;	
+}
 #loginbox {
 	width: 90%;
 	min-width: 400px;
@@ -437,12 +572,18 @@ hr {
 	display: none;
 }
 /* Case Screen  */
-#cancelsavecase, #topcasepersoninfo2, /*  NOTE: BE SURE TO UNCOMMENT THIS  */
-#showuploaddocneed, #showuploaddocgoal, #showuploaddocplan, #showuploaddocaction, #showuploaddoccasefile {
+#cancelsavecase {
 	display: none;
 }
 /* Person Screen  */
-#showuploadpersonimage, #cancelsaveperson {
+#showuploadpersonimage {
+	display: none;
+	margin-bottom: 10px;
+}
+#personbrowsebtn {
+	margin-bottom: 0px;
+}
+#cancelsaveperson {
 	display: none;
 }
 /* Organization Screen  */
@@ -450,15 +591,29 @@ hr {
 	display: none;
 }
 
-.downloadfilename {
+.downloadfilename2 {
 	width: 48%;
 	min-width: 300px;
 	max-width: 700px;
 }
+
+.downloadfilename {
+	width: 70%;
+	min-width: 300px;
+	max-width: 900px;
+	margin-top: 10px;
+}
 .downloadbtn {
+	width: 40px;
+	font-weight: bold;	
+	padding: 5px 2px 3px 2px;
+	margin: 0 50px 0 10px;
 	color: #337ab7;
 }
-
+.uploaddocbtn {
+	float:right;
+	color: #337ab7;
+}
 
 
 @media all and (min-width: 600px) {
