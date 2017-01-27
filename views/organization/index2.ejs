@@ -1071,8 +1071,40 @@ getorganizationinfo();
             document.getElementById("removeorganizationrelationship" + i).style.visibility = "visible";
         }
     }
+
+    for (i = 0; i < document.getElementById("contactphonetype").length; i += 1) {
+        if (((document.getElementById("contactphonetype").options[i].text).toLowerCase() === "home") || ((document.getElementById("contactphonetype").options[i].text).toLowerCase() === "personal")) {
+            document.getElementById("contactphonetype").options[i].style.display = "none";
+        }
+    }
+
+    for (i = 0; i < document.getElementById("contactemailtype").length; i += 1) {
+        if (((document.getElementById("contactemailtype").options[i].text).toLowerCase() === "home") || ((document.getElementById("contactemailtype").options[i].text).toLowerCase() === "personal")) {
+            document.getElementById("contactemailtype").options[i].style.display = "none";
+        }
+    }
+
+    for (i = 0; i < document.getElementById("contactfaxtype").length; i += 1) {
+        if (((document.getElementById("contactfaxtype").options[i].text).toLowerCase() === "home") || ((document.getElementById("contactfaxtype").options[i].text).toLowerCase() === "personal")) {
+            document.getElementById("contactfaxtype").options[i].style.display = "none";
+        }
+    }
+
+    for (i = 0; i < document.getElementById("contactmediatype").length; i += 1) {
+        if (((document.getElementById("contactmediatype").options[i].text).toLowerCase() === "home") || ((document.getElementById("contactmediatype").options[i].text).toLowerCase() === "personal")) {
+            document.getElementById("contactmediatype").options[i].style.display = "none";
+        }
+    }
+
+    for (i = 0; i < document.getElementById("contactaddresstype").length; i += 1) {
+        if (((document.getElementById("contactaddresstype").options[i].text).toLowerCase() === "home") || ((document.getElementById("contactaddresstype").options[i].text).toLowerCase() === "personal")) {
+            document.getElementById("contactaddresstype").options[i].style.display = "none";
+        }
+    }
+
 })();
 </script>
+
 
 
 <% include ../partials/footer2 %>
