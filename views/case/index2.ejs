@@ -5,8 +5,10 @@
 	<h1>Case</h1>
 	<div id="topcasepersoninfo">
      <% if (thiscaseperson.length === 1) { %>
-		<p><span><strong><a href="/person/<%= thiscaseperson[0].person_id %>"><%= thiscaseperson[0].person_name %></a></strong></span></p>
-		<p>Gender: <span><%= thiscaseperson[0].gender %></span> &nbsp;&nbsp; DOB: <span><%= thiscaseperson[0].birthdate %></span></p>
+		<p><strong><a href="/person/<%= thiscaseperson[0].person_id %>"><%= thiscaseperson[0].person_name %></a></strong></p>
+		<p>Gender: <%= thiscaseperson[0].gender %> &nbsp;&nbsp; DOB: <%= thiscaseperson[0].birthdate %></p>
+    <% } else if (thiscaseperson.length > 1) { %>
+		<p><strong>Multiple Case Persons</strong></p>
     <% } else { %>
     <br>
     <% } %>
@@ -2056,131 +2058,153 @@
 <script src="../js/cms_case.js"></script>
 
 <script>
-
 function getcaseinfo() {
-	$("#casetitle").val("<%= thiscase.case_title %>");
-	$("#casedescription").val("<%= thiscase.case_description %>");
-	$("#casedomain").val("<%= thiscase.lk_case_domain %>");
-	$("#casecategory").val("<%= thiscase.lk_case_category %>");
-	$("#casestatus").val("<%= thiscase.lk_case_status %>");
-	$("#caseseverity").val("<%= thiscase.lk_case_severity %>");
-	$("#casepriority").val("<%= thiscase.lk_case_priority %>");
-	$("#casetype").val("<%= thiscase.lk_case_type %>");
-	$("#casestartdate").val("<%= thiscase.start_date %>");
-	$("#caseduedate").val("<%= thiscase.due_date %>");
-	$("#casecompletedate").val("<%= thiscase.complete_date %>");
-};
+    "use strict";
+    $("#casetitle").val("<%= thiscase.case_title %>");
+    $("#casedescription").val("<%= thiscase.case_description %>");
+    $("#casedomain").val("<%= thiscase.lk_case_domain %>");
+    $("#casecategory").val("<%= thiscase.lk_case_category %>");
+    $("#casestatus").val("<%= thiscase.lk_case_status %>");
+    $("#caseseverity").val("<%= thiscase.lk_case_severity %>");
+    $("#casepriority").val("<%= thiscase.lk_case_priority %>");
+    $("#casetype").val("<%= thiscase.lk_case_type %>");
+    $("#casestartdate").val("<%= thiscase.start_date %>");
+    $("#caseduedate").val("<%= thiscase.due_date %>");
+    $("#casecompletedate").val("<%= thiscase.complete_date %>");
+}
 getcaseinfo();
 
-$("#actionstaskstable").hide();
+(function () {
+    "use strict";
+    var x = document.querySelectorAll(".endpa");
+    var i;
+    for (i = 0; i < x.length; i += 1) {
+        if (x[i].innerHTML === "") {
+            document.getElementById("endpersonassignment" + i).style.visibility = "visible";
+            document.getElementById("removepersonassignment" + i).style.visibility = "hidden";
+        } else {
+            document.getElementById("endpersonassignment" + i).style.visibility = "hidden";
+            document.getElementById("removepersonassignment" + i).style.visibility = "visible";
+        }
+    }
 
-var removereq = $("#caseform .requiredfield");
-for (var r = 0; r < removereq.length; r += 1) {
-	removereq[r].style.borderColor = "#cccccc";
-}
+    x = document.querySelectorAll(".endoa");
+    for (i = 0; i < x.length; i += 1) {
+        if (x[i].innerHTML === "") {
+            document.getElementById("endorganizationassignment" + i).style.visibility = "visible";
+            document.getElementById("removeorganizationassignment" + i).style.visibility = "hidden";
+        } else {
+            document.getElementById("endorganizationassignment" + i).style.visibility = "hidden";
+            document.getElementById("removeorganizationassignment" + i).style.visibility = "visible";
+        }
+    }
 
+    $("#actionstaskstable").hide();
 
-var goaltable = false;
-for (var t = 1; t < document.getElementById('goaltype').options.length; t += 1) {
-	var goaltypeval = document.getElementById('goaltype').options[t].value;
-	var goaltypetext = document.getElementById('goaltype').options[t].text;
-	var hasgoaltype = document.querySelector(".goal" + goaltypeval + "row");
-	if (hasgoaltype !== null) {
-		goaltable = true;
-		var goaltypebtn = '<label for="showgoal' + goaltypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showgoaltype" id="showgoal' + goaltypeval + '" class="goaltypebtn" value="' + goaltypeval + '" checked> ' + goaltypetext + '</label>';
-	} else {
-		var goaltypebtn = '<label for="showgoal' + goaltypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showgoaltype" id="showgoal' + goaltypeval + '" class="goaltypebtn" value="' + goaltypeval + '" disabled> ' + goaltypetext + '</label>';		
-	}
-	$("#goaltypebtns").append(goaltypebtn);
-}
+    var removereq = $("#caseform .requiredfield");
+    var r;
+    for (r = 0; r < removereq.length; r += 1) {
+        removereq[r].style.borderColor = "#cccccc";
+    }
 
+    var t, goaltypeval, goaltypetext, hasgoaltype, goaltypebtn;
+    for (t = 1; t < document.getElementById('goaltype').options.length; t += 1) {
+        goaltypeval = document.getElementById('goaltype').options[t].value;
+        goaltypetext = document.getElementById('goaltype').options[t].text;
+        hasgoaltype = document.querySelector(".goal" + goaltypeval + "row");
+        if (hasgoaltype !== null) {
+            goaltypebtn = '<label for="showgoal' + goaltypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showgoaltype" id="showgoal' + goaltypeval + '" class="goaltypebtn" value="' + goaltypeval + '" checked> ' + goaltypetext + '</label>';
+        } else {
+            goaltypebtn = '<label for="showgoal' + goaltypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showgoaltype" id="showgoal' + goaltypeval + '" class="goaltypebtn" value="' + goaltypeval + '" disabled> ' + goaltypetext + '</label>';
+        }
+        $("#goaltypebtns").append(goaltypebtn);
+    }
 
-for (var t = 1; t < document.getElementById('plantype').options.length; t += 1) {
-	var plantypeval = document.getElementById('plantype').options[t].value;
-	var plantypetext = document.getElementById('plantype').options[t].text;
-	var hasplantype = document.querySelector(".plan" + plantypeval + "row");
-	if (hasplantype !== null) {
-		var plantypebtn = '<label for="showplan' + plantypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showplantype" id="showplan' + plantypeval + '" class="plantypebtn" value="' + plantypeval + '" checked> ' + plantypetext + '</label>';
-	} else {
-		var plantypebtn = '<label for="showplan' + plantypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showplantype" id="showplan' + plantypeval + '" class="plantypebtn" value="' + plantypeval + '" disabled> ' + plantypetext + '</label>';
-	}
-    $("#plantypebtns").append(plantypebtn);
-}
+    var plantypeval, plantypetext, hasplantype, plantypebtn;
+    for (t = 1; t < document.getElementById('plantype').options.length; t += 1) {
+        plantypeval = document.getElementById('plantype').options[t].value;
+        plantypetext = document.getElementById('plantype').options[t].text;
+        hasplantype = document.querySelector(".plan" + plantypeval + "row");
+        if (hasplantype !== null) {
+            plantypebtn = '<label for="showplan' + plantypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showplantype" id="showplan' + plantypeval + '" class="plantypebtn" value="' + plantypeval + '" checked> ' + plantypetext + '</label>';
+        } else {
+            plantypebtn = '<label for="showplan' + plantypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showplantype" id="showplan' + plantypeval + '" class="plantypebtn" value="' + plantypeval + '" disabled> ' + plantypetext + '</label>';
+        }
+        $("#plantypebtns").append(plantypebtn);
+    }
 
+    var actiontypeval, actiontypetext, hasactiontype, actiontypebtn;
+    for (t = 1; t < document.getElementById('actiontype').options.length; t += 1) {
+        actiontypeval = document.getElementById('actiontype').options[t].value;
+        actiontypetext = document.getElementById('actiontype').options[t].text;
+        hasactiontype = document.querySelector(".action" + actiontypeval + "row");
+        if (hasactiontype !== null) {
+            actiontypebtn = '<label for="showaction' + actiontypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showactiontype" id="showaction' + actiontypeval + '" class="actiontypebtn" value="' + actiontypeval + '" checked> ' + actiontypetext + '</label>';
+        } else {
+            actiontypebtn = '<label for="showaction' + actiontypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showactiontype" id="showaction' + actiontypeval + '" class="actiontypebtn" value="' + actiontypeval + '" disabled> ' + actiontypetext + '</label>';
+        }
+        $("#actiontypebtns").append(actiontypebtn);
+    }
 
-for (var t = 1; t < document.getElementById('actiontype').options.length; t += 1) {
-	var actiontypeval = document.getElementById('actiontype').options[t].value;
-	var actiontypetext = document.getElementById('actiontype').options[t].text;
-	var hasactiontype = document.querySelector(".action" + actiontypeval + "row");
-	if (hasactiontype !== null) {
-		var actiontypebtn = '<label for="showaction' + actiontypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showactiontype" id="showaction' + actiontypeval + '" class="actiontypebtn" value="' + actiontypeval + '" checked> ' + actiontypetext + '</label>';
-	} else {
-		var actiontypebtn = '<label for="showaction' + actiontypeval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showactiontype" id="showaction' + actiontypeval + '" class="actiontypebtn" value="' + actiontypeval + '" disabled> ' + actiontypetext + '</label>';		
-	}
-    $("#actiontypebtns").append(actiontypebtn);
-}
+    var filecasedomainval, filecasedomaintext, hasfiledomain, filecasedomainbtn;
+    for (t = 1; t < document.getElementById('casefilecasedomain').options.length; t += 1) {
+        filecasedomainval = document.getElementById('casefilecasedomain').options[t].value;
+        filecasedomaintext = document.getElementById('casefilecasedomain').options[t].text;
+        hasfiledomain = document.querySelector(".filecasedomain" + filecasedomainval + "table");
+        if (hasfiledomain !== null) {
+            filecasedomainbtn = '<label for="showfile' + filecasedomainval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showfilecasedomain" id="showfile' + filecasedomainval + '" class="filecasedomainbtn" value="' + filecasedomainval + '" checked> ' + filecasedomaintext + '</label>';
+        } else {
+            filecasedomainbtn = '<label for="showfile' + filecasedomainval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showfilecasedomain" id="showfile' + filecasedomainval + '" class="filecasedomainbtn" value="' + filecasedomainval + '" disabled> ' + filecasedomaintext + '</label>';
+        }
+        $("#filecasedomainbtns").append(filecasedomainbtn);
+    }
 
+    var notecasedomainval, notecasedomaintext, hasnotedomain, notecasedomainbtn;
+    for (t = 1; t < document.getElementById('casenotecasedomain').options.length; t += 1) {
+        notecasedomainval = document.getElementById('casenotecasedomain').options[t].value;
+        notecasedomaintext = document.getElementById('casenotecasedomain').options[t].text;
+        hasnotedomain = document.querySelector(".notecasedomain" + notecasedomainval + "table");
+        if (hasnotedomain !== null) {
+            notecasedomainbtn = '<label for="shownote' + notecasedomainval + '" class="btn btn-sm btn-default"><input type="checkbox" name="shownotecasedomain" id="shownote' + notecasedomainval + '" class="notecasedomainbtn" value="' + notecasedomainval + '" checked> ' + notecasedomaintext + '</label>';
+        } else {
+            notecasedomainbtn = '<label for="shownote' + notecasedomainval + '" class="btn btn-sm btn-default"><input type="checkbox" name="shownotecasedomain" id="shownote' + notecasedomainval + '" class="notecasedomainbtn" value="' + notecasedomainval + '" disabled> ' + notecasedomaintext + '</label>';
+        }
+        $("#notecasedomainbtns").append(notecasedomainbtn);
+    }
 
-for (var t = 1; t < document.getElementById('casefilecasedomain').options.length; t += 1) {
-	var filecasedomainval = document.getElementById('casefilecasedomain').options[t].value;
-	var filecasedomaintext = document.getElementById('casefilecasedomain').options[t].text;
-	var hasfiledomain = document.querySelector(".filecasedomain" + filecasedomainval + "table");
-	if (hasfiledomain !== null) {
-		var filecasedomainbtn = '<label for="showfile' + filecasedomainval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showfilecasedomain" id="showfile' + filecasedomainval + '" class="filecasedomainbtn" value="' + filecasedomainval + '" checked> ' + filecasedomaintext + '</label>';
-	} else {
-		var filecasedomainbtn = '<label for="showfile' + filecasedomainval + '" class="btn btn-sm btn-default"><input type="checkbox" name="showfilecasedomain" id="showfile' + filecasedomainval + '" class="filecasedomainbtn" value="' + filecasedomainval + '" disabled> ' + filecasedomaintext + '</label>';		
-	}
-    $("#filecasedomainbtns").append(filecasedomainbtn);
-}
+    var c, btnid;
+    var childrennavlink = document.querySelectorAll(".childrenanchorbtn");
+    for (c = 0; c < childrennavlink.length; c += 1) {
+        btnid = childrennavlink[c].id.slice(4);
+        if (document.getElementById(btnid) === null) {
+            childrennavlink[c].disabled = true;
+        } else {
+            childrennavlink[c].disabled = false;
+        }
+    }
 
+    var b, numrows, briefhead;
+    var goalsthruactionstable = document.querySelectorAll(".goalsthruactionstable");
+    for (b = 0; b < goalsthruactionstable.length; b += 1) {
+        numrows = document.getElementById("goalsthruactionstable" + b).getElementsByTagName("tbody")[0].getElementsByTagName("tr").length;
+        if (numrows === 1) {
+            briefhead = $("#briefhead" + b);
+            briefhead.addClass("prog-start");
+        }
+    }
 
-for (var t = 1; t < document.getElementById('casenotecasedomain').options.length; t += 1) {
-	var notecasedomainval = document.getElementById('casenotecasedomain').options[t].value;
-	var notecasedomaintext = document.getElementById('casenotecasedomain').options[t].text;
-	var hasnotedomain = document.querySelector(".notecasedomain" + notecasedomainval + "table");
-	if (hasnotedomain !== null) {
-		var notecasedomainbtn = '<label for="shownote' + notecasedomainval + '" class="btn btn-sm btn-default"><input type="checkbox" name="shownotecasedomain" id="shownote' + notecasedomainval + '" class="notecasedomainbtn" value="' + notecasedomainval + '" checked> ' + notecasedomaintext + '</label>';
-	} else {
-		var notecasedomainbtn = '<label for="shownote' + notecasedomainval + '" class="btn btn-sm btn-default"><input type="checkbox" name="shownotecasedomain" id="shownote' + notecasedomainval + '" class="notecasedomainbtn" value="' + notecasedomainval + '" disabled> ' + notecasedomaintext + '</label>';
-	}
-    $("#notecasedomainbtns").append(notecasedomainbtn);
-}
+    for (i = 0; i < document.getElementById("casequeststatus").length; i += 1) {
+        if (i !== 1) {
+            document.getElementById("casequeststatus").options[i].style.display = "none";
+        } else {
+            document.getElementById("casequeststatus").options[i].style.display = "block";
+        }
+    }
 
-
-var childrennavlink = document.querySelectorAll(".childrenanchorbtn");
-for (var c = 0; c < childrennavlink.length; c += 1) {
-	var btnid = childrennavlink[c].id.slice(4);
-	if (document.getElementById(btnid) === null) {
-		childrennavlink[c].disabled = true;
-	} else {
-		childrennavlink[c].disabled = false;		
-	}
-}
-
-
-var goalsthruactionstable = document.querySelectorAll(".goalsthruactionstable");
-for (var b = 0; b < goalsthruactionstable.length; b += 1) {
-	var numrows = document.getElementById("goalsthruactionstable" + b).getElementsByTagName("tbody")[0].getElementsByTagName("tr").length;
-    if (numrows === 1) {
-		var briefhead = $("#briefhead" + b);
-        briefhead.addClass("prog-start");
-	}
-}
-
-
-for (var i = 0; i < document.getElementById("casequeststatus").length; i += 1) {
-	if (i !== 1) {
-		document.getElementById("casequeststatus").options[i].style.display = "none";
-	} else {
-		document.getElementById("casequeststatus").options[i].style.display = "block";
-	}
-}
-
-
-for (var i = 1; i < document.getElementById("questassocwithname").length; i += 1) {
-    document.getElementById("questassocwithname").options[i].style.display = "none";
-}
-
+    for (i = 1; i < document.getElementById("questassocwithname").length; i += 1) {
+        document.getElementById("questassocwithname").options[i].style.display = "none";
+    }
+})();
 
 </script>
 
