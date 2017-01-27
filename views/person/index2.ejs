@@ -1301,27 +1301,55 @@
 
 <script>
 function getpersoninfo() {
-	$("#lastname").val("<%= thisperson.last_name %>");
-	$("#firstname").val("<%= thisperson.first_name %>");
-	$("#middlename").val("<%= thisperson.middle_name %>");
-	$("#persontitle").val("<%= thisperson.title %>");
-	$("#gender").val("<%= thisperson.lk_gender %>");
-	$("#birthdate").val("<%= thisperson.birth_date %>");
-	$("#personrole").val("<%= thisperson.lk_user_role %>");
-	$("#persontype").val("<%= thisperson.lk_person_type %>");
-	$("#personrolestatus").val("<%= thisperson.lk_person_status %>");
-	$("#religion").val("<%= thisperson.lk_religion %>");
-	$("#personnote").val("<%= thisperson.note %>");
+    "use strict";
+    $("#lastname").val("<%= thisperson.last_name %>");
+    $("#firstname").val("<%= thisperson.first_name %>");
+    $("#middlename").val("<%= thisperson.middle_name %>");
+    $("#persontitle").val("<%= thisperson.title %>");
+    $("#gender").val("<%= thisperson.lk_gender %>");
+    $("#birthdate").val("<%= thisperson.birth_date %>");
+    $("#personrole").val("<%= thisperson.lk_user_role %>");
+    $("#persontype").val("<%= thisperson.lk_person_type %>");
+    $("#personrolestatus").val("<%= thisperson.lk_person_status %>");
+    $("#religion").val("<%= thisperson.lk_religion %>");
+    $("#personnote").val("<%= thisperson.note %>");
 }
 getpersoninfo();
 
-$(".personrelationshiptable").hide();
-$(".orgrelationshiptable").hide();
+(function () {
+    "use strict";
+    $(".personrelationshiptable").hide();
+    $(".orgrelationshiptable").hide();
 
-var removereq = $("#personform .requiredfield");
-for (var r = 0; r < removereq.length; r += 1) {
-	removereq[r].style.borderColor = "#cccccc";
-}
+    var removereq = $("#personform .requiredfield");
+    var r;
+    for (r = 0; r < removereq.length; r += 1) {
+        removereq[r].style.borderColor = "#cccccc";
+    }
+
+    var x = document.querySelectorAll(".endppr");
+    var i;
+    for (i = 0; i < x.length; i += 1) {
+        if (x[i].innerHTML === "") {
+            document.getElementById("endpersonrelationship" + i).style.visibility = "visible";
+            document.getElementById("removepersonrelationship" + i).style.visibility = "hidden";
+        } else {
+            document.getElementById("endpersonrelationship" + i).style.visibility = "hidden";
+            document.getElementById("removepersonrelationship" + i).style.visibility = "visible";
+        }
+    }
+
+    x = document.querySelectorAll(".endpor");
+    for (i = 0; i < x.length; i += 1) {
+        if (x[i].innerHTML === "") {
+            document.getElementById("endpersonorgrelationship" + i).style.visibility = "visible";
+            document.getElementById("removepersonorgrelationship" + i).style.visibility = "hidden";
+        } else {
+            document.getElementById("endpersonorgrelationship" + i).style.visibility = "hidden";
+            document.getElementById("removepersonorgrelationship" + i).style.visibility = "visible";
+        }
+    }
+})();
 </script>
 
 <% include ../partials/footer2 %>
