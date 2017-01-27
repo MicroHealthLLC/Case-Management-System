@@ -1028,22 +1028,50 @@
 
 <script>
 function getorganizationinfo() {
-	$("#organizationname").val("<%= thisorg.organization_name %>");
-	$("#organizationwebsite").val("<%= thisorg.organization_website %>");
-	$("#organizationrole").val("<%= thisorg.lk_user_role %>");
-	$("#organizationtype").val("<%= thisorg.lk_organization_type %>");
-	$("#organizationrolestatus").val("<%= thisorg.lk_organization_status %>");
-	$("#organizationnote").val("<%= thisorg.note %>");
+    "use strict";
+    $("#organizationname").val("<%= thisorg.organization_name %>");
+    $("#organizationwebsite").val("<%= thisorg.organization_website %>");
+    $("#organizationrole").val("<%= thisorg.lk_user_role %>");
+    $("#organizationtype").val("<%= thisorg.lk_organization_type %>");
+    $("#organizationrolestatus").val("<%= thisorg.lk_organization_status %>");
+    $("#organizationnote").val("<%= thisorg.note %>");
 }
 getorganizationinfo();
 
-$(".personrelationshiptable").hide();
-$(".orgrelationshiptable").hide();
+(function () {
+    "use strict";
+    $(".personrelationshiptable").hide();
+    $(".orgrelationshiptable").hide();
 
-var removereq = $("#organizationform .requiredfield");
-for (var r = 0; r < removereq.length; r += 1) {
-	removereq[r].style.borderColor = "#cccccc";
-}
+    var removereq = $("#organizationform .requiredfield");
+    var r;
+    for (r = 0; r < removereq.length; r += 1) {
+        removereq[r].style.borderColor = "#cccccc";
+    }
+
+    var x = document.querySelectorAll(".endpor");
+    var i;
+    for (i = 0; i < x.length; i += 1) {
+        if (x[i].innerHTML === "") {
+            document.getElementById("endpersonorgrelationship" + i).style.visibility = "visible";
+            document.getElementById("removepersonorgrelationship" + i).style.visibility = "hidden";
+        } else {
+            document.getElementById("endpersonorgrelationship" + i).style.visibility = "hidden";
+            document.getElementById("removepersonorgrelationship" + i).style.visibility = "visible";
+        }
+    }
+
+    x = document.querySelectorAll(".endoor");
+    for (i = 0; i < x.length; i += 1) {
+        if (x[i].innerHTML === "") {
+            document.getElementById("endorganizationrelationship" + i).style.visibility = "visible";
+            document.getElementById("removeorganizationrelationship" + i).style.visibility = "hidden";
+        } else {
+            document.getElementById("endorganizationrelationship" + i).style.visibility = "hidden";
+            document.getElementById("removeorganizationrelationship" + i).style.visibility = "visible";
+        }
+    }
+})();
 </script>
 
 
