@@ -32,7 +32,7 @@ app.use(passport.session());
 //passport.serializeUser(User.serializeUser());
 //passport.deserializeUser(User.deserializeUser());
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
@@ -245,19 +245,19 @@ var case_case_relationship = [
 var thisrelatedcase = [];
 
 var case_assignment = [
-    {case_assignment_id: "1", case_id: "1", person_id: "1", organization_id: "", lk_assigned_role: "2", lk_case_assignment_type: "1", start_date: "9/20/2015", end_reason: "", end_date: ""},
-    {case_assignment_id: "2", case_id: "2", person_id: "2", organization_id: "", lk_assigned_role: "3", lk_case_assignment_type: "2", start_date: "11/27/2015", end_reason: "", end_date: ""},
-    {case_assignment_id: "3", case_id: "1", person_id: "5", organization_id: "", lk_assigned_role: "1", lk_case_assignment_type: "2", start_date: "6/22/2015", end_reason: "", end_date: ""},
-    {case_assignment_id: "4", case_id: "1", person_id: "", organization_id: "1", lk_assigned_role: "2", lk_case_assignment_type: "1", start_date: "9/20/2015", end_reason: "", end_date: ""},
-    {case_assignment_id: "5", case_id: "2", person_id: "1", organization_id: "", lk_assigned_role: "2", lk_case_assignment_type: "1", start_date: "11/10/2015", end_reason: "", end_date: ""},
-    {case_assignment_id: "6", case_id: "3", person_id: "1", organization_id: "", lk_assigned_role: "2", lk_case_assignment_type: "1", start_date: "12/12/2016", end_reason: "", end_date: ""},
-    {case_assignment_id: "7", case_id: "2", person_id: "6", organization_id: "", lk_assigned_role: "1", lk_case_assignment_type: "2", start_date: "11/27/2016", end_reason: "", end_date: ""},
-    {case_assignment_id: "8", case_id: "2", person_id: "7", organization_id: "", lk_assigned_role: "1", lk_case_assignment_type: "2", start_date: "11/27/2016", end_reason: "", end_date: ""}
+    {case_assignment_id: "1", case_id: "1", person_id: "1", organization_id: null, lk_assigned_role: "2", lk_case_assignment_type: "1", start_date: "9/20/2015", end_reason: "", end_date: ""},
+    {case_assignment_id: "2", case_id: "2", person_id: "2", organization_id: null, lk_assigned_role: "3", lk_case_assignment_type: "2", start_date: "11/27/2015", end_reason: "", end_date: ""},
+    {case_assignment_id: "3", case_id: "1", person_id: "5", organization_id: null, lk_assigned_role: "1", lk_case_assignment_type: "2", start_date: "6/22/2015", end_reason: "", end_date: ""},
+    {case_assignment_id: "4", case_id: "1", person_id: null, organization_id: "1", lk_assigned_role: "2", lk_case_assignment_type: "1", start_date: "9/20/2015", end_reason: "", end_date: ""},
+    {case_assignment_id: "5", case_id: "2", person_id: "1", organization_id: null, lk_assigned_role: "2", lk_case_assignment_type: "1", start_date: "11/10/2015", end_reason: "", end_date: ""},
+    {case_assignment_id: "6", case_id: "3", person_id: "1", organization_id: null, lk_assigned_role: "2", lk_case_assignment_type: "1", start_date: "12/12/2016", end_reason: "", end_date: ""},
+    {case_assignment_id: "7", case_id: "2", person_id: "6", organization_id: null, lk_assigned_role: "1", lk_case_assignment_type: "2", start_date: "11/27/2016", end_reason: "", end_date: ""},
+    {case_assignment_id: "8", case_id: "2", person_id: "7", organization_id: null, lk_assigned_role: "1", lk_case_assignment_type: "2", start_date: "11/27/2016", end_reason: "", end_date: ""}
 ];
 var cases_person_assignment = [];
 var cases_org_assignment = [];
 var person_assignment = [];
-var org_assignment = [];
+var organization_assignment = [];
 var my_cases = [];
 
 var cases_goals = [
@@ -306,46 +306,44 @@ var this_cases_files = [];
 var cases_casenotes = [
     {casenote_id: "1", case_id: "1", name: "Case_1__Note_1", domain: "1", actiontype: "2", type: "2", notedate: "11/12/2016 at 14:22:16", noteperson_id: "1", noteorg_id: "0", note_text: ["note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 "]}
 ];
-var cases_notetext = [
-    {notetext_id: "1", casenote_id: "1", notetext: "note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 "}
-];
 var this_cases_notes = [];
 
 var contact_phone = [
-	{phone_id: "1", person_id: "", organization_id: "1", lk_phone_type: "2", phone_number: "642-562-1198", note: ""},
+	{phone_id: "1", person_id: null, organization_id: "1", lk_phone_type: "2", phone_number: "642-562-1198", note: ""},
 	{phone_id: "2", person_id: "1", organization_id: "1", lk_phone_type: "2", phone_number: "642-562-1197", note: "Extension 384"},
 	{phone_id: "3", person_id: "3", organization_id: "1", lk_phone_type: "2", phone_number: "642-562-1197", note: "Extension 390"},
-	{phone_id: "4", person_id: "", organization_id: "2", lk_phone_type: "2", phone_number: "534-833-0000", note: ""},
+	{phone_id: "4", person_id: null, organization_id: "2", lk_phone_type: "2", phone_number: "534-833-0000", note: ""},
 	{phone_id: "5", person_id: "2", organization_id: "2", lk_phone_type: "2", phone_number: "534-833-0001", note: "Extension 8745"},
-	{phone_id: "6", person_id: "1", organization_id: "", lk_phone_type: "1", phone_number: "123-999-7777", note: ""},
-	{phone_id: "7", person_id: "1", organization_id: "", lk_phone_type: "1", phone_number: "123-977-7000", note: "Weeknights and weekends."},
-	{phone_id: "8", person_id: "2", organization_id: "", lk_phone_type: "1", phone_number: "427-456-5555", note: ""},
-	{phone_id: "9", person_id: "", organization_id: "1", lk_phone_type: "1", phone_number: "642-562-0000", note: ""},
-	{phone_id: "10", person_id: "5", organization_id: "", lk_phone_type: "1", phone_number: "456-987-5566", note: ""},
-	{phone_id: "11", person_id: "6", organization_id: "", lk_phone_type: "1", phone_number: "674-900-3344", note: ""},
-	{phone_id: "12", person_id: "7", organization_id: "", lk_phone_type: "3", phone_number: "674-910-3877", note: ""}
+	{phone_id: "6", person_id: "1", organization_id: null, lk_phone_type: "1", phone_number: "123-999-7777", note: ""},
+	{phone_id: "7", person_id: "1", organization_id: null, lk_phone_type: "1", phone_number: "123-977-7000", note: "Weeknights and weekends."},
+	{phone_id: "8", person_id: "2", organization_id: null, lk_phone_type: "1", phone_number: "427-456-5555", note: ""},
+	{phone_id: "9", person_id: null, organization_id: "1", lk_phone_type: "1", phone_number: "642-562-0000", note: ""},
+	{phone_id: "10", person_id: "5", organization_id: null, lk_phone_type: "1", phone_number: "456-987-5566", note: ""},
+	{phone_id: "11", person_id: "6", organization_id: null, lk_phone_type: "1", phone_number: "674-900-3344", note: ""},
+	{phone_id: "12", person_id: "7", organization_id: null, lk_phone_type: "3", phone_number: "674-910-3877", note: ""}
 ];
 var person_contact_phone = [];
 var org_contact_phone = [];
 
 var contact_email = [
-	{email_id: "1", person_id: "", organization_id: "1", lk_email_type: "2", email_address: "info@organizationone.com", note: ""},
+	{email_id: "1", person_id: null, organization_id: "1", lk_email_type: "2", email_address: "info@organizationone.com", note: ""},
 	{email_id: "2", person_id: "1", organization_id: "1", lk_email_type: "2", email_address: "person1.lastname@organizationone.com", note: ""},
 	{email_id: "3", person_id: "3", organization_id: "1", lk_email_type: "2", email_address: "person3.lastname@organizationone.com", note: ""},
-	{email_id: "4", person_id: "", organization_id: "2", lk_email_type: "2", email_address: "info@organizationtwo.net", note: ""},
+	{email_id: "4", person_id: null, organization_id: "2", lk_email_type: "2", email_address: "info@organizationtwo.net", note: ""},
 	{email_id: "5", person_id: "2", organization_id: "2", lk_email_type: "2", email_address: "person2.lastname@organizationtwo.net", note: ""},
-	{email_id: "6", person_id: "1", organization_id: "", lk_email_type: "1", email_address: "person1name@gmail.com", note: "Only when status is Inactive."},
-	{email_id: "7", person_id: "2", organization_id: "", lk_email_type: "1", email_address: "person2name@yahoo.com", note: "Use only for emergencies when there is no response after 1 hour from sending business email."},
-	{email_id: "8", person_id: "5", organization_id: "", lk_email_type: "1", email_address: "donna.parker@gmail.com", note: ""},
-	{email_id: "9", person_id: "6", organization_id: "", lk_email_type: "1", email_address: "laurasue.michaels@gmail.com", note: ""},
-	{email_id: "10", person_id: "7", organization_id: "", lk_email_type: "1", email_address: "julieann.mcdonald12@gmail.com", note: ""}
+	{email_id: "6", person_id: "1", organization_id: null, lk_email_type: "1", email_address: "person1name@gmail.com", note: "Only when status is Inactive."},
+	{email_id: "7", person_id: "2", organization_id: null, lk_email_type: "1", email_address: "person2name@yahoo.com", note: "Use only for emergencies when there is no response after 1 hour from sending business email."},
+	{email_id: "8", person_id: "5", organization_id: null, lk_email_type: "1", email_address: "donna.parker@gmail.com", note: ""},
+	{email_id: "9", person_id: "6", organization_id: null, lk_email_type: "1", email_address: "laurasue.michaels@gmail.com", note: ""},
+	{email_id: "10", person_id: "7", organization_id: null, lk_email_type: "1", email_address: "julieann.mcdonald12@gmail.com", note: ""}
 ];
+
 var person_contact_email = [];
 var org_contact_email = [];
 
 
 var contact_fax = [
-	{fax_id: "1", person_id: "", organization_id: "1", lk_fax_type: "2", fax_number: "642-562-2198", note: ""},
+	{fax_id: "1", person_id: null, organization_id: "1", lk_fax_type: "2", fax_number: "642-562-2198", note: ""},
 	{fax_id: "2", person_id: "1", organization_id: "1", lk_fax_type: "2", fax_number: "642-562-2197", note: ""}
 ];
 var person_contact_fax = [];
@@ -353,17 +351,17 @@ var org_contact_fax = [];
 
 
 var contact_media = [
-	{media_id: "1", person_id: "1", organization_id: "", lk_media_type: "1", media_handle: "person1@facebook.com", note: ""},
-	{media_id: "2", person_id: "", organization_id: "1", lk_media_type: "1", media_handle: "organization1@facebook.com", note: ""}
+	{media_id: "1", person_id: "1", organization_id: null, lk_media_type: "1", media_handle: "person1@facebook.com", note: ""},
+	{media_id: "2", person_id: null, organization_id: "1", lk_media_type: "1", media_handle: "organization1@facebook.com", note: ""}
 ];
 var person_contact_media = [];
 var org_contact_media = [];
 
 
 var contact_address = [
-	{address_id: "1", person_id: "", organization_id: "1", lk_address_type: "2", address: "234 Anywhere Street", city: "Richmond", lk_state: "Virginia", zipcode: "11111", lk_statecode: "1", lk_countrycode: "1", note: ""},
+	{address_id: "1", person_id: null, organization_id: "1", lk_address_type: "2", address: "234 Anywhere Street", city: "Richmond", lk_state: "Virginia", zipcode: "11111", lk_statecode: "1", lk_countrycode: "1", note: ""},
 	{address_id: "2", person_id: "1", organization_id: "1", lk_address_type: "2", address: "234 Anywhere Street", city: "Richmond", lk_state: "Virginia", zipcode: "11111", lk_statecode: "1", lk_countrycode: "1", note: ""},
-	{address_id: "3", person_id: "5", organization_id: "", lk_address_type: "1", address: "733 Patient Avenue", city: "Atlanta", lk_state: "Georgia", zipcode: "11177", lk_statecode: "2", lk_countrycode: "1", note: ""}
+	{address_id: "3", person_id: "5", organization_id: null, lk_address_type: "1", address: "733 Patient Avenue", city: "Atlanta", lk_state: "Georgia", zipcode: "11177", lk_statecode: "2", lk_countrycode: "1", note: ""}
 ];
 var person_contact_address = [];
 var org_contact_address = [];
@@ -398,7 +396,7 @@ var tasks = [
 ];
 var taskslisting = [];
 var overdue_tasks = [];
-
+var taskscaselisting = [];
 
 var questionnaire = [
     {questionnaire_id: "1", name: "Questionnaire Name 1", quest_type: "1", date_created: "10/17/2016 at 11:25:33", date_updated: "", qa: [
@@ -438,7 +436,9 @@ var my_cases_questionnaires = [];
 
 
 function thisExists(this_array, this_name, this_value) {
-    for (var i = 0; i < this_array.length; i += 1) {
+    "use strict";
+    var i;
+    for (i = 0; i < this_array.length; i += 1) {
         if (this_array[i][this_name] === this_value) {
             return i;
         }
@@ -448,9 +448,11 @@ function thisExists(this_array, this_name, this_value) {
 
 
 function thisPairingExists(this_array, this_name1, this_value1, this_name2, this_value2) {
-    for (var i = 0; i < this_array.length; i += 1) {
+    "use strict";
+    var i;
+    for (i = 0; i < this_array.length; i += 1) {
         if (((this_array[i][this_name1] === this_value1) && (this_array[i][this_name2] === this_value2)) ||
-            ((this_array[i][this_name1] === this_value2) && (this_array[i][this_name2] === this_value1))) {
+                ((this_array[i][this_name1] === this_value2) && (this_array[i][this_name2] === this_value1))) {
             return i;
         }
     }
@@ -459,7 +461,9 @@ function thisPairingExists(this_array, this_name1, this_value1, this_name2, this
 
 
 function thisGroupingExists(this_array, this_name1, this_value1, this_name2, this_value2, this_name3, this_value3) {
-    for (var i = 0; i < this_array.length; i += 1) {
+    "use strict";
+    var i;
+    for (i = 0; i < this_array.length; i += 1) {
         if ((this_array[i][this_name1] === this_value1) && (this_array[i][this_name2] === this_value2) && (this_array[i][this_name3] === this_value3)) {
             return i;
         }
@@ -468,9 +472,11 @@ function thisGroupingExists(this_array, this_name1, this_value1, this_name2, thi
 }
 
 
-function thisOrgExists(this_array, this_name, this_value, notthis_name) {
-    for (var i = 0; i < this_array.length; i += 1) {
-        if ((this_array[i][this_name] === this_value) && (this_array[i][notthis_name] === "")) {
+function thisOrgContactExists(this_array, this_name, this_value, notthis_name) {
+    "use strict";
+    var i;
+    for (i = 0; i < this_array.length; i += 1) {
+        if ((this_array[i][this_name] === this_value) && (this_array[i][notthis_name] === null)) {
             return i;
         }
     }
@@ -485,13 +491,15 @@ function thisOrgExists(this_array, this_name, this_value, notthis_name) {
 // *************  INDEX SCREEN   ********************************************
 
 function updateCasesPersonAssignments() {
+    "use strict";
     var casesPersonAssignment = {};
     cases_person_assignment = [];
-    for (var i = 0; i < case_assignment.length; i += 1) {
-        if (case_assignment[i].person_id !== "") {
-            var j = thisExists(person, "person_id", case_assignment[i].person_id);
+    var i, j, person_name;
+    for (i = 0; i < case_assignment.length; i += 1) {
+        if (case_assignment[i].person_id !== null) {
+            j = thisExists(person, "person_id", case_assignment[i].person_id);
             if (j !== null) {
-                var person_name = person[j].last_name + ", " + person[j].first_name + " " + person[j].middle_name;
+                person_name = person[j].last_name + ", " + person[j].first_name + " " + person[j].middle_name;
                 casesPersonAssignment = {cases_person_assignment_id:case_assignment[i].case_assignment_id, case_id:case_assignment[i].case_id, person_id:case_assignment[i].person_id, person_name:person_name, lk_assigned_role:case_assignment[i].lk_assigned_role, lk_case_assignment_type:case_assignment[i].lk_case_assignment_type, lk_status:person[j].lk_person_status, start_date:case_assignment[i].start_date, end_date:case_assignment[i].end_date};
                 cases_person_assignment.push(casesPersonAssignment);
             } else {
@@ -499,16 +507,18 @@ function updateCasesPersonAssignments() {
             }
         }
     }
-    return(cases_person_assignment);
+    return (cases_person_assignment);
 }
 
 
 function updateCasesOrgAssignments() {
+    "use strict";
     var casesOrgAssignment = {};
     cases_org_assignment = [];
-    for (var i = 0; i < case_assignment.length; i += 1) {
-        if (case_assignment[i].organization_id !== "") {
-            var j = thisExists(organization, "organization_id", case_assignment[i].organization_id);
+    var i, j;
+    for (i = 0; i < case_assignment.length; i += 1) {
+        if (case_assignment[i].organization_id !== null) {
+            j = thisExists(organization, "organization_id", case_assignment[i].organization_id);
             if (j !== null) {
                 casesOrgAssignment = {cases_org_assignment_id:case_assignment[i].case_assignment_id, case_id:case_assignment[i].case_id, organization_id:case_assignment[i].organization_id, organization_name:organization[j].organization_name, lk_assigned_role:case_assignment[i].lk_assigned_role, lk_case_assignment_type:case_assignment[i].lk_case_assignment_type, lk_status:organization[j].lk_organization_status, start_date:case_assignment[i].start_date, end_date:case_assignment[i].end_date};
                 cases_org_assignment.push(casesOrgAssignment);
@@ -517,17 +527,19 @@ function updateCasesOrgAssignments() {
             }
         }
     }
-    return(cases_org_assignment);
+    return (cases_org_assignment);
 }
 
 
 function overdueCases() {
+    "use strict";
     var overduedate = new Date();
     var overdueCase = {};
-    overdue_cases = [];
-    for (var i = 0; i < cases.length; i += 1) {
+    var overdue_cases = [];
+    var i, duedate;
+    for (i = 0; i < cases.length; i += 1) {
         if (cases[i].due_date !== "") {
-            var duedate = new Date(cases[i].due_date);
+            duedate = new Date(cases[i].due_date);
             duedate.setDate(duedate.getDate() + 1);
             if ((cases[i].complete_date === "") && (overduedate > duedate)) {
                 overdueCase = cases[i];
@@ -539,12 +551,14 @@ function overdueCases() {
 
 
 function overdueGoals() {
+    "use strict";
     var overduedate = new Date();
     var overdueGoal = {};
-    overdue_goals = [];
-    for (var i = 0; i < cases_goals.length; i += 1) {
+    var overdue_goals = [];
+    var i, duedate;
+    for (i = 0; i < cases_goals.length; i += 1) {
         if (cases_goals[i].due_date !== "") {
-            var duedate = new Date(cases_goals[i].due_date);
+            duedate = new Date(cases_goals[i].due_date);
             duedate.setDate(duedate.getDate() + 1);
             if ((cases_goals[i].complete_date === "") && (overduedate > duedate)) {
                 overdueGoal = cases_goals[i];
@@ -556,12 +570,14 @@ function overdueGoals() {
 
 
 function overduePlans() {
+    "use strict";
     var overduedate = new Date();
     var overduePlan = {};
-    overdue_plans = [];
-    for (var i = 0; i < cases_plans.length; i += 1) {
+    var overdue_plans = [];
+    var i, duedate;
+    for (i = 0; i < cases_plans.length; i += 1) {
         if (cases_plans[i].due_date !== "") {
-            var duedate = new Date(cases_plans[i].due_date);
+            duedate = new Date(cases_plans[i].due_date);
             duedate.setDate(duedate.getDate() + 1);
             if ((cases_plans[i].complete_date === "") && (overduedate > duedate)) {
                 overduePlan = cases_plans[i];
@@ -573,12 +589,14 @@ function overduePlans() {
 
 
 function overdueActions() {
+    "use strict";
     var overduedate = new Date();
     var overdueAction = {};
-    overdue_actions = [];
-    for (var i = 0; i < cases_actions.length; i += 1) {
+    var overdue_actions = [];
+    var i, duedate;
+    for (i = 0; i < cases_actions.length; i += 1) {
         if (cases_actions[i].due_date !== "") {
-            var duedate = new Date(cases_actions[i].due_date);
+            duedate = new Date(cases_actions[i].due_date);
             duedate.setDate(duedate.getDate() + 1);
             if ((cases_actions[i].complete_date === "") && (overduedate > duedate)) {
                 overdueAction = cases_actions[i];
@@ -589,7 +607,8 @@ function overdueActions() {
 }
 
 
-app.get("/", function(req, res){
+app.get("/", function (req, res) {
+    "use strict";
     updateCasesPersonAssignments();
     updateCasesOrgAssignments();
     overdueCases();
@@ -600,7 +619,8 @@ app.get("/", function(req, res){
 });
 
 
-app.post("/", function(req, res){
+app.post("/", function (req, res) {
+    "use strict";
     res.render("index", {cases:cases, organization:organization, cases_person_assignment:cases_person_assignment, cases_org_assignment:cases_org_assignment});
 });
 
@@ -610,19 +630,22 @@ app.post("/", function(req, res){
 // *************  ENUMERATIONS SCREEN *********************************
 
 //Display All Enumerations and Eumneration Form
-app.get("/enumerations", function(req, res){
+app.get("/enumerations", function (req, res) {
+    "use strict";
     res.render("enumerations/index",{enumRequired:enumRequired, enumFreeze:enumFreeze, caseDomain:caseDomain, caseCategory:caseCategory, caseStatus:caseStatus, caseSeverity:caseSeverity, casePriority:casePriority, taskType:taskType, taskStatus:taskStatus, questionnaireType:questionnaireType, questAssociatedWith:questAssociatedWith, questionnaireStatus:questionnaireStatus, caseCaseRelationship:caseCaseRelationship, assignedRole:assignedRole, assignmentType:assignmentType, goalType:goalType, planType:planType, actionType:actionType, caseFileType:caseFileType, caseNoteType:caseNoteType, userRole:userRole, userRoleStatus:userRoleStatus, personGender:personGender, personType:personType, personReligion:personReligion, identificationType:identificationType, identificationStatus:identificationStatus, organizationType:organizationType, personPersonRelationship:personPersonRelationship, personOrganizationRelationship:personOrganizationRelationship, organizationOrganizationRelationship:organizationOrganizationRelationship, contactType:contactType, contactPhoneType:contactPhoneType, contactEmailType:contactEmailType, contactFaxType:contactFaxType, contactMediaType:contactMediaType, contactAddressType:contactAddressType, contactStateCode:contactStateCode, contactCountryCode:contactCountryCode});
 });
 
 
 //EDIT SPECIFIC ENUMERATION
-app.post("/editenumeration", function(req, res){
+app.post("/editenumeration", function (req, res) {
+    "use strict";
     var totalenumkeys = req.body.totalenumkeys;
     var freezeenumkeys = req.body.freezeenumkeys;
     var enumname = req.body.enumname;
     var enumarray = [];
-    for (var i = 1; i <= totalenumkeys; i += 1) {
-        var enumkey = req.body["userenumkey" + i];
+    var i, enumkey;
+    for (i = 1; i <= totalenumkeys; i += 1) {
+        enumkey = req.body["userenumkey" + i];
         enumarray.push(enumkey);
      }
     if (enumname === "caseDomain") {
@@ -709,13 +732,15 @@ app.post("/editenumeration", function(req, res){
 // *************  CASE SCREEN *********************************
 
 // DISPLAY CASE INPUT FORM
-app.get("/case", function(req, res){
+app.get("/case", function (req, res) {
+    "use strict";
     res.render("case/index1",{caseDomain:caseDomain, caseCategory:caseCategory, caseStatus:caseStatus, caseSeverity:caseSeverity, casePriority:casePriority});
 });
 
 
 // CREATE CASE
-app.post("/case", function(req, res) {
+app.post("/case", function (req, res) {
+    "use strict";
     var title = (req.body.casetitle).trim();
     var description = (req.body.casedescription).trim();
     var domain = req.body.casedomain;
@@ -738,17 +763,25 @@ app.post("/case", function(req, res) {
         var newCase = {case_id: caseid, case_title: title, case_description: description, lk_case_domain: domain, lk_case_category: category, lk_case_type: casetype,  lk_case_status: casestatus, lk_case_severity: severity, lk_case_priority: priority, 
         start_date: startdate, due_date: duedate, complete_date: ""};
         cases.push(newCase);
-        mkdirp("uploads/assets2/case_" + caseid + "/goalfiles/", function(err) {
-            if (err) console.error(err);
+        mkdirp("uploads/assets2/case_" + caseid + "/goalfiles/", function (err) {
+            if (err) {
+                console.error(err);
+            }
         });
-        mkdirp("uploads/assets2/case_" + caseid + "/planfiles/", function(err) {
-            if (err) console.error(err);
+        mkdirp("uploads/assets2/case_" + caseid + "/planfiles/", function (err) {
+            if (err) {
+                console.error(err);
+            }
         });
-        mkdirp("uploads/assets2/case_" + caseid + "/actionfiles/", function(err) {
-            if (err) console.error(err);
+        mkdirp("uploads/assets2/case_" + caseid + "/actionfiles/", function (err) {
+            if (err) {
+                console.error(err);
+            }
         });
-        mkdirp("uploads/assets2/case_" + caseid + "/casefiles/", function(err) {
-            if (err) console.error(err);
+        mkdirp("uploads/assets2/case_" + caseid + "/casefiles/", function (err) {
+            if (err) {
+                console.error(err);
+            }
         });
         res.redirect("/case/" + caseid);
     } else {
@@ -759,6 +792,7 @@ app.post("/case", function(req, res) {
 
 
 function updateRelatedCases(caseid) {
+    "use strict";
     var thiscaseid = caseid;
     var relatedCase = {};
     thisrelatedcase = [];
@@ -767,12 +801,13 @@ function updateRelatedCases(caseid) {
         has_relationship = thisExists(case_case_relationship, "case_id2", thiscaseid);
     }
     if (has_relationship !== null) {
-        for (var i = 0; i < case_case_relationship.length; i += 1) {
+        var i, j;
+        for (i = 0; i < case_case_relationship.length; i += 1) {
             if (case_case_relationship[i].case_id1 === thiscaseid) {
-                var j = thisExists(cases, "case_id", case_case_relationship[i].case_id2);
+                j = thisExists(cases, "case_id", case_case_relationship[i].case_id2);
             } else {
                 if (case_case_relationship[i].case_id2 === thiscaseid) {
-                    var j = thisExists(cases, "case_id", case_case_relationship[i].case_id1);
+                    j = thisExists(cases, "case_id", case_case_relationship[i].case_id1);
                 }
             }
             if (j !== null) {
@@ -781,72 +816,45 @@ function updateRelatedCases(caseid) {
             }
         }
     }
-    return(thisrelatedcase);
+    return (thisrelatedcase);
 }
 
-/*
-function updatePersonAssignments(caseid) {
-    var case_id = caseid;
-    var person_status = "1";
-    var personAssignment = {};
-    person_assignment = [];
-    for (var i = 0; i < case_assignment.length; i += 1) {
-        if ((case_assignment[i].case_id === case_id) && (case_assignment[i].person_id !== "")) {
-            var j = thisExists(person, "person_id", case_assignment[i].person_id);
-            if (j !== null) {
-                var person_name = person[j].last_name + ", " + person[j].first_name + " " + person[j].middle_name;
-                var primary_phone = "";
-                var this_phone = thisExists(contact_phone, "person_id", case_assignment[i].person_id);
-                if (this_phone !== null) {       
-                    primary_phone = contact_phone[this_phone].phone_number;
-                }
-                var primary_email = "";
-                var this_email = thisExists(contact_email, "person_id", case_assignment[i].person_id);
-                if (this_email !== null) {       
-                    primary_email = contact_email[this_email].email_address;
-                }
-                personAssignment = {case_assignment_id:case_assignment[i].case_assignment_id, case_id:case_assignment[i].case_id, person_id:case_assignment[i].person_id, person_name:person_name, primary_phone:primary_phone, primary_email:primary_email, lk_assigned_role:case_assignment[i].lk_assigned_role, lk_case_assignment_type:case_assignment[i].lk_case_assignment_type, lk_status:person[j].lk_person_status, start_date:case_assignment[i].start_date, end_reason:case_assignment[i].end_reason, end_date:case_assignment[i].end_date};
-                person_assignment.push(personAssignment);
-            } else {
-                console.log("No Person Assignment!");
-            }
-        }
-    }
-    return(person_assignment);
-}
-*/
 
 function updatePersonAssignments(caseid) {
+    "use strict";
     var case_id = caseid;
     var person_status = "1";
     var personAssignment = {};
     person_assignment = [];
     thiscaseperson = [];
-    for (var i = 0; i < case_assignment.length; i += 1) {
-        if ((case_assignment[i].case_id === case_id) && (case_assignment[i].person_id !== "")) {
-            var j = thisExists(person, "person_id", case_assignment[i].person_id);
+    var thisCasePerson = {};
+    var i, j, person_name, primary_phone, this_phone, primary_email, this_email;
+    var primary_address, primary_city, primary_state, primary_zipcode, primary_statecode, primary_countrycode, this_address;
+    for (i = 0; i < case_assignment.length; i += 1) {
+        if ((case_assignment[i].case_id === case_id) && (case_assignment[i].person_id !== null)) {
+            j = thisExists(person, "person_id", case_assignment[i].person_id);
             if (j !== null) {
-                var person_name = person[j].last_name + ", " + person[j].first_name + " " + person[j].middle_name;
-                var primary_phone = "";
-                var this_phone = thisExists(contact_phone, "person_id", case_assignment[i].person_id);
+                person_name = person[j].last_name + ", " + person[j].first_name + " " + person[j].middle_name;
+                primary_phone = "";
+                this_phone = thisExists(contact_phone, "person_id", case_assignment[i].person_id);
                 if (this_phone !== null) {       
                     primary_phone = contact_phone[this_phone].phone_number;
                 }
-                var primary_email = "";
-                var this_email = thisExists(contact_email, "person_id", case_assignment[i].person_id);
+                primary_email = "";
+                this_email = thisExists(contact_email, "person_id", case_assignment[i].person_id);
                 if (this_email !== null) {       
                     primary_email = contact_email[this_email].email_address;
                 }
                 personAssignment = {case_assignment_id:case_assignment[i].case_assignment_id, case_id:case_assignment[i].case_id, person_id:case_assignment[i].person_id, person_name:person_name, primary_phone:primary_phone, primary_email:primary_email, lk_assigned_role:case_assignment[i].lk_assigned_role, lk_case_assignment_type:case_assignment[i].lk_case_assignment_type, lk_status:person[j].lk_person_status, start_date:case_assignment[i].start_date, end_reason:case_assignment[i].end_reason, end_date:case_assignment[i].end_date};
                 person_assignment.push(personAssignment);
                 if (case_assignment[i].lk_assigned_role === "1") {
-                    var primary_address = "";
-                    var primary_city = "";
-                    var primary_state = "";
-                    var primary_zipcode = "";
-                    var primary_statecode = "";
-                    var primary_countrycode = "";
-                    var this_address = thisExists(contact_address, "person_id", case_assignment[i].person_id);
+                    primary_address = "";
+                    primary_city = "";
+                    primary_state = "";
+                    primary_zipcode = "";
+                    primary_statecode = "";
+                    primary_countrycode = "";
+                    this_address = thisExists(contact_address, "person_id", case_assignment[i].person_id);
                     if (this_address !== null) {    
                         primary_address = contact_address[this_address].address;
                         primary_city = contact_address[this_address].city;
@@ -855,7 +863,7 @@ function updatePersonAssignments(caseid) {
                         primary_statecode = contact_address[this_address].lk_statecode;
                         primary_countrycode = contact_address[this_address].lk_countrycode;
                     }
-                    var thisCasePerson = {case_id:caseid, person_id:case_assignment[i].person_id, person_name:person_name, gender:person[j].lk_gender, birthdate:person[j].birth_date, primary_phone:primary_phone, primary_email:primary_email, address:primary_address, city:primary_city, state:primary_state, zipcode:primary_zipcode, statecode:primary_statecode, countrycode:primary_countrycode};
+                    thisCasePerson = {case_id:caseid, person_id:case_assignment[i].person_id, person_name:person_name, gender:person[j].lk_gender, birthdate:person[j].birth_date, primary_phone:primary_phone, primary_email:primary_email, address:primary_address, city:primary_city, state:primary_state, zipcode:primary_zipcode, statecode:primary_statecode, countrycode:primary_countrycode};
                     thiscaseperson.push(thisCasePerson);
                 }
             } else {
@@ -863,26 +871,29 @@ function updatePersonAssignments(caseid) {
             }
         }
     }
-    return(person_assignment, thiscaseperson);
+    return (person_assignment, thiscaseperson);
 }
 
 
 function updateOrganizationAssignments(caseid) {
+    "use strict";
     var case_id = caseid;
     var organization_status = "1";
     var organizationAssignment = {};
     organization_assignment = [];
-    for (var i = 0; i < case_assignment.length; i += 1) {
-        if ((case_assignment[i].case_id === case_id) && (case_assignment[i].organization_id !== "")) {
-            var j = thisExists(organization, "organization_id", case_assignment[i].organization_id);
+    var i, j;
+    var primary_phone, this_phone, primary_email, this_email;
+    for (i = 0; i < case_assignment.length; i += 1) {
+        if ((case_assignment[i].case_id === case_id) && (case_assignment[i].organization_id !== null)) {
+            j = thisExists(organization, "organization_id", case_assignment[i].organization_id);
             if (j !== null) {
-                var primary_phone = "";
-                var this_phone = thisOrgExists(contact_phone, "organization_id", case_assignment[i].organization_id, "person_id");
+                primary_phone = "";
+                this_phone = thisOrgContactExists(contact_phone, "organization_id", case_assignment[i].organization_id, "person_id");
                 if (this_phone !== null) {       
                     primary_phone = contact_phone[this_phone].phone_number;
                 }
-                var primary_email = "";
-                var this_email = thisOrgExists(contact_email, "organization_id", case_assignment[i].organization_id, "person_id");
+                primary_email = "";
+                this_email = thisOrgContactExists(contact_email, "organization_id", case_assignment[i].organization_id, "person_id");
                 if (this_email !== null) {       
                     primary_email = contact_email[this_email].email_address;
                 }
@@ -893,31 +904,35 @@ function updateOrganizationAssignments(caseid) {
             }
         }
     }
-    return(organization_assignment);
+    return (organization_assignment);
 }
 
 
 function updateThisCasesGoals(caseid) {
+    "use strict";
     var caseid = caseid;
     this_cases_goals = [];
-    for (var j = 0; j < cases_goals.length; j += 1) {
+    var j;
+    for (j = 0; j < cases_goals.length; j += 1) {
         if (cases_goals[j].case_id === caseid) {
             this_cases_goals.push(cases_goals[j]);
         }
     }
-    return(this_cases_goals);
+    return (this_cases_goals);
 }
 
 
 function updateThisCasesPlans(caseid) {
+    "use strict";
     var caseid = caseid;
     this_cases_plans = [];
     var assocgoalname = "";
-    for (var j = 0; j < cases_plans.length; j += 1) {
+    var i, j, found_associatedgoal;
+    for (j = 0; j < cases_plans.length; j += 1) {
         if (cases_plans[j].case_id === caseid) {
             if (cases_plans[j].assocgoal_id !== "0") {
-                var found_associatedgoal = false;
-                for (var i = 0; i < cases_goals.length; i += 1) {
+                found_associatedgoal = false;
+                for (i = 0; i < cases_goals.length; i += 1) {
                     if (cases_plans[j].assocgoal_id === cases_goals[i].goal_id) {
                         assocgoalname = cases_goals[i].name;
                         found_associatedgoal = true;
@@ -933,19 +948,21 @@ function updateThisCasesPlans(caseid) {
             }
         }
     }
-    return(this_cases_plans);
+    return (this_cases_plans);
 }
 
 
 function updateThisCasesActions(caseid) {
+    "use strict";
     var caseid = caseid;
     this_cases_actions = [];
     var assocplanname = "";
-    for (var j = 0; j < cases_actions.length; j += 1) {
+    var i, j, found_associatedplan;
+    for (j = 0; j < cases_actions.length; j += 1) {
         if (cases_actions[j].case_id === caseid) {
             if (cases_actions[j].assocplan_id !== "0") {
-                var found_associatedplan = false;
-                for (var i = 0; i < cases_plans.length; i += 1) {
+                found_associatedplan = false;
+                for (i = 0; i < cases_plans.length; i += 1) {
                     if (cases_actions[j].assocplan_id === cases_plans[i].plan_id) {
                         assocplanname = cases_plans[i].name;
                         found_associatedplan = true;
@@ -961,72 +978,80 @@ function updateThisCasesActions(caseid) {
             }
         }
     }
-    return(this_cases_actions);
+    return (this_cases_actions);
 }
 
 
 function updateTasksCaseListing(caseid) {
+    "use strict";
     var caseid = caseid;
     var caselisting = {};
     taskscaselisting = [];
     var k = thisExists(cases, "case_id", caseid);
+    var i, j, person_name;
     if (k !== null) {
-        for (var i = 0; i < tasks.length; i += 1) {
+        for (i = 0; i < tasks.length; i += 1) {
             k = thisExists(cases, "case_id", tasks[i].case_id);       
             if (k !== null) {
-                var j = thisExists(person, "person_id", tasks[i].person_id);
+                j = thisExists(person, "person_id", tasks[i].person_id);
                 if ((k !== null) && (j !== null)) {
-                    var person_name = person[j].last_name + ", " + person[j].first_name + " " + person[j].middle_name;
+                    person_name = person[j].last_name + ", " + person[j].first_name + " " + person[j].middle_name;
                     caselisting = {task_id:tasks[i].task_id, subject:tasks[i].subject, type:tasks[i].type, priority:tasks[i].priority, person_id:tasks[i].person_id, person_name:person_name, case_id:tasks[i].case_id, start_date:tasks[i].start_date, due_date:tasks[i].due_date, complete_date:tasks[i].complete_date, task_status:tasks[i].task_status, note:tasks[i].note};
                     taskscaselisting.push(caselisting);
                 }
             }
         }
-        return(taskscaselisting);
+        return (taskscaselisting);
     }
 }
 
 
 function updateThisCasesFiles(caseid) {
+    "use strict";
     var caseid = caseid;
     this_cases_files = [];
-    for (var j = 0; j < cases_casefiles.length; j += 1) {
+    var j;
+    for (j = 0; j < cases_casefiles.length; j += 1) {
         if (cases_casefiles[j].case_id === caseid) {
             this_cases_files.push(cases_casefiles[j]);
         }
     }
-    return(this_cases_files);
+    return (this_cases_files);
 }
 
 
 function updateThisCasesNotes(caseid) {
+    "use strict";
     var caseid = caseid;
     this_cases_notes = [];
-    for (var j = 0; j < cases_casenotes.length; j += 1) {
+    var j;
+    for (j = 0; j < cases_casenotes.length; j += 1) {
         if (cases_casenotes[j].case_id === caseid) {
             this_cases_notes.push(cases_casenotes[j]);
         }
     }
-    return(this_cases_notes);
+    return (this_cases_notes);
 }
 
 
 function updateThisCasesQuestionnaires(caseid) {
+    "use strict";
     var caseid = caseid;
     var caseQuestionnaire = {};
     this_cases_questionnaires = [];
-    for (var i = 0; i < cases_questionnaires.length; i += 1) {
+    var i, j, k, found_questionnaire, totalquestassigned, startedquestusers, completedquestusers;
+    for (i = 0; i < cases_questionnaires.length; i += 1) {
         if (cases_questionnaires[i].case_id === caseid) {
-            var found_questionnaire = false;
-            var j = -1;
+            found_questionnaire = false;
+            j = -1;
             while ((found_questionnaire === false) && (j < questionnaire.length - 1)) {
                 j += 1;
-                var totalquestassigned = 0;
-                var startedquestusers = 0;
-                var completedquestusers = 0;
+                totalquestassigned = 0;
+                startedquestusers = 0;
+                completedquestusers = 0;
                 if (cases_questionnaires[i].questionnaire_id === questionnaire[j].questionnaire_id) {                    
                     found_questionnaire = true;
-                    for (var k = 0; k < questanswers.length; k += 1) {
+                    for (k = 0; k < questanswers.length; k += 1) {
                         if (questanswers[k].casequest_id === cases_questionnaires[i].casequest_id) {
                             totalquestassigned += 1;
                             if (questanswers[k].quest_status === "3") {
@@ -1046,12 +1071,13 @@ function updateThisCasesQuestionnaires(caseid) {
             }
         }
     }
-    return(this_cases_questionnaires);
+    return (this_cases_questionnaires);
 }
 
 
 // DISPLAY SPECIFC CASE
-app.get("/case/:case_id", function(req, res){
+app.get("/case/:case_id", function (req, res) {
+    "use strict";
     var caseid = req.params.case_id;
     thiscaseperson = [];
     var j = thisExists(cases, "case_id", caseid);
@@ -1075,7 +1101,8 @@ app.get("/case/:case_id", function(req, res){
 
 
 // EDIT SPECIFIC CASE
-app.put("/case/:case_id", function(req, res){
+app.put("/case/:case_id", function (req, res) {
+    "use strict";
     var caseid = req.params.case_id;
     var title = (req.body.casetitle).trim();
     var description = (req.body.casedescription).trim();
@@ -1108,8 +1135,9 @@ app.put("/case/:case_id", function(req, res){
 
 
 // DELETE SPECIFIC CASE
-app.delete("/case/:case_id", function(req, res){
-  res.redirect("/");    
+app.delete("/case/:case_id", function (req, res) {
+    "use strict";
+    res.redirect("/");    
 });
 
 
@@ -1118,31 +1146,34 @@ app.delete("/case/:case_id", function(req, res){
 // *************  TASKS SCREEN ***************************************************
 
 function updateTasksListing() {
+    "use strict";
     var listing = {};
     taskslisting = [];
-    var k = null;
-    for (var i = 0; i < tasks.length; i += 1) {
-        var j = thisExists(person, "person_id", tasks[i].person_id);
+    var i, j, k, person_name;
+    for (i = 0; i < tasks.length; i += 1) {
+        j = thisExists(person, "person_id", tasks[i].person_id);
         if (j !== null) {
-            var person_name = person[j].last_name + ", " + person[j].first_name + " " + person[j].middle_name;
-            var k = thisExists(cases, "case_id", tasks[i].case_id);
+            person_name = person[j].last_name + ", " + person[j].first_name + " " + person[j].middle_name;
+            k = thisExists(cases, "case_id", tasks[i].case_id);
         }
         if ((j !== null) && (k !== null)) {
             listing = {task_id:tasks[i].task_id, subject:tasks[i].subject, type:tasks[i].type, priority:tasks[i].priority, person_id:tasks[i].person_id, person_name:person_name, case_id:tasks[i].case_id, case_title:cases[k].case_title, start_date:tasks[i].start_date, due_date:tasks[i].due_date, complete_date:tasks[i].complete_date, task_status:tasks[i].task_status, note:tasks[i].note};
             taskslisting.push(listing);
         }
     }
-    return(taskslisting);
+    return (taskslisting);
 }
 
 
 function overdueTasks() {
+    "use strict";
     var overduedate = new Date();
     var overdueTask = {};
     overdue_tasks = [];
-    for (var i = 0; i < tasks.length; i += 1) {
+    var i, duedate;
+    for (i = 0; i < tasks.length; i += 1) {
         if (tasks[i].due_date !== "") {
-            var duedate = new Date(tasks[i].due_date);
+            duedate = new Date(tasks[i].due_date);
             duedate.setDate(duedate.getDate() + 1);
             if (((tasks[i].complete_date === "") && (overduedate > duedate)) || (tasks[i].task_status === "5")) {
                 overdueTask = tasks[i];
@@ -1153,14 +1184,16 @@ function overdueTasks() {
 }
 
 
-app.get("/tasks", function(req, res){
+app.get("/tasks", function (req, res) {
+    "use strict";
     updateTasksListing();
     overdueTasks();
     res.render("tasks/index", {taskslisting:taskslisting, person:person, cases:cases, overdue_tasks:overdue_tasks, taskType:taskType, taskStatus:taskStatus, caseCategory:caseCategory});
 });
 
 
-app.post("/tasks", function(req, res){
+app.post("/tasks", function (req, res) {
+    "use strict";
     updateTasksListing();
     overdueTasks();
     res.render("tasks/index", {taskslisting:taskslisting, person:person, cases:cases, overdue_tasks:overdue_tasks, taskType:taskType, taskStatus:taskStatus, caseCategory:caseCategory});
@@ -1168,7 +1201,8 @@ app.post("/tasks", function(req, res){
 
 
 //CREATE TASK
-app.post("/task", function(req, res){
+app.post("/task", function (req, res) {
+    "use strict";
     var tasksubject = (req.body.tasksubject).trim();
     var tasktype = req.body.tasktype;
     var taskpriority = req.body.taskpriority;
@@ -1199,7 +1233,8 @@ app.post("/task", function(req, res){
 
 
 //EDIT TASK
-app.put("/task/:task_id", function(req, res){
+app.put("/task/:task_id", function (req, res) {
+    "use strict";
     var taskid = req.params.task_id;
     var tasksubject = (req.body.tasksubject).trim();
     var tasktype = req.body.tasktype;
@@ -1232,31 +1267,10 @@ app.put("/task/:task_id", function(req, res){
 
 
 
-
-// ***************  CREATE CASE PERSON ****************************************
-/* NOTE: not used!!
-app.post("/caseperson", function(req, res){
-    var caseid = req.body.caseperson_caseid;
-    var personid = req.body.caseperson_personid;
-    var found_case = false;
-    var i = -1;
-    while ((found_case === false) && (i < cases.length - 1)) {
-        i += 1;
-        if (cases[i].case_id === caseid) {
-            found_case = true;
-        }
-    }
-    if (found_case === true) {
-        cases[i].caseperson_id = personid;
-    }
-    res.redirect("back");
-});
-*/
-
-
 //  ******************  RELATED CASES  *******************************
 
-app.post("/relatedcase", function(req, res){
+app.post("/relatedcase", function (req, res) {
+    "use strict";
     var caseid1 = req.body.relatedcase_id1;
     var caseid2 = req.body.relatedcase_id2;
     if ((caseid1 !== "0") && (caseid2 !== "0")) {
@@ -1293,7 +1307,9 @@ app.post("/relatedcase", function(req, res){
 // ***********************  CASE ASSIGNMENTS  **************************************************
 
 function thisAssignmentExists(this_array, this_caseid, this_case_value, this_assignee, this_assignee_value, this_role, this_role_value, this_type, this_type_value) {
-    for (var i = 0; i < this_array.length; i += 1) {
+    "use strict";
+    var i;
+    for (i = 0; i < this_array.length; i += 1) {
         if ((this_array[i][this_caseid] === this_case_value) && (this_array[i][this_assignee] === this_assignee_value) && (this_array[i][this_role] === this_role_value) && (this_array[i][this_type] === this_type_value)) {
             return i;
         }
@@ -1303,7 +1319,8 @@ function thisAssignmentExists(this_array, this_caseid, this_case_value, this_ass
 
 // CREATE PERSON CASE ASSIGNMENT
 
-app.post("/personassignment", function(req, res){
+app.post("/personassignment", function (req, res) {
+    "use strict";
     var caseid = req.body.personassign_caseid;
     var personid = req.body.personassignpersonid;
     var assignedrole = req.body.personassignrole;
@@ -1316,7 +1333,7 @@ app.post("/personassignment", function(req, res){
             var startdate = (start_date.getMonth() + 1) + "/" + start_date.getDate() + "/" + start_date.getFullYear();
             var endreason = "";
             var enddate = "";
-            var orgid = "";
+            var orgid = null;
             var j = case_assignment.length - 1;
             if (j >= 0) {
                 var caseassignmentid = parseInt(case_assignment[j].case_assignment_id,10) + 1;
@@ -1340,13 +1357,14 @@ app.post("/personassignment", function(req, res){
 
 // EDIT PERSON ASSIGNMENT
 
-app.put("/personassignment/:case_assignment_id", function(req, res){
+app.put("/personassignment/:case_assignment_id", function (req, res) {
+    "use strict";
     var caseassignmentid = req.params.case_assignment_id;
     var caseid = req.body.personassign_caseid;
     var personid = req.body.personassignpersonid;
     var assignedrole = req.body.personassignrole;
     var assignmenttype = req.body.personassigntype;
-    var orgid = "";
+    var orgid = null;
     var endreason = (req.body.personassignmentendreason).trim();
 //    if ((personid !== "0") && (assignedrole !== "0") && (assignmenttype !== "0")) {
     if ((personid !== "0") && (assignedrole !== "0")) {
@@ -1371,7 +1389,8 @@ app.put("/personassignment/:case_assignment_id", function(req, res){
 
 // CREATE ORGANIZATION CASE ASSIGNMENT
 
-app.post("/organizationassignment", function(req, res){
+app.post("/organizationassignment", function (req, res) {
+    "use strict";
     var caseid = req.body.organizationassign_caseid;
     var organizationid = req.body.organizationassignorgid;
     var assignedrole = req.body.organizationassignrole;
@@ -1384,7 +1403,7 @@ app.post("/organizationassignment", function(req, res){
             var startdate = (start_date.getMonth() + 1) + "/" + start_date.getDate() + "/" + start_date.getFullYear();
             var endreason = "";
             var enddate = "";
-            var personid = "";
+            var personid = null;
             var j = case_assignment.length - 1;
             if (j >= 0) {
                 var caseassignmentid = parseInt(case_assignment[j].case_assignment_id,10) + 1;
@@ -1408,13 +1427,14 @@ app.post("/organizationassignment", function(req, res){
 
 // EDIT ORGANIZATION ASSIGNMENT
 
-app.put("/organizationassignment/:case_assignment_id", function(req, res){
+app.put("/organizationassignment/:case_assignment_id", function (req, res) {
+    "use strict";
     var caseassignmentid = req.params.case_assignment_id;
     var caseid = req.body.organizationassign_caseid;
     var organizationid = req.body.organizationassignorgid;
     var assignedrole = req.body.organizationassignrole;
     var assignmenttype = req.body.organizationassigntype;
-    var personid = "";
+    var personid = null;
     var endreason = (req.body.organizationassignmentendreason).trim();
 //    if ((organizationid !== "0") && (assignedrole !== "0") && (assignmenttype !== "0")) {
     if ((organizationid !== "0") && (assignedrole !== "0")) {
@@ -1454,12 +1474,13 @@ var uploadFile = multer({ storage : storageFile}).array("userFile",10);
 
 //**** DOWNLOAD FILE **********************************************
 
-app.get("/download/:case_id/:section/:urlfile", function(req, res) {
-  var caseid = req.params.case_id;
-  var section = req.params.section;
-  var urlfile = req.params.urlfile;
-  var file = __dirname + "/uploads/assets2/case_" + caseid + "/" + section + "/" + urlfile;
-  res.download(file);
+app.get("/download/:case_id/:section/:urlfile", function (req, res) {
+    "use strict";
+    var caseid = req.params.case_id;
+    var section = req.params.section;
+    var urlfile = req.params.urlfile;
+    var file = __dirname + "/uploads/assets2/case_" + caseid + "/" + section + "/" + urlfile;
+    res.download(file);
 });
 
 
@@ -1469,7 +1490,8 @@ app.get("/download/:case_id/:section/:urlfile", function(req, res) {
 
 // CREATE GOAL
 
-app.post("/goal", function(req, res) {
+app.post("/goal", function (req, res) {
+    "use strict";
     var caseid = req.body.goalcaseid;
     var goalname = (req.body.goalname).trim();
     var goaltype = req.body.goaltype;
@@ -1501,7 +1523,8 @@ app.post("/goal", function(req, res) {
 
 // EDIT GOAL
 
-app.put("/goal/:goal_id", function(req, res) {
+app.put("/goal/:goal_id", function (req, res) {
+    "use strict";
     var goalid = req.params.goal_id;
     var caseid = req.body.goalcaseid;
     var goalname = (req.body.goalname).trim();
@@ -1533,21 +1556,23 @@ app.put("/goal/:goal_id", function(req, res) {
 
 // UPLOAD GOAL DOC
 
-app.post("/goal/upload/:goal_id", function(req, res) {
-    uploadFile(req, res, function(err) {
+app.post("/goal/upload/:goal_id", function (req, res) {
+    "use strict";
+    uploadFile(req, res, function (err) {
         if (err) {
             req.flash("error", "Error uploading File!");
             res.redirect("back");
         } else {
             var goalid = req.params.goal_id;
             var caseid = req.body.uploadgoalcase_id;
+            var f;
             var i = thisExists(cases_goals, "goal_id", goalid);
             if (i !== null) {
                 if (req.files.length < 1) {
                     req.flash("error", "No file submitted for upload!");
                     res.redirect("back");
                 } else {
-                    for (var f = 0; f < req.files.length; f += 1) {
+                    for (f = 0; f < req.files.length; f += 1) {
                         fs.rename("/node_exercises/CMS_demo/uploads/assets2/" + req.files[f].filename, "/node_exercises/CMS_demo/uploads/assets2/case_" + caseid + "/goalfiles/" + req.files[f].filename, function (err) {
                             if (err) {
                                 req.flash("error", "File Directory Error!");
@@ -1570,7 +1595,8 @@ app.post("/goal/upload/:goal_id", function(req, res) {
 
 // REMOVE GOAL DOC ---- UPDATE THIS FUNCTION for MySQL to handle goal_doc array !!!!!!!!!!!!!!!!!!!!
 
-app.post("/goal/removedoc/:goal_id/:doc_position", function(req, res) {
+app.post("/goal/removedoc/:goal_id/:doc_position", function (req, res) {
+    "use strict";
     var goalid = req.params.goal_id;
     var goaldocposition = req.params.doc_position;
     var i = thisExists(cases_goals, "goal_id", goalid);
@@ -1589,7 +1615,8 @@ app.post("/goal/removedoc/:goal_id/:doc_position", function(req, res) {
 
 // CREATE PLAN
 
-app.post("/plan", function(req, res) {
+app.post("/plan", function (req, res) {
+    "use strict";
     var caseid = req.body.plancaseid;
     var planname = (req.body.planname).trim();
     var plantype = req.body.plantype;
@@ -1622,7 +1649,8 @@ app.post("/plan", function(req, res) {
 
 // EDIT PLAN
 
-app.put("/plan/:plan_id", function(req, res) {
+app.put("/plan/:plan_id", function (req, res) {
+    "use strict";
     var planid = req.params.plan_id;
     var caseid = req.body.plancaseid;
     var planname = (req.body.planname).trim();
@@ -1655,21 +1683,23 @@ app.put("/plan/:plan_id", function(req, res) {
 
 // UPLOAD PLAN DOC
 
-app.post("/plan/upload/:plan_id", function(req, res) {
-    uploadFile(req, res, function(err) {
+app.post("/plan/upload/:plan_id", function (req, res) {
+    "use strict";
+    uploadFile(req, res, function (err) {
         if (err) {
             req.flash("error", "Error Uploading File(s)!");
             res.redirect("back");
         } else {
             var planid = req.params.plan_id;
             var caseid = req.body.uploadplancase_id;
+            var f;
             var i = thisExists(cases_plans, "plan_id", planid);
             if (i !== null) {
                 if (req.files.length < 1) {
                     req.flash("error", "No file submitted for upload!");
                     res.redirect("back");
                 } else {
-                    for (var f = 0; f < req.files.length; f += 1) {
+                    for (f = 0; f < req.files.length; f += 1) {
                         fs.rename("/node_exercises/CMS_demo/uploads/assets2/" + req.files[f].filename, "/node_exercises/CMS_demo/uploads/assets2/case_" + caseid + "/planfiles/" + req.files[f].filename, function (err) {
                             if (err) {
                                 req.flash("error", "File Directory Error!");
@@ -1691,7 +1721,8 @@ app.post("/plan/upload/:plan_id", function(req, res) {
 
 // REMOVE PLAN DOC ---- UPDATE THIS FUNCTION for MySQL to handle plan_doc array !!!!!!!!!!!!!!!!!!!!
 
-app.post("/plan/removedoc/:plan_id/:doc_position", function(req, res) {
+app.post("/plan/removedoc/:plan_id/:doc_position", function (req, res) {
+    "use strict";
     var planid = req.params.plan_id;
     var plandocposition = req.params.doc_position;
     var i = thisExists(cases_plans, "plan_id", planid);
@@ -1711,7 +1742,8 @@ app.post("/plan/removedoc/:plan_id/:doc_position", function(req, res) {
 
 // CREATE ACTION
 
-app.post("/action", function(req, res) {
+app.post("/action", function (req, res) {
+    "use strict";
     var caseid = req.body.actioncaseid;
     var actionname = (req.body.actionname).trim();
     var actiontype = req.body.actiontype;
@@ -1744,7 +1776,8 @@ app.post("/action", function(req, res) {
 
 // EDIT ACTION
 
-app.put("/action/:action_id", function(req, res) {
+app.put("/action/:action_id", function (req, res) {
+    "use strict";
     var actionid = req.params.action_id;
     var caseid = req.body.actioncaseid;
     var actionname = (req.body.actionname).trim();
@@ -1777,21 +1810,23 @@ app.put("/action/:action_id", function(req, res) {
 
 // UPLOAD ACTION DOC
 
-app.post("/action/upload/:action_id", function(req, res) {
-    uploadFile(req, res, function(err) {
+app.post("/action/upload/:action_id", function (req, res) {
+    "use strict";
+    uploadFile(req, res, function (err) {
         if (err) {
             req.flash("error", "Error Uploading File(s)!");
             res.redirect("back");
         } else {
             var actionid = req.params.action_id;
             var caseid = req.body.uploadactioncase_id;
+            var f;
             var i = thisExists(cases_actions, "action_id", actionid);
             if (i !== null) {
                 if (req.files.length < 1) {
                     req.flash("error", "No file submitted for upload!");
                     res.redirect("back");
                 } else {
-                    for (var f = 0; f < req.files.length; f += 1) {
+                    for (f = 0; f < req.files.length; f += 1) {
                         fs.rename("/node_exercises/CMS_demo/uploads/assets2/" + req.files[f].filename, "/node_exercises/CMS_demo/uploads/assets2/case_" + caseid + "/actionfiles/" + req.files[f].filename, function (err) {
                             if (err) {
                                 req.flash("error", "File Directory Error!");
@@ -1813,7 +1848,8 @@ app.post("/action/upload/:action_id", function(req, res) {
 
 // REMOVE ACTION DOC ---- UPDATE THIS FUNCTION for MySQL to handle action_doc array !!!!!!!!!!!!!!!!!!!!
 
-app.post("/action/removedoc/:action_id/:doc_position", function(req, res) {
+app.post("/action/removedoc/:action_id/:doc_position", function (req, res) {
+    "use strict";
     var actionid = req.params.action_id;
     var actiondocposition = req.params.doc_position;
     var i = thisExists(cases_actions, "action_id", actionid);
@@ -1832,8 +1868,9 @@ app.post("/action/removedoc/:action_id/:doc_position", function(req, res) {
 
 // CREATE CASE FILE 
 
-app.post("/casefile", function(req, res) {
-    uploadFile(req, res, function(err) {
+app.post("/casefile", function (req, res) {
+    "use strict";
+    uploadFile(req, res, function (err) {
         if(err) {
             req.flash("error", "Error Uploading File(s)!");
             res.redirect("back");
@@ -1853,7 +1890,8 @@ app.post("/casefile", function(req, res) {
                 var filepersonid = req.body.casefilepersonid;
                 var fileorgid = req.body.casefileorgid;
                 var filenote = (req.body.casefilenote).trim();
-                for (var f = 0; f < req.files.length; f += 1) {
+                var f;
+                for (f = 0; f < req.files.length; f += 1) {
                     fs.rename("/node_exercises/CMS_demo/uploads/assets2/" + req.files[f].filename, "/node_exercises/CMS_demo/uploads/assets2/case_" + caseid + "/casefiles/" + req.files[f].filename, function (err) {
                         if (err) {
                             req.flash("error", "File Directory Error!");
@@ -1880,7 +1918,8 @@ app.post("/casefile", function(req, res) {
 
 // EDIT CASE FILE
 
-app.put("/casefile/:casefile_id", function(req, res) {
+app.put("/casefile/:casefile_id", function (req, res) {
+    "use strict";
     var casefileid = req.params.casefile_id;
     var caseid = req.body.casefilecaseid;
     var casefilename = (req.body.casefilename).trim();
@@ -1907,21 +1946,23 @@ app.put("/casefile/:casefile_id", function(req, res) {
 
 // UPLOAD CASE FILE DOC
 
-app.post("/casefile/upload/:casefile_id", function(req, res, next) {
-    uploadFile(req, res, function(err) {
+app.post("/casefile/upload/:casefile_id", function (req, res, next) {
+    "use strict";
+    uploadFile(req, res, function (err) {
         if(err) {
             req.flash("error", "Error Uploading File(s)!");
             res.redirect("back");
         } else {
             var casefileid = req.params.casefile_id;
             var caseid = req.body.uploadfilecase_id;
+            var f;
             var i = thisExists(cases_casefiles, "casefile_id", casefileid);
             if (i !== null) {
                 if (req.files.length < 1) {
                     req.flash("error", "No file submitted for upload!");
                     res.redirect("back");
                 } else {
-                    for (var f = 0; f < req.files.length; f += 1) {
+                    for (f = 0; f < req.files.length; f += 1) {
                             fs.rename("/node_exercises/CMS_demo/uploads/assets2/" + req.files[f].filename, "/node_exercises/CMS_demo/uploads/assets2/case_" + caseid + "/casefiles/" + req.files[f].filename, function (err) {
                             if (err) {
                                 req.flash("error", "File Directory Error!");
@@ -1944,7 +1985,8 @@ app.post("/casefile/upload/:casefile_id", function(req, res, next) {
  
 // REMOVE CASE FILE DOC ---- UPDATE THIS FUNCTION for MySQL to handle file_doc array !!!!!!!!!!!!!!!!!!!!
 
-app.post("/casefile/removedoc/:casefile_id/:doc_position", function(req, res) {
+app.post("/casefile/removedoc/:casefile_id/:doc_position", function (req, res) {
+    "use strict";
     var casefileid = req.params.casefile_id;
     var casefiledocposition = req.params.doc_position;
     var i = thisExists(cases_casefiles, "casefile_id", casefileid);
@@ -1968,7 +2010,8 @@ app.post("/casefile/removedoc/:casefile_id/:doc_position", function(req, res) {
 
 // CREATE CASE NOTE
 
-app.post("/casenote", function(req, res) {
+app.post("/casenote", function (req, res) {
+    "use strict";
     var caseid = req.body.casenotecaseid;
     var notename = (req.body.casenotename).trim();
     var notedomain = req.body.casenotecasedomain;
@@ -2001,7 +2044,8 @@ app.post("/casenote", function(req, res) {
 
 // EDIT CASE NOTE
 
-app.put("/casenote/:casenote_id", function(req, res) {
+app.put("/casenote/:casenote_id", function (req, res) {
+    "use strict";
     var notename = (req.body.casenotename).trim();
     var notetext = (req.body.casenotetext).trim();
     if ((notename !== "") && (notetext !== "")) {
@@ -2040,58 +2084,66 @@ app.put("/casenote/:casenote_id", function(req, res) {
 //*************************   QUESTIONNAIRES   ************************************************************
 
 function updateQuestionnairesInfo() {
+    "use strict";
     questionnaireslisting = [];
-    for (var i = 0; i < questionnaire.length; i += 1) {
-        var j = thisExists(cases_questionnaires, "questionnaire_id", questionnaire[i].questionnaire_id);
+    var thisQuestionnaire = {};
+    var i, j, inuse;
+    for (i = 0; i < questionnaire.length; i += 1) {
+        j = thisExists(cases_questionnaires, "questionnaire_id", questionnaire[i].questionnaire_id);
         if (j !== null) {
-            var inuse = "yes";
+            inuse = "yes";
         } else {
-            var inuse = "no";          
+            inuse = "no";          
         }
-        var thisQuestionnaire = {questionnaire_id: questionnaire[i].questionnaire_id, name: questionnaire[i].name, quest_type: questionnaire[i].quest_type, date_created: questionnaire[i].date_created, date_updated: questionnaire[i].date_updated, inuse: inuse};
+        thisQuestionnaire = {questionnaire_id: questionnaire[i].questionnaire_id, name: questionnaire[i].name, quest_type: questionnaire[i].quest_type, date_created: questionnaire[i].date_created, date_updated: questionnaire[i].date_updated, inuse: inuse};
         questionnaireslisting.push(thisQuestionnaire);
     }
-    return(questionnaireslisting);
+    return (questionnaireslisting);
 }
 
 
-app.get("/questionnaires", function(req, res) {
+app.get("/questionnaires", function (req, res) {
+    "use strict";
     updateQuestionnairesInfo();
     res.render("questionnaire/index", {questionnaireslisting:questionnaireslisting});
 });
 
 // Display New Questionnaire Form
-app.get("/questionnaire", function(req, res) {
+app.get("/questionnaire", function (req, res) {
+    "use strict";
     res.render("questionnaire/newquest.ejs");
 });
 
 // Create Questionnaire
-app.post("/questionnaire", function(req, res) {
+app.post("/questionnaire", function (req, res) {
+    "use strict";
     var totalquestions = req.body.currquestno;
     var questionnairename = (req.body.questionnairename).trim();
     var questionnairetype = req.body.questionnairetype;
     var datecreated =  new Date();
     datecreated = (datecreated.getMonth() + 1) + "/" + datecreated.getDate() + "/" + datecreated.getFullYear() + " at " + datecreated.getHours() + ":" + datecreated.getMinutes() + ":" + datecreated.getSeconds();
     var dateupdated =  "";
-    var qa = [];
-    for (var i = 1; i <= totalquestions; i += 1) {
-        var questno = req.body["question" + i];
-        var questtype = req.body["questtype" + i];
-        var totalanswers = req.body["totalanswers" + i];
-        var questtext = req.body["questtext" + i];
-        var answers = [];
+    var i, j, thisanswer, qa = [], answers = [], questanswgroup = {};
+    var questno, questtype, totalanswers, questtext;
+    var q, questionnaireid;
+    for (i = 1; i <= totalquestions; i += 1) {
+        questno = req.body["question" + i];
+        questtype = req.body["questtype" + i];
+        totalanswers = req.body["totalanswers" + i];
+        questtext = req.body["questtext" + i];
+        answers = [];
         if ((questtype !== "textbox") && (questtype !== "textarea")) {
-            for (var j = 1; j <= totalanswers; j += 1) {
-                var thisanswer = req.body["answer" + i + "-" + j + "_textbox"];
+            for (j = 1; j <= totalanswers; j += 1) {
+                thisanswer = req.body["answer" + i + "-" + j + "_textbox"];
                 answers.push(thisanswer);
             }
         }
-        var questanswgroup = {question_id: questno, questtext: questtext, questtype: questtype, totalansw: totalanswers, answers: answers};
+        questanswgroup = {question_id: questno, questtext: questtext, questtype: questtype, totalansw: totalanswers, answers: answers};
         qa.push(questanswgroup);           
     }
-    var q = questionnaire.length - 1;
+    q = questionnaire.length - 1;
     if (q >= 0) {
-        var questionnaireid = (parseInt(questionnaire[q].questionnaire_id,10) + 1);
+        questionnaireid = (parseInt(questionnaire[q].questionnaire_id,10) + 1);
         questionnaireid = questionnaireid.toString();
     } else {
         questionnaireid = "1";
@@ -2103,7 +2155,8 @@ app.post("/questionnaire", function(req, res) {
 
 
 // Display Specific Questionnaire in View Mode without Case and Person Info
-app.get("/questionnaire/:questionnaire_id", function(req, res) {
+app.get("/questionnaire/:questionnaire_id", function (req, res) {
+    "use strict";
     var questionnaireid = req.params.questionnaire_id;
     var i = thisExists(questionnaire, "questionnaire_id", questionnaireid);
     if (i !== null) {
@@ -2116,7 +2169,8 @@ app.get("/questionnaire/:questionnaire_id", function(req, res) {
 
 
 // Display Specific Questionnaire Form for Editing
-app.post("/editquestionnaire/:questionnaire_id", function(req, res) {
+app.post("/editquestionnaire/:questionnaire_id", function (req, res) {
+    "use strict";
     var questionnaireid = req.params.questionnaire_id;
     var q = thisExists(questionnaire, "questionnaire_id", questionnaireid);
     if (q !== null) {
@@ -2129,29 +2183,31 @@ app.post("/editquestionnaire/:questionnaire_id", function(req, res) {
 
 
 //EDIT SPECIFIC QUESTIONNAIRE
-app.put("/questionnaire/:questionnaire_id", function(req, res) {
+app.put("/questionnaire/:questionnaire_id", function (req, res) {
+    "use strict";
     var questionnaireid = req.params.questionnaire_id;
     var dateupdated =  new Date();
     dateupdated = (dateupdated.getMonth() + 1) + "/" + dateupdated.getDate() + "/" + dateupdated.getFullYear() + " at " + dateupdated.getHours() + ":" + dateupdated.getMinutes() + ":" + dateupdated.getSeconds();
+    var i, j, thisanswer, questno, questtype, totalanswers, questtext, answers = [], questanswgroup = {};
     var q = thisExists(questionnaire, "questionnaire_id", questionnaireid);
     if (q !== null) {
         var totalquestions = req.body.currquestno;
         var questionnairename = (req.body.questionnairename).trim();
         var questionnairetype = req.body.questionnairetype;
         var qa = [];
-        for (var i = 1; i <= totalquestions; i += 1) {
-            var questno = req.body["question" + i];
-            var questtype = req.body["questtype" + i];
-            var totalanswers = req.body["totalanswers" + i];
-            var questtext = req.body["questtext" + i];
-            var answers = [];
+        for (i = 1; i <= totalquestions; i += 1) {
+            questno = req.body["question" + i];
+            questtype = req.body["questtype" + i];
+            totalanswers = req.body["totalanswers" + i];
+            questtext = req.body["questtext" + i];
+            answers = [];
             if ((questtype !== "textbox") && (questtype !== "textarea")) {
-                for (var j = 1; j <= totalanswers; j += 1) {
-                    var thisanswer = req.body["answer" + i + "-" + j + "_textbox"];
+                for (j = 1; j <= totalanswers; j += 1) {
+                    thisanswer = req.body["answer" + i + "-" + j + "_textbox"];
                     answers.push(thisanswer);
                 }
             }
-            var questanswgroup = {question_id: questno, questtext: questtext, questtype: questtype, totalansw: totalanswers, answers: answers};
+            questanswgroup = {question_id: questno, questtext: questtext, questtype: questtype, totalansw: totalanswers, answers: answers};
             qa.push(questanswgroup);           
         }
         var editQuestionnaire = {questionnaire_id: questionnaire[q].questionnaire_id, name: questionnairename, quest_type: questionnairetype, date_created:questionnaire[q].date_created, date_updated:dateupdated, qa: qa};
@@ -2165,23 +2221,26 @@ app.put("/questionnaire/:questionnaire_id", function(req, res) {
 
 
 // Delete Specific Questionnaire
-app.post("/deletequestionnaire/:questionnaire_id", function(req, res) {
+app.post("/deletequestionnaire/:questionnaire_id", function (req, res) {
+    "use strict";
     var questionnaireid = req.params.questionnaire_id;
     res.send("'<html><head></head><body><h1>Delete Questionnaire " + questionnaireid + "!</h1></body></html>'");                    
 });
 
 
 // Display Specific Questionnaire Info
-app.post("/infoquestionnaire/:questionnaire_id", function(req, res) {
+app.post("/infoquestionnaire/:questionnaire_id", function (req, res) {
+    "use strict";
     var questionnaireid = req.params.questionnaire_id;
-    var casequestlisting = [];
+    casequestlisting = [];
     var personquestansw = [];
     var i = thisExists(questionnaire, "questionnaire_id", questionnaireid);
+    var j, q;
     if (i !== null) {
-        for (var j = 0; j < cases_questionnaires.length; j += 1) {
+        for (j = 0; j < cases_questionnaires.length; j += 1) {
             if (cases_questionnaires[j].questionnaire_id === questionnaireid) {
                 casequestlisting.push(cases_questionnaires[j]);
-                for (var q = 0; q < questanswers.length; q += 1) {
+                for (q = 0; q < questanswers.length; q += 1) {
                     if (questanswers[q].casequest_id === cases_questionnaires[j].casequest_id) {
                         personquestansw.push(questanswers[q]);
                     }
@@ -2199,7 +2258,8 @@ app.post("/infoquestionnaire/:questionnaire_id", function(req, res) {
 //*********************   Case Questionnaires ********************************
 
 // Create Case Questionnaire - Table Info
-app.post("/casequestionnaire", function(req, res) {
+app.post("/casequestionnaire", function (req, res) {
+    "use strict";
     var caseid = req.body.casequestcaseid;
     var questcaseassocwith = req.body.questcaseassocwith;
     var questassocwithname = req.body.questassocwithname;
@@ -2228,7 +2288,8 @@ app.post("/casequestionnaire", function(req, res) {
 
 
 // EDIT Case Questionnaire - Table Info
-app.put("/casequestionnaire/:casequest_id", function(req, res) {
+app.put("/casequestionnaire/:casequest_id", function (req, res) {
+    "use strict";
     var casequestid = req.params.casequest_id;
     var queststatus = req.body.casequeststatus;
     var questnote = (req.body.questnote).trim();
@@ -2250,7 +2311,8 @@ app.put("/casequestionnaire/:casequest_id", function(req, res) {
 
 
 //  DISPLAY SPECIFIC QUESTIONNAIRE on Case Screen under Questionnaires Tab for Input or View
-app.post("/questionnaire/:questionnaire_id", function(req, res) {
+app.post("/questionnaire/:questionnaire_id", function (req, res) {
+    "use strict";
     var questionnaireid = req.params.questionnaire_id;
     var casequestid = req.body.linkcasequestid;
     var caseid = req.body.linkquestcaseid;
@@ -2301,7 +2363,8 @@ app.post("/questionnaire/:questionnaire_id", function(req, res) {
 //**************************  Person Questionnaires *****************************
 
 // INPUT and/or UPDATE PERSON ANSWERS TO SPECIFIC QUESTIONNAIRE
-app.post("/personquestionnaire/:person_id/:casequest_id", function(req, res){
+app.post("/personquestionnaire/:person_id/:casequest_id", function (req, res) {
+    "use strict";
     var personid = req.params.person_id;
     var casequestid = req.params.casequest_id;
     var answers = req.body.answers;
@@ -2354,7 +2417,8 @@ app.post("/personquestionnaire/:person_id/:casequest_id", function(req, res){
 
 
 //  DISPLAY SPECIFIC QUESTIONNAIRE RESULTS FOR PERSON
-app.post("/questionnaireresults/:questionnaire_id", function(req, res) {
+app.post("/questionnaireresults/:questionnaire_id", function (req, res) {
+    "use strict";
     var questionnaireid = req.params.questionnaire_id;
     var casequestid = req.body.linkcasequestid;
     var questanswerid = req.body.linkquestanswerid;
@@ -2398,13 +2462,15 @@ app.post("/questionnaireresults/:questionnaire_id", function(req, res) {
 // *************  PERSON SCREEN ***************************************************
 
 // DISPLAY PERSON INPUT FORM
-app.get("/person", function(req, res){
+app.get("/person", function (req, res) {
+    "use strict";
     res.render("person/index1",{personGender:personGender, userRole:userRole, userRoleStatus:userRoleStatus, personType:personType, personReligion:personReligion});
 });
 
 
 // CREATE PERSON
-app.post("/person", function(req, res){
+app.post("/person", function (req, res) {
+    "use strict";
     var lastname = (req.body.lastname).trim();
     var firstname = (req.body.firstname).trim();
     var middlename = (req.body.middlename).trim();
@@ -2435,146 +2501,69 @@ app.post("/person", function(req, res){
     }
 });
 
-/*  NOTE: HAS BUG FIX!!!
-function updatePersonRelationships(personid) {
-    var thispersonid = personid;
-    var personRelationship = {};
-    person_relationship = [];
-    var has_relationship = thisExists(person_person_relationship, "person_id1", thispersonid);
-    if (has_relationship === null) {
-        has_relationship = thisExists(person_person_relationship, "person_id2", thispersonid);
-    }
-    if (has_relationship !== null) {
-        for (var i = 0; i < person_person_relationship.length; i += 1) {
-            var person_status = "1";
-            if (person_person_relationship[i].person_id1 === thispersonid) { 
-                var j = thisExists(person, "person_id", person_person_relationship[i].person_id2);
-            } else {
-                if (person_person_relationship[i].person_id2 === thispersonid) {
-                    var j = thisExists(person, "person_id", person_person_relationship[i].person_id1);
-                }
-            }
-            if (j !== null) {
-                var otherpersonid = person[j].person_id;
-                var person_name = person[j].last_name + ", " + person[j].first_name + " " + person[j].middle_name;
-                var p = thisExists(contact_phone, "person_id", otherpersonid);
-                if (p !== null) {       
-                    var person_contact_phone = contact_phone[p].phone_number;
-                } else {
-                    var person_contact_phone = "";                        
-                }
-                var e = thisExists(contact_email, "person_id", otherpersonid);
-                if (e !== null) {       
-                    var person_contact_email = contact_email[e].email_address;
-                } else {
-                    var person_contact_email = "";
-                }
-                personRelationship = {person_relationship_id:person_person_relationship[i].person_relationship_id, person_id1:thispersonid, person_id2:otherpersonid, person_name:person_name, primary_phone:person_contact_phone, primary_email:person_contact_email, lk_contact_type:person_person_relationship[i].lk_contact_type, lk_person_relationship_type:person_person_relationship[i].lk_person_relationship_type, lk_status:person[j].lk_person_status, start_date:person_person_relationship[i].start_date, end_reason:person_person_relationship[i].end_reason, end_date:person_person_relationship[i].end_date};
-                person_relationship.push(personRelationship);
-            }
-        }
-        return(person_relationship);
-    }
-}
-*/
 
-//Person Person Relationship
 function updatePersonRelationships(personid) {
+    "use strict";
     var thispersonid = personid;
-    var otherpersonid = "";
-    var person_name = "";
-    var person_status = "1";
-    var person_contact_phone = "";
-    var person_contact_email = "";
-    var i = 0;
-    var j = -1;
-    var found_person = false;
-    var has_person = -1;
-    var found_phone = false;
-    var has_phone = -1;
-    var found_email = false;
-    var has_email = -1;
     var personRelationship = {};
     person_relationship = [];
+    var i, j, person_status, otherpersonid, person_name, p;
+    var person_contact_phone, e, person_contact_email;
     var has_relationship = thisExists(person_person_relationship, "person_id1", thispersonid);
     if (has_relationship === null) {
         has_relationship = thisExists(person_person_relationship, "person_id2", thispersonid);
     }
     if (has_relationship !== null) {
         for (i = 0; i < person_person_relationship.length; i += 1) {
-            found_person = false;
-            person_name = "";
             person_status = "1";
-            j = -1;
-            if (person_person_relationship[i].person_id1 === thispersonid) {
-                while ((found_person === false) && (j < person.length - 1)) {
-                    j += 1;
-                    if (person_person_relationship[i].person_id2 === person[j].person_id) {
-                        found_person = true;
-                    }
-                }
+            if (person_person_relationship[i].person_id1 === thispersonid) { 
+                j = thisExists(person, "person_id", person_person_relationship[i].person_id2);
             } else {
                 if (person_person_relationship[i].person_id2 === thispersonid) {
-                    while ((found_person === false) && (j < person.length - 1)) {
-                        j += 1;
-                        if (person_person_relationship[i].person_id1 === person[j].person_id) {
-                            found_person = true;
-                        }
-                    }
+                    j = thisExists(person, "person_id", person_person_relationship[i].person_id1);
                 }
             }
-            if (found_person === true) {
+            if (j !== null) {
                 otherpersonid = person[j].person_id;
                 person_name = person[j].last_name + ", " + person[j].first_name + " " + person[j].middle_name;
-                person_status = person[j].lk_person_status;
-                found_phone = false;
-                person_contact_phone = "";
-                has_phone = thisExists(contact_phone, "person_id", otherpersonid);
-                if (has_phone !== null) {       
-                    j = -1;
-                    while ((found_phone === false) && (j < contact_phone.length - 1)) {
-                        j += 1;
-                        if (otherpersonid === contact_phone[j].person_id) {        
-                            person_contact_phone = contact_phone[j].phone_number;
-                            found_phone = true;
-                        }
-                    }
+                p = thisExists(contact_phone, "person_id", otherpersonid);
+                if (p !== null) {       
+                    person_contact_phone = contact_phone[p].phone_number;
+                } else {
+                    person_contact_phone = "";                        
                 }
-                found_email = false;
-                person_contact_email = "";
-                has_email = thisExists(contact_email, "person_id", otherpersonid);
-                if (has_email !== null) {       
-                    j = -1;
-                    while ((found_email === false) && (j < contact_email.length - 1)) {
-                        j += 1;
-                        if (otherpersonid === contact_email[j].person_id) {
-                            person_contact_email = contact_email[j].email_address;
-                            found_email = true;
-                        }
-                    }
+                e = thisExists(contact_email, "person_id", otherpersonid);
+                if (e !== null) {       
+                    person_contact_email = contact_email[e].email_address;
+                } else {
+                    person_contact_email = "";
                 }
-                personRelationship = {person_relationship_id:person_person_relationship[i].person_relationship_id, person_id1:thispersonid, person_id2:otherpersonid, person_name:person_name, primary_phone:person_contact_phone, primary_email:person_contact_email, lk_contact_type:person_person_relationship[i].lk_contact_type, lk_person_relationship_type:person_person_relationship[i].lk_person_relationship_type, lk_status:person_status, start_date:person_person_relationship[i].start_date, end_reason:person_person_relationship[i].end_reason, end_date:person_person_relationship[i].end_date};
+                personRelationship = {person_relationship_id:person_person_relationship[i].person_relationship_id, person_id1:thispersonid, person_id2:otherpersonid, person_name:person_name, primary_phone:person_contact_phone, primary_email:person_contact_email, lk_contact_type:person_person_relationship[i].lk_contact_type, lk_person_relationship_type:person_person_relationship[i].lk_person_relationship_type, lk_status:person[j].lk_person_status, start_date:person_person_relationship[i].start_date, end_reason:person_person_relationship[i].end_reason, end_date:person_person_relationship[i].end_date};
                 person_relationship.push(personRelationship);
             }
         }
-        return(person_relationship);
+        return (person_relationship);
     }
-}    
+}
 
 
 function updatePersonOrgRelationships(personid) {
+    "use strict";
     var person_id = personid;
     var organization_status = "1";
     var j = -1;
     var personOrgRelationship = {};
     personorg_relationship = [];
+    var i, found_org, organization_name, has_org;
+    var found_phone, org_contact_phone, has_phone;
+    var found_email, org_contact_email, has_email;
     var has_relationship = thisExists(person_organization_relationship, "person_id", person_id);
     if (has_relationship !== null) {
-        for (var i = 0; i < person_organization_relationship.length; i += 1) {
+        for (i = 0; i < person_organization_relationship.length; i += 1) {
             if (person_organization_relationship[i].person_id === person_id) { 
-                var found_org = false;
-                var organization_name = ""; 
-                var has_org = thisExists(person_organization_relationship, "organization_id", person_organization_relationship[i].organization_id);
+                found_org = false;
+                organization_name = ""; 
+                has_org = thisExists(person_organization_relationship, "organization_id", person_organization_relationship[i].organization_id);
                 if (has_org !== null) {       
                     j = -1;
                     while ((found_org === false) && (j < organization.length - 1)) {
@@ -2586,9 +2575,9 @@ function updatePersonOrgRelationships(personid) {
                         }
                     }
                     if (found_org === true) {
-                        var found_phone = false;
-                        var org_contact_phone = "";
-                        var has_phone = thisExists(contact_phone, "organization_id", person_organization_relationship[i].organization_id);
+                        found_phone = false;
+                        org_contact_phone = "";
+                        has_phone = thisExists(contact_phone, "organization_id", person_organization_relationship[i].organization_id);
                         if (has_phone !== null) {       
                             j = -1;
                             while ((found_phone === false) && (j < contact_phone.length - 1)) {
@@ -2599,9 +2588,9 @@ function updatePersonOrgRelationships(personid) {
                                 }
                             }
                         }
-                        var found_email = false;
-                        var org_contact_email = "";
-                        var has_email = thisExists(contact_email, "organization_id", person_organization_relationship[i].organization_id);
+                        found_email = false;
+                        org_contact_email = "";
+                        has_email = thisExists(contact_email, "organization_id", person_organization_relationship[i].organization_id);
                         if (has_email !== null) {       
                             j = -1;
                             while ((found_email === false) && (j < contact_email.length - 1)) {
@@ -2620,78 +2609,74 @@ function updatePersonOrgRelationships(personid) {
                 }
             }
         }
-        return(personorg_relationship);
+        return (personorg_relationship);
     }
 }
 
 
 function updateThisPersonAssignments(person_id) {
+    "use strict";
     var personid = person_id;
     var thisPersonAssignment = {};
     my_cases = [];
-//    my_cases_questionnaires = [];
-    for (var i = 0; i < case_assignment.length; i += 1) {
+    var i, j, k;
+    for (i = 0; i < case_assignment.length; i += 1) {
         if (case_assignment[i].person_id === personid) {
-            var k = thisExists(person, "person_id", case_assignment[i].person_id);
+            k = thisExists(person, "person_id", case_assignment[i].person_id);
             if (k !== null) {
-                var j = thisExists(cases, "case_id", case_assignment[i].case_id);
+                j = thisExists(cases, "case_id", case_assignment[i].case_id);
                 if ((k !== null) && (j !== null)) {
                     thisPersonAssignment = {case_id:cases[j].case_id, title:cases[j].case_title, duedate:cases[j].due_date, priority:cases[j].lk_case_priority, role:case_assignment[i].lk_assigned_role, startdate:case_assignment[i].start_date, enddate:case_assignment[i].end_date};
                     my_cases.push(thisPersonAssignment);
-//                    var mypersoncasequest = updateThisCasesQuestionnaires(cases[j].case_id);
-//        console.log(mypersoncasequest.length);
-//                    for (var q = 0; q < mypersoncasequest.length; q += 1) {
-    //                    console.log(mypersoncasequest[q]);
- //                       my_cases_questionnaires.push(mypersoncasequest[q]);
- //                   }
                 } else {
                     console.log("Sorry, Case Not Found For Person Assignment!");
                 }
             }
         }
     }
-    return(my_cases);
-//    return(my_cases, my_cases_questionnaires);
+    return (my_cases);
 }
 
 
 // DISPLAY SPECIFC PERSON
-app.get("/person/:person_id", function(req, res){
+app.get("/person/:person_id", function (req, res) {
+    "use strict";
     var personid = req.params.person_id;
+    var i;
     var j = thisExists(person, "person_id", personid);
     if (j !== null) {
         person_contact_phone = [];
-        for (var i = 0; i < contact_phone.length; i += 1) {
+        for (i = 0; i < contact_phone.length; i += 1) {
             if (contact_phone[i].person_id === personid) {
                 person_contact_phone.push(contact_phone[i]);
             }
         }
         person_contact_email = [];
-        for (var i = 0; i < contact_email.length; i += 1) {
+        for (i = 0; i < contact_email.length; i += 1) {
             if (contact_email[i].person_id === personid) {
                 person_contact_email.push(contact_email[i]);
             }
         }
         person_contact_fax = [];
-        for (var i = 0; i < contact_fax.length; i += 1) {
+        for (i = 0; i < contact_fax.length; i += 1) {
             if (contact_fax[i].person_id === personid) {
                 person_contact_fax.push(contact_fax[i]);
             }
         }
         person_contact_media = [];
-        for (var i = 0; i < contact_media.length; i += 1) {
+        for (i = 0; i < contact_media.length; i += 1) {
             if (contact_media[i].person_id === personid) {
                 person_contact_media.push(contact_media[i]);
             }
         }
         person_contact_address = [];
-        for (var i = 0; i < contact_address.length; i += 1) {
+        for (i = 0; i < contact_address.length; i += 1) {
             if (contact_address[i].person_id === personid) {
                 person_contact_address.push(contact_address[i]);
             }
         }
         person_identification = [];
-        for (var i = 0; i < identification.length; i += 1) {
+        for (i = 0; i < identification.length; i += 1) {
             if (identification[i].person_id === personid) {
                 person_identification.push(identification[i]);
             }
@@ -2708,7 +2693,8 @@ app.get("/person/:person_id", function(req, res){
 
 
 // EDIT SPECIFIC PERSON
-app.put("/person/:person_id", function(req, res){
+app.put("/person/:person_id", function (req, res) {
+    "use strict";
     var personid = req.params.person_id;
     var lastname = (req.body.lastname).trim();
     var firstname = (req.body.firstname).trim();
@@ -2741,7 +2727,8 @@ app.put("/person/:person_id", function(req, res){
 
 
 // DELETE SPECIFIC PERSON
-app.delete("/person/:person_id", function(req, res){
+app.delete("/person/:person_id", function (req, res) {
+    "use strict";
     res.redirect("/");    
 });
 
@@ -2749,7 +2736,8 @@ app.delete("/person/:person_id", function(req, res){
 
 // CREATE PERSON IDENTIFICATION
 
-app.post("/personidentification", function(req, res){
+app.post("/personidentification", function (req, res) {
+    "use strict";
     var personid = req.body.identificationpersonid;
     var issuedbyorg = (req.body.identificationorg).trim();
     var identificationnumber = (req.body.identificationnumber).trim();
@@ -2784,7 +2772,8 @@ app.post("/personidentification", function(req, res){
 
 // EDIT PERSON IDENTIFICATION
 
-app.put("/personidentification/:identification_id", function(req, res){
+app.put("/personidentification/:identification_id", function (req, res) {
+    "use strict";
     var identificationid = req.params.identification_id;
     var personid = req.body.identificationpersonid;
     var identificationnumber = (req.body.identificationnumber).trim();
@@ -2825,8 +2814,9 @@ var storagePersonImageFile = multer.diskStorage({
 
 var uploadPersonImageFile = multer({ storage : storagePersonImageFile}).single("userPersonImageFile");
 
-app.post("/personimage/:person_id", function(req, res){
-    uploadPersonImageFile(req, res, function(err) {
+app.post("/personimage/:person_id", function (req, res) {
+    "use strict";
+    uploadPersonImageFile(req, res, function (err) {
         if (err) {
             req.flash("error", "Error Uploading Person Image!");
             res.redirect("back");
@@ -2857,7 +2847,8 @@ app.post("/personimage/:person_id", function(req, res){
 });
 
 
-app.post("/personnoimage/:person_id", function(req, res){
+app.post("/personnoimage/:person_id", function (req, res) {
+    "use strict";
     var personid = req.params.person_id;
     var j = thisExists(person, "person_id", personid);
     if (j !== null) {
@@ -2875,13 +2866,15 @@ app.post("/personnoimage/:person_id", function(req, res){
 // *************  ORGANIZATION SCREEN ***************************************************
 
 // DISPLAY ORGANIZATION INPUT FORM
-app.get("/organization", function(req, res){
+app.get("/organization", function (req, res) {
+    "use strict";
     res.render("organization/index1",{userRole:userRole, organizationType:organizationType, userRoleStatus:userRoleStatus});
 });
 
 
 // CREATE ORGANIZATION
-app.post("/organization", function(req, res){
+app.post("/organization", function (req, res) {
+    "use strict";
     var orgname = (req.body.organizationname).trim();
     var orgwebsite = (req.body.organizationwebsite).trim();
     var orgrole = req.body.organizationrole;
@@ -2907,31 +2900,25 @@ app.post("/organization", function(req, res){
 });
 
 
-function thisOrgContactsExists(this_array, this_name, this_value, notthis_name) {
-    for (var i = 0; i < this_array.length; i += 1) {
-        if ((this_array[i][this_name] === this_value) && (this_array[i][notthis_name] === "")) {
-            return i;
-        } else {
-            return null;
-        }
-    }
-}
-
 
 function updateOrgPeopleRelationships(organizationid) {
+    "use strict";
     var organization_id = organizationid;
     var person_status = "1";
     var orgPersonRelationship = {};
     personorg_relationship = [];
+    var i, j, found_person, person_name, has_person;
+    var found_phone, person_contact_phone, has_phone;
+    var found_email, person_contact_email, has_email;
     var has_relationship = thisExists(person_organization_relationship, "organization_id", organization_id);
     if (has_relationship !== null) {
-        for (var i = 0; i < person_organization_relationship.length; i += 1) {
+        for (i = 0; i < person_organization_relationship.length; i += 1) {
             if (person_organization_relationship[i].organization_id === organization_id) {
-                var found_person = false;
-                var person_name = ""; 
-                var has_person = thisExists(person_organization_relationship, "person_id", person_organization_relationship[i].person_id);
+                found_person = false;
+                person_name = ""; 
+                has_person = thisExists(person_organization_relationship, "person_id", person_organization_relationship[i].person_id);
                 if (has_person !== null) {       
-                    var j = -1;
+                    j = -1;
                     while ((found_person === false) && (j < person.length - 1)) {
                         j += 1;
                         if (person_organization_relationship[i].person_id === person[j].person_id) {
@@ -2941,9 +2928,9 @@ function updateOrgPeopleRelationships(organizationid) {
                         }
                     }
                     if (found_person === true) {
-                        var found_phone = false;
-                        var person_contact_phone = "";
-                        var has_phone = thisExists(contact_phone, "person_id", person_organization_relationship[i].person_id);
+                        found_phone = false;
+                        person_contact_phone = "";
+                        has_phone = thisExists(contact_phone, "person_id", person_organization_relationship[i].person_id);
                         if (has_phone !== null) {       
                             j = -1;
                             while ((found_phone === false) && (j < contact_phone.length - 1)) {
@@ -2954,9 +2941,9 @@ function updateOrgPeopleRelationships(organizationid) {
                                 }
                             }
                         }
-                        var found_email = false;
-                        var person_contact_email = "";
-                        var has_email = thisExists(contact_email, "person_id", person_organization_relationship[i].person_id);
+                        found_email = false;
+                        person_contact_email = "";
+                        has_email = thisExists(contact_email, "person_id", person_organization_relationship[i].person_id);
                         if (has_email !== null) {       
                             j = -1;
                             while ((found_email === false) && (j < contact_email.length - 1)) {
@@ -2975,25 +2962,29 @@ function updateOrgPeopleRelationships(organizationid) {
                 }
             }
         }
-        return(personorg_relationship);
+        return (personorg_relationship);
     }
 }
 
 
 function updateOrganizationRelationships(organizationid) {
+    "use strict";
     var thisorganization = organizationid;
     var organizationRelationship = {};
     organization_relationship = [];
+    var i, j, found_org, organization_name, organization_status;
+    var otherorganization, found_phone, org_contact_phone, has_phone;
+    var found_email, org_contact_email, has_email;
     var has_relationship = thisExists(organization_organization_relationship, "organization_id1", thisorganization);
     if (has_relationship === null) {
         has_relationship = thisExists(organization_organization_relationship, "organization_id2", thisorganization);
     }
     if (has_relationship !== null) {
-        for (var i = 0; i < organization_organization_relationship.length; i += 1) {
-            var found_org = false;
-            var organization_name = "";
-            var organization_status = "1";
-            var j = -1;
+        for (i = 0; i < organization_organization_relationship.length; i += 1) {
+            found_org = false;
+            organization_name = "";
+            organization_status = "1";
+            j = -1;
             if (organization_organization_relationship[i].organization_id1 === thisorganization) {
                 while ((found_org === false) && (j < organization.length - 1)) {
                     j += 1;
@@ -3012,12 +3003,12 @@ function updateOrganizationRelationships(organizationid) {
                 }               
             }
             if (found_org === true) {
-                var otherorganization = organization[j].organization_id;
-                var organization_name = organization[j].organization_name;
-                var organization_status = organization[j].lk_organization_status;
-                var found_phone = false;
-                var org_contact_phone = "";
-                var has_phone = thisExists(contact_phone, "organization_id", otherorganization);
+                otherorganization = organization[j].organization_id;
+                organization_name = organization[j].organization_name;
+                organization_status = organization[j].lk_organization_status;
+                found_phone = false;
+                org_contact_phone = "";
+                has_phone = thisExists(contact_phone, "organization_id", otherorganization);
                 if (has_phone !== null) {       
                     j = -1;
                     while ((found_phone === false) && (j < contact_phone.length - 1)) {
@@ -3028,9 +3019,9 @@ function updateOrganizationRelationships(organizationid) {
                         }
                     }
                 }
-                var found_email = false;
-                var org_contact_email = "";
-                var has_email = thisExists(contact_email, "organization_id", otherorganization);
+                found_email = false;
+                org_contact_email = "";
+                has_email = thisExists(contact_email, "organization_id", otherorganization);
                 if (has_email !== null) {       
                     j = -1;
                     while ((found_email === false) && (j < contact_email.length - 1)) {
@@ -3046,17 +3037,19 @@ function updateOrganizationRelationships(organizationid) {
             }
         }
     }
-    return(organization_relationship);
+    return (organization_relationship);
 }
 
 
 function updateThisOrgAssignments(organization_id) {
+    "use strict";
     var organizationid = organization_id;
     var thisOrgAssignment = {};
     my_cases = [];
-    for (var i = 0; i < case_assignment.length; i += 1) {
+    var i, j;
+    for (i = 0; i < case_assignment.length; i += 1) {
         if (case_assignment[i].organization_id === organizationid) {
-            var j = thisExists(cases, "case_id", case_assignment[i].case_id);
+            j = thisExists(cases, "case_id", case_assignment[i].case_id);
             if (j !== null) {
                 thisOrgAssignment = {case_id:cases[j].case_id, title:cases[j].case_title, duedate:cases[j].due_date, priority:cases[j].lk_case_priority, role:case_assignment[i].lk_assigned_role, startdate:case_assignment[i].start_date, enddate:case_assignment[i].end_date};
                 my_cases.push(thisOrgAssignment);
@@ -3065,52 +3058,54 @@ function updateThisOrgAssignments(organization_id) {
             }
         }
     }
-    return(my_cases);
+    return (my_cases);
 }
 
 
 // DISPLAY SPECIFC ORGANIZATION
-app.get("/organization/:organization_id", function(req, res){
+app.get("/organization/:organization_id", function (req, res) {
+    "use strict";
     var organizationid = req.params.organization_id;
+    org_contact_phone = [];
+    org_contact_email = [];
+    org_contact_fax = [];
+    org_contact_media = [];
+    org_contact_address = [];
+    var i;
     var j = thisExists(organization, "organization_id", organizationid);
     if (j !== null) {
-        org_contact_phone = [];
-        var found_phone = thisOrgContactsExists(contact_phone, "organization_id", organization[j].organization_id, "person_id");
+        var found_phone = thisOrgContactExists(contact_phone, "organization_id", organization[j].organization_id, "person_id");
         if (found_phone !== null) {
-            for (var i = 0; i < contact_phone.length; i += 1) {
+            for (i = 0; i < contact_phone.length; i += 1) {
                 if ((contact_phone[i].organization_id === organizationid) && (contact_phone[i].person_id === "")) {
                     org_contact_phone.push(contact_phone[i]);
                 }
             }
         }
-        org_contact_email = [];
-        var found_email = thisOrgContactsExists(contact_email, "organization_id", organization[j].organization_id, "person_id");
+        var found_email = thisOrgContactExists(contact_email, "organization_id", organization[j].organization_id, "person_id");
         if (found_email !== null) {
-            for (var i = 0; i < contact_email.length; i += 1) {
+            for (i = 0; i < contact_email.length; i += 1) {
                 if ((contact_email[i].organization_id === organizationid) && (contact_email[i].person_id === "")) {
                     org_contact_email.push(contact_email[i]);
                 }
             }
         }
-        org_contact_fax = [];
-        var found_fax = thisOrgContactsExists(contact_fax, "organization_id", organization[j].organization_id, "person_id");
+        var found_fax = thisOrgContactExists(contact_fax, "organization_id", organization[j].organization_id, "person_id");
         if (found_fax !== null) {
-            for (var i = 0; i < contact_fax.length; i += 1) {
+            for (i = 0; i < contact_fax.length; i += 1) {
                 if ((contact_fax[i].organization_id === organizationid) && (contact_fax[i].person_id === "")) {
                     org_contact_fax.push(contact_fax[i]);
                 }
             }
         }
-        org_contact_media = [];
-        for (var i = 0; i < contact_media.length; i += 1) {
+        for (i = 0; i < contact_media.length; i += 1) {
             if (contact_media[i].organization_id === organizationid) {
                 org_contact_media.push(contact_media[i]);
             }
         }
-        org_contact_address = [];
-        var found_address = thisOrgContactsExists(contact_address, "organization_id", organization[j].organization_id, "person_id");
+        var found_address = thisOrgContactExists(contact_address, "organization_id", organization[j].organization_id, "person_id");
         if (found_address !== null) {
-            for (var i = 0; i < contact_address.length; i += 1) {
+            for (i = 0; i < contact_address.length; i += 1) {
                 if ((contact_address[i].organization_id === organizationid) && (contact_address[i].person_id === "")) {
                     org_contact_address.push(contact_address[i]);
                 }
@@ -3128,7 +3123,8 @@ app.get("/organization/:organization_id", function(req, res){
 
 
 // EDIT SPECIFIC ORGANIZATION
-app.put("/organization/:organization_id", function(req, res){
+app.put("/organization/:organization_id", function (req, res) {
+    "use strict";
     var organizationid = req.params.organization_id;
     var orgname = (req.body.organizationname).trim();
     var orgwebsite = (req.body.organizationwebsite).trim();
@@ -3155,7 +3151,8 @@ app.put("/organization/:organization_id", function(req, res){
 
 
 // DELETE SPECIFIC ORGANIZATION
-app.delete("/organization/:organization_id", function(req, res){
+app.delete("/organization/:organization_id", function (req, res) {
+    "use strict";
     res.redirect("/");    
 });
 
@@ -3167,7 +3164,8 @@ app.delete("/organization/:organization_id", function(req, res){
 
 // CREATE PERSON PERSON RELATIONSHIP
 
-app.post("/personrelationship", function(req, res){
+app.post("/personrelationship", function (req, res) {
+    "use strict";
     var personid1 = req.body.personrelonepersonid;
     var personid2 = req.body.personreltwopersonid;
     var contacttype = req.body.personcontacttype;
@@ -3207,7 +3205,8 @@ app.post("/personrelationship", function(req, res){
 
 // EDIT PERSON PERSON RELATIONSHIP
 
-app.put("/personrelationship/:person_relationship_id", function(req, res){
+app.put("/personrelationship/:person_relationship_id", function (req, res) {
+    "use strict";
     var personrelationshipid = req.params.person_relationship_id;
     var personid1 = req.body.personrelonepersonid;
     var personid2 = req.body.personreltwopersonid;
@@ -3237,7 +3236,8 @@ app.put("/personrelationship/:person_relationship_id", function(req, res){
 
 // CREATE PERSON ORGANIZATION RELATIONSHIP
 
-app.post("/personorgrelationship", function(req, res){
+app.post("/personorgrelationship", function (req, res) {
+    "use strict";
     var personid = req.body.personorgpersonid;
     var organizationid = req.body.personorgorganizationid;
     var contacttype = req.body.personorgcontacttype;
@@ -3273,7 +3273,8 @@ app.post("/personorgrelationship", function(req, res){
 
 // EDIT PERSON ORGANIZATION RELATIONSHIP
 
-app.put("/personorgrelationship/:person_organization_id", function(req, res){
+app.put("/personorgrelationship/:person_organization_id", function (req, res) {
+    "use strict";
     var personorganizationid = req.params.person_organization_id;
     var personid = req.body.personorgpersonid;
     var organizationid = req.body.personorgorganizationid;
@@ -3303,7 +3304,8 @@ app.put("/personorgrelationship/:person_organization_id", function(req, res){
 
 // CREATE ORGANIZATION RELATIONSHIP
 
-app.post("/organizationrelationship", function(req, res){
+app.post("/organizationrelationship", function (req, res) {
+    "use strict";
     var organizationid1 = req.body.orgreloneorganizationid;
     var organizationid2 = req.body.orgreltwoorganizationid;
     var contacttype = req.body.organizationcontacttype;
@@ -3343,7 +3345,8 @@ app.post("/organizationrelationship", function(req, res){
 
 // EDIT ORGANIZATION RELATIONSHIP
 
-app.put("/organizationrelationship/:organization_relationship_id", function(req, res){
+app.put("/organizationrelationship/:organization_relationship_id", function (req, res) {
+    "use strict";
     var organizationrelationshipid = req.params.organization_relationship_id;
     var organizationid1 = req.body.orgreloneorganizationid;
     var organizationid2 = req.body.orgreltwoorganizationid;
@@ -3376,11 +3379,15 @@ app.put("/organizationrelationship/:organization_relationship_id", function(req,
 
 // CREATE CONTACT PHONE
 
-app.post("/contactphone", function(req, res){
+app.post("/contactphone", function (req, res) {
+    "use strict";
     var personid = req.body.phonepersonid;
     var organizationid = req.body.phoneorgid;
+    if (personid === "") {
+        personid = null;
+    }
     if (organizationid === "0") {
-        organizationid = "";
+        organizationid = null;
     }
     var phonenumber = (req.body.contactphonenumber).trim();
     var phonetype = req.body.contactphonetype;
@@ -3389,9 +3396,6 @@ app.post("/contactphone", function(req, res){
     if (phonenumber !== "") {
         var has_phone = thisGroupingExists(contact_phone, "person_id", personid, "organization_id", organizationid, "phone_number", phonenumber);
         if (has_phone === null) {
-            if ((personid === null) || (personid === "")) {
-                personid = "";
-            }
             var j = contact_phone.length - 1;
             if (j >= 0) {
                 var phoneid = parseInt(contact_phone[j].phone_id,10) + 1;
@@ -3415,21 +3419,22 @@ app.post("/contactphone", function(req, res){
 
 // EDIT CONTACT PHONE
 
-app.put("/contactphone/:phone_id", function(req, res){
+app.put("/contactphone/:phone_id", function (req, res) {
+    "use strict";
     var phoneid = req.params.phone_id;
     var personid = req.body.phonepersonid;
+    var organizationid = req.body.phoneorgid;
+    if (personid === "") {
+        personid = null;
+    }
+    if (organizationid === "0") {
+        organizationid = null;
+    }
     var phonetype = req.body.contactphonetype;
     var phonenumber = (req.body.contactphonenumber).trim();
-    var organizationid = req.body.phoneorgid;
     var phonenote = (req.body.phonenote).trim();
 //    if ((phonenumber !== "") && (phonetype !== "0")) {
     if (phonenumber !== "") {
-        if ((personid === null) || (personid === "")) {
-            personid = "";
-        }
-        if (organizationid === "0") {
-            organizationid = "";
-        }
         var i = thisExists(contact_phone, "phone_id", phoneid);
         if (i !== null) {
             var editContactPhone = {phone_id: phoneid, person_id: personid, organization_id: organizationid, lk_phone_type: phonetype, phone_number: phonenumber, note: phonenote};
@@ -3449,11 +3454,15 @@ app.put("/contactphone/:phone_id", function(req, res){
 
 // CREATE CONTACT EMAIL
 
-app.post("/contactemail", function(req, res){
+app.post("/contactemail", function (req, res) {
+    "use strict";
     var personid = req.body.emailpersonid;
     var organizationid = req.body.emailorgid;
+    if (personid === "") {
+        personid = null;
+    }
     if (organizationid === "0") {
-        organizationid = "";
+        organizationid = null;
     }
     var emailaddress = (req.body.contactemailaddress).trim();
     var emailtype = req.body.contactemailtype;
@@ -3462,9 +3471,6 @@ app.post("/contactemail", function(req, res){
     if (emailaddress !== "") {
         var has_email = thisGroupingExists(contact_email, "person_id", personid, "organization_id", organizationid, "email_address", emailaddress);
         if (has_email === null) {
-            if ((personid === null) || (personid === "")) {
-                personid = "";
-            }
             var j = contact_email.length - 1;
             if (j >= 0) {
                 var emailid = parseInt(contact_email[j].email_id,10) + 1;
@@ -3488,21 +3494,22 @@ app.post("/contactemail", function(req, res){
 
 // EDIT CONTACT EMAIL
 
-app.put("/contactemail/:email_id", function(req, res){
+app.put("/contactemail/:email_id", function (req, res) {
+    "use strict";
     var emailid = req.params.email_id;
     var personid = req.body.emailpersonid;
+    if (personid === "") {
+        personid = null;
+    }
+    if (organizationid === "0") {
+        organizationid = null;
+    }
     var emailtype = req.body.contactemailtype;
     var emailaddress = (req.body.contactemailaddress).trim();
     var organizationid = req.body.emailorgid;
     var emailnote = (req.body.emailnote).trim();
 //    if ((emailaddress !== "") && (emailtype !== "0")) {
     if (emailaddress !== "") {
-        if ((personid === null) || (personid === "")) {
-            personid = "";
-        }
-        if (organizationid === "0") {
-            organizationid = "";
-        }
         var i = thisExists(contact_email, "email_id", emailid);
         if (i !== null) {
             var contactEmail = {email_id: emailid, person_id: personid, organization_id: organizationid, lk_email_type: emailtype, email_address: emailaddress, note: emailnote};
@@ -3521,11 +3528,15 @@ app.put("/contactemail/:email_id", function(req, res){
 
 // CREATE CONTACT FAX
 
-app.post("/contactfax", function(req, res){
+app.post("/contactfax", function (req, res) {
+    "use strict";
     var personid = req.body.faxpersonid;
     var organizationid = req.body.faxorgid;
+    if (personid === "") {
+        personid = null;
+    }
     if (organizationid === "0") {
-        organizationid = "";
+        organizationid = null;
     }
     var faxnumber = (req.body.contactfaxnumber).trim();
     var faxtype = req.body.contactfaxtype;
@@ -3534,9 +3545,6 @@ app.post("/contactfax", function(req, res){
     if (faxnumber !== "") {
         var has_fax = thisGroupingExists(contact_fax, "person_id", personid, "organization_id", organizationid, "fax_number", faxnumber);
         if (has_fax === null) {
-            if ((personid === null) || (personid === "")) {
-                personid = "";
-            }
             var j = contact_fax.length - 1;
             if (j >= 0) {
                 var faxid = parseInt(contact_fax[j].fax_id,10) + 1;
@@ -3560,21 +3568,22 @@ app.post("/contactfax", function(req, res){
 
 // EDIT CONTACT FAX
 
-app.put("/contactfax/:fax_id", function(req, res){
+app.put("/contactfax/:fax_id", function (req, res) {
+    "use strict";
     var faxid = req.params.fax_id;
     var personid = req.body.faxpersonid;
+    var organizationid = req.body.faxorgid;
+    if (personid === "") {
+        personid = null;
+    }
+    if (organizationid === "0") {
+        organizationid = null;
+    }
     var faxtype = req.body.contactfaxtype;
     var faxnumber = (req.body.contactfaxnumber).trim();
-    var organizationid = req.body.faxorgid;
     var faxnote = (req.body.faxnote).trim();
 //    if ((faxnumber !== "") && (faxtype !== "0")) {
     if (faxnumber !== "") {
-        if ((personid === null) || (personid === "")) {
-            personid = "";
-        }
-        if (organizationid === "0") {
-            organizationid = "";
-        }
         var i = thisExists(contact_fax, "fax_id", faxid);
         if (i !== null) {
             var editContactFax = {fax_id: faxid, person_id: personid, organization_id: organizationid, lk_fax_type: faxtype, fax_number: faxnumber, note: faxnote};
@@ -3593,9 +3602,16 @@ app.put("/contactfax/:fax_id", function(req, res){
 
 // CREATE CONTACT SOCIAL MEDIA
 
-app.post("/contactmedia", function(req, res){
+app.post("/contactmedia", function (req, res) {
+    "use strict";
     var personid = req.body.mediapersonid;
     var organizationid = req.body.mediaorgid;
+    if (personid === "") {
+        personid = null;
+    }
+    if (organizationid === "0") {
+        organizationid = null;
+    }
     var mediahandle = (req.body.contactmediahandle).trim();
     var mediatype = req.body.contactmediatype;
     var medianote = (req.body.medianote).trim();
@@ -3626,10 +3642,17 @@ app.post("/contactmedia", function(req, res){
 
 // EDIT CONTACT SOCIAL MEDIA
 
-app.put("/contactmedia/:media_id", function(req, res){
+app.put("/contactmedia/:media_id", function (req, res) {
+    "use strict";
     var mediaid = req.params.media_id;
     var personid = req.body.mediapersonid;
     var organizationid = req.body.mediaorgid;
+    if (personid === "") {
+        personid = null;
+    }
+    if (organizationid === "0") {
+        organizationid = null;
+    }
     var mediatype = req.body.contactmediatype;
     var mediahandle = (req.body.contactmediahandle).trim();
     var medianote = (req.body.medianote).trim();
@@ -3653,11 +3676,15 @@ app.put("/contactmedia/:media_id", function(req, res){
 
 // CREATE CONTACT ADDRESS
 
-app.post("/contactaddress", function(req, res){
+app.post("/contactaddress", function (req, res) {
+    "use strict";
     var personid = req.body.addresspersonid;
     var organizationid = req.body.addressorgid;
+    if (personid === "") {
+        personid = null;
+    }
     if (organizationid === "0") {
-        organizationid = "";
+        organizationid = null;
     }
     var addresstype = req.body.contactaddresstype;
     var street = (req.body.contactstreet).trim();
@@ -3671,9 +3698,6 @@ app.post("/contactaddress", function(req, res){
     if ((street !== "") && (city !== "") && (state !== "") && (zipcode != "")) {
         var has_address = thisGroupingExists(contact_address, "person_id", personid, "organization_id", organizationid, "address", street);
         if (has_address === null) {
-            if ((personid === null) || (personid === "")) {
-                personid = "";
-            }
             var j = contact_address.length - 1;
             if (j >= 0) {
                 var addressid = parseInt(contact_address[j].address_id,10) + 1;
@@ -3697,10 +3721,17 @@ app.post("/contactaddress", function(req, res){
 
 // EDIT CONTACT ADDRESS
 
-app.put("/contactaddress/:address_id", function(req, res){
+app.put("/contactaddress/:address_id", function (req, res) {
+    "use strict";
     var addressid = req.params.address_id;
     var personid = req.body.addresspersonid;
     var organizationid = req.body.addressorgid;
+    if (personid === "") {
+        personid = null;
+    }
+    if (organizationid === "0") {
+        organizationid = null;
+    }
     var addresstype = req.body.contactaddresstype;
     var street = (req.body.contactstreet).trim();
     var city = (req.body.contactcity).trim();
@@ -3729,7 +3760,8 @@ app.put("/contactaddress/:address_id", function(req, res){
 
 
 
-app.get("*", function(req, res) {
+app.get("*", function (req, res) {
+    "use strict";
     res.send("Sorry, page not found.");
 });
 
