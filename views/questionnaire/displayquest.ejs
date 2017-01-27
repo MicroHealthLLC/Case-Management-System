@@ -88,29 +88,30 @@
 var resultJSON = $("#answers").val();
 JSON.stringify(resultJSON);
 var result = $.parseJSON(resultJSON);
+var thisone, bb;
 $.each(result, function(k, v) {
-//	alert('k = ' + k + '; and v = ' + v);
-	if (k.indexOf("_radio") > -1) {
-    	$("input[name=" + k + "][value=" + v + "]").prop("checked", true);		
-	} else if (k.indexOf("_checkbox") > -1) {
-    	$("input[name=" + k + "]").prop("checked", true);
-	} else if (k.indexOf("_textbox") > -1) {
-    	$("input[name=" + k + "]").val(v);
-		var thisone = $("input[name=" + k + "]").attr('id');
-		var bb = document.getElementById(thisone).className;
-		if (bb.indexOf(" userinput") > -1) {
-			$("input[name=" + k + "]").prop("disabled", false);
-		}
-	} else {
-		if (k.indexOf("_textarea") > -1) {
-			$("textarea[name=" + k + "]").val(v);
-			var thisone = $("textarea[name=" + k + "]").attr('id');
-			var bb = document.getElementById(thisone).className;
-			if (bb.indexOf(" userinput") > -1) {
-				$("textarea[name=" + k + "]").prop("disabled", false);
-			}
-		}
-	}
+    "use strict";
+    if (k.indexOf("_radio") > -1) {
+        $("input[name=" + k + "][value=" + v + "]").prop("checked", true);
+    } else if (k.indexOf("_checkbox") > -1) {
+        $("input[name=" + k + "]").prop("checked", true);
+    } else if (k.indexOf("_textbox") > -1) {
+        $("input[name=" + k + "]").val(v);
+        thisone = $("input[name=" + k + "]").attr('id');
+        bb = document.getElementById(thisone).className;
+        if (bb.indexOf(" userinput") > -1) {
+            $("input[name=" + k + "]").prop("disabled", false);
+        }
+    } else {
+        if (k.indexOf("_textarea") > -1) {
+            $("textarea[name=" + k + "]").val(v);
+            thisone = $("textarea[name=" + k + "]").attr('id');
+            bb = document.getElementById(thisone).className;
+            if (bb.indexOf(" userinput") > -1) {
+                $("textarea[name=" + k + "]").prop("disabled", false);
+            }
+        }
+    }
 });
 </script>
 
