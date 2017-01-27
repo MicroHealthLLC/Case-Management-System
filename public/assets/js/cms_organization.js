@@ -40,7 +40,8 @@ $("#resetorganization").click(function (e) {
     document.getElementById("organizationtype").disabled = true;
     document.getElementById("organizationrolestatus").disabled = true;
     var removereq = $("#organizationform .requiredfield");
-    for (var r = 0; r < removereq.length; r += 1) {
+    var r;
+    for (r = 0; r < removereq.length; r += 1) {
         removereq[r].style.borderColor = "#cccccc";
     }
     $("#cancelsaveorganization").hide();
@@ -56,7 +57,7 @@ function validateorganization() {
     if ((($("#organizationname").val()).trim() !== "") && ($("#organizationrole").val() !== "0")
             && ($("#organizationtype").val() !== "0") && ($("#organizationrolestatus").val() !== "0")) {
         passvalidation = true;
-alert('from validation ' + passvalidation);
+//alert('from validation ' + passvalidation);
     } else {
         alert('invalid input');
     }
@@ -101,13 +102,14 @@ $("#editorganization").click(function () {
     document.getElementById("organizationtype").disabled = false;
     document.getElementById("organizationrolestatus").disabled = false;
     var removereq = $("#organizationform .requiredfield");
-    for (var r = 0; r < removereq.length; r += 1) {
+    var r;
+    for (r = 0; r < removereq.length; r += 1) {
         removereq[r].style.borderColor = "#ffb8af";
     }
     if (document.getElementById("cancelsaveorganization").style.visibility !== "visible") {
         $("#editdeleteorganization").hide();
         $("#cancelsaveorganization").show();
-   } else {
+    } else {
         $("#cancelsaveorganization").hide();
     }
 });

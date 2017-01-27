@@ -66,7 +66,8 @@ $("#resetcase").click(function (e) {
     document.getElementById("casetype").disabled = true;
     document.getElementById("casestatus").disabled = true;
     var removereq = $("#caseform .requiredfield");
-    for (var r = 0; r < removereq.length; r += 1) {
+    var r;
+    for (r = 0; r < removereq.length; r += 1) {
         removereq[r].style.borderColor = "#cccccc";
     }
     $("#cancelsavecase").hide();
@@ -94,7 +95,7 @@ function validatecase() {
 $("#submitcase1").click(function (e) {
     "use strict";
     e.preventDefault();
-//    $("#selectparentmodule").hide();	
+//    $("#selectparentmodule").hide();
 //    var passvalidation = validatecase();
     var passvalidation = true;
 //  NOTE VALIDATE CASE FORM and POST back to Case Screen if passes
@@ -133,7 +134,8 @@ $("#editcase").click(function () {
     document.getElementById("casetype").selectedIndex = thistype;
     document.getElementById("casestatus").disabled = false;
     var removereq = $("#caseform .requiredfield");
-    for (var r = 0; r < removereq.length; r += 1) {
+    var r;
+    for (r = 0; r < removereq.length; r += 1) {
         removereq[r].style.borderColor = "#ffb8af";
     }
     if (document.getElementById("cancelsavecase").style.visibility !== "visible") {
@@ -155,6 +157,4 @@ $("#deletecase").click(function () {
         return false;
     }
 });
-
-
 

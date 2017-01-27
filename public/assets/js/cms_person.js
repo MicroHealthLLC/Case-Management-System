@@ -35,7 +35,6 @@ document.getElementById("personrolestatus").disabled = true;
 $("#personrole").change(function () {
     "use strict";
     var role = $("#personrole").val();
-    var i;
     document.getElementById("personrolestatus").selectedIndex = "0";
     document.getElementById("personrolestatus").disabled = true;
     document.getElementById("persontype").selectedIndex = "0";
@@ -68,7 +67,8 @@ $("#resetperson").click(function (e) {
     document.getElementById("persontype").disabled = true;
     document.getElementById("personrolestatus").disabled = true;
     var removereq = $("#personform .requiredfield");
-    for (var r = 0; r < removereq.length; r += 1) {
+    var r;
+    for (r = 0; r < removereq.length; r += 1) {
         removereq[r].style.borderColor = "#cccccc";
     }
     $("#cancelsaveperson").hide();
@@ -128,7 +128,8 @@ $("#editperson").click(function () {
     document.getElementById("persontype").disabled = false;
     document.getElementById("personrolestatus").disabled = false;
     var removereq = $("#personform .requiredfield");
-    for (var r = 0; r < removereq.length; r += 1) {
+    var r;
+    for (r = 0; r < removereq.length; r += 1) {
         removereq[r].style.borderColor = "#ffb8af";
     }
     if (document.getElementById("cancelsaveperson").style.visibility !== "visible") {

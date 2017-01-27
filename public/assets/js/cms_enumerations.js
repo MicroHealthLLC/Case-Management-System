@@ -25,17 +25,17 @@ $(".enumhdbtn").click(function () {
 
 $("#resetenum").click(function (e) {
     "use strict";
-	e.preventDefault();
+    e.preventDefault();
     $("#totalenumkeys").val(0);
     $("#freezeenumkeys").val(0);
-    $("#enumname").val("");   
+    $("#enumname").val("");
     document.getElementById("userenumkeysdiv").innerHTML = "";
 });
 
 
 $("#adduserenumkey").click(function (e) {
     "use strict";
-	e.preventDefault();
+    e.preventDefault();
     var userenumkey = $(".userenumkey");
     var thiskeyno = userenumkey.length + 1;
     var userenumkeytextbox = '<div id="enumkeyrow' + thiskeyno + '" class="row userdefinedenum"><br><div class="col-xs-10 col-sm-11"><input type="text" class="form-control userenumkey" id="userenumkey' + thiskeyno + '" name="userenumkey' + thiskeyno + '" value=""/></div><div class="col-xs-2 col-sm-1"><button class="btn btn-default btn-md oneline enumkeyremovebtn" id="removeenumkey' + thiskeyno + '"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></div></div>';
@@ -48,7 +48,7 @@ $("#adduserenumkey").click(function (e) {
 
 $("#freezeuserenumkey").click(function (e) {
     "use strict";
-	e.preventDefault();
+    e.preventDefault();
     var userenumkey = $(".userenumkey");
     var thiskeyno = userenumkey.length + 1;
     var userenumkeytextbox = '<div id="enumkeyrow' + thiskeyno + '" class="row userdefinedenum"><br><div class="col-xs-10 col-sm-11"><input type="text" class="form-control userenumkey" id="userenumkey' + thiskeyno + '" name="userenumkey' + thiskeyno + '" readonly value=""/></div><div class="col-xs-2 col-sm-1"></div></div>';
@@ -61,7 +61,7 @@ $("#freezeuserenumkey").click(function (e) {
 
 $("#closeeditenum").click(function (e) {
     "use strict";
-	e.preventDefault();
+    e.preventDefault();
     $("#resetenum").click();
     $("#enumformdiv").hide();
 });
@@ -77,11 +77,12 @@ $("body").on("click", ".editenumbtn", function () {
     var enumkeys = document.getElementById(enumname).querySelectorAll(".enumkey");
     var freezekeys = Number(document.getElementById("freeze_" + enumname).value);
     $("#freezeenumkeys").val(freezekeys);
-    for (var i = 0; i < freezekeys; i += 1) {
+    var i;
+    for (i = 0; i < freezekeys; i += 1) {
         $("#freezeuserenumkey").click();
         document.getElementById("userenumkey" + (i + 1)).value = enumkeys[i].innerHTML;
     }
-    for (var i = freezekeys; i < enumkeys.length; i += 1) {
+    for (i = freezekeys; i < enumkeys.length; i += 1) {
         $("#adduserenumkey").click();
         document.getElementById("userenumkey" + (i + 1)).value = enumkeys[i].innerHTML;
     }
@@ -91,7 +92,7 @@ $("body").on("click", ".editenumbtn", function () {
 
 $("body").on("click", ".enumkeyremovebtn", function (e) {
     "use strict";
-	e.preventDefault();
+    e.preventDefault();
     var checkstr = window.confirm("Sure you want to remove this answer?");
     if (checkstr === true) {
         var userdefinedenum = $(this).closest("div.userdefinedenum");
