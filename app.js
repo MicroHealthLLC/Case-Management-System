@@ -48,7 +48,6 @@ var enumRequired = {
     top_userRoleStatus: "2",
     top_caseDomain: "0",
     top_caseCategory: "0",
-    top_caseType: "0",
     top_caseStatus: "2",
     top_caseSeverity: "0",
     top_casePriority: "0",
@@ -60,6 +59,8 @@ var enumRequired = {
     top_caseFileType: "0",
     top_caseNoteType: "0",
     top_questionnaireType: "0",
+    top_questAssociatedWith: "3",
+    top_questionnaireStatus: "4",
     top_taskType: "0",
     top_taskStatus: "0",
     top_personGender: "2",
@@ -86,7 +87,6 @@ var enumFreeze = {
     top_userRoleStatus: "2",
     top_caseDomain: "0",
     top_caseCategory: "0",
-    top_caseType: "0",
     top_caseStatus: "2",
     top_caseSeverity: "0",
     top_casePriority: "0",
@@ -98,6 +98,8 @@ var enumFreeze = {
     top_caseFileType: "0",
     top_caseNoteType: "0",
     top_questionnaireType: "0",
+    top_questAssociatedWith: "3",
+    top_questionnaireStatus: "4",
     top_taskType: "0",
     top_taskStatus: "0",
     top_personGender: "2",
@@ -119,81 +121,79 @@ var enumFreeze = {
     top_contactCountryCode: "1"
 };
 
-var userRole = new Enum(['User Role 1', 'User Role 2', 'User Role 3']);
+var userRole = ['User Role 1', 'User Role 2', 'User Role 3'];
 
-var userRoleStatus = new Enum({'Active':1, 'Inactive':2});
+var userRoleStatus = ['Active', 'Inactive'];
 
-var caseDomain = new Enum(['Domain 1', 'Domain 2', 'Domain 3']);
+var caseDomain = ['Domain 1', 'Domain 2', 'Domain 3'];
 
-var caseCategory = new Enum(['Medical', 'Non-Medical']);
+var caseCategory = ['Medical', 'Non-Medical'];
 
-var caseType = new Enum([]);
+var caseStatus = ['Active', 'Inactive', 'On Hold', 'Canceled'];
 
-var caseStatus = new Enum(['Active', 'Inactive', 'On Hold', 'Canceled']);
+var caseSeverity = ['Low', 'Medium', 'High'];
 
-var caseSeverity = new Enum(['Low', 'Medium', 'High']);
+var casePriority = ['Yellow', 'Blue', 'Green', 'Red'];
 
-var casePriority = new Enum(['Yellow', 'Blue', 'Green', 'Red']);
+var assignedRole = ['Case Person', 'Assigned Role 2', 'Assigned Role 3'];
 
-var assignedRole = new Enum(['Case Person', 'Assigned Role 2', 'Assigned Role 3']);
+var assignmentType = ['Assignment Type 1', 'Assignment Type 2', 'Assignment Type 3'];
 
-var assignmentType = new Enum(['Assignment Type 1', 'Assignment Type 2', 'Assignment Type 3']);
+var goalType = ['Goal Type 1', 'Goal Type 2', 'Goal Type 3'];
 
-var goalType = new Enum(['Goal Type 1', 'Goal Type 2', 'Goal Type 3']);
+var planType = ['Plan Type 1', 'Plan Type 2', 'Plan Type 3'];
 
-var planType = new Enum(['Plan Type 1', 'Plan Type 2', 'Plan Type 3']);
+var actionType = ['Action Type 1', 'Action Type 2', 'Action Type 3'];
 
-var actionType = new Enum(['Action Type 1', 'Action Type 2', 'Action Type 3']);
+var caseFileType = ['Case File Type 1', 'Case File Type 2', 'Case File Type 3'];
 
-var caseFileType = new Enum(['Case File Type 1', 'Case File Type 2', 'Case File Type 3']);
+var caseNoteType = ['Case Note Type 1', 'Case Note Type 2', 'Case Note Type 3'];
 
-var caseNoteType = new Enum(['Case Note Type 1', 'Case Note Type 2', 'Case Note Type 3']);
+var questionnaireType = ['Questionnaire Type 1', 'Questionnaire Type 2', 'Questionnaire Type 3'];
 
-var questionnaireType = new Enum(['Questionnaire Type 1', 'Questionnaire Type 2', 'Questionnaire Type 3']);
+var questAssociatedWith = ['Goal', 'Plan', 'Action'];
 
-var questAssociatedWith = new Enum({'Goal':1, 'Plan':2, 'Action':3});
+var questionnaireStatus = ['Not Started', 'Started', 'Complete', 'Canceled'];
 
-var questionnaireStatus = new Enum({'Not Started':1, 'Started':2, 'Complete':3, 'Canceled':4});
+var taskType = ['Task Type 1', 'Task Type 2', 'Task Type 3'];
 
-var taskType = new Enum(['Task Type 1', 'Task Type 2', 'Task Type 3']);
+var taskStatus = ['Task Status 1', 'Task Status 2', 'Task Status 3'];
 
-var taskStatus = new Enum(['Task Status 1', 'Task Status 2', 'Task Status 3']);
+var personGender = ['Male', 'Female', 'Unknown'];
 
-var personGender = new Enum(['Male', 'Female', 'Unknown']);
+var personType = ['Person Type 1', 'Person Type 2', 'Person Type 3'];
 
-var personType = new Enum(['Person Type 1', 'Person Type 2', 'Person Type 3']);
+var personReligion = ['Christian', 'Jewish', 'Muslim', 'Other'];
 
-var personReligion = new Enum(['Christian', 'Jewish', 'Muslim', 'Other']);
+var identificationType = ['Drivers License', 'Social Security Card', 'Passport', 'Birth Certificate'];
 
-var identificationType = new Enum(['Drivers License', 'Social Security Card', 'Passport', 'Birth Certificate']);
+var identificationStatus = ['Active', 'Inactive'];
 
-var identificationStatus = new Enum(['Active', 'Inactive', 'ID Status 3']);
+var organizationType = ['Organization Type 1', 'Organization Type 2', 'Organization Type 3'];
 
-var organizationType = new Enum(['Organization Type 1', 'Organization Type 2', 'Organization Type 3']);
+var caseCaseRelationship = ['Case Case Relationship 1', 'Case Case Relationship 2', 'Case Case Relationship 3'];
 
-var caseCaseRelationship = new Enum(['Case Case Relationship 1', 'Case Case Relationship 2', 'Case Case Relationship 3']);
+var personPersonRelationship = ['Person Person Relationship 1', 'Person Person Relationship 2', 'Person Person Relationship 3'];
 
-var personPersonRelationship = new Enum(['Person Person Relationship 1', 'Person Person Relationship 2', 'Person Person Relationship 3']);
+var personOrganizationRelationship = ['Person Org Relationship 1', 'Person Org Relationship 2', 'Person Org Relationship 3'];
 
-var personOrganizationRelationship = new Enum(['Person Org Relationship 1', 'Person Org Relationship 2', 'Person Org Relationship 3']);
+var organizationOrganizationRelationship = ['Org Org Relationship 1', 'Org Org Relationship 2', 'Org Org Relationship 3'];
 
-var organizationOrganizationRelationship = new Enum(['Org Org Relationship 1', 'Org Org Relationship 2', 'Org Org Relationship 3']);
+var contactType = ['Case Support', 'Family Support', 'External Support'];
 
-var contactType = new Enum({'Case Support':1, 'Family Support':2, 'External Support':3});
+var contactPhoneType = ['Home', 'Business', 'Mobile', 'Other'];
 
-var contactPhoneType = new Enum(['Home', 'Business', 'Mobile', 'Other']);
+var contactEmailType = ['Personal', 'Business', 'Other'];
 
-var contactEmailType = new Enum(['Personal', 'Business', 'Other']);
+var contactFaxType = ['Home', 'Business', 'Other'];
 
-var contactFaxType = new Enum(['Home', 'Business', 'Other']);
+var contactMediaType = ['Personal', 'Business', 'Other'];
 
-var contactMediaType = new Enum(['Personal', 'Business', 'Other']);
+var contactAddressType = ['Home', 'Business', 'Other'];
 
-var contactAddressType = new Enum(['Home', 'Business', 'Other']);
+var contactStateCode = ['VA', 'GA', 'CA', 'NY', 'FL'];
 
-var contactStateCode = new Enum(['VA', 'GA', 'CA', 'NY', 'FL']);
-
-var contactCountryCode = new Enum(['USA']);
+var contactCountryCode = ['USA'];
 
 
 
@@ -636,93 +636,144 @@ app.get("/enumerations", function (req, res) {
 });
 
 
-//EDIT SPECIFIC ENUMERATION
-app.post("/editenumeration", function (req, res) {
+function updateEnums(enumfunctiontype, this_array, these_values) {
     "use strict";
-    var totalenumkeys = req.body.totalenumkeys;
-    var freezeenumkeys = req.body.freezeenumkeys;
+    var i;
+    if (enumfunctiontype !== "input") {
+        this_array.length = 0;
+    }
+    for (i = 0; i < these_values.length; i += 1) {
+        this_array.push(these_values[i]);
+    }
+    return;
+}
+
+
+//EDIT SPECIFIC ENUMERATION
+app.post("/enumeration", function (req, res) {
+    "use strict";
+    var enumfunctiontype = req.body.enumfunctiontype;
+    var totalenumvalues = req.body.totalenumvalues;
+    var freezeenumvalues = req.body.freezeenumvalues;
     var enumname = req.body.enumname;
     var enumarray = [];
-    var i, enumkey;
-    for (i = 1; i <= totalenumkeys; i += 1) {
-        enumkey = req.body["userenumkey" + i];
-        enumarray.push(enumkey);
-     }
-    if (enumname === "caseDomain") {
-        caseDomain = new Enum(enumarray);
-        enumFreeze.top_caseDomain = freezeenumkeys;
+    var i;
+    for (i = 1; i <= totalenumvalues; i += 1) {
+        enumarray.push(req.body["userenumvalue" + i]);
+    }
+    if (enumname === "caseDomain") {          
+        updateEnums(enumfunctiontype, caseDomain, enumarray);
+        enumFreeze.top_caseDomain = freezeenumvalues;
     } else if (enumname === "caseCategory") {
-        caseCategory = new Enum(enumarray);
-        enumFreeze.top_caseCategory = freezeenumkeys;
-    } else if (enumname === "caseType") {
-        caseType = new Enum(enumarray);
+        updateEnums(enumfunctiontype, caseCategory, enumarray);
+        enumFreeze.top_caseCategory = freezeenumvalues;
     } else if (enumname === "caseStatus") {
-        caseStatus = new Enum(enumarray);
-        enumFreeze.top_caseStatus = freezeenumkeys;
+        updateEnums(enumfunctiontype, caseStatus, enumarray);
+        enumFreeze.top_caseStatus = freezeenumvalues;
     } else if (enumname === "caseSeverity") {
-        caseSeverity = new Enum(enumarray);
+        updateEnums(enumfunctiontype, caseSeverity, enumarray);
+        enumFreeze.top_caseSeverity = freezeenumvalues;
     } else if (enumname === "casePriority") {
-        casePriority = new Enum(enumarray);
+        updateEnums(enumfunctiontype, casePriority, enumarray);
+        enumFreeze.top_casePriority = freezeenumvalues;
     } else if (enumname === "caseCaseRelationship") {
-        caseCaseRelationship = new Enum(enumarray);
+        updateEnums(enumfunctiontype, caseCaseRelationship, enumarray);
+        enumFreeze.top_caseCaseRelationship = freezeenumvalues;
     } else if (enumname === "personPersonRelationship") {
-        personPersonRelationship = new Enum(enumarray);
+        updateEnums(enumfunctiontype, personPersonRelationship, enumarray);
+        enumFreeze.top_personPersonRelationship = freezeenumvalues;
     } else if (enumname === "personOrganizationRelationship") {
-        personOrganizationRelationship = new Enum(enumarray);
+        updateEnums(enumfunctiontype, personOrganizationRelationship, enumarray);
+        enumFreeze.top_personOrganizationRelationship = freezeenumvalues;
     } else if (enumname === "organizationOrganizationRelationship") {
-        organizationOrganizationRelationship = new Enum(enumarray);
+        updateEnums(enumfunctiontype, organizationOrganizationRelationship, enumarray);
+        enumFreeze.top_organizationOrganizationRelationship = freezeenumvalues;
     } else if (enumname === "assignedRole") {
-        assignedRole = new Enum(enumarray);
+        updateEnums(enumfunctiontype, assignedRole, enumarray);
+        enumFreeze.top_assignedRole = freezeenumvalues;
     } else if (enumname === "assignmentType") {
-        assignmentType = new Enum(enumarray);
+        updateEnums(enumfunctiontype, assignmentType, enumarray);
+        enumFreeze.top_assignmentType = freezeenumvalues;
     } else if (enumname === "goalType") {
-        goalType = new Enum(enumarray);
+        updateEnums(enumfunctiontype, goalType, enumarray);
+        enumFreeze.top_goalType = freezeenumvalues;
     } else if (enumname === "planType") {
-        planType = new Enum(enumarray);
+        updateEnums(enumfunctiontype, planType, enumarray);
+        enumFreeze.top_planType = freezeenumvalues;
     } else if (enumname === "taskType") {
-        taskType = new Enum(enumarray);
+        updateEnums(enumfunctiontype, taskType, enumarray);
+        enumFreeze.top_taskType = freezeenumvalues;
     } else if (enumname === "taskStatus") {
-        taskStatus = new Enum(enumarray);
+        updateEnums(enumfunctiontype, taskStatus, enumarray);
+        enumFreeze.top_taskStatus = freezeenumvalues;
     } else if (enumname === "actionType") {
-        actionType = new Enum(enumarray);
+        updateEnums(enumfunctiontype, actionType, enumarray);
+        enumFreeze.top_actionType = freezeenumvalues;
     } else if (enumname === "caseFileType") {
-        caseFileType = new Enum(enumarray);
+        updateEnums(enumfunctiontype, caseFileType, enumarray);
+        enumFreeze.top_caseFileType = freezeenumvalues;
     } else if (enumname === "caseNoteType") {
-        caseNoteType = new Enum(enumarray);
+        updateEnums(enumfunctiontype, caseNoteType, enumarray);
+        enumFreeze.top_caseNoteType = freezeenumvalues;
     } else if (enumname === "questionnaireType") {
-        questionnaireType = new Enum(enumarray);
+        updateEnums(enumfunctiontype, questionnaireType, enumarray);
+        enumFreeze.top_questionnaireType = freezeenumvalues;
+    } else if (enumname === "questAssociatedWith") {
+        updateEnums(enumfunctiontype, questAssociatedWith, enumarray);
+        enumFreeze.top_questAssociatedWith = freezeenumvalues;
+    } else if (enumname === "questionnaireStatus") {
+        updateEnums(enumfunctiontype, questionnaireStatus, enumarray);
+        enumFreeze.top_questionnaireStatus = freezeenumvalues;
     } else if (enumname === "personGender") {
-        personGender = new Enum(enumarray);
+        updateEnums(enumfunctiontype, personGender, enumarray);
+        enumFreeze.top_personGender = freezeenumvalues;
     } else if (enumname === "userRole") {
-        userRole = new Enum(enumarray);
+        updateEnums(enumfunctiontype, userRole, enumarray);
+        enumFreeze.top_userRole = freezeenumvalues;
     } else if (enumname === "userRoleStatus") {
-        userRoleStatus = new Enum(enumarray);
+        updateEnums(enumfunctiontype, userRoleStatus, enumarray);
+        enumFreeze.top_userRoleStatus = freezeenumvalues;
     } else if (enumname === "personType") {
-        personType = new Enum(enumarray);
+        updateEnums(enumfunctiontype, personType, enumarray);
+        enumFreeze.top_personType = freezeenumvalues;
     } else if (enumname === "personReligion") {
-        personReligion = new Enum(enumarray);
+        updateEnums(enumfunctiontype, personReligion, enumarray);
+        enumFreeze.top_personReligion = freezeenumvalues;
     } else if (enumname === "organizationType") {
-        organizationType = new Enum(enumarray);
+        updateEnums(enumfunctiontype, organizationType, enumarray);
+        enumFreeze.top_organizationType = freezeenumvalues;
     } else if (enumname === "contactType") {
-        contactType = new Enum(enumarray);
+        updateEnums(enumfunctiontype, contactType, enumarray);
+        enumFreeze.top_contactType = freezeenumvalues;
     } else if (enumname === "contactPhoneType") {
-        contactPhoneType = new Enum(enumarray);
+        updateEnums(enumfunctiontype, contactPhoneType, enumarray);
+        enumFreeze.top_contactPhoneType = freezeenumvalues;
     } else if (enumname === "contactEmailType") {
-        contactEmailType = new Enum(enumarray);
+        updateEnums(enumfunctiontype, contactEmailType, enumarray);
+        enumFreeze.top_contactEmailType = freezeenumvalues;
     } else if (enumname === "contactFaxType") {
-        contactFaxType = new Enum(enumarray);
+        updateEnums(enumfunctiontype, contactFaxType, enumarray);
+        enumFreeze.top_contactFaxType = freezeenumvalues;
     } else if (enumname === "contactMediaType") {
-        contactMediaType = new Enum(enumarray);
+        updateEnums(enumfunctiontype, contactMediaType, enumarray);
+        enumFreeze.top_contactMediaType = freezeenumvalues;
     } else if (enumname === "contactAddressType") {
-        contactAddressType = new Enum(enumarray);
+        updateEnums(enumfunctiontype, contactAddressType, enumarray);
+        enumFreeze.top_contactAddressType = freezeenumvalues;
     } else if (enumname === "contactStateCode") {
-        contactStateCode = new Enum(enumarray);
+        updateEnums(enumfunctiontype, contactStateCode, enumarray);
+        enumFreeze.top_contactStateCode = freezeenumvalues;
     } else if (enumname === "contactCountryCode") {
-        contactCountryCode = new Enum(enumarray);
+        updateEnums(enumfunctiontype, contactCountryCode, enumarray);
+        enumFreeze.top_contactCountryCode = freezeenumvalues;
     } else if (enumname === "identificationType") {
-        identificationType = new Enum(enumarray);
-    } else if (enumname === "identificationStatus") {
-        identificationStatus = new Enum(enumarray);
+        updateEnums(enumfunctiontype, identificationType, enumarray);
+        enumFreeze.top_identificationType = freezeenumvalues;
+    } else {
+        if (enumname === "identificationStatus") {
+            updateEnums(enumfunctiontype, identificationStatus, enumarray);
+            enumFreeze.top_identificationStatus = freezeenumvalues;
+        }
     }   
     res.redirect("/enumerations");
 });
@@ -1188,7 +1239,7 @@ app.get("/tasks", function (req, res) {
     "use strict";
     updateTasksListing();
     overdueTasks();
-    res.render("tasks/index", {taskslisting:taskslisting, person:person, cases:cases, overdue_tasks:overdue_tasks, taskType:taskType, taskStatus:taskStatus, caseCategory:caseCategory});
+    res.render("tasks/index", {taskslisting:taskslisting, person:person, cases:cases, overdue_tasks:overdue_tasks, taskType:taskType, taskStatus:taskStatus, casePriority:casePriority});
 });
 
 
@@ -1196,7 +1247,7 @@ app.post("/tasks", function (req, res) {
     "use strict";
     updateTasksListing();
     overdueTasks();
-    res.render("tasks/index", {taskslisting:taskslisting, person:person, cases:cases, overdue_tasks:overdue_tasks, taskType:taskType, taskStatus:taskStatus, caseCategory:caseCategory});
+    res.render("tasks/index", {taskslisting:taskslisting, person:person, cases:cases, overdue_tasks:overdue_tasks, taskType:taskType, taskStatus:taskStatus, casePriority:casePriority});
 });
 
 
