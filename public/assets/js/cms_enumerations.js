@@ -26,36 +26,36 @@ $(".enumhdbtn").click(function () {
 $("#resetenum").click(function (e) {
     "use strict";
     e.preventDefault();
-    $("#totalenumkeys").val(0);
-    $("#freezeenumkeys").val(0);
+    $("#totalenumvalues").val(0);
+    $("#freezeenumvalues").val(0);
     $("#enumname").val("");
-    document.getElementById("userenumkeysdiv").innerHTML = "";
+    document.getElementById("userenumvaluesdiv").innerHTML = "";
 });
 
 
-$("#adduserenumkey").click(function (e) {
+$("#adduserenumvalue").click(function (e) {
     "use strict";
     e.preventDefault();
-    var userenumkey = $(".userenumkey");
-    var thiskeyno = userenumkey.length + 1;
-    var userenumkeytextbox = '<div id="enumkeyrow' + thiskeyno + '" class="row userdefinedenum"><br><div class="col-xs-10 col-sm-11"><input type="text" class="form-control userenumkey" id="userenumkey' + thiskeyno + '" name="userenumkey' + thiskeyno + '" value=""/></div><div class="col-xs-2 col-sm-1"><button class="btn btn-default btn-md oneline enumkeyremovebtn" id="removeenumkey' + thiskeyno + '"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></div></div>';
-    $("#userenumkeysdiv").append(userenumkeytextbox);
-    var totalenumkeys = Number($("#totalenumkeys").val());
-    totalenumkeys += 1;
-    $("#totalenumkeys").val(totalenumkeys);
+    var userenumvalue = $(".userenumvalue");
+    var thisvalueno = userenumvalue.length + 1;
+    var userenumvaluetextbox = '<div id="enumvaluerow' + thisvalueno + '" class="row userdefinedenum"><br><div class="col-xs-10 col-sm-11"><input type="text" class="form-control userenumvalue" id="userenumvalue' + thisvalueno + '" name="userenumvalue' + thisvalueno + '" value=""/></div><div class="col-xs-2 col-sm-1"><button class="btn btn-default btn-md oneline enumvalueremovebtn" id="removeenumvalue' + thisvalueno + '"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></div></div>';
+    $("#userenumvaluesdiv").append(userenumvaluetextbox);
+    var totalenumvalues = Number($("#totalenumvalues").val());
+    totalenumvalues += 1;
+    $("#totalenumvalues").val(totalenumvalues);
 });
 
 
-$("#freezeuserenumkey").click(function (e) {
+$("#freezeuserenumvalue").click(function (e) {
     "use strict";
     e.preventDefault();
-    var userenumkey = $(".userenumkey");
-    var thiskeyno = userenumkey.length + 1;
-    var userenumkeytextbox = '<div id="enumkeyrow' + thiskeyno + '" class="row userdefinedenum"><br><div class="col-xs-10 col-sm-11"><input type="text" class="form-control userenumkey" id="userenumkey' + thiskeyno + '" name="userenumkey' + thiskeyno + '" readonly value=""/></div><div class="col-xs-2 col-sm-1"></div></div>';
-    $("#userenumkeysdiv").append(userenumkeytextbox);
-    var totalenumkeys = Number($("#totalenumkeys").val());
-    totalenumkeys += 1;
-    $("#totalenumkeys").val(totalenumkeys);
+    var userenumvalue = $(".userenumvalue");
+    var thisvalueno = userenumvalue.length + 1;
+    var userenumvaluetextbox = '<div id="enumvaluerow' + thisvalueno + '" class="row userdefinedenum"><br><div class="col-xs-10 col-sm-11"><input type="text" class="form-control userenumvalue" id="userenumvalue' + thisvalueno + '" name="userenumvalue' + thisvalueno + '" readonly value=""/></div><div class="col-xs-2 col-sm-1"></div></div>';
+    $("#userenumvaluesdiv").append(userenumvaluetextbox);
+    var totalenumvalues = Number($("#totalenumvalues").val());
+    totalenumvalues += 1;
+    $("#totalenumvalues").val(totalenumvalues);
 });
 
 
@@ -68,38 +68,54 @@ $("#closeeditenum").click(function (e) {
 
 
 
+$("body").on("click", ".inputenumbtn", function () {
+    "use strict";
+    $("#resetenum").click();
+    var enumname = this.id.slice(10);
+    $("#enumfunctiontype").val("input");
+    $("#enumname").val(enumname);
+    var freezevalues = Number(document.getElementById("freeze_" + enumname).value);
+    $("#freezeenumvalues").val(freezevalues);
+    $("#enumformdiv").show();
+    $("#adduserenumvalue").click();
+    location.hash = "#enumformdiv";
+});
+
+
+
 $("body").on("click", ".editenumbtn", function () {
     "use strict";
     $("#resetenum").click();
     var enumname = this.id.slice(9);
+    $("#enumfunctiontype").val("update");
     $("#enumname").val(enumname);
     $("#enumformdiv").show();
-    var enumkeys = document.getElementById(enumname).querySelectorAll(".enumkey");
-    var freezekeys = Number(document.getElementById("freeze_" + enumname).value);
-    $("#freezeenumkeys").val(freezekeys);
+    var enumvalues = document.getElementById(enumname).querySelectorAll(".enumvalue");
+    var freezevalues = Number(document.getElementById("freeze_" + enumname).value);
+    $("#freezeenumvalues").val(freezevalues);
     var i;
-    for (i = 0; i < freezekeys; i += 1) {
-        $("#freezeuserenumkey").click();
-        document.getElementById("userenumkey" + (i + 1)).value = enumkeys[i].innerHTML;
+    for (i = 0; i < freezevalues; i += 1) {
+        $("#freezeuserenumvalue").click();
+        document.getElementById("userenumvalue" + (i + 1)).value = enumvalues[i].innerHTML;
     }
-    for (i = freezekeys; i < enumkeys.length; i += 1) {
-        $("#adduserenumkey").click();
-        document.getElementById("userenumkey" + (i + 1)).value = enumkeys[i].innerHTML;
+    for (i = freezevalues; i < enumvalues.length; i += 1) {
+        $("#adduserenumvalue").click();
+        document.getElementById("userenumvalue" + (i + 1)).value = enumvalues[i].innerHTML;
     }
     location.hash = "#enumformdiv";
 });
 
 
-$("body").on("click", ".enumkeyremovebtn", function (e) {
+$("body").on("click", ".enumvalueremovebtn", function (e) {
     "use strict";
     e.preventDefault();
     var checkstr = window.confirm("Sure you want to remove this answer?");
     if (checkstr === true) {
         var userdefinedenum = $(this).closest("div.userdefinedenum");
         $(userdefinedenum).remove();
-        var totalenumkeys = Number($("#totalenumkeys").val());
-        totalenumkeys -= 1;
-        $("#totalenumkeys").val(totalenumkeys);
+        var totalenumvalues = Number($("#totalenumvalues").val());
+        totalenumvalues -= 1;
+        $("#totalenumvalues").val(totalenumvalues);
     }
 });
 
