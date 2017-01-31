@@ -26,16 +26,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% userRole.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= userRole.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= userRole[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -52,7 +52,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_userRole">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_userRole">Input</button>
+                    <% if (userRole.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_userRole">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -65,16 +70,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% userRoleStatus.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= userRoleStatus.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= userRoleStatus[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                     <p class="redflag">WARNING: First two must remain unchanged!</p>
@@ -92,7 +97,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_userRoleStatus">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_userRoleStatus">Input</button>
+                    <% if (userRoleStatus.length > 0) { %>
+                        <button class="btn btn-warning btn-md editenumbtn" id="editenum_userRoleStatus">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
     </div><!-- divuser -->
@@ -109,16 +119,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% caseDomain.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= caseDomain.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= caseDomain[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -135,7 +145,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_caseDomain">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_caseDomain">Input</button>
+                    <% if (caseDomain.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_caseDomain">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -147,16 +162,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% caseCategory.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= caseCategory.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= caseCategory[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -173,7 +188,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_caseCategory">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_caseCategory">Input</button>
+                    <% if (caseCategory.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_caseCategory">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -185,16 +205,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% caseStatus.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= caseStatus.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= caseStatus[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                     <p class="redflag">WARNING: First two must remain unchanged!</p>
@@ -212,7 +232,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_caseStatus">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_caseStatus">Input</button>
+                    <% if (caseStatus.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_caseStatus">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -224,16 +249,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% caseSeverity.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= caseSeverity.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= caseSeverity[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -250,7 +275,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_caseSeverity">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_caseSeverity">Input</button>
+                    <% if (caseSeverity.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_caseSeverity">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -262,16 +292,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% casePriority.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= casePriority.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= casePriority[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -288,7 +318,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_casePriority">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_casePriority">Input</button>
+                    <% if (casePriority.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_casePriority">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -301,16 +336,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% assignedRole.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= assignedRole.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= assignedRole[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -327,7 +362,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_assignedRole">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_assignedRole">Input</button>
+                    <% if (assignedRole.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_assignedRole">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -339,16 +379,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% assignmentType.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= assignmentType.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= assignmentType[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -365,7 +405,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_assignmentType">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_assignmentType">Input</button>
+                    <% if (assignmentType.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_assignmentType">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -378,16 +423,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% goalType.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= goalType.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= goalType[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -404,7 +449,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_goalType">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_goalType">Input</button>
+                    <% if (goalType.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_goalType">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -417,16 +467,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% planType.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= planType.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= planType[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -443,7 +493,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_planType">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_planType">Input</button>
+                    <% if (planType.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_planType">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -456,16 +511,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% actionType.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= actionType.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= actionType[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -482,7 +537,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_actionType">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_actionType">Input</button>
+                    <% if (actionType.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_actionType">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -495,16 +555,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% caseFileType.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= caseFileType.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= caseFileType[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -521,7 +581,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_caseFileType">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_caseFileType">Input</button>
+                    <% if (caseFileType.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_caseFileType">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -533,16 +598,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% caseNoteType.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= caseNoteType.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= caseNoteType[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -559,7 +624,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_caseNoteType">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_caseNoteType">Input</button>
+                    <% if (caseNoteType.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_caseNoteType">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -572,16 +642,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% questionnaireType.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= questionnaireType.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= questionnaireType[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -598,7 +668,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_questionnaireType">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_questionnaireType">Input</button>
+                    <% if (questionnaireType.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_questionnaireType">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -610,19 +685,38 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% questAssociatedWith.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= questAssociatedWith.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= questAssociatedWith[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
-                <!-- <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_questAssociatedWith">Edit</button></div> -->
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_questAssociatedWith">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_questAssociatedWith" name="required_questAssociatedWith" readonly value="<%= enumRequired.top_questAssociatedWith %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_questAssociatedWith">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_questAssociatedWith" name="freeze_questAssociatedWith" value="<%= enumFreeze.top_questAssociatedWith %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_questAssociatedWith">Input</button>
+                    <% if (questAssociatedWith.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_questAssociatedWith">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -634,19 +728,38 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% questionnaireStatus.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= questionnaireStatus.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= questionnaireStatus[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
-                <!-- <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_questionnaireStatus">Edit</button></div> -->
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="required_questionnaireStatus">Required Top Enums</label>
+                            <input type="text" class="form-control" id="required_questionnaireStatus" name="required_questionnaireStatus" readonly value="<%= enumRequired.top_questionnaireStatus %>"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="freeze_questionnaireStatus">Freeze Top Enums</label>
+                            <input type="text" class="form-control minfreeze" id="freeze_questionnaireStatus" name="freeze_questionnaireStatus" value="<%= enumFreeze.top_questionnaireStatus %>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_questionnaireStatus">Input</button>
+                    <% if (questionnaireStatus.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_questionnaireStatus">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>  
     </div><!-- divcase -->
@@ -664,16 +777,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% taskType.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= taskType.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= taskType[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -690,7 +803,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_taskType">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_taskType">Input</button>
+                    <% if (taskType.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_taskType">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -702,16 +820,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% taskStatus.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= taskStatus.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= taskStatus[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -728,7 +846,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_taskStatus">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_taskStatus">Input</button>
+                    <% if (taskStatus.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_taskStatus">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
     </div><!-- divtask -->
@@ -745,16 +868,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% personGender.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= personGender.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= personGender[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                     <p class="redflag">WARNING: First two must remain unchanged!</p>
@@ -772,7 +895,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_personGender">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_personGender">Input</button>
+                    <% if (personGender.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_personGender">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -785,16 +913,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% personType.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= personType.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= personType[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -811,7 +939,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_personType">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_personType">Input</button>
+                    <% if (personType.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_personType">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -824,16 +957,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% personReligion.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= personReligion.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= personReligion[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -850,7 +983,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_personReligion">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_personReligion">Input</button>
+                    <% if (personReligion.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_personReligion">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -862,16 +1000,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% identificationType.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= identificationType.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= identificationType[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                     <p class="redflag">WARNING: First four must remain unchanged!</p>
@@ -889,7 +1027,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_identificationType">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_identificationType">Input</button>
+                    <% if (identificationType.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_identificationType">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -901,16 +1044,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% identificationStatus.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= identificationStatus.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= identificationStatus[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                     <p class="redflag">WARNING: First two must remain unchanged!</p>
@@ -928,7 +1071,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_identificationStatus">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_identificationStatus">Input</button>
+                    <% if (identificationStatus.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_identificationStatus">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
     </div><!-- divperson -->
@@ -946,16 +1094,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% organizationType.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= organizationType.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= organizationType[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -972,7 +1120,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_organizationType">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_organizationType">Input</button>
+                    <% if (organizationType.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_organizationType">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
     </div><!-- divorganization -->
@@ -989,16 +1142,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% caseCaseRelationship.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= caseCaseRelationship.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= caseCaseRelationship[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -1015,7 +1168,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_caseCaseRelationship">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_caseCaseRelationship">Input</button>
+                    <% if (caseCaseRelationship.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_caseCaseRelationship">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -1027,16 +1185,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% personPersonRelationship.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= personPersonRelationship.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= personPersonRelationship[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -1053,7 +1211,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_personPersonRelationship">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_personPersonRelationship">Input</button>
+                    <% if (personPersonRelationship.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_personPersonRelationship">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -1065,16 +1228,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% personOrganizationRelationship.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= personOrganizationRelationship.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= personOrganizationRelationship[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -1091,7 +1254,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_personOrganizationRelationship">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_personOrganizationRelationship">Input</button>
+                    <% if (personOrganizationRelationship.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_personOrganizationRelationship">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -1103,16 +1271,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% organizationOrganizationRelationship.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= organizationOrganizationRelationship.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= organizationOrganizationRelationship[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -1129,7 +1297,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_organizationOrganizationRelationship">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_organizationOrganizationRelationship">Input</button>
+                    <% if (organizationOrganizationRelationship.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_organizationOrganizationRelationship">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
     </div><!-- divrelationships -->
@@ -1146,19 +1319,19 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% contactType.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= contactType.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= contactType[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
-                <!-- <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_contactType">Edit</button></div> -->
+                <!-- <div class="enumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_contactType">Edit</button></div> -->
             </div>  
         </div>
 
@@ -1170,16 +1343,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% contactPhoneType.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= contactPhoneType.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= contactPhoneType[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                     <p class="redflag">WARNING: First three must remain unchanged!</p>
@@ -1197,7 +1370,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_contactPhoneType">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_contactPhoneType">Input</button>
+                    <% if (contactPhoneType.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_contactPhoneType">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -1209,16 +1387,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% contactEmailType.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= contactEmailType.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= contactEmailType[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                     <p class="redflag">WARNING: First two must remain unchanged!</p>
@@ -1236,7 +1414,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_contactEmailType">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_contactEmailType">Input</button>
+                    <% if (contactEmailType.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_contactEmailType">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -1248,16 +1431,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% contactFaxType.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= contactFaxType.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= contactFaxType[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                     <p class="redflag">WARNING: First two must remain unchanged!</p>
@@ -1275,7 +1458,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_contactFaxType">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_contactFaxType">Input</button>
+                    <% if (contactFaxType.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_contactFaxType">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -1287,16 +1475,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% contactMediaType.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= contactMediaType.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= contactMediaType[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                     <p class="redflag">WARNING: First two must remain unchanged!</p>
@@ -1314,7 +1502,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_contactMediaType">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_contactMediaType">Input</button>
+                    <% if (contactMediaType.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_contactMediaType">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -1326,16 +1519,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% contactAddressType.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= contactAddressType.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= contactAddressType[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                     <p class="redflag">WARNING: First two must remain unchanged!</p>
@@ -1353,7 +1546,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_contactAddressType">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_contactAddressType">Input</button>
+                    <% if (contactAddressType.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_contactAddressType">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -1365,16 +1563,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% contactStateCode.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= contactStateCode.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= contactStateCode[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                 <div class="row">
@@ -1391,7 +1589,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_contactStateCode">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_contactStateCode">Input</button>
+                    <% if (contactStateCode.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_contactStateCode">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -1403,16 +1606,16 @@
                     <table class="table table-responsive table-condensed enumlisttable">
                         <thead>
                             <tr class="info">
+                                <th>Index</th>
                                 <th>Value</th>
-                                <th>Key</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <% contactCountryCode.enums.forEach(function(enumItem) { %>
+                        <% for (var i = 1; i <= contactCountryCode.length; i += 1) { %>
                             <tr>
-                                <td class="enumvalue"><%= enumItem.value %></td><td class="enumkey"><%= enumItem.key %></td>
+                                <td class="enumindex"><%= i %></td><td class="enumvalue"><%= contactCountryCode[i - 1] %></td>
                             </tr>
-                        <% }); %>
+                        <% } %>
                         </tbody>
                     </table>
                     <p class="redflag">WARNING: First one must remain unchanged!</p>
@@ -1430,7 +1633,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="editenumbtndiv"><button class="btn btn-warning btn-md editenumbtn" id="editenum_contactCountryCode">Edit</button></div>
+                <div class="enumbtndiv">
+                    <button class="btn btn-warning btn-md inputenumbtn" id="inputenum_contactCountryCode">Input</button>
+                    <% if (contactCountryCode.length > 0) { %>
+                    <button class="btn btn-warning btn-md editenumbtn" id="editenum_contactCountryCode">Edit</button>
+                    <% } %>
+                </div>
             </div>  
         </div>
 
@@ -1441,17 +1649,21 @@
 
 <div id="enumformdiv">
     <hr>
-    <h3>Edit Enumeration</h3>
+    <h3>Enumerations Form</h3>
 
-	<form id="enumform" action="/editenumeration/" method="POST">
+	<form id="enumform" action="/enumeration/" method="POST">
         <div class="row" hidden>
-            <div class="col-xs-6">
-                <label for="totalenumkeys">Total Enum Keys</label>
-                <input type="text" class="form-control" id="totalenumkeys" name="totalenumkeys" readonly value="0"/>
+            <div class="col-xs-4">
+                <label for="enumfunctiontype">Insert or Update</label>
+                <input type="text" class="form-control" id="enumfunctiontype" name="enumfunctiontype" readonly value="update"/>
             </div>
-            <div class="col-xs-6">
-                <label for="freezeenumkeys">Freeze Enum Keys</label>
-                <input type="text" class="form-control" id="freezeenumkeys" name="freezeenumkeys" readonly value="0"/>
+            <div class="col-xs-4">
+                <label for="totalenumvalues">Total Enums</label>
+                <input type="text" class="form-control" id="totalenumvalues" name="totalenumvalues" readonly value="0"/>
+            </div>
+            <div class="col-xs-4">
+                <label for="freezeenumvalues">Freeze Enums</label>
+                <input type="text" class="form-control" id="freezeenumvalues" name="freezeenumvalues" readonly value="0"/>
             </div>
         </div>
         <div class="row">
@@ -1462,8 +1674,8 @@
                 </div>
             </div>
 		</div>
-    <h4>Keys</h4>
-        <div id="userenumkeysdiv">
+    <h4>Values</h4>
+        <div id="userenumvaluesdiv">
         </div>
         <br><br><br>
 		<div id="resetsubmitenum" class="buttonrow">
@@ -1472,7 +1684,7 @@
 		</div>
 	</form>
 
-<p><button class="btn btn-primary btn-md enumformbtn" id="closeeditenum">Close</button><button class="btn btn-primary btn-md enumformbtn" id="adduserenumkey"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;Add Key</button><button class="btn btn-primary btn-md enumformbtn" id="freezeuserenumkey">Freeze Key</button></p>
+<p><button class="btn btn-primary btn-md enumformbtn" id="closeeditenum">Close</button><button class="btn btn-primary btn-md enumformbtn" id="adduserenumvalue"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add Value</button><button class="btn btn-primary btn-md enumformbtn" id="freezeuserenumvalue">Freeze Value</button></p>
 
 </div>
 
