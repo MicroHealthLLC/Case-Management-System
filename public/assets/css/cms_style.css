@@ -489,10 +489,11 @@ hr {
 	text-align: left;
 	color: #333;
 }
-.editenumbtndiv {
+.enumbtndiv {
 	margin-bottom: 50px;
 }
-.editenumbtn, .editenumbtn2 {
+.inputenumbtn, .editenumbtn, .editenumbtn2 {
+	margin-left: 10px;
 	float: right;
 }
 .enumlisttable {
@@ -517,7 +518,7 @@ hr {
 	font-size: 75%;
 }
 
-.answremovebtn, .enumkeyremovebtn {
+.answremovebtn, .enumvalueremovebtn {
 	width: 40px;
 	padding: 5px 2px 3px 2px;
 	color: #d9534f;
@@ -526,7 +527,7 @@ hr {
 #enumformdiv {
 	margin-bottom: 60px !important;
 }
-#freezeuserenumkey {
+#freezeuserenumvalue {
 	display:none;
 }
 #saveenumfile {
