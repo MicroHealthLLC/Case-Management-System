@@ -25,9 +25,9 @@
 				<label for="organizationrole">Role</label>
 				<select class="form-control" id="organizationrole" name="organizationrole">
 					<option value="0">Select</option>
-                    <% userRole.enums.forEach(function(enumItem) { %>
-                    <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-                    <% }); %>
+                <% for (var i = 1; i <= userRole.length; i += 1) { %>
+					<option value="<%= userRole[i - 1] %>"><%= userRole[i - 1] %></option>
+                <% } %>
 				</select>
 			</div>
 		</div>
@@ -36,9 +36,9 @@
 				<label for="organizationtype">Type</label>
 				<select class="form-control" id="organizationtype" name="organizationtype">
 					<option value="0">Select</option>
-                    <% organizationType.enums.forEach(function(enumItem) { %>
-                    <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-                    <% }); %>
+                <% for (var i = 1; i <= organizationType.length; i += 1) { %>
+					<option value="<%= organizationType[i - 1] %>"><%= organizationType[i - 1] %></option>
+                <% } %>
 				</select>
 			</div>
 		</div>
@@ -47,9 +47,9 @@
 				<label for="organizationrolestatus">Role Status</label>
 				<select class="form-control" id="organizationrolestatus" name="organizationrolestatus">
 					<option value="0">Select</option>
-                    <% userRoleStatus.enums.forEach(function(enumItem) { %>
-                    <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-                    <% }); %>
+                <% for (var i = 1; i <= userRoleStatus.length; i += 1) { %>
+					<option value="<%= userRoleStatus[i - 1] %>"><%= userRoleStatus[i - 1] %></option>
+                <% } %>
 				</select>
 			</div>
 		</div>
@@ -98,9 +98,9 @@
 						<label for="contactphonetype">Type</label>
 						<select class="form-control" id="contactphonetype" name="contactphonetype">
 							<option value="0" selected>Select</option>
-                            <% contactPhoneType.enums.forEach(function(enumItem) { %>
-                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-                            <% }); %>
+                            <% for (var i = 1; i <= contactPhoneType.length; i += 1) { %>
+					            <option value="<%= contactPhoneType[i - 1] %>"><%= contactPhoneType[i - 1] %></option>
+                            <% } %>
 						</select>
 					</div>
 				</div>
@@ -183,9 +183,9 @@
 						<label for="contactemailtype">Type</label>
 						<select class="form-control" id="contactemailtype" name="contactemailtype">
 							<option value="0" selected>Select</option>
-                            <% contactEmailType.enums.forEach(function(enumItem) { %>
-                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-                            <% }); %>
+                        <% for (var i = 1; i <= contactEmailType.length; i += 1) { %>
+                            <option value="<%= contactEmailType[i - 1] %>"><%= contactEmailType[i - 1] %></option>
+                        <% } %>
 						</select>
 					</div>
 				</div>
@@ -268,9 +268,9 @@
 						<label for="contactfaxtype">Type</label>
 						<select class="form-control" id="contactfaxtype" name="contactfaxtype">
 							<option value="0" selected>Select</option>
-                            <% contactFaxType.enums.forEach(function(enumItem) { %>
-                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-                            <% }); %>
+                            <% for (var i = 1; i <= contactFaxType.length; i += 1) { %>
+					            <option value="<%= contactFaxType[i - 1] %>"><%= contactFaxType[i - 1] %></option>
+                            <% } %>
 						</select>
 					</div>
 				</div>
@@ -353,9 +353,9 @@
 						<label for="contactmediatype">Type</label>
 						<select class="form-control" id="contactmediatype" name="contactmediatype">
 							<option value="0" selected>Select</option>
-                            <% contactMediaType.enums.forEach(function(enumItem) { %>
-                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-                            <% }); %>
+                            <% for (var i = 1; i <= contactMediaType.length; i += 1) { %>
+					            <option value="<%= contactMediaType[i - 1] %>"><%= contactMediaType[i - 1] %></option>
+                            <% } %>
 						</select>
 					</div>
 				</div>
@@ -440,9 +440,9 @@
 						<label for="contactaddresstype">Type</label>
 						<select class="form-control" id="contactaddresstype" name="contactaddresstype">
 							<option value="0" selected>Select</option>
-                            <% contactAddressType.enums.forEach(function(enumItem) { %>
-                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-                            <% }); %>
+                            <% for (var i = 1; i <= contactAddressType.length; i += 1) { %>
+					            <option value="<%= contactAddressType[i - 1] %>"><%= contactAddressType[i - 1] %></option>
+                            <% } %>
 						</select>
 					</div>
 				</div>
@@ -479,9 +479,9 @@
 						<label for="contactstatecode">State Code</label>
 						<select class="form-control" id="contactstatecode" name="contactstatecode">
 							<option value="0" selected>Select</option>
-                            <% contactStateCode.enums.forEach(function(enumItem) { %>
-                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-                            <% }); %>
+                            <% for (var i = 1; i <= contactStateCode.length; i += 1) { %>
+					            <option value="<%= contactStateCode[i - 1] %>"><%= contactStateCode[i - 1] %></option>
+                            <% } %>
 						</select>
 					</div>
 				</div>
@@ -490,9 +490,9 @@
 						<label for="contactcountrycode">Country Code</label>
 						<select class="form-control" id="contactcountrycode" name="contactcountrycode">
 							<option value="0" selected>Select</option>
-                            <% contactCountryCode.enums.forEach(function(enumItem) { %>
-                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-                            <% }); %>
+                            <% for (var i = 1; i <= contactCountryCode.length; i += 1) { %>
+					            <option value="<%= contactCountryCode[i - 1] %>"><%= contactCountryCode[i - 1] %></option>
+                            <% } %>
 						</select>
 					</div>
 				</div>
@@ -608,9 +608,9 @@
 						<label for="personorgcontacttype">Contact Type</label>
 						<select class="form-control requiredfield" id="personorgcontacttype" name="personorgcontacttype">
 							<option value="0" selected>Select</option>
-                            <% contactType.enums.forEach(function(enumItem) { %>
-                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-                            <% }); %>
+                            <% for (var i = 1; i <= contactType.length; i += 1) { %>
+					            <option value="<%= contactType[i - 1] %>"><%= contactType[i - 1] %></option>
+                            <% } %>
 						</select>
 					</div>
 				</div>
@@ -619,9 +619,9 @@
 						<label for="personorgrelationshiptype">Relationship Type</label>
 						<select class="form-control" id="personorgrelationshiptype" name="personorgrelationshiptype">
 							<option value="0" selected>Select</option>
-                            <% personOrganizationRelationship.enums.forEach(function(enumItem) { %>
-                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-                            <% }); %>
+                            <% for (var i = 1; i <= personOrganizationRelationship.length; i += 1) { %>
+					            <option value="<%= personOrganizationRelationship[i - 1] %>"><%= personOrganizationRelationship[i - 1] %></option>
+                            <% } %>
 						</select>
 					</div>
 				</div>
@@ -811,9 +811,9 @@
 						<label for="organizationcontacttype">Contact Type</label>
 						<select class="form-control requiredfield" id="organizationcontacttype" name="organizationcontacttype">
 							<option value="0" selected>Select</option>
-                            <% contactType.enums.forEach(function(enumItem) { %>
-                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-                            <% }); %>
+                            <% for (var i = 1; i <= contactType.length; i += 1) { %>
+					            <option value="<%= contactType[i - 1] %>"><%= contactType[i - 1] %></option>
+                            <% } %>
 						</select>
 					</div>
 				</div>
@@ -822,9 +822,9 @@
 						<label for="organizationrelationshiptype">Relationship Type</label>
 						<select class="form-control" id="organizationrelationshiptype" name="organizationrelationshiptype">
 							<option value="0" selected>Select</option>
-                            <% organizationOrganizationRelationship.enums.forEach(function(enumItem) { %>
-                            <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-                            <% }); %>
+                            <% for (var i = 1; i <= organizationOrganizationRelationship.length; i += 1) { %>
+					            <option value="<%= organizationOrganizationRelationship[i - 1] %>"><%= organizationOrganizationRelationship[i - 1] %></option>
+                            <% } %>
 						</select>
 					</div>
 				</div>
