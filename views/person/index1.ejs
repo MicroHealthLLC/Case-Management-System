@@ -37,9 +37,9 @@
 				<label for="gender">Gender</label>
 				<select class="form-control" id="gender" name="gender">
 					<option value="0" selected>Select</option>
-                    <% personGender.enums.forEach(function(enumItem) { %>
-                    <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-                    <% }); %>
+                <% for (var i = 1; i <= personGender.length; i += 1) { %>
+					<option value="<%= personGender[i - 1] %>"><%= personGender[i - 1] %></option>
+                <% } %>
 				</select>
 			</div>
 		</div>
@@ -54,9 +54,9 @@
 				<label for="personrole">Role</label>
 				<select class="form-control" id="personrole" name="personrole">
 					<option value="0" selected>Select</option>
-                    <% userRole.enums.forEach(function(enumItem) { %>
-                    <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-                    <% }); %>
+                <% for (var i = 1; i <= userRole.length; i += 1) { %>
+					<option value="<%= userRole[i - 1] %>"><%= userRole[i - 1] %></option>
+                <% } %>
 				</select>
 			</div>
 		</div>
@@ -65,9 +65,9 @@
 				<label for="persontype">Type</label>
 				<select class="form-control" id="persontype" name="persontype">
 					<option value="0" selected>Select</option>
-                    <% personType.enums.forEach(function(enumItem) { %>
-                    <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-                    <% }); %>
+                <% for (var i = 1; i <= personType.length; i += 1) { %>
+					<option value="<%= personType[i - 1] %>"><%= personType[i - 1] %></option>
+                <% } %>
 				</select>
 			</div>
 		</div>
@@ -76,9 +76,9 @@
 				<label for="personrolestatus">Role Status</label>
 				<select class="form-control" id="personrolestatus" name="personrolestatus">
 					<option value="0" selected>Select</option>
-                    <% userRoleStatus.enums.forEach(function(enumItem) { %>
-                    <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-                    <% }); %>
+                <% for (var i = 1; i <= userRoleStatus.length; i += 1) { %>
+					<option value="<%= userRoleStatus[i - 1] %>"><%= userRoleStatus[i - 1] %></option>
+                <% } %>
 				</select>
 			</div>
 		</div>
@@ -87,9 +87,9 @@
 				<label for="religion">Religion</label>
 				<select class="form-control" id="religion" name="religion">
 					<option value="0" selected>Select</option>
-                    <% personReligion.enums.forEach(function(enumItem) { %>
-                    <option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-                    <% }); %>
+                <% for (var i = 1; i <= personReligion.length; i += 1) { %>
+					<option value="<%= personReligion[i - 1] %>"><%= personReligion[i - 1] %></option>
+                <% } %>
 				</select>
 			</div>
 		</div>
