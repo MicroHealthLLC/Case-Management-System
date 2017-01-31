@@ -28,10 +28,10 @@
 			<div class="form-group">
 				<label for="casedomain">Domain</label>
 				<select class="form-control" id="casedomain" name="casedomain">
-					<option value="0" selected>Select</option>
-					<% caseDomain.enums.forEach(function(enumItem) { %>
-					<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-					<% }); %>
+					<option value="0">Select</option>
+                <% for (var i = 1; i <= caseDomain.length; i += 1) { %>
+					<option value="<%= caseDomain[i - 1] %>"><%= caseDomain[i - 1] %></option>
+                <% } %>
 				</select>
 			</div>
 		</div>
@@ -40,9 +40,9 @@
 				<label for="casecategory">Category</label>
 				<select class="form-control" id="casecategory" name="casecategory">
 					<option value="0" selected>Select</option>
-					<% caseCategory.enums.forEach(function(enumItem) { %>
-					<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-					<% }); %>
+                <% for (var i = 1; i <= caseCategory.length; i += 1) { %>
+					<option value="<%= caseCategory[i - 1] %>"><%= caseCategory[i - 1] %></option>
+                <% } %>
 				</select>
 			</div>
 		</div>
@@ -51,12 +51,10 @@
 				<label for="casetype">Type</label>
 				<select class="form-control" id="casetype" name="casetype">
 					<option value="0" selected>Select</option>
-					<option class="1 1" value="1">Domain 1 and Medical</option>
-					<option class="1 2" value="2">Domain 1 and Non-Medical</option>
-					<option class="2 1" value="3">Domain 2 and Medical</option>
-					<option class="2 2" value="4">Domain 2 and Non-Medical</option>
-					<option class="3 1" value="5">Domain 3 and Medical</option>
-					<option class="3 2" value="6">Domain 3 and Non-Medical</option>
+                <% for (var i = 1; i <= caseDomain.length; i += 1) {
+                	for (var j = 1; j <= caseCategory.length; j += 1) { %>
+					<option class="<%= i %> <%= j %>" value="<%= caseDomain[i - 1] %> and <%= caseCategory[j - 1] %>"><%= caseDomain[i - 1] %> and <%= caseCategory[j - 1] %></option>
+				<% } } %>
 				</select>
 			</div>
 		</div>
@@ -65,9 +63,9 @@
 				<label for="casestatus">Status</label>
 				<select class="form-control" id="casestatus" name="casestatus">
 					<option value="0" selected>Select</option>
-					<% caseStatus.enums.forEach(function(enumItem) { %>
-					<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-					<% }); %>
+                <% for (var i = 1; i <= caseStatus.length; i += 1) { %>
+					<option value="<%= caseStatus[i - 1] %>"><%= caseStatus[i - 1] %></option>
+                <% } %>
 				</select>
 			</div>
 		</div>
@@ -76,9 +74,9 @@
 				<label for="caseseverity">Severity</label>
 				<select class="form-control" id="caseseverity" name="caseseverity">
 					<option value="0" selected>Select</option>
-					<% caseSeverity.enums.forEach(function(enumItem) { %>
-					<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-					<% }); %>
+                <% for (var i = 1; i <= caseSeverity.length; i += 1) { %>
+					<option value="<%= caseSeverity[i - 1] %>"><%= caseSeverity[i - 1] %></option>
+                <% } %>
 				</select>
 			</div>
 		</div>
@@ -87,9 +85,9 @@
 				<label for="casepriority">Priority</label>
 				<select class="form-control" id="casepriority" name="casepriority">
 					<option value="0" selected>Select</option>
-					<% casePriority.enums.forEach(function(enumItem) { %>
-					<option value="<%= enumItem.value %>"><%= enumItem.key %></option>
-					<% }); %>
+                <% for (var i = 1; i <= casePriority.length; i += 1) { %>
+					<option value="<%= casePriority[i - 1] %>"><%= casePriority[i - 1] %></option>
+                <% } %>
 				</select>
 			</div>
 		</div>
